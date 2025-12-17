@@ -1,0 +1,3 @@
+Based Use case prioritize - Image Detection, OCR, Query Search in Database
+
+#  Gantt Chart

@@ -3,9 +3,11 @@ import './App.css'
 import Header from './frontendReusedComponents/Header'
 
 function App() {
-  <>
-  <Header />
-  </>
+  return(
+<>
+<Header />
+</>
+  )
 }
 
 export default App

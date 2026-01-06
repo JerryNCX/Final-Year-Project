@@ -1,0 +1,25 @@
+FYP Article Lists
+
+
+S. Silas Sargunam and M. Maria Jain Bruce, 2015. Impact of Product and Market Factors on Consumer Behavior: A Study on Personal Computers Purchase. Asian Journal of Applied Sciences, 8: 92-100.
+
+
+A comparison of performance and preference on mobile devices vs. desktop computers, IEEE, 12 Dec 2016
+
+A different image content-based retrievals using OCR techniques, IEEE, 18 Dec 2017
+
+Behavioural differences and purchasing experiences through online commerce or offline within mall‑based retail structures, Springer, 2024
+
+Comparison of Tesseract OCR, Easy OCR, and Transformer OCR on Handwritten Image, researchgate.net, Sep 2025
+
+Evaluating User Experience Across Platforms: Analyzing Complex Task Performance in Academic Desktop-Mobile Platforms, IEEE, 06 OCT 2025
+
+Leveraging YOLO models for Enhanced Object Detection and Recognition in E-Commerce, IEEE, 17 Nov 2025
+
+Object Detection for Retail Product Recognition, IEEE, 17 Feb 2025
+
+OCR Based Image Text To Speech Conversion Using MATLAB, IEEE, 10 Merch 2019
+
+TrOCR: Transformer-based Optical Character Recognition with Pre-trained Models, arxiv.org, 6Sep 2022
+
+YOLOv4, YOLOv6, YOLOv7, YOLOv9, YOLOv10, YOLOv12, Ultralytics

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Header = () => {
+export default function Header() {
   return (
     <>
-    
+      <div>
+        Winter Sale For Pre-build package And Free Express Delivery - OFF 50%!
+      </div>
     </>
-  )
-}
-
-export default Header
+  );
+};

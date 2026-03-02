@@ -28,7 +28,5 @@ function Header() {
         </ResizablePanel>
       </ResizablePanelGroup>
     </>
-  )
-}
-
-export default Header
+  );
+};

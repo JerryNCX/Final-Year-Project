@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import './App.css'
-import Header from './frontendReusedComponents/Header'
+import HomePage from './frontendReusedComponents/HomePage/HomePage'
 
 function App() {
-  return(
-<>
-<Header />
-</>
+  return (
+    <HomePage />
   )
 }
 

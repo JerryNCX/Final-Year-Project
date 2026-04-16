@@ -2,15 +2,15 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 
 const SIDE_CATEGORIES = [
-  "Woman's Fashion",
-  "Men's Fashion",
-  'Electronics',
-  'Home & Lifestyle',
-  'Medicine',
-  'Sports & Outdoor',
-  "Baby's & Toys",
-  'Groceries & Pets',
-  'Health & Beauty',
+  "CPU",
+  "GPU",
+  "Memory",
+  "Graphics Card",
+  "Motherboard",
+  "Storage Hard Drive",
+  "Storage SSD",
+  "Cooling",
+  "Power Supply",
 ]
 
 export default function HeroSection() {

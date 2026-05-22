@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#ffb59a",
+                      "inverse-primary": "#b7c4ff",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "outline": "#727687",
+                      "inverse-on-surface": "#f0f0f5",
+                      "surface-container-highest": "#e2e2e7",
+                      "on-primary-container": "#f9f7ff",
+                      "secondary": "#a33800",
+                      "on-tertiary-fixed": "#390c00",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "on-error-container": "#93000a",
+                      "background": "#f9f9fe",
+                      "on-secondary-fixed": "#370e00",
+                      "inverse-surface": "#2e3034",
+                      "surface-container": "#ededf3",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#ffdbd0",
+                      "outline-variant": "#c2c6d8",
+                      "secondary-container": "#cd4800",
+                      "on-surface-variant": "#424656",
+                      "on-background": "#1a1c1f",
+                      "tertiary": "#a33200",
+                      "secondary-fixed": "#ffdbce",
+                      "surface": "#f9f9fe",
+                      "on-tertiary-fixed-variant": "#832600",
+                      "on-primary-fixed-variant": "#0038b6",
+                      "on-error": "#ffffff",
+                      "on-surface": "#1a1c1f",
+                      "on-primary": "#ffffff",
+                      "primary": "#0048e1",
+                      "primary-fixed": "#dde1ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e8e8ed",
+                      "surface-dim": "#d9dadf",
+                      "tertiary-container": "#cc4204",
+                      "surface-tint": "#004ced",
+                      "on-tertiary-container": "#fff6f4",
+                      "primary-container": "#3063ff",
+                      "surface-bright": "#f9f9fe",
+                      "on-primary-fixed": "#001452",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#fffbff",
+                      "surface-container-low": "#f3f3f8",
+                      "surface-variant": "#e2e2e7",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background-color: rgba(249, 249, 254, 0.7);
+        }
+        .ghost-border {
+            outline: 1px solid rgba(194, 198, 216, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm font-['Space_Grotesk'] tracking-tight">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-slate-900">PRECISION TECH</div>
+<nav class="hidden md:flex items-center space-x-10">
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Home</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">About</a>
+<a class="text-blue-700 border-b-2 border-blue-600 pb-1 transition-all" href="#">Contact</a>
+</nav>
+<div class="flex items-center space-x-6">
+<button class="material-symbols-outlined text-slate-600 hover:bg-slate-100/50 p-2 rounded-sm transition-all" data-icon="shopping_cart">shopping_cart</button>
+<button class="bg-primary text-on-primary px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out active:scale-95 rounded-lg hover:bg-primary-container">Sign Up</button>
+</div>
+</div>
+<div class="bg-slate-200/20 h-[1px]"></div>
+</header>
+<main class="max-w-[1920px] mx-auto px-8 lg:px-24 py-16">
+<!-- Hero Section -->
+<section class="grid grid-cols-12 gap-8 mb-24 items-end">
+<div class="col-span-12 lg:col-span-8">
+<span class="label-sm uppercase tracking-[0.2em] text-primary font-semibold mb-4 block">Communication Portal</span>
+<h1 class="font-headline text-7xl font-bold tracking-tighter leading-none text-on-surface">TECHNICAL<br/>ENQUIRY.</h1>
+</div>
+<div class="col-span-12 lg:col-span-4 pb-2">
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-md">
+                    Connect with our engineering laboratory for specialized component requests, overclocking consultations, and logistical support.
+                </p>
+</div>
+</section>
+<!-- Main Content: Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Contact Form: The "Machined" Container -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-low p-12 ghost-border">
+<div class="mb-10">
+<h2 class="font-headline text-3xl font-bold mb-2">Initialize Connection</h2>
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-wider">Estimated Response Time: &lt; 4 Hours</p>
+</div>
+<form class="space-y-8">
+<div class="grid grid-cols-2 gap-8">
+<div class="group">
+<label class="block font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Subject Identity</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 transition-all py-4 text-on-surface" placeholder="Full Name" type="text"/>
+</div>
+<div class="group">
+<label class="block font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Protocol Address</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 transition-all py-4 text-on-surface" placeholder="Email Address" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Project Classification</label>
+<select class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 transition-all py-4 text-on-surface">
+<option>Technical Consultation</option>
+<option>Enterprise Logistics</option>
+<option>Component Customization</option>
+<option>RMA &amp; Support</option>
+</select>
+</div>
+<div>
+<label class="block font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">Detailed Specification</label>
+<textarea class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 transition-all py-4 text-on-surface resize-none" placeholder="Message content..." rows="6"></textarea>
+</div>
+<div class="pt-4">
+<button class="inline-flex items-center space-x-3 bg-gradient-to-r from-primary to-primary-container text-on-primary px-10 py-5 font-headline font-bold uppercase tracking-widest text-sm rounded-lg hover:shadow-lg transition-all group" type="submit">
+<span>Execute Transmission</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform" data-icon="send">send</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Side Info Column -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
+<!-- Support Channels: Tonal Layering -->
+<div class="bg-surface-container-lowest p-8 ghost-border flex-grow">
+<h3 class="font-headline text-2xl font-bold mb-8">Direct Channels</h3>
+<div class="space-y-8">
+<div class="flex items-start gap-4 group">
+<div class="bg-surface-container-high p-3 rounded transition-colors group-hover:bg-primary-fixed">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+</div>
+<div>
+<p class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Lab Hotline</p>
+<p class="text-xl font-headline font-bold text-on-surface">+1 (800) 992-TECH</p>
+</div>
+</div>
+<div class="flex items-start gap-4 group">
+<div class="bg-surface-container-high p-3 rounded transition-colors group-hover:bg-primary-fixed">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+</div>
+<div>
+<p class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Secure Uplink</p>
+<p class="text-xl font-headline font-bold text-on-surface">secure@precision-tech.com</p>
+</div>
+</div>
+<div class="flex items-start gap-4 group">
+<div class="bg-surface-container-high p-3 rounded transition-colors group-hover:bg-primary-fixed">
+<span class="material-symbols-outlined text-primary" data-icon="headset_mic">headset_mic</span>
+</div>
+<div>
+<p class="font-label text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Live Dispatch</p>
+<p class="text-xl font-headline font-bold text-on-surface">24/7 Global NOC</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Laboratory Image: Asymmetrical Bleed -->
+<div class="relative overflow-hidden group h-[400px] ghost-border">
+<img alt="Clean room laboratory" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-tech minimalist laboratory with clean white benches, blue ambient lighting, and high-performance server stacks in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfZOyHDlGVfox63Kb10Ju-BHvqGYyR73DggO0dmwa2A6NQf3WDwl1X5sID9EYvZ3M4JUefwNhKAVTBdT1_t-lDeWDBnCjupcjVdZkPtsoBTf0gLeUmPvZ-XH0jrFgCg1o1jy5NgByXUMi1oLM5KUkVLIY9RYSGtueMdYwBYmxP50cVT54QFanzAAhh8SuMHtqh8C-D1DOlfxAK0PKw-dQewelqZIrXjB-rPb8OjQknXRt3bO7Kjaw1TrYLSPRGEBNgofyN4b46F0YN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-on-primary">
+<p class="font-label text-xs font-semibold uppercase tracking-[0.3em] mb-1">HQ Location</p>
+<p class="font-headline text-2xl font-bold">Research Cell Alpha</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Map Section -->
+<section class="mt-24">
+<div class="grid grid-cols-12 gap-6 items-center">
+<div class="col-span-12 lg:col-span-4 bg-surface-container p-12 h-full flex flex-col justify-center">
+<span class="text-secondary font-headline font-bold uppercase tracking-widest text-xs mb-4 block">Physical Node</span>
+<h2 class="font-headline text-4xl font-bold mb-6">Laboratory <br/>Coordinates</h2>
+<p class="text-on-surface-variant mb-8">
+                        Silicon Valley Innovation Park<br/>
+                        Building 12, Level 4<br/>
+                        94043 California, USA
+                    </p>
+<button class="text-on-surface flex items-center gap-2 font-semibold hover:text-primary transition-colors group">
+<span>Get Navigational Data</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="col-span-12 lg:col-span-8 h-[500px] bg-surface-dim relative overflow-hidden ghost-border">
+<!-- Map Placeholder -->
+<div class="w-full h-full bg-slate-200" data-location="Mountain View, California" style="">
+<img alt="Technical map layout" class="w-full h-full object-cover grayscale opacity-50 contrast-125" data-alt="Technical blueprint style map of a technology park with glowing blue vector lines and digital coordinate overlays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlUObv0iCd06o7tWN1PzGRpwMhAMkI4C5UpH8fAiMkyvK3RIy9lT0vAisnMABF8GXZTB6DKeQJrRioEHer78T1nZb3H12G6Hr5YKusGll-gZwy2SaTLXH6um0lvr06tDEcO4TQHY0kNqHS567G_CZK_bHEvWJNLtWYT-YFLGom94mW-PcCAeuzFyUe71OJ9DyKe23-nGY9k55rQHKY01UAApSk4dUHm60l1wmvaOBsddhdB5DJqMYn4Xd7i_Oc1RUoWWdJ7HiQieut"/>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-24 h-24 bg-primary/20 rounded-full animate-ping"></div>
+<div class="relative z-10 w-6 h-6 bg-primary rounded-full border-4 border-surface"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-100 border-t border-slate-200">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto font-['Inter'] text-sm uppercase tracking-widest">
+<div>
+<div class="font-['Space_Grotesk'] font-bold text-lg mb-4 text-slate-900">PRECISION TECH</div>
+<p class="text-slate-500 max-w-sm normal-case tracking-normal">© 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE.</p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-center">
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Support</a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

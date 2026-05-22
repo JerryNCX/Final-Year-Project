@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - TECH ATELIER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#832600",
+                      "surface-container-highest": "#e2e2e7",
+                      "surface-container-high": "#e8e8ed",
+                      "secondary-fixed-dim": "#ffb59a",
+                      "surface-dim": "#d9dadf",
+                      "on-background": "#1a1c1f",
+                      "tertiary-container": "#cc4204",
+                      "surface-container-low": "#f3f3f8",
+                      "outline-variant": "#c2c6d8",
+                      "surface-bright": "#f9f9fe",
+                      "inverse-primary": "#b7c4ff",
+                      "tertiary": "#a33200",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "on-primary-fixed-variant": "#0038b6",
+                      "surface": "#f9f9fe",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "surface-variant": "#e2e2e7",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#004ced",
+                      "secondary": "#a33800",
+                      "on-primary-container": "#f9f7ff",
+                      "inverse-on-surface": "#f0f0f5",
+                      "on-primary": "#ffffff",
+                      "background": "#f9f9fe",
+                      "outline": "#727687",
+                      "on-secondary-fixed": "#370e00",
+                      "on-secondary-container": "#fffbff",
+                      "on-tertiary-container": "#fff6f4",
+                      "primary-fixed": "#dde1ff",
+                      "on-primary-fixed": "#001452",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#3063ff",
+                      "tertiary-fixed": "#ffdbd0",
+                      "secondary-container": "#cd4800",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#424656",
+                      "on-surface": "#1a1c1f",
+                      "surface-container": "#ededf3",
+                      "primary": "#0048e1",
+                      "secondary-fixed": "#ffdbce",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2e3034",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "on-tertiary-fixed": "#390c00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Space Grotesk"
+                      ],
+                      "display": [
+                              "Space Grotesk"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "label": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {}
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        h1, h2, h3, h4, h5, h6, .font-display, .font-headline {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+      </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-surface w-full h-[1080px] max-w-[1920px] mx-auto overflow-hidden">
+<!-- Split Screen Container -->
+<div class="flex w-full h-full">
+<!-- Left Side: Login Form (The Technical Canvas) -->
+<div class="w-1/2 flex flex-col justify-center px-16 lg:px-32 xl:px-48 bg-surface relative z-10">
+<!-- Logo / Branding -->
+<div class="absolute top-12 left-16 lg:left-32 xl:left-48">
+<a class="text-2xl font-display font-bold tracking-tighter text-on-surface flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+                    TECH ATELIER
+                </a>
+</div>
+<div class="max-w-md w-full mx-auto">
+<!-- Header -->
+<div class="mb-10">
+<h1 class="text-5xl font-display font-bold tracking-tight text-on-surface mb-3">Access Lab</h1>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed">Enter your credentials to access the performance engineering suite. Unauthorized access is monitored.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant font-semibold" for="email">Authentication ID (Email)</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant text-sm">mail</span>
+</span>
+<input class="w-full bg-surface-container-high border-0 rounded-DEFAULT py-3 pl-10 pr-4 text-on-surface placeholder-outline-variant focus:ring-0 focus:border-b-2 focus:border-primary transition-all duration-200" id="email" name="email" placeholder="engineer@techatelier.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant font-semibold" for="password">Security Key (Password)</label>
+<a class="text-xs font-body text-primary hover:text-primary-container transition-colors font-medium" href="#">Forgot Key?</a>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant text-sm">lock</span>
+</span>
+<input class="w-full bg-surface-container-high border-0 rounded-DEFAULT py-3 pl-10 pr-4 text-on-surface placeholder-outline-variant focus:ring-0 focus:border-b-2 focus:border-primary transition-all duration-200" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="h-4 w-4 rounded-sm border-outline-variant text-primary focus:ring-primary bg-surface-container-high border-0" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-sm font-body text-on-surface-variant" for="remember-me">
+                            Maintain persistent session
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-lg font-display font-bold tracking-wide uppercase text-sm hover:shadow-[0_0_20px_rgba(0,72,225,0.4)] transition-shadow duration-300 flex justify-center items-center gap-2" type="submit">
+                        Initialize Session
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">login</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="mt-8 mb-6 relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<div class="relative flex justify-center text-xs">
+<span class="px-4 bg-surface text-on-surface-variant font-label uppercase tracking-widest">Or connect via</span>
+</div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 w-full bg-surface-container-low hover:bg-surface-container py-3 rounded-DEFAULT text-on-surface font-body text-sm transition-colors border border-outline-variant/20">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJr_yOuHt38u_VIuIjA-Siy5-orw_DYpO4QHVFzw4nW5qlCwYzaToa6QWegraFrH3neQgQvaObyLfDEyoeqDYSeN_Pdyv9m4hMXE7cX8t6d1L8c95M2vuZPZo18xSRw1mW1rx13KzPnI4irbkQ4fAHInqLi1CIVJup6ZDRHd6a3lxpIPEyjOr2xoliJcgcGAnPNgXYxywhISmJgFEWPYDDfoogEQI5cY-TDGHc4jwLgounjtiG4CBnYJjbCq8qvYiqE_sxoS-KLT5X"/>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-2 w-full bg-surface-container-low hover:bg-surface-container py-3 rounded-DEFAULT text-on-surface font-body text-sm transition-colors border border-outline-variant/20">
+<img alt="GitHub" class="w-5 h-5 invert dark:invert-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAz-llC9zV4KGxzHCgl8b4SF-cnKpOV0ouizTmiRJDdEi_7rB_z43CLBhjFccJOAMFVIUy0vBrbo9YByWgzTWYPzpwDLeD1IAz1a0AEZYfYa05kZdXen0C5z4QqNlDBPBVcb5QUNiefCus1FxB-9Y2ca6KVm0C2Ed_euM5xXV39q5Np_HueRJ5ZbPn2rdSBW-pQjVqSLksXOqqrkSWPF_v15rAWRUiTRp4ZdbNQAHFjmI16mODhuRge9ehP1vql_zAV6KpmLKfbrCv"/>
+                        GitHub
+                    </button>
+</div>
+<!-- Sign Up Link -->
+<p class="mt-8 text-center text-sm font-body text-on-surface-variant">
+                    Require engineering access? 
+                    <a class="font-medium text-primary hover:text-primary-container border-b border-transparent hover:border-primary transition-all pb-0.5" href="#">Request Account</a>
+</p>
+</div>
+</div>
+<!-- Right Side: Imagery (The Hardware Laboratory) -->
+<div class="w-1/2 relative bg-surface-container-highest hidden md:block overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105" data-alt="Close up macro shot of a high-end motherboard CPU socket with precise metallic pins reflecting cool blue and crisp gray lighting, technical laboratory atmosphere, deep depth of field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZM79ty3xdaEFjIPCN2UOiM1x-Gm6gVly4SZfmF7Y2cuRjFElooKHg2DX43j8ZhiLLyQXnn_2JK1dathwgz5h8d_ZI_0zOpNvammShhTtOzO2Wexkj_rNBGCIE8FVt77Erd316Mo6ICW_e_GIqtI03dwCDEXzn2k14AaURYl_PCSrDxeNhoh7_72OB5f3vcgp7qqE_4qalnZWM-STovogm2zpJqFvZwTK-HmMHHl2NV-1-at2COm1Xf2o-nhr0q_2suskXDYnDeCmm');">
+</div>
+<!-- Overlay Gradient for Technical Feel -->
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/40 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+<!-- Floating Spec Element (Glassmorphism) -->
+<div class="absolute bottom-16 right-16 bg-surface/70 backdrop-blur-md p-6 rounded-lg border border-outline-variant/15 shadow-[0_40px_80px_rgba(26,28,31,0.1)] max-w-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">speed</span>
+<h3 class="font-display text-on-surface font-bold tracking-tight text-lg">System Metrics</h3>
+</div>
+<div class="space-y-3 font-label text-xs uppercase tracking-widest text-on-surface-variant">
+<div class="flex justify-between items-center">
+<span>Thermal Delta</span>
+<span class="text-on-surface font-semibold">-2.4°C</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-1/4"></div>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span>Clock Stability</span>
+<span class="text-on-surface font-semibold text-primary">99.9%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- Top Right Corner Badge -->
+<div class="absolute top-12 right-16 text-right">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Protocol Active</p>
+<div class="flex items-center justify-end gap-2 mt-1">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-display text-on-surface font-semibold tracking-wider text-sm">SECURE_LINK</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

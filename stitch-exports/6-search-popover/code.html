@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb59a",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "outline": "#727687",
+                        "inverse-on-surface": "#f0f0f5",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-primary-container": "#f9f7ff",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9fe",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#2e3034",
+                        "surface-container": "#ededf3",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline-variant": "#c2c6d8",
+                        "secondary-container": "#cd4800",
+                        "on-surface-variant": "#424656",
+                        "on-background": "#1a1c1f",
+                        "tertiary": "#a33200",
+                        "secondary-fixed": "#ffdbce",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1a1c1f",
+                        "on-primary": "#ffffff",
+                        "primary": "#0048e1",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "surface-dim": "#d9dadf",
+                        "tertiary-container": "#cc4204",
+                        "surface-tint": "#004ced",
+                        "on-tertiary-container": "#fff6f4",
+                        "primary-container": "#3063ff",
+                        "surface-bright": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-low": "#f3f3f8",
+                        "surface-variant": "#e2e2e7",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(249, 249, 254, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased overflow-hidden">
+<!-- Landing Page Background (Simulated) -->
+<main class="w-full h-screen relative bg-surface overflow-hidden">
+<!-- TopNavBar Component -->
+<nav class="w-full sticky top-0 z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm dark:shadow-none transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto font-['Space_Grotesk'] tracking-tight">
+<div class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-slate-50">PRECISION TECH</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 pb-1 transition-all duration-200 ease-in-out active:scale-95" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors transition-all duration-200 ease-in-out active:scale-95" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors transition-all duration-200 ease-in-out active:scale-95" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<input class="bg-surface-container-high border-none rounded-sm px-4 py-2 w-64 text-sm focus:ring-2 focus:ring-primary transition-all" placeholder="Search components..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span>
+</div>
+<button class="p-2 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-sm transition-all">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">shopping_cart</span>
+</button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-medium transition-all active:scale-95">Sign Up</button>
+</div>
+</div>
+<div class="bg-slate-200/20 dark:bg-slate-800/20 h-[1px]"></div>
+</nav>
+<!-- Page Content Hero -->
+<section class="p-20 grid grid-cols-12 gap-10">
+<div class="col-span-7">
+<h1 class="font-headline text-[5rem] leading-none font-bold tracking-tighter text-on-surface mb-8">
+                    ENGINEERED <br/> TO EXCEED.
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-xl mb-12">
+                    Premium PC hardware curated for professionals, overclockers, and digital architects. Experience the technical atelier.
+                </p>
+<div class="flex gap-4">
+<button class="px-8 py-4 bg-primary text-on-primary font-bold rounded-lg transition-all hover:brightness-110">EXPLORE INVENTORY</button>
+<button class="px-8 py-4 border-2 border-outline-variant text-on-surface font-bold rounded-lg hover:bg-surface-container-low transition-all">READ SPECS</button>
+</div>
+</div>
+<div class="col-span-5 relative">
+<div class="absolute -right-20 top-0 w-[120%] h-[600px] bg-surface-container-low rounded-lg overflow-hidden transform rotate-2 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-end motherboard with glowing blue LED accents and brushed metal heat sinks in a dark studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_imgnwrL9UOt_j8mxgb7Wl4YzNK7gDfkUqlsoIi8eFgZO2DNg7KdiZqI9nTjzyvSkMY4wSHRbtdPVQO1Nqyomy4ivPEofDE7q7gephqkqbOaLoIQkPczCIocqDzhHJHDrJnCV7btc0-DFYmmDrTM3XXiIgutG77C3syf2u6V6fzjn5-TEjaM6idZNypmvvrSxfGentWWrjiDAux1ajJb8Xz3ILAP4u2DfYZlErETYtkkggS5B-CM26T-DD_5Tkj7PSpYFd6BMJWvC"/>
+</div>
+</div>
+</section>
+<!-- MODAL OVERLAY: SEARCH POPOVER -->
+<div class="fixed inset-0 z-[100] flex flex-col items-center pt-20 px-6 bg-slate-900/40 backdrop-blur-md">
+<!-- Main Search Container -->
+<div class="w-full max-w-5xl glass-panel rounded-xl shadow-2xl overflow-hidden flex flex-col border border-white/20">
+<!-- Search Header/Input Area -->
+<div class="p-8 border-b border-outline-variant/30 flex items-center gap-6">
+<div class="flex-1 flex items-center gap-4 bg-surface-container-high/50 rounded-lg px-6 py-4 border-b-2 border-primary">
+<span class="material-symbols-outlined text-primary text-3xl">search</span>
+<input autofocus="" class="bg-transparent border-none focus:ring-0 w-full text-2xl font-headline font-medium placeholder:text-outline" placeholder="Search by model, SKU, or performance tier..." type="text" value="RTX 4090"/>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-all">
+<span class="material-symbols-outlined text-outline">close</span>
+</button>
+</div>
+</div>
+<!-- Split Content Layout -->
+<div class="flex h-[600px]">
+<!-- Left: Search by Image & Filters -->
+<div class="w-2/5 border-r border-outline-variant/30 bg-surface-container-low/40 p-8 flex flex-col gap-10 overflow-y-auto">
+<!-- Search by Image Section -->
+<div>
+<h3 class="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-4">Visual Identification</h3>
+<div class="border-2 border-dashed border-outline-variant bg-surface/50 rounded-xl p-10 flex flex-col items-center text-center group cursor-pointer hover:border-primary transition-colors">
+<div class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center mb-6 text-on-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<p class="font-headline text-lg font-bold mb-2">Drop hardware photo here</p>
+<p class="text-sm text-outline px-4 leading-relaxed">Drag and drop or upload a component photo to find exact matches and technical specs.</p>
+<button class="mt-6 px-6 py-2 bg-on-surface text-surface text-xs font-bold rounded-lg uppercase tracking-wider">Select File</button>
+</div>
+</div>
+<!-- Technical Filters -->
+<div>
+<h3 class="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-4">Filter Parameters</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all">GPU</span>
+<span class="px-3 py-1.5 bg-primary text-on-primary rounded-md text-xs font-semibold">NVIDIA</span>
+<span class="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all">In-Stock</span>
+<span class="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all">Over 2GHz</span>
+<span class="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all">Liquid Cooled</span>
+</div>
+</div>
+</div>
+<!-- Right: Instant Results -->
+<div class="flex-1 p-8 overflow-y-auto bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline">Search Results (4)</h3>
+<button class="text-primary text-xs font-bold uppercase tracking-widest hover:underline transition-all">View All Results</button>
+</div>
+<div class="space-y-6">
+<!-- Result Item 1 -->
+<div class="group flex gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="w-32 h-32 bg-surface-container rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform" data-alt="High-end RTX 4090 graphics card with triple fan setup and sleek geometric shroud design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATao0B3zQ9QzG3K8yx8rvw8IJ50jhc2U3PQLkDUS2D4w7ARE6bJhJ-NDfzmDRz5k5tiLr0zTcy-mZ8Ocv6TlxzgYQEW-lpSwBWetIg-MFxwOS2Dq4ujRtaDbvXH_Sv7rC19kksqOb8SEexsKVsL4mPLKcqO8SRzk9ZnWm0swwhXaE_Y_wBhaLqBqTZ4q8913aIk3LnBjCpD1SXMBwFSF74BrpA0M9A8Kjf8sfhqQyqu8pCd2naoW_IoX1iESvqTWM-fbJkirnio1ZU"/>
+</div>
+<div class="flex-1 py-2">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline text-xl font-bold group-hover:text-primary transition-colors">Precision-X GeForce RTX 4090</h4>
+<span class="font-headline text-xl font-bold text-on-surface">$1,699.00</span>
+</div>
+<p class="text-sm text-outline mb-4">24GB GDDR6X, Ada Lovelace Architecture, DLSS 3.0 Ready</p>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-outline">Boost: 2.52 GHz</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">memory</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-outline">Memory: 24GB</span>
+</div>
+<div class="ml-auto">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-extrabold uppercase rounded">Available</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Result Item 2 -->
+<div class="group flex gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="w-32 h-32 bg-surface-container rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform" data-alt="Detail of a graphics card's backplate showing precision machining and brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJAjkmnOwMi0t4mpJRptEg9DGHUGt1vZJ7ewZxis_OTu0meHUxBIr3u-BiZbPH-054GhSJnpeO8PLoUvypPQcfMJWieYGN6tqoyJLZ2OHqa_96s1XXP0FGjHmayHMQnU-btgotyqTbKldQHhSaltYgd2jVESqDVVciRpeWQwqZr3ZDkwqfzO7-IRoNfArixoAaVlsHZaoWPZWvBGSWVIyyFZQTnWgU2v4eWqR-W_oxlU8_xTQykHfzekuLY4ty1jsRVrvlCbF00a59"/>
+</div>
+<div class="flex-1 py-2">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline text-xl font-bold group-hover:text-primary transition-colors">Vortex OC RTX 4090 Liquid</h4>
+<span class="font-headline text-xl font-bold text-on-surface">$1,949.00</span>
+</div>
+<p class="text-sm text-outline mb-4">Integrated 360mm AIO, Ultra-Stable VRM, Factory Overclocked</p>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-outline">Boost: 2.68 GHz</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">thermostat</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-outline">Max Temp: 54°C</span>
+</div>
+<div class="ml-auto">
+<span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-extrabold uppercase rounded">Backorder</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggestion List -->
+<div class="mt-8 pt-8 border-t border-outline-variant/30">
+<h3 class="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-6">Technical Collections</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
+<span class="font-headline font-bold text-on-surface">4K Rendering Rigs</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
+<span class="font-headline font-bold text-on-surface">Deep Learning Clusters</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Shortcut Keys -->
+<div class="bg-surface-container-highest px-8 py-4 flex items-center justify-between">
+<div class="flex gap-8">
+<div class="flex items-center gap-2">
+<span class="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">ESC</span>
+<span class="text-xs text-outline font-medium">to close</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">↑↓</span>
+<span class="text-xs text-outline font-medium">to navigate</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">ENTER</span>
+<span class="text-xs text-outline font-medium">to select</span>
+</div>
+</div>
+<div class="text-[10px] font-bold uppercase tracking-[0.2em] text-outline">
+                        Precision Indexing v4.2.0
+                    </div>
+</div>
+</div>
+<!-- Click to Dismiss Message -->
+<button class="mt-8 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">resize</span>
+                Click outside to return to atelier
+            </button>
+</div>
+<!-- Footer Component -->
+<footer class="absolute bottom-0 w-full py-12 bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
+<div>
+<div class="font-['Space_Grotesk'] font-bold text-lg mb-4 text-primary">PRECISION TECH</div>
+<p class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500">© 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE.</p>
+</div>
+<div class="flex gap-8 justify-end">
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

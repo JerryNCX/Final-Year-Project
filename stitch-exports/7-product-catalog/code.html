@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voltage Precision - Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#f9f9fe",
+                        "inverse-primary": "#b7c4ff",
+                        "on-surface": "#1a1c1f",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "secondary-fixed": "#ffdbce",
+                        "primary": "#0048e1",
+                        "surface-tint": "#004ced",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "primary-container": "#3063ff",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "secondary-container": "#cd4800",
+                        "surface-variant": "#e2e2e7",
+                        "surface-container-highest": "#e2e2e7",
+                        "surface-container-low": "#f3f3f8",
+                        "on-surface-variant": "#424656",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "on-tertiary-container": "#fff6f4",
+                        "surface-dim": "#d9dadf",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-container": "#fffbff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d8",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "background": "#f9f9fe",
+                        "tertiary": "#a33200",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline": "#727687",
+                        "inverse-surface": "#2e3034",
+                        "tertiary-container": "#cc4204",
+                        "secondary-fixed-dim": "#ffb59a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#ededf3",
+                        "on-secondary-fixed": "#370e00",
+                        "on-background": "#1a1c1f",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#f9f7ff",
+                        "surface": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0f5"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(249, 249, 254, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ambient-shadow {
+            box-shadow: 0px 4px 40px rgba(26, 28, 31, 0.06);
+        }
+        .ghost-border {
+            outline: 1px solid rgba(194, 198, 216, 0.15);
+        }
+        .primary-gradient-btn {
+            background: linear-gradient(135deg, #0048e1 0%, #3063ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.03)] font-['Space_Grotesk'] font-bold tracking-tight">
+<div class="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
+<!-- Brand -->
+<a class="text-xl font-black italic tracking-tighter text-slate-900 dark:text-slate-50" href="#">
+                VOLTAGE PRECISION
+            </a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-500 pb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Catalog</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Builds</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Support</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">About</a>
+</nav>
+<!-- Search & Actions -->
+<div class="flex items-center gap-6 text-blue-600 dark:text-blue-500">
+<div class="relative hidden lg:block group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-surface-container-high text-on-surface text-sm pl-9 pr-4 py-2 w-64 rounded-DEFAULT border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body" placeholder="Search Components..." type="text"/>
+</div>
+<button class="hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full font-body">3</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-200/30 dark:bg-white/5 h-[1px] w-full"></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex w-full max-w-[1920px] mx-auto">
+<!-- Sidebar Filters -->
+<aside class="hidden lg:block w-80 bg-surface-container-low p-8 flex-shrink-0 min-h-[calc(100vh-80px)]">
+<div class="mb-12">
+<h2 class="font-display text-2xl font-bold tracking-tight text-on-surface mb-2">Filters</h2>
+<p class="font-body text-sm text-on-surface-variant">Narrow down your technical specifications.</p>
+</div>
+<!-- Filter Group: Component Type -->
+<div class="mb-8">
+<h3 class="font-body text-sm font-semibold text-on-surface uppercase tracking-widest mb-6">Component Type</h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">Processors (CPU)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">Graphics Cards (GPU)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">Motherboards</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">Memory (RAM)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">Storage (NVMe/SSD)</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Brand -->
+<div class="mb-8">
+<h3 class="font-body text-sm font-semibold text-on-surface uppercase tracking-widest mb-6">Brand</h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">NVIDIA</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">AMD</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">ASUS ROG</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">MSI</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Price Range -->
+<div class="mb-8">
+<h3 class="font-body text-sm font-semibold text-on-surface uppercase tracking-widest mb-6">Price Range</h3>
+<div class="flex items-center gap-4">
+<div class="relative w-full">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm font-body">$</span>
+<input class="w-full bg-surface-container-high text-on-surface text-sm pl-7 pr-3 py-2 rounded-DEFAULT border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body" placeholder="Min" type="number"/>
+</div>
+<span class="text-on-surface-variant font-body">-</span>
+<div class="relative w-full">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm font-body">$</span>
+<input class="w-full bg-surface-container-high text-on-surface text-sm pl-7 pr-3 py-2 rounded-DEFAULT border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body" placeholder="Max" type="number"/>
+</div>
+</div>
+</div>
+<!-- Filter Group: Stock Status -->
+<div class="mb-8">
+<h3 class="font-body text-sm font-semibold text-on-surface uppercase tracking-widest mb-6">Availability</h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="form-checkbox h-5 w-5 rounded-DEFAULT text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body text-sm text-on-surface group-hover:text-primary transition-colors">In Stock</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Catalog Grid -->
+<section class="flex-grow p-8 lg:p-12 bg-surface">
+<!-- Page Header & Sort -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+<div>
+<h1 class="font-display text-4xl lg:text-5xl font-extrabold tracking-tighter text-on-surface mb-2">Graphics Cards</h1>
+<p class="font-body text-base text-on-surface-variant max-w-xl">High-performance computational rendering engines for extreme workloads and framerates.</p>
+</div>
+<div class="flex items-center gap-4 self-end">
+<span class="font-body text-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-surface-container-high text-on-surface text-sm px-4 py-2 rounded-DEFAULT border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body cursor-pointer appearance-none pr-8 relative">
+<option>Performance: High to Low</option>
+<option>Price: High to Low</option>
+<option>Price: Low to High</option>
+<option>Newest Arrivals</option>
+</select>
+</div>
+</div>
+<!-- Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Product Card 1 -->
+<article class="bg-surface-container-lowest ghost-border group relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col h-full">
+<!-- Glow Effect on Hover -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
+<!-- Badges -->
+<div class="absolute top-4 left-4 z-10 flex gap-2">
+<span class="bg-secondary text-on-primary font-body text-[10px] uppercase tracking-wider px-2 py-1 rounded-sm font-bold">Extreme Perf</span>
+</div>
+<!-- Image Area -->
+<div class="relative h-64 w-full bg-surface-container flex items-center justify-center p-6 overflow-hidden">
+<img alt="High end computer graphics card with triple fan cooler design, dark metallic shroud, sitting on a clean technical gray background" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" data-alt="High end computer graphics card with triple fan cooler design, dark metallic shroud, sitting on a clean technical gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG2AkFGL4M512Npeo3fXeacK5w2hPt5f02UO98h8NtARDAtHoyg93mSMU5Wr6BqDpZUDpT-_2x8Nz4hmJGw-mEtKN4wy6TaCghS9mmuI7tfdbowheh2d8MhDmueM1qDtKgCEnoNI59VUv0x_EjpEHw8BAcgRoY4-n2Kk1phF2XPQgTEgBsKJptRdAc-ubrvqr3floxIMbq5j-3pzWlTf1JwDRf9XIJ-yr9d2g1MuKVlOeYoTOzgGymTKIWfLQ2xxTZBNyfeavTyftA"/>
+</div>
+<!-- Content Area -->
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-4">
+<span class="font-body text-xs text-on-surface-variant uppercase tracking-[0.1em] mb-1 block">NVIDIA</span>
+<h3 class="font-display text-xl font-bold tracking-tight text-on-surface leading-tight">GeForce RTX 4090 Founders Edition</h3>
+</div>
+<!-- Technical Specs Grid -->
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mt-auto pt-6">
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">VRAM</span>
+<span class="font-body text-sm font-semibold text-on-surface">24GB GDDR6X</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Core Clock</span>
+<span class="font-body text-sm font-semibold text-on-surface">2.23 GHz</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Cores</span>
+<span class="font-body text-sm font-semibold text-on-surface">16384</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">TDP</span>
+<span class="font-body text-sm font-semibold text-on-surface">450W</span>
+</div>
+</div>
+<!-- Price & Action -->
+<div class="flex items-center justify-between mt-8 pt-4 border-t border-surface-container-high">
+<div class="font-display text-2xl font-bold tracking-tight text-on-surface">$1,599.00</div>
+<button class="primary-gradient-btn text-on-primary font-body text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                Add
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-surface-container-lowest ghost-border group relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col h-full">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
+<div class="relative h-64 w-full bg-surface-container flex items-center justify-center p-6 overflow-hidden">
+<img alt="Sleek black graphics card with minimalist dual fan design, premium matte finish, isolated on light technical background" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 filter grayscale" data-alt="Sleek black graphics card with minimalist dual fan design, premium matte finish, isolated on light technical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABlsXcZlaXadCH1N29fM4yR9c5N-joIwTa8XBSQa7l4ZSyzMfjyuxYMRPbyxuUPBtrCiIT98RgjJLdgsOpcqDwSw-wXO0l5gQk3KKtcvQG0veNdBL7gmjnOK15uD7pQPsyTTb-YssLKMumZrUZIYFi48SFqcExtBanLFilUsg6-QyvCHQdLyfsnQb1YMLovyTeea9SY8gwy8tEWISEW7fPbjiPnkF_ntpCSiDhg1ZGCr_iumgNFgk6Z8tYyol5O_190zMguf6yfpG8"/>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-4">
+<span class="font-body text-xs text-on-surface-variant uppercase tracking-[0.1em] mb-1 block">ASUS ROG</span>
+<h3 class="font-display text-xl font-bold tracking-tight text-on-surface leading-tight">Strix GeForce RTX 4080 SUPER OC</h3>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mt-auto pt-6">
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">VRAM</span>
+<span class="font-body text-sm font-semibold text-on-surface">16GB GDDR6X</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Boost Clock</span>
+<span class="font-body text-sm font-semibold text-on-surface">2.67 GHz</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Interface</span>
+<span class="font-body text-sm font-semibold text-on-surface">PCIe 4.0</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Length</span>
+<span class="font-body text-sm font-semibold text-on-surface">357.6 mm</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8 pt-4 border-t border-surface-container-high">
+<div class="font-display text-2xl font-bold tracking-tight text-on-surface">$1,249.99</div>
+<button class="primary-gradient-btn text-on-primary font-body text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                Add
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="bg-surface-container-lowest ghost-border group relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col h-full">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
+<div class="relative h-64 w-full bg-surface-container flex items-center justify-center p-6 overflow-hidden">
+<img alt="Industrial design graphics card with exposed heatsink fins and red accents on a blue-gray surface" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 filter sepia-[.1] hue-rotate-[180deg]" data-alt="Industrial design graphics card with exposed heatsink fins and red accents on a blue-gray surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6-UmlbQhr4PAqUVbUQ8_CCauG3cJTSwQHN1aEcZO_ss8pRfet2yqIJHVCWbmDeYLDKoajCLZ6f5QK2oMwpiSaYYaPqp5Qb5y4sNNcampJOtoCkrfU0o68-uEHFk74BSsJron6m_JLj3QYrd4tkcFE0tsjSzvqXiheQTLMgLnoBJUgT9VwIOSYynebg6tyWw8OGjlb7HEMYFW6IaVSem-uqJGfNPfeCMRIVQixnmm_P9uoVSLDrid-8kwlJQtO1mIt3IxTDNVc05eq"/>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-4">
+<span class="font-body text-xs text-on-surface-variant uppercase tracking-[0.1em] mb-1 block">AMD</span>
+<h3 class="font-display text-xl font-bold tracking-tight text-on-surface leading-tight">Radeon RX 7900 XTX Reference</h3>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mt-auto pt-6">
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">VRAM</span>
+<span class="font-body text-sm font-semibold text-on-surface">24GB GDDR6</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Game Clock</span>
+<span class="font-body text-sm font-semibold text-on-surface">2.3 GHz</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Stream Procs</span>
+<span class="font-body text-sm font-semibold text-on-surface">6144</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Ports</span>
+<span class="font-body text-sm font-semibold text-on-surface">2x DP 2.1, 1x HDMI</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8 pt-4 border-t border-surface-container-high">
+<div class="font-display text-2xl font-bold tracking-tight text-on-surface">$999.00</div>
+<button class="primary-gradient-btn text-on-primary font-body text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                Add
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="bg-surface-container-lowest ghost-border group relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col h-full">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-10"></div>
+<div class="relative h-64 w-full bg-surface-container flex items-center justify-center p-6 overflow-hidden">
+<img alt="Compact dual-fan graphics card, silver backplate, clean studio lighting on gray background" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500 filter hue-rotate-90" data-alt="Compact dual-fan graphics card, silver backplate, clean studio lighting on gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY_8Xdyqk1HKOe3qb7qMjv3oT_6dQTJ_5dW3AVqWNZnsR-yelfqwAfTcBSDjvlGUa3dWQs1-bXzpGoSON4C03EG7O1Bk1zxI0DAPZ-5EzwDMOHCfoZ-VxquThnx9Jt6UlG25ooQSl51q7SyiJbrinPc0RMcizZbmVIUgdrNB4R67XQU8WUxHDxna43hO5NfkG_k_-9gJ5VTJpVF8jQXi3pTC_dwZTYQbbWNT-uBy0X4utiA4hOgg6DbLRZGlrhD27KgKgo9aT3tefK"/>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-4">
+<span class="font-body text-xs text-on-surface-variant uppercase tracking-[0.1em] mb-1 block">MSI</span>
+<h3 class="font-display text-xl font-bold tracking-tight text-on-surface leading-tight">GeForce RTX 4070 Ti SUPER Ventus 3X</h3>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-4 mt-auto pt-6">
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">VRAM</span>
+<span class="font-body text-sm font-semibold text-on-surface">16GB GDDR6X</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Boost Clock</span>
+<span class="font-body text-sm font-semibold text-on-surface">2.64 GHz</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">Cores</span>
+<span class="font-body text-sm font-semibold text-on-surface">8448</span>
+</div>
+<div>
+<span class="font-body text-[10px] text-on-surface-variant uppercase tracking-wider block mb-0.5">TDP</span>
+<span class="font-body text-sm font-semibold text-on-surface">285W</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-8 pt-4 border-t border-surface-container-high">
+<div class="font-display text-2xl font-bold tracking-tight text-on-surface">$799.99</div>
+<button class="primary-gradient-btn text-on-primary font-body text-sm font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                                Add
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination (Technical Data Style) -->
+<div class="mt-16 flex items-center justify-between border-t border-surface-container-high pt-6">
+<span class="font-body text-sm text-on-surface-variant">Showing 1-4 of 42 Items</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-surface-container-low text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-primary text-on-primary font-body text-sm font-bold">01</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-surface-container-low text-on-surface hover:bg-surface-variant transition-colors font-body text-sm font-bold">02</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-surface-container-low text-on-surface hover:bg-surface-variant transition-colors font-body text-sm font-bold">03</button>
+<span class="w-10 h-10 flex items-center justify-center text-on-surface-variant font-body">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-surface-container-low text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 font-['Inter'] text-xs uppercase tracking-[0.1em] w-full py-12 px-10 mt-auto">
+<div class="max-w-[1920px] mx-auto">
+<div class="bg-slate-300 dark:bg-slate-800 h-[1px] mb-8"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+<div>
+<h4 class="text-lg font-black text-slate-900 dark:text-slate-50 mb-4 font-['Space_Grotesk'] italic tracking-tighter normal-case">VOLTAGE PRECISION</h4>
+<p class="text-slate-500 dark:text-slate-500">© 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.</p>
+</div>
+<nav class="flex flex-wrap gap-6 md:justify-end">
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Warranty</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Shipping &amp; Returns</a>
+</nav>
+</div>
+</div>
+</footer>
+</body></html>

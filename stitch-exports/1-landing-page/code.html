@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb59a",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "outline": "#727687",
+                        "inverse-on-surface": "#f0f0f5",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-primary-container": "#f9f7ff",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9fe",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#2e3034",
+                        "surface-container": "#ededf3",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline-variant": "#c2c6d8",
+                        "secondary-container": "#cd4800",
+                        "on-surface-variant": "#424656",
+                        "on-background": "#1a1c1f",
+                        "tertiary": "#a33200",
+                        "secondary-fixed": "#ffdbce",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1a1c1f",
+                        "on-primary": "#ffffff",
+                        "primary": "#0048e1",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "surface-dim": "#d9dadf",
+                        "tertiary-container": "#cc4204",
+                        "surface-tint": "#004ced",
+                        "on-tertiary-container": "#fff6f4",
+                        "primary-container": "#3063ff",
+                        "surface-bright": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-low": "#f3f3f8",
+                        "surface-variant": "#e2e2e7",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(249, 249, 254, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-slate-900 font-headline uppercase">
+                PRECISION TECH
+            </div>
+<nav class="hidden md:flex items-center space-x-10 font-headline tracking-tight">
+<a class="text-blue-700 border-b-2 border-blue-600 pb-1" href="#">Home</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">About</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center space-x-6">
+<div class="relative flex items-center bg-surface-container-high rounded-sm px-3 py-1.5">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm p-0 w-48 placeholder:text-on-surface-variant/50" placeholder="Search Components" type="text"/>
+</div>
+<button class="relative hover:bg-slate-100/50 p-2 rounded-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-slate-600" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="bg-primary text-on-primary px-6 py-2 text-sm font-medium rounded-lg hover:shadow-lg transition-all active:scale-95">
+                    Sign Up
+                </button>
+</div>
+</div>
+<div class="bg-slate-200/20 h-[1px]"></div>
+</header>
+<main>
+<!-- Hero Section: Editorial Asymmetry -->
+<section class="relative min-h-[870px] flex items-center overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,#dde1ff_0%,#f9f9fe_70%)] opacity-40"></div>
+<div class="container mx-auto px-8 grid grid-cols-12 gap-8 items-center relative z-10">
+<div class="col-span-12 lg:col-span-6">
+<div class="inline-block bg-secondary-fixed text-on-secondary-fixed text-[10px] tracking-[0.2em] font-bold py-1 px-3 mb-6 uppercase">
+                        Extreme Performance Series
+                    </div>
+<h1 class="font-headline text-7xl md:text-8xl font-bold tracking-tighter leading-[0.9] text-on-surface mb-8">
+                        FORGED IN <span class="text-primary">SILICON.</span><br/>DEFINED BY SPEED.
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-xl mb-12 leading-relaxed">
+                        Engineering the next generation of high-performance computing. Experience ultra-low latency and thermal excellence with the new Precision ATELIER components.
+                    </p>
+<div class="flex items-center space-x-6">
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-10 py-4 rounded-lg font-bold tracking-tight shadow-xl hover:shadow-primary/20 transition-all active:scale-95">
+                            EXPLORE THE SERIES
+                        </button>
+<button class="flex items-center space-x-2 text-on-surface font-semibold group">
+<span>Watch Technical Reveal</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-6 relative">
+<div class="relative scale-110 translate-x-12">
+<img alt="High-end GPU" class="w-full h-auto drop-shadow-[0_35px_60px_rgba(0,72,225,0.15)] rounded-xl" data-alt="Ultra-modern graphic processing unit with exposed copper heat pipes and brushed metal finish, dramatic cold studio lighting with blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNyywoi6_5O9a3Bw34a5L62lMvQvwBitEvNtbmB5WEp37j9Da6atKFkADWds55GII_RKDYvQb5cueeU33bEq_Pate5w-gpzRXRfEZw9fJLuHi1EVa7nE77OpwkPJi0x5CrA3CN426UHSL2C2_P4Js3HPdU6QwUIhfJ5so4noFf74ZUniCvGk_q4ae7jFX5E3bzV2W_XB1Nbdn4gejjGPzPuY1TFJuwCwlL_E74JkgD-ZYpty6BnxGBEGla69c8jcAwSobGtgOHBT9t"/>
+<!-- Floating Spec Tags -->
+<div class="absolute top-20 -left-10 glass-panel p-4 rounded-lg shadow-xl border border-outline-variant/20">
+<div class="text-[10px] text-primary font-bold tracking-widest uppercase mb-1">Thermal Index</div>
+<div class="text-2xl font-headline font-bold">28°C IDLE</div>
+</div>
+<div class="absolute bottom-20 right-10 glass-panel p-4 rounded-lg shadow-xl border border-outline-variant/20">
+<div class="text-[10px] text-secondary font-bold tracking-widest uppercase mb-1">Core Clock</div>
+<div class="text-2xl font-headline font-bold">3.2GHz OC</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories: Tonal Grid -->
+<section class="py-24 bg-surface-container-low">
+<div class="container mx-auto px-8">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="font-headline text-4xl font-bold tracking-tight mb-2 uppercase">Core Inventories</h2>
+<div class="h-1 w-20 bg-primary"></div>
+</div>
+<div class="text-on-surface-variant font-label text-sm tracking-widest uppercase">Select Hierarchy</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- CPU -->
+<div class="group relative aspect-[4/5] bg-surface-container-lowest overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="Microscopic view of a computer processor chip on a motherboard, technical high-contrast photography with cold blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDozOb8XRraKvYeDkuBDm9_xU58mhnEN-dAqk9_qMfb5zvPyMH7qcYAO5AwDwWH28KNiqmvtf2dPyI2nU0abaXRhzYhTyQefB91gGnUjRLdfUYem4xQSOiTvhdvA0aSs_8oHHRVIZAg48wkw5LmQQkx99hKxB2-_d4jx02VoLkwg7Fzpc6S8a1RHMTjHTRu310hc45yuZoBZvDEOuzZjqCeoJ7O7zEMZmyLQbwi8O_nmnTI5OTI5skIBFlJ5-qP28gFrYxnWEPg0JRf"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-[10px] font-bold tracking-widest text-primary mb-2 block uppercase">01 / Logic</span>
+<h3 class="font-headline text-3xl font-bold">PROCESSORS</h3>
+</div>
+</div>
+<!-- GPU -->
+<div class="group relative aspect-[4/5] bg-surface-container-lowest overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="Sleek graphics card backplate with geometric patterns and subtle RGB lighting, professional studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPBxjh8zifXKjU-Z3pCyj5Fy3NgSn3otLv7K-1ZrLx0jtCFkRGYUkjVo1eL7SdMwlhtbYWKy_a0pV5yK4fMem2WqaJbDOTYuvfgYdjwxgDK72Ov4nwnZ1gdnv1a72Pc7knsoAwqgeUWxjU8-YKwmyKUy1LPbAt3h8Y2VJKI5G0MYMqSESPBOH-8UnkgFnC-vxfpnwEG0yt77tHwBpoBBKXBjAAUta9RcP3TaDYZhSAEZ__agOw8W1Iy9GCXalasu-TGE-nBOT46N4p"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-[10px] font-bold tracking-widest text-primary mb-2 block uppercase">02 / Render</span>
+<h3 class="font-headline text-3xl font-bold">GRAPHICS</h3>
+</div>
+</div>
+<!-- Motherboards -->
+<div class="group relative aspect-[4/5] bg-surface-container-lowest overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="Top down view of a high-end motherboard circuits and capacitors, industrial aesthetic, sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx9v17VJBGlSoRoi-qP48L8cFEYGM6WlOOfA9dXLephnj-hOhYKiMLGTdFeEit6C6InXmINryyYi44Se_HDhXsOglZTz8UmFkVI5DYWbyggdlXDvZqFgp6qYjcwvngffe1Bot0J-8L0GYZlFZgbpAPg34BuMQDH2H364GtJ8yTin-hafk6CgdaUjMeTmOXHalYAI6aV4viF_rM_zBRVoBwJNm2cMc2_AvouAm7EaAHKzutJG35LgYO0t5O0pi2g0cSP5xmm2gwgWPw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-[10px] font-bold tracking-widest text-primary mb-2 block uppercase">03 / Nexus</span>
+<h3 class="font-headline text-3xl font-bold">BOARDS</h3>
+</div>
+</div>
+<!-- Memory -->
+<div class="group relative aspect-[4/5] bg-surface-container-lowest overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="DDR5 RAM modules with brushed aluminium heatsinks and sleek line patterns, tech laboratory lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKG8j0ZSyWVSKtyibidr93pu6iinhSFPTrNCVAJ9egdc-_wXWIEbhI5zHqXk1nmKWgAf_02rxV5xw4Bo9tTkmG9oQDSTg5zTMzXnJXXXzw2astTR5lEw0awB_3O4RSpUGCcDbvrsR-Kbb1Ipx9OaaVyNLCDu7y2TmAvdWgG-o1ZcCQOU2vCQe3qYlT80ozvVk1dlPOY1xMxm_A0pyqSRtfN1-SCuWwmUyVQ1iSpZHqKB99LK-isLXGOKc31rFLrgXFdlpKrHN1xaTQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-[10px] font-bold tracking-widest text-primary mb-2 block uppercase">04 / Stream</span>
+<h3 class="font-headline text-3xl font-bold">STORAGE</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Products: Spec-First Cards -->
+<section class="py-32">
+<div class="container mx-auto px-8">
+<div class="flex items-center space-x-4 mb-20">
+<h2 class="font-headline text-5xl font-bold tracking-tighter uppercase">Featured Tier</h2>
+<div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+<div class="flex space-x-2">
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">west</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Product Card 1 -->
+<div class="group">
+<div class="bg-surface-container-lowest p-8 transition-all group-hover:bg-surface-bright mb-6 relative overflow-hidden">
+<div class="absolute top-4 right-4 z-10">
+<span class="bg-secondary text-on-secondary px-2 py-1 text-[10px] font-bold tracking-widest uppercase">Performance Thermal</span>
+</div>
+<img class="w-full h-64 object-contain mb-8 group-hover:scale-110 transition-transform duration-500" data-alt="Close up of a high performance graphics card with triple fan cooling system, matte black finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCek9EPXDbdSTVX_uMQMbNEiUt1Um6k0cAUXDBFDT-C6EkRwrG53vlA1xW1PTWzp9B96ZDyxGiRJqb4bz4GkjIMc4832-Dzx0iahxQxXcsiZ2b-YbYEalSDPwi7ZDUmHM-G3V89IbmuELKC89B3auRqHgHhJlgZ-NXBNRsZSRjDLxNWZIARklkOKSGwEoQshsIPdW9ZjIXsXD-i9l2b6HehVQiwuS7FmyfAa-uL-QkYW7zLcqYr9Ayv3St0gWjINnDYORCsCo534ShZ"/>
+<h4 class="font-headline text-2xl font-bold mb-2">VERTEX RTX 9090 PRO</h4>
+<p class="text-on-surface-variant text-sm mb-6">Ultra-Efficient Ada Lovelace Architecture</p>
+<div class="grid grid-cols-2 gap-y-4 border-t border-outline-variant/15 pt-6">
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">VRAM</div>
+<div class="font-headline font-semibold">48GB GDDR7</div>
+</div>
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">Power</div>
+<div class="font-headline font-semibold">450W TGP</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<span class="font-headline text-2xl font-bold">$1,999.00</span>
+<button class="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">Configure Build</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group">
+<div class="bg-surface-container-lowest p-8 transition-all group-hover:bg-surface-bright mb-6 relative overflow-hidden">
+<img class="w-full h-64 object-contain mb-8 group-hover:scale-110 transition-transform duration-500" data-alt="Sleek high-performance motherboard with heatsinks and gold-plated circuits, industrial tech product shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQeNhyl1BxnWkswH0UkfAiwzxHxLnDG6c4K9kFoIIzJPGHDez1OVOVeUxkwFgxK-tQ97pemAcUUz5eQ-SlEm7HPkqvpbSvWXfCCAIJ5KDtrv0qNIodr-hURkmyJsGPXgot3JoG704-bxy5T9qr0qk8cqI53Oa3Mx_-et3-DIoFSI_poaHuBpJoXPkHOOqx4EOxrnDpM5vApMYBu6QEtxhG8WA_DlShCX2K9ihiACqGZW20Y-EVTLwNIVwNqYhcp2RtSlI3D-9Bun45"/>
+<h4 class="font-headline text-2xl font-bold mb-2">APEX Z890 EXTREME</h4>
+<p class="text-on-surface-variant text-sm mb-6">Next-Gen Socket LGA 1851 Support</p>
+<div class="grid grid-cols-2 gap-y-4 border-t border-outline-variant/15 pt-6">
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">Slots</div>
+<div class="font-headline font-semibold">4x PCIE 5.0</div>
+</div>
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">Ethernet</div>
+<div class="font-headline font-semibold">10GbE LAN</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<span class="font-headline text-2xl font-bold">$649.00</span>
+<button class="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">Configure Build</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group">
+<div class="bg-surface-container-lowest p-8 transition-all group-hover:bg-surface-bright mb-6 relative overflow-hidden">
+<div class="absolute top-4 right-4 z-10">
+<span class="bg-primary text-on-primary px-2 py-1 text-[10px] font-bold tracking-widest uppercase">New Release</span>
+</div>
+<img class="w-full h-64 object-contain mb-8 group-hover:scale-110 transition-transform duration-500" data-alt="Computer processor chip held by metal tweezers in a sterile lab setting, macro shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHRapCjRUYmTxF2iMtW6owW6MZGKkMMZ9s5zWyp_fxb8Y_cI4g8p2mTtyB-1O_JhHb_U_6Et1HEf6JwoNtTQ8KJnUPQiuS5mj4MmPTA-YG2-Q_8498_TcnUuKM-LJE2JBpJdsb2R1TWDr9oJhUXIZEapLacOBBA81mJ1XJoFwqtogZkayZ46SUsxvuxxqE9yNKvxiKQHBnJAtZSAkYMDHKtbTG09QMlDSFOawzZHzWFyncm_Fk9XcQu4k_XeDXoN3Vpbobpaza5n3u"/>
+<h4 class="font-headline text-2xl font-bold mb-2">QUBIT X-12 CORE</h4>
+<p class="text-on-surface-variant text-sm mb-6">Multi-Threaded Mastery for Workstations</p>
+<div class="grid grid-cols-2 gap-y-4 border-t border-outline-variant/15 pt-6">
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">Cores</div>
+<div class="font-headline font-semibold">24P + 12E</div>
+</div>
+<div>
+<div class="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">Boost</div>
+<div class="font-headline font-semibold">6.2 GHz</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center px-2">
+<span class="font-headline text-2xl font-bold">$589.00</span>
+<button class="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">Configure Build</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter: Machined Design -->
+<section class="py-24 relative overflow-hidden bg-slate-900 text-slate-100">
+<div class="absolute inset-0 opacity-10">
+<div class="grid grid-cols-12 h-full">
+<div class="col-span-1 border-r border-slate-500"></div>
+<div class="col-span-1 border-r border-slate-500"></div>
+<div class="col-span-1 border-r border-slate-500"></div>
+<div class="col-span-1 border-r border-slate-500"></div>
+</div>
+</div>
+<div class="container mx-auto px-8 relative z-10">
+<div class="max-w-4xl">
+<span class="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Engineered Intelligence</span>
+<h2 class="font-headline text-5xl font-bold tracking-tighter mb-8 leading-tight">STAY AT THE EDGE OF <br/>COMPUTATIONAL LIMITS.</h2>
+<p class="text-slate-400 text-lg mb-12 max-w-2xl">
+                        Subscribe to our Technical Briefings. Get early access to component drops, overclocking guides, and professional workstation builds.
+                    </p>
+<form class="flex flex-col md:flex-row gap-4 max-w-xl">
+<div class="flex-grow relative">
+<input class="w-full bg-slate-800/50 border-none border-b-2 border-slate-700 focus:border-primary text-slate-100 px-0 py-4 font-headline tracking-widest transition-all" placeholder="ENTER WORKSTATION EMAIL" type="email"/>
+</div>
+<button class="bg-primary text-on-primary px-12 py-4 font-bold tracking-widest uppercase hover:bg-primary-container transition-all">
+                            SUBSCRIBE
+                        </button>
+</form>
+<div class="mt-4 text-[10px] text-slate-500 tracking-widest uppercase">
+                        By subscribing, you agree to our Protocol and Privacy Policy.
+                    </div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-100 border-t border-slate-200">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
+<div>
+<div class="font-['Space_Grotesk'] font-bold text-lg mb-6 uppercase tracking-tight">PRECISION TECH</div>
+<p class="text-slate-500 font-['Inter'] text-sm uppercase tracking-widest max-w-md">
+                    © 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE. EVERY COMPONENT IS HAND-SELECTED FOR MISSION-CRITICAL STABILITY AND PEAK THROUGHPUT.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Information</div>
+<ul class="space-y-3">
+<li><a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<div class="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Support</div>
+<ul class="space-y-3">
+<li><a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors" href="#">Support</a></li>
+<li><a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors" href="#">Returns</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

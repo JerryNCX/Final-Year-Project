@@ -1,54 +1,42 @@
 import React, { useState } from 'react'
-import HeaderTabs from './HeaderTabs'
-import SearchBar from './SearchBar'
+import { Search, ShoppingCart, X } from 'lucide-react'
 import SearchPopover from '../Search/SearchPopover'
-import { Search } from 'lucide-react'
 
 export default function Header() {
   const [showSearch, setShowSearch] = useState(false)
-
+  
   return (
     <>
-      <header className='min-h-[40px] pt-4 text-center font-bold'>
-        <div className='grid grid-cols-6 gap-4 items-center'>
-          <div className="col-span-2 md:col-span-1 justify-self-start text-2xl md:text-3xl font-bold">
-            <a href="/" className="hover:text-blue-600 transition-colors">
-              TECH ATELIER
+      <header className="w-full sticky top-0 z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm">
+        <div className="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
+          <div className="text-2xl font-bold tracking-tighter text-slate-900 font-headline uppercase">
+            <a href="/">TECH ATELIER</a>
+          </div>
+          <nav className="hidden md:flex items-center space-x-10 font-headline tracking-tight">
+            <a href="/" className="text-blue-700 border-b-2 border-blue-600 pb-1">Home</a>
+            <a href="/about" className="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+            <a href="/contact" className="text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
+          </nav>
+          <div className="flex items-center space-x-6">
+            <div className="relative flex items-center bg-surface-container-high rounded-sm px-3 py-1.5">
+              <Search className="w-4 h-4 text-on-surface-variant mr-2" />
+              <input 
+                className="bg-transparent border-none focus:ring-0 text-sm p-0 w-48 placeholder:text-on-surface-variant/50"
+                placeholder="Search Components"
+                onFocus={() => setShowSearch(true)}
+              />
+            </div>
+            <a href="/cart" className="relative hover:bg-slate-100/50 p-2 rounded-sm transition-all">
+              <ShoppingCart className="w-5 h-5 text-slate-600" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full"></span>
             </a>
-          </div>
-          <div className="col-span-2 md:col-span-2 md:col-start-3 justify-self-center w-full md:w-auto hidden md:block">
-            <HeaderTabs />
-          </div>
-          <div className="col-span-2 md:col-span-2 col-end-7 justify-self-end flex items-center gap-3">
-            <button
-              onClick={() => setShowSearch(true)}
-              className="flex items-center gap-2 px-3 py-2 border rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <Search className="w-4 h-4 text-gray-500" />
-              <span className="text-sm text-gray-500 hidden sm:inline">Search</span>
-            </button>
-            {/* <div className="w-full md:w-48 lg:w-64 hidden md:block">
-              <SearchBar />
-            </div> */}
+            <a href="/signup" className="bg-primary text-on-primary px-6 py-2 text-sm font-medium rounded-lg hover:shadow-lg transition-all">
+              Sign Up
+            </a>
           </div>
         </div>
       </header>
-
-      {/* Mobile Header */}
-      <div className="md:hidden px-4 py-2 border-b flex items-center gap-2">
-        <button
-          onClick={() => setShowSearch(true)}
-          className="flex-1 flex items-center gap-2 px-3 py-2 border rounded-lg bg-gray-50"
-        >
-          <Search className="w-4 h-4 text-gray-500" />
-          <span className="text-sm text-gray-500">Search products...</span>
-        </button>
-      </div>
-
-      <SearchPopover
-        isOpen={showSearch}
-        onClose={() => setShowSearch(false)}
-      />
+      <SearchPopover isOpen={showSearch} onClose={() => setShowSearch(false)} />
     </>
   )
 }

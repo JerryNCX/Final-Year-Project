@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart - VOLTAGE PRECISION</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f9f9fe",
+                      "inverse-primary": "#b7c4ff",
+                      "on-surface": "#1a1c1f",
+                      "on-tertiary-fixed-variant": "#832600",
+                      "secondary-fixed": "#ffdbce",
+                      "primary": "#0048e1",
+                      "surface-tint": "#004ced",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e8e8ed",
+                      "primary-container": "#3063ff",
+                      "on-primary-fixed-variant": "#0038b6",
+                      "secondary-container": "#cd4800",
+                      "surface-variant": "#e2e2e7",
+                      "surface-container-highest": "#e2e2e7",
+                      "surface-container-low": "#f3f3f8",
+                      "on-surface-variant": "#424656",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#802a00",
+                      "on-tertiary-container": "#fff6f4",
+                      "surface-dim": "#d9dadf",
+                      "secondary": "#a33800",
+                      "on-tertiary-fixed": "#390c00",
+                      "primary-fixed": "#dde1ff",
+                      "on-secondary-container": "#fffbff",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c2c6d8",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "background": "#f9f9fe",
+                      "tertiary": "#a33200",
+                      "tertiary-fixed": "#ffdbd0",
+                      "outline": "#727687",
+                      "inverse-surface": "#2e3034",
+                      "tertiary-container": "#cc4204",
+                      "secondary-fixed-dim": "#ffb59a",
+                      "error": "#ba1a1a",
+                      "surface-container": "#ededf3",
+                      "on-secondary-fixed": "#370e00",
+                      "on-background": "#1a1c1f",
+                      "on-error-container": "#93000a",
+                      "on-primary-container": "#f9f7ff",
+                      "surface": "#f9f9fe",
+                      "on-primary-fixed": "#001452",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#f0f0f5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Space Grotesk"
+                      ],
+                      "display": [
+                              "Space Grotesk"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "label": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {}
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            font-family: theme('fontFamily.body');
+        }
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: theme('fontFamily.display');
+        }
+        /* Custom Ambient Shadow */
+        .shadow-ambient {
+            box-shadow: 0 40px 80px -20px rgba(26, 28, 31, 0.06);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl sticky top-0 w-full z-50">
+<div class="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
+<!-- Brand -->
+<a class="text-xl font-black italic tracking-tighter text-slate-900 dark:text-slate-50 font-display" href="#">
+                VOLTAGE PRECISION
+            </a>
+<!-- Navigation Links -->
+<div class="hidden md:flex space-x-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-['Space_Grotesk'] font-bold tracking-tight" href="#">Catalog</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-['Space_Grotesk'] font-bold tracking-tight" href="#">Builds</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-['Space_Grotesk'] font-bold tracking-tight" href="#">Support</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-['Space_Grotesk'] font-bold tracking-tight" href="#">About</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-6">
+<button class="text-blue-600 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="text-blue-600 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Separation Logic -->
+<div class="bg-slate-200/30 dark:bg-white/5 h-[1px] w-full"></div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow max-w-[1920px] mx-auto w-full px-10 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Header -->
+<div class="lg:col-span-12 mb-8">
+<h1 class="text-5xl font-bold tracking-tighter text-on-surface mb-2">ACTIVE MANIFEST</h1>
+<p class="text-on-surface-variant text-sm tracking-[0.05em] uppercase">Order ID: VP-2024-8891-X</p>
+</div>
+<!-- Cart Items List (Left Side) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Item 1 -->
+<div class="group bg-surface-container-lowest rounded-lg p-6 relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col sm:flex-row gap-8 items-center border border-outline-variant/15">
+<!-- Hover Glow -->
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<!-- Product Image -->
+<div class="w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+<img alt="Processor" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="High-end computer processor on a dark minimalist background, crisp technical lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCngEDMYUs3g4Bhs7U1B0WLPh0qNAyW1q8M-k3sw6APNO5uYuYBfvveYHR-HDoNGJrSU0dhjXXIKmpmj9QPxKjsALm6p9m1k-FYCw9B4E3LaHChNN77O6pJBOKO66UTWpm0Npm3mrKUUhkRXNdGKXg5Oxu4KpTJhvuyXKXUZbxDUBlu49QdX7NIR41daGSqZd6Z57Zh2LBL7Sv--BUNarAKYa7H69nxC3A3R6MZHF5Mb9lGDxZXrFNKz7kvcjEKOIvTUXf_Ce07h5d_"/>
+</div>
+<!-- Details -->
+<div class="flex-grow flex flex-col justify-between h-full w-full">
+<div class="flex justify-between items-start mb-4 w-full">
+<div>
+<span class="text-[0.65rem] font-bold tracking-[0.1em] text-on-surface-variant uppercase block mb-1">CPU • Socket AM5</span>
+<h3 class="text-xl font-display font-bold text-on-surface leading-tight">Quantum Core i9-14900KS</h3>
+</div>
+<button aria-label="Remove item" class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Specs & Price Row -->
+<div class="flex justify-between items-end w-full mt-auto">
+<div class="flex gap-4">
+<!-- Spec Badges -->
+<div class="flex items-center gap-1 text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="speed">speed</span>
+<span class="text-xs font-medium">6.2 GHz Max</span>
+</div>
+<div class="flex items-center gap-1 text-secondary bg-secondary-container/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="local_fire_department">local_fire_department</span>
+<span class="text-xs font-medium">150W TDP</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Quantity -->
+<div class="flex items-center bg-surface-container-low rounded border border-outline-variant/20">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Price -->
+<div class="text-right">
+<span class="text-lg font-display font-bold text-on-surface">$689.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group bg-surface-container-lowest rounded-lg p-6 relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col sm:flex-row gap-8 items-center border border-outline-variant/15">
+<!-- Hover Glow -->
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<!-- Product Image -->
+<div class="w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+<img alt="GPU" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="High-performance graphics card with triple fans on dark background, technical aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7GMc5bNMx4R_spyGVpYJhURqHcQVwcHBNUSMXQUfMVetFfFNv81JbPmUS_awWwrFT6YWLd4fQriOp7gUW39FF2L0A8U4xYTMTDDkeVcErxMeLWTsDNNH2DoshGBYS6bxfvL2jRdSNZxmQ-vJHZ3pDGVGCsMVDTKmTEvksi1L1RbSxxGDub7iNAL117NIzsEOB80hdPzeKEZ54wqZGhz7KoFXm7CE485RGhykhxsoarp8fxywhQ_q6Y_h62aMFAJj-O4Rlz3RHwS4E"/>
+</div>
+<!-- Details -->
+<div class="flex-grow flex flex-col justify-between h-full w-full">
+<div class="flex justify-between items-start mb-4 w-full">
+<div>
+<span class="text-[0.65rem] font-bold tracking-[0.1em] text-on-surface-variant uppercase block mb-1">GPU • PCIe 4.0</span>
+<h3 class="text-xl font-display font-bold text-on-surface leading-tight">GeForce RTX 4090 Matrix</h3>
+</div>
+<button aria-label="Remove item" class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Specs & Price Row -->
+<div class="flex justify-between items-end w-full mt-auto">
+<div class="flex gap-4">
+<!-- Spec Badges -->
+<div class="flex items-center gap-1 text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="memory">memory</span>
+<span class="text-xs font-medium">24GB GDDR6X</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Quantity -->
+<div class="flex items-center bg-surface-container-low rounded border border-outline-variant/20">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Price -->
+<div class="text-right">
+<span class="text-lg font-display font-bold text-on-surface">$1,999.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group bg-surface-container-lowest rounded-lg p-6 relative overflow-hidden transition-colors duration-300 hover:bg-surface-bright flex flex-col sm:flex-row gap-8 items-center border border-outline-variant/15">
+<!-- Hover Glow -->
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<!-- Product Image -->
+<div class="w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+<img alt="RAM" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="DDR5 RAM sticks with sleek aluminum heat spreaders, technical studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5eRmQ_ouYmYCou3MWgobYRRugLfcCxFl1ZVo6_krryWAIyrB3i6QKTjhTQjvVB2n7mKzJv539uvT9UNoBZC1_tLnNe7gWnNK0QwKwoVdenU5iMWKOAH1TY8lvdvlJt0flR-m9MZcnYixLfwa6DtIWNFqGX3dR0wpObK9Rkq_BxlAQsI_beNiXpSXF5j20Eg4ZUpjxHFxbmj7qhGMVMo3B_n2v-JOVaux0oZ6v5XztLyqheXfzutGjf_FCQhPk0YQWKTxFT9dQVywJ"/>
+</div>
+<!-- Details -->
+<div class="flex-grow flex flex-col justify-between h-full w-full">
+<div class="flex justify-between items-start mb-4 w-full">
+<div>
+<span class="text-[0.65rem] font-bold tracking-[0.1em] text-on-surface-variant uppercase block mb-1">RAM • DDR5</span>
+<h3 class="text-xl font-display font-bold text-on-surface leading-tight">Dominator Titanium 64GB</h3>
+</div>
+<button aria-label="Remove item" class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Specs & Price Row -->
+<div class="flex justify-between items-end w-full mt-auto">
+<div class="flex gap-4">
+<!-- Spec Badges -->
+<div class="flex items-center gap-1 text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="bolt">bolt</span>
+<span class="text-xs font-medium">6600MT/s</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span class="text-xs font-medium">CL32</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Quantity -->
+<div class="flex items-center bg-surface-container-low rounded border border-outline-variant/20">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+</button>
+<span class="w-8 text-center text-sm font-bold text-on-surface">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Price -->
+<div class="text-right">
+<span class="text-lg font-display font-bold text-on-surface">$558.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary (Right Side) -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 bg-surface-container-lowest/70 backdrop-blur-[20px] rounded-lg p-8 border border-outline-variant/15 shadow-ambient flex flex-col gap-8">
+<h2 class="text-2xl font-display font-bold text-on-surface uppercase tracking-tight">Telemetry</h2>
+<!-- Promo Code -->
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none text-sm text-on-surface px-4 py-3 focus:ring-0 focus:outline-none placeholder:text-outline transition-all pb-[10px] border-b-2 border-transparent focus:border-primary" placeholder="Access Code" type="text"/>
+</div>
+<!-- Line Items -->
+<div class="flex flex-col gap-4 text-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Subtotal (4 items)</span>
+<span class="font-medium text-on-surface">$3,246.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Shipping Calculation</span>
+<span class="font-medium text-on-surface">Calculated at next step</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Estimated Tax</span>
+<span class="font-medium text-on-surface">$259.68</span>
+</div>
+</div>
+<div class="h-[1px] w-full bg-outline-variant/30"></div>
+<!-- Total -->
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold tracking-[0.1em] text-on-surface-variant uppercase">Total Required</span>
+<span class="text-3xl font-display font-bold text-on-surface leading-none">$3,505.68</span>
+</div>
+<!-- Checkout Button -->
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 px-6 rounded-lg font-bold tracking-wide uppercase text-sm hover:from-primary-container hover:to-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,72,225,0.3)] hover:shadow-[0_0_30px_rgba(0,72,225,0.5)] flex items-center justify-center gap-2">
+                    Execute Order
+                    <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Secure Checkout Badge -->
+<div class="flex items-center justify-center gap-2 text-outline text-xs mt-[-1rem]">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+<span>Encrypted Transaction Path</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 w-full py-12 px-10 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end max-w-[1920px] mx-auto">
+<!-- Brand & Copyright -->
+<div>
+<div class="text-lg font-black text-slate-900 dark:text-slate-50 font-display mb-4">VOLTAGE PRECISION</div>
+<div class="bg-slate-300 dark:bg-slate-800 h-[1px] mb-8"></div>
+<p class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500">
+                    © 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.
+                </p>
+</div>
+<!-- Links -->
+<div class="flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Warranty</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Shipping &amp; Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

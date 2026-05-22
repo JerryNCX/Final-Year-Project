@@ -1,1 +1,90 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #0048e1;
+  --color-primary-container: #3063ff;
+  --color-secondary: #a33800;
+  --color-secondary-container: #cd4800;
+  --color-tertiary: #a33200;
+  --color-tertiary-container: #cc4204;
+  --color-background: #f9f9fe;
+  --color-surface: #f9f9fe;
+  --color-surface-dim: #d9dadf;
+  --color-surface-bright: #f9f9fe;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f3f8;
+  --color-surface-container: #ededf3;
+  --color-surface-container-high: #e8e8ed;
+  --color-surface-container-highest: #e2e2e7;
+  --color-surface-variant: #e2e2e7;
+  --color-on-background: #1a1c1f;
+  --color-on-surface: #1a1c1f;
+  --color-on-surface-variant: #424656;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #f9f7ff;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #fffbff;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #fff6f4;
+  --color-outline: #727687;
+  --color-outline-variant: #c2c6d8;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-inverse-surface: #2e3034;
+  --color-inverse-on-surface: #f0f0f5;
+  --color-inverse-primary: #b7c4ff;
+  --color-primary-fixed: #dde1ff;
+  --color-primary-fixed-dim: #b7c4ff;
+  --color-secondary-fixed: #ffdbce;
+  --color-secondary-fixed-dim: #ffb59a;
+  --color-tertiary-fixed: #ffdbd0;
+  --color-tertiary-fixed-dim: #ffb59d;
+  --color-on-primary-fixed: #001452;
+  --color-on-primary-fixed-variant: #0038b6;
+  --color-on-secondary-fixed: #370e00;
+  --color-on-secondary-fixed-variant: #802a00;
+  --color-on-tertiary-fixed: #390c00;
+  --color-on-tertiary-fixed-variant: #832600;
+  --color-surface-tint: #004ced;
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+  --radius-xs: 0.0625rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.glass-panel {
+  background: rgba(249, 249, 254, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+.ghost-border {
+  outline: 1px solid rgba(194, 198, 216, 0.15);
+}
+
+.primary-gradient-btn {
+  background: linear-gradient(135deg, #0048e1 0%, #3063ff 100%);
+}

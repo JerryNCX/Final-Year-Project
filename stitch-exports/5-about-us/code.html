@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb59a",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "outline": "#727687",
+                        "inverse-on-surface": "#f0f0f5",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-primary-container": "#f9f7ff",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9fe",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#2e3034",
+                        "surface-container": "#ededf3",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline-variant": "#c2c6d8",
+                        "secondary-container": "#cd4800",
+                        "on-surface-variant": "#424656",
+                        "on-background": "#1a1c1f",
+                        "tertiary": "#a33200",
+                        "secondary-fixed": "#ffdbce",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1a1c1f",
+                        "on-primary": "#ffffff",
+                        "primary": "#0048e1",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "surface-dim": "#d9dadf",
+                        "tertiary-container": "#cc4204",
+                        "surface-tint": "#004ced",
+                        "on-tertiary-container": "#fff6f4",
+                        "primary-container": "#3063ff",
+                        "surface-bright": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-low": "#f3f3f8",
+                        "surface-variant": "#e2e2e7",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(249, 249, 254, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar Component -->
+<nav class="w-full sticky top-0 z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm dark:shadow-none font-['Space_Grotesk'] tracking-tight">
+<div class="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-slate-50">PRECISION TECH</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors transition-all duration-200 ease-in-out active:scale-95" href="#">Home</a>
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 pb-1 transition-all duration-200 ease-in-out active:scale-95" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors transition-all duration-200 ease-in-out active:scale-95" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 p-2 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 rounded-sm cursor-pointer transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined text-on-surface-variant">shopping_cart</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-6 py-2 rounded-lg font-medium transition-all duration-200 ease-in-out active:scale-95">Sign Up</button>
+</div>
+</div>
+<div class="bg-slate-200/20 dark:bg-slate-800/20 h-[1px]"></div>
+</nav>
+<main class="max-w-[1920px] mx-auto">
+<!-- Hero Section: The Technical Atelier -->
+<section class="relative h-[800px] flex items-center overflow-hidden bg-surface">
+<div class="container mx-auto px-12 z-10 grid grid-cols-12 gap-8 items-center">
+<div class="col-span-12 lg:col-span-6">
+<span class="font-label text-sm uppercase tracking-[0.2em] text-secondary font-semibold mb-6 block">Est. 2024 / Laboratory Grade</span>
+<h1 class="font-headline text-8xl font-bold tracking-tighter text-on-surface leading-[0.9] mb-8">
+                        PRECISION<br/>
+<span class="text-primary italic">BY DESIGN.</span>
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed max-w-lg mb-10">
+                        At Tech Atelier, we don't just assemble components; we engineer digital environments. Our laboratory focuses on the intersection of extreme thermal dynamics and computational efficiency.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all hover:bg-primary-container active:scale-95 shadow-lg">View Technical Specs</button>
+<button class="border-2 border-outline-variant text-on-surface px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all hover:bg-surface-container-high active:scale-95">Lab Tour</button>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-6 relative">
+<div class="aspect-[16/9] w-[120%] -ml-[10%] bg-surface-container-highest rounded-lg overflow-hidden shadow-2xl relative">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close-up macro shot of a high-end motherboard with clean blue lighting, showing intricate circuits and brushed metal heat sinks in a sterile lab setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOuKzbjJlRWRHF9f2FxQGQKat5Z67IV2bYnImUAdETVIQNsv4zixvBSAJjJW7VJMkYERL8jbTXIY9GVCbqaBHcyqgrvLYH-oGBAh7c8XUgod8XhE7XALdqknJL1IjfpbigXmmLUViB1BYclC9q2nocizR010Bt6j850Tv_d2uNYoOKb_JYn7awhVz-5REALrnNShvHKsButmJJsmgtbuyjfcuCFQ9R9TWh40SQErgcE1TRaBn1OHaR61tEwBEW9SsRkSHsi84ZvMpB"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+</div>
+<!-- Technical Callout Box -->
+<div class="absolute -bottom-10 -left-10 glass-panel p-8 rounded-lg border border-outline-variant/20 shadow-xl max-w-xs">
+<span class="font-headline text-4xl font-bold text-primary block">0.01mm</span>
+<p class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-2">Production Tolerance Threshold</p>
+</div>
+</div>
+</div>
+<!-- Background Decorative Element -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-surface-container-low -z-0 translate-x-1/4 skew-x-[-12deg]"></div>
+</section>
+<!-- Narrative: The Engineering Philosophy -->
+<section class="py-32 bg-surface-container-low">
+<div class="container mx-auto px-12">
+<div class="grid grid-cols-12 gap-16 items-start">
+<div class="col-span-12 lg:col-span-4 sticky top-32">
+<h2 class="font-headline text-5xl font-bold tracking-tighter text-on-surface">OUR<br/>DNA</h2>
+<div class="w-16 h-1 bg-secondary mt-6"></div>
+<p class="mt-8 text-on-surface-variant text-lg">Every component that enters our atelier undergoes a rigorous 72-hour thermal stress cycle in our sub-zero testing chamber.</p>
+</div>
+<div class="col-span-12 lg:col-span-8 space-y-24">
+<div class="grid grid-cols-2 gap-12">
+<div class="group">
+<div class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+<span class="text-primary">01</span>
+<span>Extreme Thermal Control</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                    Heat is the enemy of performance. Our cooling solutions utilize aerospace-grade materials and custom micro-fin architectures to ensure 99.9% uptime under peak load.
+                                </p>
+</div>
+<div class="group">
+<div class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+<span class="text-primary">02</span>
+<span>Signal Integrity</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                    Through advanced EMI shielding and multi-layer trace isolation, we eliminate cross-talk and jitter in our high-speed data interconnects.
+                                </p>
+</div>
+</div>
+<div class="aspect-[21/9] bg-surface-container-highest rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Professional engineer in a white lab coat using high-precision measuring tools on a silicon wafer in a clean room environment with blue industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ02bnai4alJxlB13fylgKy3Mu8wq6UEQli9cCOmnjpZNFofKgzLN3gXy8iHWqafIw8wnxWvKRDtLZQybBj-P29ye8grJ5ciOZqhZhY-i3xmDgRTIAKWaMHDjjj4Gsc9AddA9dsMZMK9bCezytv1iiEKSnSCJSylyE4X3cJRZRRXSscu6Z7e7m4PBkyaI_dj60lsdr7RZXoQOX1G8euedCflt2KpHaXYWqTQA2qNWlZNdKmyWbT9i4LQeqFpnpyjkPJZAJhEFAwlt_"/>
+<div class="absolute inset-0 bg-on-surface/20 mix-blend-multiply"></div>
+<div class="absolute bottom-8 left-8 text-surface text-sm font-label uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">sensors</span>
+                                Live Monitoring: Chamber A-04
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: The Laboratory -->
+<section class="py-32 bg-surface">
+<div class="container mx-auto px-12">
+<div class="mb-16">
+<h2 class="font-headline text-5xl font-bold tracking-tighter text-on-surface text-center">THE TESTING GROUNDS</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-[800px]">
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-lowest rounded-lg overflow-hidden group relative">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Wide shot of a modern minimalist computer hardware workshop with professional tools organized on a wall and bright white overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ88L4_jJgYIZgcnY9YC5xMvEJSH7OAr1b76B9-adCiQ9Lt3JVCouSRgrSkKVXdjXjYudafwqIbzKSdlek1Q9DGVG_9QskGgm7kwMbkuNyVvOCifmBRwFfZOw3WMbMz2maV11jdCmKv-3T44tZG-6PDvuuPb0oCMCWDme6V9QVmMHTwnT4Z1-vLTSf81wtoSAp-RBnE9reZIECVwBMO9E8cLbhZhCPzf-0Td_Ve7rPdRBZuqtr4xVyaTeNuOLWmzsLSwyCwTOJPkyp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 to-transparent p-12 flex flex-col justify-end">
+<h3 class="font-headline text-3xl font-bold text-surface">Assembly Bay 01</h3>
+<p class="text-surface/80 mt-2 max-w-xs">Where high-performance architecture meets surgical precision assembly.</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container-lowest rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Abstract view of technical equipment with glowing green and blue circuit lights, suggesting cybersecurity and data processing strength" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSQ1Yg1MjkvYI0Q5_-XiDBbAtReF4pK_NUZtn8-YOBzXohxXE-LkyAU-6yj2e2AVciF-x_549q0nHfT_kNZWQBtZS7rmyJqcuHdBUeZjBknuzkaWaj8p1i7GUnpermUMYU_xJkIMwubpsckTNj9xZw6zjO3dmK4en10uYmn6wPimEpXV_jAh2MW9pXQxZLjYMWML9e5aHZ8gc74yU8_exIGI95sAYiEWvK8zn9V6qXLls-C4gOHGgRYsDFezoywc-v3CMXfWz3f0g8"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute top-6 right-6">
+<span class="bg-secondary text-on-secondary px-3 py-1 text-[10px] font-bold uppercase tracking-tighter rounded">Performance Alpha</span>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-high rounded-lg flex flex-col items-center justify-center p-8 text-center border-t-4 border-primary">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">memory</span>
+<div class="font-headline text-4xl font-bold text-on-surface">1.21k</div>
+<div class="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-2">Units Verified / Day</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Macro photo of liquid cooling tubes with neon blue coolant flowing through transparent pipes in a high-end PC build" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7Xilj57cgQ8uZ3Zb0e4D8GLpnMJ8Di7QUilOnfktnOQoO3hmodwJ0dUB4LFrrOU-lgdisNnLWjDmXVFrHd2pkmpEhMveTXSHD9kdxwl3pMvqKop7r2DSOwJPxPVNEhQNesSH8NHBxI7G6tXhyK7kaW0ju0JRNo59xuUS3o1CcSZXjyWPqbiX1i2yxY9EzFLiEbdEq65Q4Dbl3eb652-Hm2lSRmYkWb79MW16koKd7uLQmXAkRTtLMbl8wEY2byzyeXzBlxm2nY-Iu"/>
+<div class="absolute inset-0 flex items-center justify-center bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined text-surface text-4xl">play_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quote Section -->
+<section class="py-32 bg-on-surface text-surface overflow-hidden relative">
+<div class="container mx-auto px-12 relative z-10">
+<div class="max-w-4xl mx-auto text-center">
+<span class="material-symbols-outlined text-primary text-6xl mb-8">format_quote</span>
+<blockquote class="font-headline text-6xl font-light tracking-tight leading-[1.1] mb-12">
+                        "In the realm of <span class="italic font-bold">extreme hardware</span>, there is no room for 'good enough'. We operate in the final percentiles of performance."
+                    </blockquote>
+<cite class="not-italic block">
+<span class="font-label uppercase tracking-widest text-primary font-bold">Marcus Vane</span>
+<span class="text-surface/50 text-sm mt-1 block">Chief Engineer, Tech Atelier</span>
+</cite>
+</div>
+</div>
+<!-- Subtle background watermark -->
+<div class="absolute -bottom-20 -right-20 font-headline text-[24rem] font-bold text-surface-container-lowest/5 select-none leading-none">TECH</div>
+</section>
+<!-- Technical Roadmap -->
+<section class="py-32 bg-background">
+<div class="container mx-auto px-12">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24">
+<div>
+<span class="font-label text-sm text-primary uppercase tracking-[0.3em] font-bold">Vision 2025</span>
+<h2 class="font-headline text-6xl font-bold tracking-tighter text-on-surface mt-4">EVOLUTIONARY<br/>BENCHMARKS</h2>
+</div>
+<p class="max-w-sm text-on-surface-variant mb-2">Our commitment to research and development drives us toward the next frontier of hardware integration.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-l border-outline-variant/30">
+<div class="p-12 border-r border-outline-variant/30 hover:bg-surface-container-low transition-colors group">
+<span class="font-headline text-lg font-bold text-primary block mb-12">PHASE I</span>
+<h4 class="font-headline text-3xl font-bold mb-6 group-hover:translate-x-2 transition-transform">Liquid Silicon Cooling</h4>
+<p class="text-on-surface-variant">Integrating non-conductive thermal fluids directly into the substrate for zero-latency heat transfer.</p>
+</div>
+<div class="p-12 border-r border-outline-variant/30 hover:bg-surface-container-low transition-colors group">
+<span class="font-headline text-lg font-bold text-primary block mb-12">PHASE II</span>
+<h4 class="font-headline text-3xl font-bold mb-6 group-hover:translate-x-2 transition-transform">Neural Interconnects</h4>
+<p class="text-on-surface-variant">Developing AI-driven bus architectures that predict data flow patterns to reduce energy consumption.</p>
+</div>
+<div class="p-12 border-r border-outline-variant/30 hover:bg-surface-container-low transition-colors group">
+<span class="font-headline text-lg font-bold text-primary block mb-12">PHASE III</span>
+<h4 class="font-headline text-3xl font-bold mb-6 group-hover:translate-x-2 transition-transform">Zero-G Production</h4>
+<p class="text-on-surface-variant">Exploring manufacturing in orbital environments to achieve perfect crystalline purity in component wafers.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
+<div>
+<div class="font-['Space_Grotesk'] font-bold text-lg mb-4 text-on-surface">PRECISION TECH</div>
+<p class="text-slate-500 dark:text-slate-500 font-['Inter'] text-sm uppercase tracking-widest leading-loose max-w-sm">
+                    © 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE.
+                </p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-center">
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-['Inter'] text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100" href="#">Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

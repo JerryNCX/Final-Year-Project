@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffb59a",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "outline": "#727687",
+                        "inverse-on-surface": "#f0f0f5",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-primary-container": "#f9f7ff",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9fe",
+                        "on-secondary-fixed": "#370e00",
+                        "inverse-surface": "#2e3034",
+                        "surface-container": "#ededf3",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline-variant": "#c2c6d8",
+                        "secondary-container": "#cd4800",
+                        "on-surface-variant": "#424656",
+                        "on-background": "#1a1c1f",
+                        "tertiary": "#a33200",
+                        "secondary-fixed": "#ffdbce",
+                        "surface": "#f9f9fe",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1a1c1f",
+                        "on-primary": "#ffffff",
+                        "primary": "#0048e1",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "surface-dim": "#d9dadf",
+                        "tertiary-container": "#cc4204",
+                        "surface-tint": "#004ced",
+                        "on-tertiary-container": "#fff6f4",
+                        "primary-container": "#3063ff",
+                        "surface-bright": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-low": "#f3f3f8",
+                        "surface-variant": "#e2e2e7",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(249, 249, 254, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<main class="min-h-screen flex flex-col md:flex-row overflow-hidden">
+<section class="w-full md:w-[45%] flex flex-col p-8 md:p-16 lg:p-24 bg-surface-container-lowest relative z-10">
+<div class="mb-12">
+<a class="inline-block" href="/">
+<span class="font-headline font-bold text-2xl tracking-tighter text-on-surface">PRECISION TECH</span>
+<span class="block h-0.5 w-8 bg-primary mt-1"></span>
+</a>
+</div>
+<div class="flex-grow flex flex-col justify-center max-w-md mx-auto w-full">
+<header class="mb-10">
+<h1 class="font-headline text-4xl font-bold tracking-tight text-on-surface mb-3">CREATE ACCOUNT</h1>
+<p class="text-on-surface-variant font-medium">Join the atelier for enterprise-grade performance components.</p>
+</header>
+<form class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="font-label text-xs font-bold tracking-widest uppercase text-on-surface-variant">First Name</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 px-4 py-3 text-sm transition-all font-medium" placeholder="ALEX" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-xs font-bold tracking-widest uppercase text-on-surface-variant">Last Name</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 px-4 py-3 text-sm transition-all font-medium" placeholder="RIVERA" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-xs font-bold tracking-widest uppercase text-on-surface-variant">Email Address</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 px-4 py-3 text-sm transition-all font-medium" placeholder="ALEX@PRECISION.TECH" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label text-xs font-bold tracking-widest uppercase text-on-surface-variant">Password</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 px-4 py-3 text-sm transition-all font-medium" placeholder="••••••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-start gap-3 py-2">
+<input class="mt-1 w-4 h-4 rounded-sm border-outline text-primary focus:ring-primary-container" id="terms" type="checkbox"/>
+<label class="text-xs leading-relaxed text-on-surface-variant font-medium" for="terms">
+                            I AGREE TO THE <a class="text-primary hover:underline" href="#">TERMS OF SERVICE</a> AND <a class="text-primary hover:underline" href="#">PRIVACY POLICY</a> REGARDING TECHNICAL DATA PROCESSING.
+                        </label>
+</div>
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-sm tracking-widest uppercase rounded-lg shadow-lg shadow-primary/10 active:scale-[0.98] transition-transform" type="submit">
+                        INITIALIZE ACCOUNT
+                    </button>
+</form>
+<div class="mt-8 flex items-center gap-4">
+<span class="h-px flex-grow bg-outline-variant"></span>
+<span class="text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">Or Continue With</span>
+<span class="h-px flex-grow bg-outline-variant"></span>
+</div>
+<div class="mt-6 grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-3 bg-surface-container border border-outline-variant/30 hover:bg-surface-variant transition-colors rounded-lg">
+<span class="material-symbols-outlined text-lg">terminal</span>
+<span class="font-label text-xs font-bold tracking-widest uppercase">GITHUB</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 bg-surface-container border border-outline-variant/30 hover:bg-surface-variant transition-colors rounded-lg">
+<span class="material-symbols-outlined text-lg">cloud</span>
+<span class="font-label text-xs font-bold tracking-widest uppercase">GOOGLE</span>
+</button>
+</div>
+</div>
+<footer class="mt-auto pt-12">
+<p class="text-xs font-medium text-on-surface-variant">
+                    ALREADY REGISTERED? <a class="text-primary font-bold hover:underline" href="#">SIGN IN TO YOUR ATELIER.</a>
+</p>
+</footer>
+</section>
+<section class="hidden md:flex md:w-[55%] relative overflow-hidden bg-surface-dim">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale contrast-125 opacity-80" data-alt="High-end computer hardware macro photography showing circuit boards and heat sinks with futuristic blue lighting in a technical atelier environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANaKAzlrNeBZxB5Z64RDXd9Mpy5X4Zj2FvduXveJuF01o-MoMBvy7N5AF-WPt_i6__m7617cEqrpptzOJtsMG2tyEbth5dZhoxyjzy65sGLFfRYNjDFrDYeVHUdPz1D3-tiYDksRgzmui-7p_nmTWPuRcZrcCrLTNTT9HevrepSiICbM33V7igL4vEbKrlf4lbFDJV9ook889Na91bqltZm3Y9k74tHFgn0ILHQKoVXTa2k6zMiadTEya7NUiG8BRomHoreryHeTN4"/>
+<div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-on-surface/90"></div>
+</div>
+<div class="relative z-20 w-full h-full flex flex-col justify-end p-16 text-on-primary">
+<div class="glass-panel p-10 max-w-2xl rounded-xl border border-white/10 shadow-2xl">
+<div class="flex gap-2 mb-6">
+<span class="px-2 py-1 bg-secondary text-[10px] font-bold tracking-tighter uppercase rounded-sm">Performance Tier 1</span>
+<span class="px-2 py-1 bg-white/10 text-[10px] font-bold tracking-tighter uppercase rounded-sm backdrop-blur-md">Optimized v4.2</span>
+</div>
+<h2 class="font-headline text-5xl font-extrabold tracking-tighter mb-8 leading-[0.95]">ENGINEERED FOR <br/>0.01MM TOLERANCE.</h2>
+<div class="grid grid-cols-3 gap-8">
+<div>
+<div class="text-3xl font-headline font-bold text-primary-fixed mb-1">99.9%</div>
+<div class="text-[10px] font-bold tracking-widest uppercase opacity-70">Uptime Reliability</div>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-primary-fixed mb-1">0.12ms</div>
+<div class="text-[10px] font-bold tracking-widest uppercase opacity-70">Query Latency</div>
+</div>
+<div>
+<div class="text-3xl font-headline font-bold text-secondary-fixed-dim mb-1">+40%</div>
+<div class="text-[10px] font-bold tracking-widest uppercase opacity-70">Thermal Efficiency</div>
+</div>
+</div>
+<div class="mt-12 pt-12 border-t border-white/10">
+<p class="font-body text-lg italic opacity-90 leading-relaxed">
+                            "Precision Tech doesn't just sell hardware; they provide the infrastructure for digital craftsmanship. The atelier is where potential meets performance."
+                        </p>
+<div class="mt-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional system engineer in a tech environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoGuzIEnJkmry4O1gkza1qhEjvSmP33LmcURA5R-lK8ItFtQywHeObNZkcQwohQHnjDwReguF7oU8Zyb5lG4Vu3cpAofx3QMJRxxL1a3wNhtoZ5gyc4aRV_9oDeDAKC38sSz7mH1e9_wF4OJdd0wtLlgfrpSut0KOGZJO9qYXKalZA3hSZaeg6hcNr5yv1vbHh_sU697KQGEV-bO6cDlqVKvpfHCaN_T3qFmuPSXWOyTEv9yKWjT6x_N851UGOgA9sYM1gp27pVTWP"/>
+</div>
+<div>
+<div class="text-xs font-bold tracking-widest uppercase">Marcus Thorne</div>
+<div class="text-[10px] opacity-60 uppercase tracking-tighter">CTO, Nexus Systems</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-between items-center text-[10px] font-bold tracking-[0.2em] opacity-40 uppercase">
+<span>© 2024 PRECISION TECH</span>
+<div class="flex gap-6">
+<span>LHR_HUB_01</span>
+<span>SF_NODE_09</span>
+</div>
+</div>
+</div>
+<div class="absolute top-12 right-12 z-30">
+<div class="flex items-center gap-4">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-xs font-headline font-bold tracking-widest text-on-primary uppercase">System Live: 104.2 FPS</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

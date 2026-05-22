@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wishlist - VOLTAGE PRECISION</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9fe",
+                        "inverse-primary": "#b7c4ff",
+                        "on-surface": "#1a1c1f",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "secondary-fixed": "#ffdbce",
+                        "primary": "#0048e1",
+                        "surface-tint": "#004ced",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e8e8ed",
+                        "primary-container": "#3063ff",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "secondary-container": "#cd4800",
+                        "surface-variant": "#e2e2e7",
+                        "surface-container-highest": "#e2e2e7",
+                        "surface-container-low": "#f3f3f8",
+                        "on-surface-variant": "#424656",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#802a00",
+                        "on-tertiary-container": "#fff6f4",
+                        "surface-dim": "#d9dadf",
+                        "secondary": "#a33800",
+                        "on-tertiary-fixed": "#390c00",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-container": "#fffbff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c2c6d8",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "background": "#f9f9fe",
+                        "tertiary": "#a33200",
+                        "tertiary-fixed": "#ffdbd0",
+                        "outline": "#727687",
+                        "inverse-surface": "#2e3034",
+                        "tertiary-container": "#cc4204",
+                        "secondary-fixed-dim": "#ffb59a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#ededf3",
+                        "on-secondary-fixed": "#370e00",
+                        "on-background": "#1a1c1f",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#f9f7ff",
+                        "surface": "#f9f9fe",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0f5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.surface'); color: theme('colors.on-surface'); font-family: theme('fontFamily.body'); }
+        h1, h2, h3, h4, h5, h6 { font-family: theme('fontFamily.display'); }
+        .glass-panel { background: rgba(249, 249, 254, 0.7); backdrop-filter: blur(20px); }
+        .ambient-glow { box-shadow: 0 0 40px rgba(26, 28, 31, 0.06); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl sticky top-0 w-full z-50 shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
+<div class="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-xl font-black italic tracking-tighter text-slate-900 dark:text-slate-50" href="#">VOLTAGE PRECISION</a>
+<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] font-bold tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Catalog</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Builds</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">Support</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-blue-600 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="text-blue-600 dark:text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 active:scale-95 transform transition-transform">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-200/30 dark:bg-white/5 h-[1px] w-full"></div>
+</header>
+<main class="flex-grow flex flex-col items-center py-16 px-6 lg:px-10">
+<div class="w-full max-w-[1440px]">
+<div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<p class="font-label text-sm uppercase tracking-[0.05em] text-on-surface-variant mb-2">My Account</p>
+<h1 class="text-5xl font-display font-bold tracking-tight">Saved Components</h1>
+</div>
+<div class="text-on-surface-variant text-sm font-label">
+                    4 Items Total
+                </div>
+</div>
+<!-- Wishlist Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Item 1 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden transition-all duration-300 hover:bg-surface-bright outline outline-1 outline-outline-variant/15 relative">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant bg-surface-container px-2 py-1 rounded">SKU: VP-CPU-9950X</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="aspect-video mb-6 bg-surface-container-low rounded-lg flex items-center justify-center overflow-hidden">
+<img alt="High performance computer processor macro shot on dark background" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="Close-up macro photography of a high-end computer processor chip with intricate circuitry details, cold blue and technical gray lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZmS-I9OfQDPngFU21DqwErMgANRFw62qcS-x8acbikt7VRT34q4JDzU8xl5nfmZ6ePHzd4E3HRRBORYYRz2O0O4gJkvCM0qAZXuQIW0ZpLyss7u95m5R_Al7pg9iK5sSJEjCEW5Xef5eqOpYXxOyIt-MG6kZ2cEF-J_wwwT6tc5sQ-aexue837sPIz9GuYueugkxs-b_fvw5F5SHU5lODnmpS6KU-1SLyQvJ15qG8ht9m31ZZvva_Y7yGAJT947qLwU4dgJFWDH6O"/>
+</div>
+<h3 class="font-display text-2xl font-bold mb-2">Quantum Core i9-14900K</h3>
+<p class="text-on-surface-variant mb-6 text-sm">24 Cores / 32 Threads, up to 6.0 GHz. Unlocked desktop processor.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Architecture</p>
+<p class="font-semibold text-sm">Raptor Lake</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-1">TDP</p>
+<p class="font-semibold text-sm">125W Base</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-variant/50">
+<span class="font-display text-xl font-bold">$589.99</span>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                Move to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden transition-all duration-300 hover:bg-surface-bright outline outline-1 outline-outline-variant/15 relative">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant bg-surface-container px-2 py-1 rounded">SKU: VP-GPU-4090</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="aspect-video mb-6 bg-surface-container-low rounded-lg flex items-center justify-center overflow-hidden">
+<img alt="High end graphics card with triple fan cooler" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="Massive triple-fan graphics card on a clean technical gray surface, studio lighting highlighting metallic textures and sharp industrial design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS8-aW4XFHhb6_oP3lR5DoWUgfh_tFAcrUev_aU3sl7mgDSGwRkH-jn5sqwp2rJiLnLJpF63KQ3QCb3_OO8gijIBKurZ3xD1B1dY57FDHsh_zIWQpLs-T_6LPhypPerfdMovVqYRmtbbO5_ju_ejh70YbPvCt7CMDcvrAkiMwYlNHqo-hO9YC1c64WppmXW7kRED76shGeGkdVvDmU-u3-v_4TOgC0ddS_V4yDWUHcOBcdyYr7e3YgCJtVg2YiHXTzzT6_46YteZ_u"/>
+</div>
+<h3 class="font-display text-2xl font-bold mb-2">Vortex RTX 4090 Extreme</h3>
+<p class="text-on-surface-variant mb-6 text-sm">24GB GDDR6X, Triple Fan Thermal Design, Ultimate Ray Tracing.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">VRAM</p>
+<p class="font-semibold text-sm">24GB GDDR6X</p>
+</div>
+<div>
+<p class="text-xs text-secondary mb-1">Status</p>
+<p class="font-semibold text-sm text-secondary">Low Stock</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-variant/50">
+<span class="font-display text-xl font-bold">$1,599.99</span>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                Move to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden transition-all duration-300 hover:bg-surface-bright outline outline-1 outline-outline-variant/15 relative">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant bg-surface-container px-2 py-1 rounded">SKU: VP-MB-Z790</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="aspect-video mb-6 bg-surface-container-low rounded-lg flex items-center justify-center overflow-hidden">
+<img alt="Premium motherboard with heavy heatsinks" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="Top-down view of a premium computer motherboard with extensive brushed aluminum heatsinks and complex circuitry on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLm1MVlZC7xXsBK0pfUE0QumA5WyYbxOCoV0nAkhIkDMWsRw330RltmG9dJsGKdQZpjCIcmYnYVvbsYOX7dTT3naPiiqTliweTAZDyexgBRsQWccnEmBktdcDVmXYyTwG8YfRiNIac1CVqbh59JrmVVDbwOHwgYFa1vTQdArJ8nSfTwMe7Z1Yebq4r8QC4gLtE7pYKekmYwZ2xMI6JKvx-6D-zpZ1kYxXTXadOrgaYCab8WwaAkWveCe8x7lcx35T_6Jh0W2a_i-qh"/>
+</div>
+<h3 class="font-display text-2xl font-bold mb-2">Aero Z790 Master</h3>
+<p class="text-on-surface-variant mb-6 text-sm">E-ATX Motherboard, DDR5 Support, PCIe 5.0, 10GbE LAN.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Form Factor</p>
+<p class="font-semibold text-sm">E-ATX</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Socket</p>
+<p class="font-semibold text-sm">LGA 1700</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-variant/50">
+<span class="font-display text-xl font-bold">$499.00</span>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                Move to Cart
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-slate-100 dark:bg-slate-900 w-full py-12 px-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end max-w-[1920px] mx-auto">
+<div>
+<div class="text-lg font-black text-slate-900 dark:text-slate-50 mb-8">VOLTAGE PRECISION</div>
+<div class="bg-slate-300 dark:bg-slate-800 h-[1px] mb-8"></div>
+<p class="font-['Inter'] text-xs uppercase tracking-[0.1em] text-slate-500 dark:text-slate-500">© 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.</p>
+</div>
+<div class="flex flex-wrap gap-6 md:justify-end font-['Inter'] text-xs uppercase tracking-[0.1em]">
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Warranty</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Shipping &amp; Returns</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -2,46 +2,31 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className="py-8 border-t mt-4">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 md:gap-8">
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Tech &amp; Comp</h3>
-          <p className="text-sm text-muted-foreground">
-            Your one‑stop shop for performance‑focused gear, from workstations to gaming setups.
+    <footer className="w-full py-12 bg-slate-100 border-t border-slate-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
+        <div>
+          <div className="font-headline font-bold text-lg mb-6 uppercase tracking-tight">TECH ATELIER</div>
+          <p className="text-slate-500 text-sm uppercase tracking-widest max-w-md">
+            &copy; 2024 TECH ATELIER. ENGINEERED FOR PERFORMANCE.
           </p>
         </div>
-        <div className="space-y-2 text-sm">
-          <h4 className="font-semibold">Shop</h4>
-          <ul className="space-y-1 text-muted-foreground">
-            <li>Laptops</li>
-            <li>Desktops</li>
-            <li>Accessories</li>
-            <li>Gaming</li>
-          </ul>
-        </div>
-        <div className="space-y-2 text-sm">
-          <h4 className="font-semibold">Support</h4>
-          <ul className="space-y-1 text-muted-foreground">
-            <li>Help Center</li>
-            <li>Shipping &amp; Returns</li>
-            <li>Warranty</li>
-            <li>Contact Us</li>
-          </ul>
-        </div>
-        <div className="space-y-2 text-sm">
-          <h4 className="font-semibold">Follow</h4>
-          <ul className="space-y-1 text-muted-foreground">
-            <li>Instagram</li>
-            <li>Twitter</li>
-            <li>Youtube</li>
-            <li>Discord</li>
-          </ul>
+        <div className="grid grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <div className="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Information</div>
+            <ul className="space-y-3">
+              <li><a href="/about" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">About</a></li>
+              <li><a href="/contact" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <div className="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Account</div>
+            <ul className="space-y-3">
+              <li><a href="/login" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Sign In</a></li>
+              <li><a href="/cart" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Cart</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-      <p className="mt-6 text-xs text-muted-foreground text-center md:text-left">
-        © {new Date().getFullYear()} Tech &amp; Comp. All rights reserved.
-      </p>
     </footer>
   )
 }
-

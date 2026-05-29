@@ -17,6 +17,8 @@ import AdminLayout from './frontendReusedComponents/Admin/AdminLayout'
 import ProductManagement from './frontendReusedComponents/Admin/ProductManagement'
 import AdminLogin from './frontendReusedComponents/Admin/AdminLogin'
 import ProtectedRoute from './frontendReusedComponents/Admin/ProtectedRoute'
+import PCBuildPage from './frontendReusedComponents/Build/PCBuildPage'
+import ChooseComponent from './frontendReusedComponents/Build/ChooseComponent'
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/account" element={<UserAccount />} />
+          <Route path="/build" element={<PCBuildPage />} />
+          <Route path="/build/choose/:category" element={<ChooseComponent />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/admin"

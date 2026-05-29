@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { User, ShoppingCart, Minus, Plus, X, Lock, Truck } from 'lucide-react'
+import { Minus, Plus, X, Lock, Truck } from 'lucide-react'
+import Header from '../HomePage/Header'
+import Footer from '../HomePage/Footer'
 
 const initialItems = [
   {
@@ -63,28 +65,7 @@ export default function ShoppingCartPage() {
 
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body antialiased flex flex-col selection:bg-primary selection:text-on-primary">
-      <nav className="bg-slate-50/80 backdrop-blur-xl sticky top-0 w-full z-50">
-        <div className="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
-          <a href="/" className="text-xl font-black italic tracking-tighter text-slate-900 font-display">
-            VOLTAGE PRECISION
-          </a>
-          <div className="hidden md:flex space-x-8">
-            <a href="/catalog" className="text-slate-600 font-medium hover:text-primary transition-all duration-300 font-headline font-bold tracking-tight">Catalog</a>
-            <a href="/builds" className="text-slate-600 font-medium hover:text-primary transition-all duration-300 font-headline font-bold tracking-tight">Builds</a>
-            <a href="/support" className="text-slate-600 font-medium hover:text-primary transition-all duration-300 font-headline font-bold tracking-tight">Support</a>
-            <a href="/about" className="text-slate-600 font-medium hover:text-primary transition-all duration-300 font-headline font-bold tracking-tight">About</a>
-          </div>
-          <div className="flex items-center space-x-6">
-            <button className="text-primary hover:text-primary transition-all duration-300">
-              <User className="w-5 h-5" />
-            </button>
-            <a href="/cart" className="text-primary hover:text-primary transition-all duration-300">
-              <ShoppingCart className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-        <div className="bg-slate-200/30 h-[1px] w-full"></div>
-      </nav>
+      <Header />
 
       <main className="flex-grow max-w-[1920px] mx-auto w-full px-10 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-12 mb-8">
@@ -211,23 +192,7 @@ export default function ShoppingCartPage() {
         </div>
       </main>
 
-      <footer className="bg-slate-100 w-full py-12 px-10 mt-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end max-w-[1920px] mx-auto">
-          <div>
-            <div className="text-lg font-black text-slate-900 font-display mb-4">VOLTAGE PRECISION</div>
-            <div className="bg-slate-300 h-[1px] mb-8"></div>
-            <p className="font-body text-xs uppercase tracking-[0.1em] text-slate-500">
-              &copy; 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
-            <a href="#" className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-primary underline decoration-2 underline-offset-4 transition-colors duration-200">Warranty</a>
-            <a href="#" className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-primary underline decoration-2 underline-offset-4 transition-colors duration-200">Privacy Policy</a>
-            <a href="#" className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-primary underline decoration-2 underline-offset-4 transition-colors duration-200">Terms of Service</a>
-            <a href="#" className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-primary underline decoration-2 underline-offset-4 transition-colors duration-200">Shipping & Returns</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

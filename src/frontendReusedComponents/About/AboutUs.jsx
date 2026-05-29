@@ -1,26 +1,12 @@
 import React from 'react'
-import { Thermometer, Cpu, Wifi, Users, Quote, ArrowRight } from 'lucide-react'
+import { Thermometer, Cpu, Wifi, Quote, ArrowRight } from 'lucide-react'
+import Header from '../HomePage/Header'
+import Footer from '../HomePage/Footer'
 
 export default function AboutUs() {
   return (
     <div className="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-      <nav className="w-full sticky top-0 z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm font-headline tracking-tight">
-        <div className="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
-          <div className="text-2xl font-bold tracking-tighter text-slate-900 font-display">PRECISION TECH</div>
-          <div className="hidden md:flex items-center gap-8">
-            <a className="text-slate-600 hover:text-slate-900 transition-colors" href="/">Home</a>
-            <a className="text-blue-700 border-b-2 border-blue-600 pb-1" href="/about">About</a>
-            <a className="text-slate-600 hover:text-slate-900 transition-colors" href="/contact">Contact</a>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="text-on-surface-variant hover:bg-slate-100/50 p-2 rounded-sm transition-all">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg>
-            </button>
-            <button className="bg-primary hover:bg-primary-container text-on-primary px-6 py-2 rounded-lg font-medium transition-all">Sign Up</button>
-          </div>
-        </div>
-        <div className="bg-slate-200/20 h-[1px]"></div>
-      </nav>
+      <Header />
 
       <main className="max-w-[1920px] mx-auto">
         <section className="relative h-[800px] flex items-center overflow-hidden bg-surface">
@@ -32,7 +18,7 @@ export default function AboutUs() {
                 <span className="text-primary italic">BY DESIGN.</span>
               </h1>
               <p className="text-xl text-on-surface-variant leading-relaxed max-w-lg mb-10">
-                At Tech Atelier, we don't just assemble components; we engineer digital environments. Our laboratory focuses on the intersection of extreme thermal dynamics and computational efficiency.
+                At Precision Tech, we don't just assemble components; we engineer digital environments. Our laboratory focuses on the intersection of extreme thermal dynamics and computational efficiency.
               </p>
               <div className="flex gap-4">
                 <button className="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-sm transition-all hover:bg-primary-container shadow-lg">
@@ -160,7 +146,7 @@ export default function AboutUs() {
               </blockquote>
               <cite className="not-italic block">
                 <span className="font-label uppercase tracking-widest text-primary font-bold">Marcus Vane</span>
-                <span className="text-surface/50 text-sm mt-1 block">Chief Engineer, Tech Atelier</span>
+                <span className="text-surface/50 text-sm mt-1 block">Chief Engineer, Precision Tech</span>
               </cite>
             </div>
           </div>
@@ -197,22 +183,7 @@ export default function AboutUs() {
         </section>
       </main>
 
-      <footer className="w-full py-12 bg-slate-100 border-t border-slate-200">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
-          <div>
-            <div className="font-display font-bold text-lg mb-4 text-on-surface">PRECISION TECH</div>
-            <p className="text-slate-500 font-body text-sm uppercase tracking-widest leading-loose max-w-sm">
-              &copy; 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-center">
-            <a className="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
-            <a className="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
-            <a className="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
-            <a className="font-body text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors opacity-80 hover:opacity-100" href="#">Returns</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

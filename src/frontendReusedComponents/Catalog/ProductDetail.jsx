@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { User, ShoppingCart, Star, ShoppingBag, Heart, Truck } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
+import Footer from '../HomePage/Footer'
 
 export default function ProductDetail() {
   const { id } = useParams()
@@ -231,24 +232,7 @@ export default function ProductDetail() {
         </section>
       </main>
 
-      <footer className="bg-surface-container-low w-full py-12 px-10">
-        <div className="max-w-[1920px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end mb-8">
-            <div>
-              <div className="text-lg font-black font-headline text-on-surface mb-2">VOLTAGE PRECISION</div>
-              <div className="font-label text-xs uppercase tracking-[0.1em] text-on-surface-variant">
-                © 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.
-              </div>
-            </div>
-            <div className="flex flex-wrap md:justify-end gap-6 font-label text-xs uppercase tracking-[0.1em]">
-              <a href="#" className="text-on-surface-variant hover:text-primary transition-colors duration-200">Warranty</a>
-              <a href="#" className="text-on-surface-variant hover:text-primary transition-colors duration-200">Privacy Policy</a>
-              <a href="#" className="text-on-surface-variant hover:text-primary transition-colors duration-200">Terms of Service</a>
-              <a href="#" className="text-on-surface-variant hover:text-primary transition-colors duration-200">Shipping & Returns</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
@@ -257,14 +241,15 @@ function Nav() {
   return (
     <nav className="bg-surface-bright/80 backdrop-blur-xl sticky top-0 w-full z-50">
       <div className="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
-        <a href="/" className="font-headline font-black italic tracking-tighter text-on-surface text-xl">
-          VOLTAGE PRECISION
+        <a href="/" className="font-headline font-bold tracking-tighter text-on-surface text-xl uppercase">
+          PRECISION TECH
         </a>
         <div className="hidden md:flex gap-8 items-center">
+          <a href="/" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Home</a>
           <a href="/catalog" className="text-primary font-headline font-bold border-b-2 border-primary pb-1 tracking-tight">Catalog</a>
-          <a href="/builds" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Builds</a>
-          <a href="/support" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Support</a>
+          <a href="/build" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Build</a>
           <a href="/about" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">About</a>
+          <a href="/contact" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Support</a>
         </div>
         <div className="flex items-center gap-6">
           <button className="text-on-surface-variant hover:text-primary transition-colors">

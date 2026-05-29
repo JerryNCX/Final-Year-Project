@@ -12,12 +12,13 @@ import {
   Monitor,
   MemoryStick,
   Thermometer,
-  AlertTriangle,
   ChevronRight,
   Star,
   User,
   ShieldAlert
 } from 'lucide-react'
+import Header from '../HomePage/Header'
+import Footer from '../HomePage/Footer'
 
 const milestones = ['Sourcing', 'Assembly', 'Testing', 'Burn-In', 'Dispatch']
 
@@ -45,20 +46,7 @@ export default function UserAccount() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
-        <div className="max-w-[1440px] mx-auto flex items-center justify-between h-14 px-6">
-          <div className="text-lg font-bold tracking-tighter text-primary font-headline uppercase">
-            VOLTAGE PRECISION
-          </div>
-          <button
-            onClick={handleSignOut}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
-        </div>
-      </header>
+      <Header />
 
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <div className="mb-8">
@@ -108,6 +96,13 @@ export default function UserAccount() {
                   {item.active && <ChevronRight className="w-3.5 h-3.5 ml-auto" />}
                 </button>
               ))}
+              <button
+                onClick={handleSignOut}
+                className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-label text-on-surface-variant hover:bg-surface-container-high hover:text-error transition-colors mt-4"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
             </nav>
 
             <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/20">
@@ -249,6 +244,7 @@ export default function UserAccount() {
           </main>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

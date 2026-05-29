@@ -1,5 +1,7 @@
 import React from 'react'
-import { Trash2, ShoppingCart, Heart } from 'lucide-react'
+import { Trash2, ShoppingCart } from 'lucide-react'
+import Header from '../HomePage/Header'
+import Footer from '../HomePage/Footer'
 
 const wishlistItems = [
   {
@@ -51,28 +53,7 @@ const wishlistItems = [
 export default function Wishlist() {
   return (
     <div className="min-h-screen flex flex-col bg-surface text-on-surface font-body">
-      <header className="bg-slate-50/80 backdrop-blur-xl sticky top-0 w-full z-50 shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
-        <div className="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
-          <div className="flex items-center gap-12">
-            <a className="text-xl font-black italic tracking-tighter text-slate-900 font-display" href="/">VOLTAGE PRECISION</a>
-            <nav className="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight">
-              <a className="text-slate-600 font-medium hover:text-blue-600 transition-all duration-300" href="/catalog">Catalog</a>
-              <a className="text-slate-600 font-medium hover:text-blue-600 transition-all duration-300" href="/builds">Builds</a>
-              <a className="text-slate-600 font-medium hover:text-blue-600 transition-all duration-300" href="/support">Support</a>
-              <a className="text-slate-600 font-medium hover:text-blue-600 transition-all duration-300" href="/about">About</a>
-            </nav>
-          </div>
-          <div className="flex items-center gap-6">
-            <button className="text-blue-600 hover:text-blue-500 transition-all duration-300">
-              <Heart className="w-5 h-5" />
-            </button>
-            <button className="text-blue-600 hover:text-blue-500 transition-all duration-300">
-              <ShoppingCart className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-        <div className="bg-slate-200/30 h-[1px] w-full"></div>
-      </header>
+      <Header />
 
       <main className="flex-grow flex flex-col items-center py-16 px-6 lg:px-10">
         <div className="w-full max-w-[1440px]">
@@ -136,21 +117,7 @@ export default function Wishlist() {
         </div>
       </main>
 
-      <footer className="bg-slate-100 w-full py-12 px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end max-w-[1920px] mx-auto">
-          <div>
-            <div className="text-lg font-black text-slate-900 font-display mb-8">VOLTAGE PRECISION</div>
-            <div className="bg-slate-300 h-[1px] mb-8"></div>
-            <p className="font-body text-xs uppercase tracking-[0.1em] text-slate-500">&copy; 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.</p>
-          </div>
-          <div className="flex flex-wrap gap-6 md:justify-end font-body text-xs uppercase tracking-[0.1em]">
-            <a className="text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Warranty</a>
-            <a className="text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Privacy Policy</a>
-            <a className="text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Terms of Service</a>
-            <a className="text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Shipping &amp; Returns</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Lock, ArrowLeft, ArrowRight, Truck, Plane, Shield, Headphones } from 'lucide-react'
+import Footer from '../HomePage/Footer'
 
 const cartItems = [
   {
@@ -25,7 +26,7 @@ export default function Checkout() {
     <div className="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
       <header className="w-full bg-surface-container-lowest/80 backdrop-blur-xl sticky top-0 z-50 border-b border-surface-variant/50">
         <div className="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
-          <span className="font-display font-black italic tracking-tighter text-on-surface text-xl">VOLTAGE PRECISION</span>
+          <span className="font-headline font-bold tracking-tighter text-on-surface text-xl uppercase">PRECISION TECH</span>
           <div className="flex items-center gap-2 text-on-surface-variant font-label text-sm uppercase tracking-[0.1em]">
             <Lock className="w-4 h-4" />
             <span>Secure Checkout</span>
@@ -269,22 +270,7 @@ export default function Checkout() {
         </div>
       </main>
 
-      <footer className="bg-slate-100 w-full py-12 px-10 border-t border-surface-variant mt-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end max-w-[1920px] mx-auto">
-          <div className="flex flex-col gap-4">
-            <span className="text-lg font-black text-slate-900 font-display italic tracking-tighter">VOLTAGE PRECISION</span>
-            <span className="font-body text-xs uppercase tracking-[0.1em] text-slate-500">
-              &copy; 2024 VOLTAGE PRECISION. ENGINEERED FOR MAXIMUM TOLERANCE.
-            </span>
-          </div>
-          <div className="flex flex-wrap md:justify-end gap-x-8 gap-y-4">
-            <a className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Warranty</a>
-            <a className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Privacy Policy</a>
-            <a className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Terms of Service</a>
-            <a className="font-body text-xs uppercase tracking-[0.1em] text-slate-500 hover:text-blue-600 underline decoration-2 underline-offset-4 transition-colors duration-200" href="#">Shipping &amp; Returns</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,26 +1,12 @@
 import React from 'react'
 import { Send, Phone, Mail, Headphones, MapPin, Building2, ArrowRight } from 'lucide-react'
+import Header from '../HomePage/Header'
+import Footer from '../HomePage/Footer'
 
 export default function ContactUs() {
   return (
     <div className="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-      <header className="w-full sticky top-0 z-50 bg-slate-50/70 backdrop-blur-xl shadow-sm font-headline tracking-tight">
-        <div className="flex justify-between items-center h-16 px-8 max-w-[1920px] mx-auto">
-          <div className="text-2xl font-bold tracking-tighter text-slate-900 font-display">PRECISION TECH</div>
-          <nav className="hidden md:flex items-center space-x-10">
-            <a className="text-slate-600 hover:text-slate-900 transition-colors" href="/">Home</a>
-            <a className="text-slate-600 hover:text-slate-900 transition-colors" href="/about">About</a>
-            <a className="text-blue-700 border-b-2 border-blue-600 pb-1" href="/contact">Contact</a>
-          </nav>
-          <div className="flex items-center space-x-6">
-            <button className="text-slate-600 hover:bg-slate-100/50 p-2 rounded-sm transition-all">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" /></svg>
-            </button>
-            <button className="bg-primary text-on-primary px-6 py-2 text-sm font-medium rounded-lg hover:bg-primary-container transition-all">Sign Up</button>
-          </div>
-        </div>
-        <div className="bg-slate-200/20 h-[1px]"></div>
-      </header>
+      <Header />
 
       <main className="max-w-[1920px] mx-auto px-8 lg:px-24 py-16">
         <section className="grid grid-cols-12 gap-8 mb-24 items-end">
@@ -157,20 +143,7 @@ export default function ContactUs() {
         </section>
       </main>
 
-      <footer className="w-full py-12 bg-slate-100 border-t border-slate-200">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto font-body text-sm uppercase tracking-widest">
-          <div>
-            <div className="font-display font-bold text-lg mb-4 text-slate-900">PRECISION TECH</div>
-            <p className="text-slate-500 max-w-sm normal-case tracking-normal">&copy; 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE.</p>
-          </div>
-          <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-center">
-            <a className="text-slate-500 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
-            <a className="text-slate-500 hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
-            <a className="text-slate-500 hover:text-blue-600 transition-colors" href="#">Support</a>
-            <a className="text-slate-500 hover:text-blue-600 transition-colors" href="#">Returns</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

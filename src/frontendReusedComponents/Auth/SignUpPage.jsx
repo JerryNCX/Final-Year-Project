@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
-import { Eye, EyeOff, User, Mail, Lock, Check, Github } from 'lucide-react'
+import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react'
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState('')
@@ -44,7 +44,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen flex">
       <div className="w-[45%] flex flex-col justify-center px-14 py-12 bg-background">
-        <div className="text-xl font-bold tracking-tighter text-primary font-headline uppercase mb-12">
+        <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-12">
           PRECISION TECH
         </div>
         <div className="max-w-sm mx-auto w-full">
@@ -52,7 +52,7 @@ export default function SignUpPage() {
             CREATE ACCOUNT
           </h1>
           <p className="text-on-surface-variant font-body text-sm mb-7">
-            Set up your engineering workspace
+            Join the atelier for enterprise-grade performance components.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -75,7 +75,7 @@ export default function SignUpPage() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
-                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="John"
                   />
                 </div>
@@ -92,7 +92,7 @@ export default function SignUpPage() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
-                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Doe"
                   />
                 </div>
@@ -111,7 +111,7 @@ export default function SignUpPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="engineer@precision.tech"
                 />
               </div>
@@ -130,7 +130,7 @@ export default function SignUpPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full pl-9 pr-10 py-2.5 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full pl-9 pr-10 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="••••••••"
                 />
                 <button
@@ -151,7 +151,7 @@ export default function SignUpPage() {
                 className="mt-0.5 accent-primary"
               />
               <span className="text-xs font-label text-on-surface-variant leading-relaxed">
-                I agree to the Terms of Service and Privacy Policy governing the use of this engineering platform
+                I agree to the Terms of Service and Privacy Policy regarding technical data processing.
               </span>
             </label>
 
@@ -180,7 +180,7 @@ export default function SignUpPage() {
                 <div className="w-full border-t border-outline-variant"></div>
               </div>
               <div className="relative flex justify-center text-xs font-label text-on-surface-variant">
-                <span className="bg-background px-2">or continue with</span>
+                <span className="bg-background px-2">Or Continue With</span>
               </div>
             </div>
             <div className="flex gap-3">
@@ -223,41 +223,39 @@ export default function SignUpPage() {
         <div className="absolute inset-0 flex items-center justify-center p-16">
           <div className="space-y-10 max-w-lg">
             <div>
+              <div className="text-xs font-label text-blue-400 uppercase tracking-widest mb-3">Performance Tier 1 &mdash; Optimized v4.2</div>
               <h2 className="text-4xl font-headline font-semibold text-white leading-tight">
                 ENGINEERED FOR<br />
                 <span className="text-blue-400">0.01MM TOLERANCE</span>
               </h2>
-              <p className="text-blue-200/70 font-body text-sm mt-4 leading-relaxed">
-                Precision manufacturing meets cutting-edge thermal engineering. Every component validated to military-grade specifications.
-              </p>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
               <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
                 <div className="text-2xl font-headline font-bold text-green-400">99.9%</div>
-                <div className="text-xs font-label text-blue-200/60 mt-1">Uptime</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Uptime Reliability</div>
               </div>
               <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
                 <div className="text-2xl font-headline font-bold text-green-400">0.12ms</div>
-                <div className="text-xs font-label text-blue-200/60 mt-1">Latency</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Query Latency</div>
               </div>
               <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
                 <div className="text-2xl font-headline font-bold text-green-400">+40%</div>
-                <div className="text-xs font-label text-blue-200/60 mt-1">Thermal</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Thermal Efficiency</div>
               </div>
             </div>
 
             <div className="glass-panel rounded-xl p-6 border border-white/5">
               <p className="text-blue-100/80 font-body text-sm leading-relaxed italic">
-                "The precision tolerances on these components are unlike anything we've tested. Our thermal imaging confirms a 40% improvement in heat dissipation over industry standard."
+                &ldquo;Precision Tech doesn&apos;t just sell hardware; they provide the infrastructure for digital craftsmanship. The atelier is where potential meets performance.&rdquo;
               </p>
               <div className="flex items-center gap-3 mt-4">
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white">
-                  DR
+                  MT
                 </div>
                 <div>
-                  <div className="text-sm font-label text-white">Dr. Elena Rivas</div>
-                  <div className="text-xs font-label text-blue-200/50">Lead Engineer, CERN LHC</div>
+                  <div className="text-sm font-label text-white">Marcus Thorne</div>
+                  <div className="text-xs font-label text-blue-200/50">CTO, Nexus Systems</div>
                 </div>
               </div>
             </div>

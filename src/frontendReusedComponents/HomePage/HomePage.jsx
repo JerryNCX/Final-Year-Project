@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import Footer from './Footer'
+import { ArrowRight } from 'lucide-react'
 
 const categories = [
   { number: '01', label: 'Logic', title: 'PROCESSORS', description: 'CPU', image: '' },
@@ -53,10 +54,10 @@ export default function HomePage() {
                 Engineering the next generation of high-performance computing. Experience ultra-low latency and thermal excellence with the new Precision ATELIER components.
               </p>
               <div className="flex items-center space-x-6">
-                <a href="/catalog" className="bg-gradient-to-r from-primary to-primary-container text-on-primary px-10 py-4 rounded-lg font-bold tracking-tight shadow-xl hover:shadow-primary/20 transition-all">
+                <a href="/catalog" className="primary-gradient-btn text-on-primary px-10 py-4 rounded-lg font-bold tracking-tight shadow-xl hover:shadow-primary/20 transition-all">
                   EXPLORE THE SERIES
                 </a>
-                <a href="/about" className="flex items-center space-x-2 text-on-surface font-semibold group">
+                <a href="/build" className="flex items-center space-x-2 text-on-surface font-semibold group">
                   <span>Watch Technical Reveal</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
@@ -66,6 +67,16 @@ export default function HomePage() {
               <div className="relative scale-110 translate-x-12">
                 <div className="aspect-square bg-gradient-to-br from-primary/10 to-surface-container-highest rounded-xl flex items-center justify-center">
                   <div className="text-8xl font-headline font-bold text-primary/20">GPU</div>
+                </div>
+              </div>
+              <div className="absolute bottom-8 right-8 flex gap-4">
+                <div className="glass-panel rounded-xl p-4 border border-white/20">
+                  <div className="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Thermal Index</div>
+                  <div className="font-headline text-xl font-bold text-on-surface">28&deg;C IDLE</div>
+                </div>
+                <div className="glass-panel rounded-xl p-4 border border-white/20">
+                  <div className="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Core Clock</div>
+                  <div className="font-headline text-xl font-bold text-on-surface">3.2GHz OC</div>
                 </div>
               </div>
             </div>
@@ -141,7 +152,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex justify-between items-center px-2">
                     <span className="font-headline text-2xl font-bold">{product.price}</span>
-                    <a href="/catalog" className="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">
+                    <a href="/build" className="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">
                       Configure Build
                     </a>
                   </div>
@@ -180,33 +191,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full py-12 bg-slate-100 border-t border-slate-200">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-12 max-w-[1920px] mx-auto">
-          <div>
-            <div className="font-headline font-bold text-lg mb-6 uppercase tracking-tight">TECH ATELIER</div>
-            <p className="text-slate-500 text-sm uppercase tracking-widest max-w-md">
-              &copy; 2024 TECH ATELIER. ENGINEERED FOR PERFORMANCE.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div className="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Information</div>
-              <ul className="space-y-3">
-                <li><a href="/about" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">About</a></li>
-                <li><a href="/contact" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div className="space-y-4">
-              <div className="font-bold text-xs tracking-widest uppercase mb-4 text-slate-900">Account</div>
-              <ul className="space-y-3">
-                <li><a href="/login" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Sign In</a></li>
-                <li><a href="/cart" className="text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">Cart</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

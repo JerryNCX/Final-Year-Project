@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
-import { Lock, Mail, LogIn, Zap, Activity } from 'lucide-react'
+import { Lock, Mail, LogIn, Activity } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -28,15 +28,15 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       <div className="w-1/2 flex flex-col justify-center px-16 py-12 bg-background">
-        <div className="text-2xl font-bold tracking-tighter text-primary font-headline uppercase mb-16">
-          TECH ATELIER
+        <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-16">
+          PRECISION TECH
         </div>
         <div className="max-w-sm mx-auto w-full">
           <h1 className="text-4xl font-headline font-semibold text-on-background mb-2">
             Access Lab
           </h1>
           <p className="text-on-surface-variant font-body text-sm mb-8">
-            Authenticate your session to continue
+            Enter your credentials to access the performance engineering suite. Unauthorized access is monitored.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -58,16 +58,21 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Enter your email"
+                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="mail"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-label font-medium text-on-surface mb-2">
-                Security Key (Password)
-              </label>
+              <div className="flex justify-between items-center mb-2">
+                <label htmlFor="password" className="text-sm font-label font-medium text-on-surface">
+                  Security Key (Password)
+                </label>
+                <Link to="/login" className="text-xs font-label text-on-surface-variant hover:text-primary transition-colors">
+                  Forgot Key?
+                </Link>
+              </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
                 <input
@@ -76,11 +81,19 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Enter your password"
+                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="lock"
                 />
               </div>
             </div>
+
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                className="h-4 w-4 rounded-sm text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0"
+              />
+              <span className="text-xs font-label text-on-surface-variant">Maintain persistent session</span>
+            </label>
 
             <button
               type="submit"
@@ -107,7 +120,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-outline-variant"></div>
               </div>
               <div className="relative flex justify-center text-xs font-label text-on-surface-variant">
-                <span className="bg-background px-2">or continue with</span>
+                <span className="bg-background px-2">or connect via</span>
               </div>
             </div>
             <div className="flex gap-3">
@@ -123,7 +136,7 @@ export default function LoginPage() {
           </div>
 
           <p className="mt-8 text-center text-sm font-label text-on-surface-variant">
-            Need access?{' '}
+            Require engineering access?{' '}
             <Link to="/signup" className="text-primary hover:text-primary-fixed-dim font-medium">
               Request Account
             </Link>
@@ -149,24 +162,24 @@ export default function LoginPage() {
         <div className="absolute inset-0 flex items-center justify-center p-12">
           <div className="w-full max-w-md space-y-6">
             <div className="glass-panel rounded-xl p-6 border border-white/10">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-6">
                 <span className="text-xs font-label text-blue-300 uppercase tracking-widest">System Metrics</span>
                 <Activity className="w-4 h-4 text-green-400" />
               </div>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <div>
                   <div className="flex justify-between text-sm mb-1.5">
                     <span className="font-label text-blue-200">Thermal Delta</span>
-                    <span className="font-label text-green-400">32.4°C</span>
+                    <span className="font-label text-green-400">-2.4&deg;C</span>
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-3/4 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full"></div>
+                    <div className="h-full w-[55%] bg-gradient-to-r from-green-400 to-yellow-400 rounded-full"></div>
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1.5">
                     <span className="font-label text-blue-200">Clock Stability</span>
-                    <span className="font-label text-green-400">99.97%</span>
+                    <span className="font-label text-green-400">99.9%</span>
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div className="h-full w-[99%] bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
@@ -176,8 +189,7 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center gap-2 glass-panel rounded-full px-4 py-2 border border-green-500/20 w-fit mx-auto">
-              <Zap className="w-3.5 h-3.5 text-green-400" />
-              <span className="text-xs font-label text-green-300 uppercase tracking-wider">Protocol Active</span>
+              <span className="text-xs font-label text-green-300 uppercase tracking-wider">Access Authorized</span>
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
             </div>
           </div>

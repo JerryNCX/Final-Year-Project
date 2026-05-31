@@ -44,7 +44,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen flex">
       <div className="w-[45%] flex flex-col justify-center px-14 py-12 bg-background">
-        <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-12">
+       <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-12">
           PRECISION TECH
         </div>
         <div className="max-w-sm mx-auto w-full">

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Search, X, Camera, SlidersHorizontal } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function SearchPopover({ isOpen, onClose }) {
   const [query, setQuery] = useState('')
@@ -87,12 +87,12 @@ export default function SearchPopover({ isOpen, onClose }) {
                 <p className="text-sm text-outline px-4 leading-relaxed">
                   Drag and drop or upload a component photo to find exact matches and technical specs.
                 </p>
-                <a
-                  href="/catalog"
+                <Link
+                  to="/catalog"
                   className="mt-6 px-6 py-2 bg-on-surface text-surface text-xs font-bold rounded-lg uppercase tracking-wider"
                 >
                   Browse Catalog
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -102,13 +102,13 @@ export default function SearchPopover({ isOpen, onClose }) {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {['GPU', 'CPU', 'Motherboard', 'RAM', 'SSD', 'PSU'].map((cat) => (
-                  <a
+                  <Link
                     key={cat}
-                    href={`/category/${cat.toLowerCase()}`}
+                    to={`/category/${cat.toLowerCase()}`}
                     className="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all"
                   >
                     {cat}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -120,9 +120,9 @@ export default function SearchPopover({ isOpen, onClose }) {
                 Search Results {query ? `(${results.length})` : ''}
               </h3>
               {results.length > 0 && (
-                <a href={`/catalog?q=${encodeURIComponent(query)}`} className="text-primary text-xs font-bold uppercase tracking-widest hover:underline transition-all">
+                <Link to={`/catalog?q=${encodeURIComponent(query)}`} className="text-primary text-xs font-bold uppercase tracking-widest hover:underline transition-all">
                   View All Results
-                </a>
+                </Link>
               )}
             </div>
 
@@ -190,14 +190,14 @@ export default function SearchPopover({ isOpen, onClose }) {
                     Technical Collections
                   </h3>
                   <div className="grid grid-cols-2 gap-4">
-                    <a href="/catalog" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
+                    <Link to="/catalog" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
                       <span className="font-headline font-bold text-on-surface">High-Performance GPUs</span>
                       <span className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">→</span>
-                    </a>
-                    <a href="/category/cpu" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
+                    </Link>
+                    <Link to="/category/cpu" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
                       <span className="font-headline font-bold text-on-surface">Workstation CPUs</span>
                       <span className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">→</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </>

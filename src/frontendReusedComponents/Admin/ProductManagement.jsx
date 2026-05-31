@@ -124,22 +124,22 @@ export default function ProductManagement() {
 
       <div className="flex-1">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Product Management</h1>
+          <h1 className="text-2xl font-bold text-on-surface mb-4 font-headline">Product Management</h1>
           
           <form onSubmit={handleSearch} className="flex gap-2">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
               <input
                 type="text"
                 placeholder="Search by product name..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 ghost-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-surface-container placeholder:text-outline text-on-surface"
               />
             </div>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 primary-gradient-btn"
             >
               Search
             </button>
@@ -147,7 +147,7 @@ export default function ProductManagement() {
               <button
                 type="button"
                 onClick={handleClearSearch}
-                className="px-4 py-2 text-gray-600 border rounded-lg hover:bg-gray-50"
+                className="px-4 py-2 text-on-surface-variant ghost-border rounded-sm hover:bg-surface-container font-label"
               >
                 Clear
               </button>
@@ -157,16 +157,16 @@ export default function ProductManagement() {
 
         {loading && products.length === 0 ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-            <span className="ml-2 text-gray-600">Loading products...</span>
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            <span className="ml-2 text-on-surface-variant font-label">Loading products...</span>
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-500">No products found.</p>
+            <p className="text-on-surface-variant font-label">No products found.</p>
             {search && (
               <button
                 onClick={handleClearSearch}
-                className="mt-2 text-blue-600 hover:underline"
+                className="mt-2 text-primary hover:underline font-label"
               >
                 Clear search
               </button>
@@ -187,7 +187,7 @@ export default function ProductManagement() {
 
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-on-surface-variant font-label">
                   Showing {page * limit + 1} to {Math.min((page + 1) * limit, totalCount)} of {totalCount} products
                 </p>
                 
@@ -195,7 +195,7 @@ export default function ProductManagement() {
                   <button
                     onClick={() => handlePageChange(page - 1)}
                     disabled={page === 0 || loading}
-                    className="flex items-center gap-1 px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Previous
@@ -223,10 +223,10 @@ export default function ProductManagement() {
                           key={pageNum}
                           onClick={() => handlePageChange(pageNum)}
                           disabled={loading}
-                          className={`w-8 h-8 text-sm rounded-lg ${
+                          className={`w-8 h-8 text-sm rounded-sm font-label ${
                             page === pageNum
-                              ? 'bg-blue-600 text-white'
-                              : 'border hover:bg-gray-50 disabled:opacity-50'
+                              ? 'primary-gradient-btn'
+                              : 'ghost-border hover:bg-surface-container disabled:opacity-50'
                           }`}
                         >
                           {pageNum + 1}
@@ -238,7 +238,7 @@ export default function ProductManagement() {
                   <button
                     onClick={() => handlePageChange(page + 1)}
                     disabled={page >= totalPages - 1 || loading}
-                    className="flex items-center gap-1 px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label"
                   >
                     Next
                     <ChevronRight className="w-4 h-4" />

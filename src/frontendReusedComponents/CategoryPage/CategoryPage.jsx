@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { ChevronRight, ArrowLeft } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { fetchProductsByCategory, CATEGORIES } from '@/lib/supabase'
-import { Button } from '@/components/ui/button'
 
 export default function CategoryPage() {
   const { category } = useParams()
@@ -37,11 +37,6 @@ export default function CategoryPage() {
     }
   }, [decodedCategory, isValidCategory])
 
-  function formatPrice(price) {
-    if (!price) return 'N/A'
-    return price
-  }
-
   function extractShortName(fullName) {
     if (!fullName) return 'Unknown Product'
     const cleaned = fullName
@@ -53,15 +48,16 @@ export default function CategoryPage() {
 
   if (!isValidCategory) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-surface-dim">
+        <div className="max-w-[1920px] mx-auto px-6 md:px-10">
           <Header />
-          <div className="py-10 text-center">
-            <h1 className="text-2xl font-semibold">Category Not Found</h1>
-            <p className="text-muted-foreground mt-2">The category "{decodedCategory}" does not exist.</p>
-            <Button asChild className="mt-4">
-              <a href="/">Go to Homepage</a>
-            </Button>
+          <div className="py-20 text-center">
+            <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} ERROR</span>
+            <h1 className="font-headline text-4xl tracking-tight text-on-surface uppercase mt-3">Category Not Found</h1>
+            <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-2">The category &ldquo;{decodedCategory}&rdquo; does not exist.</p>
+            <Link to="/" className="inline-block mt-8 bg-primary text-on-primary font-label text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-primary-container transition-colors">
+              RETURN HOME
+            </Link>
           </div>
           <Footer />
         </div>
@@ -70,81 +66,99 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="min-h-screen bg-surface-dim text-on-surface font-body">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10 space-y-8 md:space-y-10">
         <Header />
-        
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <span className="h-8 w-1 rounded-full bg-red-500" />
-            <span className="text-sm font-semibold text-red-500">Our Product</span>
+
+        <div className="space-y-4 pt-4">
+          <Link to="/catalog" className="inline-flex items-center gap-2 font-label text-[10px] tracking-[0.15em] uppercase text-on-surface-variant hover:text-primary transition-colors">
+            <ArrowLeft className="w-3 h-3" />
+            ALL CATALOG
+          </Link>
+          <div>
+            <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-1 block">{'>'} COMPONENT SERIES</span>
+            <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl tracking-tight text-on-surface uppercase">
+              {decodedCategory}
+            </h1>
+            <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-1">
+              Browse our selection of {decodedCategory} products
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold">{decodedCategory}</h1>
-          <p className="text-muted-foreground">
-            Browse our selection of {decodedCategory} products
-          </p>
         </div>
 
         {loading && (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground">Loading products...</p>
+            <div className="w-5 h-5 border border-primary border-t-transparent animate-spin mx-auto mb-4" />
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Loading...</p>
           </div>
         )}
 
         {error && (
-          <div className="py-20 text-center">
-            <p className="text-red-500">{error}</p>
+          <div className="py-16 text-center">
+            <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} {error}</span>
           </div>
         )}
 
         {!loading && !error && products.length === 0 && (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground">No products found in this category.</p>
+            <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} EMPTY</span>
+            <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-3">No products found in this category.</p>
+            <Link to="/catalog" className="inline-block mt-6 font-label text-[10px] tracking-[0.15em] uppercase text-primary border-b border-primary/50 hover:border-primary transition-colors">
+              BROWSE ALL CATALOG
+            </Link>
           </div>
         )}
 
         {!loading && !error && products.length > 0 && (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6 pb-16">
             {products.map((product, index) => (
-              <article
+              <Link
                 key={`${product.ASIN}-${index}`}
-                className="group border rounded-xl p-3 sm:p-4 bg-background hover:shadow-md transition flex flex-col gap-3"
+                to={`/product/${product.id || product.ASIN}`}
+                className="group trace-border bg-surface-container-lowest p-4 transition-all duration-300 hover:bg-surface-container flex flex-col gap-3"
               >
-                <div className="relative rounded-lg bg-muted aspect-square overflow-hidden flex items-center justify-center">
+                <div className="bg-surface-container aspect-square flex items-center justify-center overflow-hidden">
                   {product.Image ? (
-                    <img 
-                      src={product.Image} 
+                    <img
+                      src={product.Image}
                       alt={product.Product_name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none'
-                        e.target.nextSibling.style.display = 'flex'
-                      }}
+                      className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => { e.target.style.display = 'none' }}
                     />
-                  ) : null}
-                  <span className="text-xs text-muted-foreground hidden">Product image</span>
+                  ) : (
+                    <span className="font-headline text-4xl text-outline/20">{decodedCategory[0]}</span>
+                  )}
                 </div>
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-sm sm:text-base font-medium line-clamp-2">
+                <div className="flex flex-col gap-1.5 flex-1">
+                  <h3 className="font-label text-[11px] leading-snug line-clamp-2 text-on-surface group-hover:text-primary transition-colors uppercase tracking-wider">
                     {extractShortName(product.Product_name)}
                   </h3>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="font-semibold">{formatPrice(product.Current_price)}</span>
-                    {product.Original_price && product.Original_price !== product.Current_price && (
-                      <span className="text-xs text-muted-foreground line-through">
-                        {formatPrice(product.Original_price)}
+                  {product.Current_price && (
+                    <div className="flex items-center gap-2">
+                      <span className="font-headline text-lg tracking-tight text-primary">
+                        ${product.Current_price}
                       </span>
+                      {product.Original_price && product.Original_price !== product.Current_price && (
+                        <span className="font-label text-[9px] text-on-surface-variant/50 line-through">
+                          ${product.Original_price}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className="flex items-center gap-1.5 mt-auto pt-2 font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider">
+                    {product.Stars && (
+                      <>
+                        <span className="text-primary">{product.Stars}</span>
+                        {product.Rating_count && <span>({product.Rating_count})</span>}
+                      </>
                     )}
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <span>{product.Stars}</span>
-                    <span>({product.Rating_count})</span>
-                  </div>
                 </div>
-                <Button size="sm" className="mt-auto">
-                  View Details
-                </Button>
-              </article>
+                <div className="flex items-center gap-1 font-label text-[9px] tracking-[0.15em] uppercase text-on-surface-variant/50 group-hover:text-primary transition-all">
+                  <span>VIEW</span>
+                  <ChevronRight className="w-3 h-3" />
+                </div>
+              </Link>
             ))}
           </div>
         )}

@@ -1,82 +1,152 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Cpu, Zap, Thermometer, HardDrive } from 'lucide-react'
 
 const categories = [
-  { number: '01', label: 'Logic', title: 'PROCESSORS', description: 'CPU', image: '' },
-  { number: '02', label: 'Render', title: 'GRAPHICS', description: 'GPU', image: '' },
-  { number: '03', label: 'Nexus', title: 'BOARDS', description: 'Motherboard', image: '' },
-  { number: '04', label: 'Stream', title: 'STORAGE', description: 'SSD', image: '' },
+  { number: '01', label: 'LOGIC', title: 'PROCESSORS', icon: Cpu, path: 'cpu' },
+  { number: '02', label: 'RENDER', title: 'GRAPHICS', icon: Zap, path: 'gpu' },
+  { number: '03', label: 'NEXUS', title: 'BOARDS', icon: HardDrive, path: 'motherboard' },
+  { number: '04', label: 'STREAM', title: 'STORAGE', icon: Thermometer, path: 'ssd' },
 ]
 
 const featuredProducts = [
   {
-    badge: 'Performance Thermal',
+    badge: 'PERFORMANCE THERMAL',
     name: 'VERTEX RTX 9090 PRO',
     desc: 'Ultra-Efficient Ada Lovelace Architecture',
-    specs: { VRAM: '48GB GDDR7', Power: '450W TGP' },
+    specs: { VRAM: '48GB GDDR7', Bandwidth: '1.2 TB/s', Cores: '18432 CUDA', TGP: '450W' },
     price: '$1,999.00',
   },
   {
     name: 'APEX Z890 EXTREME',
     desc: 'Next-Gen Socket LGA 1851 Support',
-    specs: { Slots: '4x PCIE 5.0', Ethernet: '10GbE LAN' },
+    specs: { Slots: '4x PCIE 5.0', Ethernet: '10GbE LAN', RAM: '256GB DDR5', Phases: '24+2+1' },
     price: '$649.00',
   },
   {
-    badge: 'New Release',
+    badge: 'NEW RELEASE',
     name: 'QUBIT X-12 CORE',
     desc: 'Multi-Threaded Mastery for Workstations',
-    specs: { Cores: '24P + 12E', Boost: '6.2 GHz' },
+    specs: { Cores: '24P + 12E', Boost: '6.2 GHz', Cache: '60MB L3', TDP: '125W' },
     price: '$589.00',
   },
 ]
 
+const diagnosticLines = [
+  { label: 'SYSTEM INIT', status: 'OK', delay: '0.2s' },
+  { label: 'CPU DETECTION', status: 'PASS', delay: '1.0s' },
+  { label: 'MEMORY CHECK', status: '32GB DDR5-6400', delay: '1.8s' },
+  { label: 'GPU INIT', status: 'DETECTED', delay: '2.6s' },
+  { label: 'STORAGE SCAN', status: 'NVMe 2TB', delay: '3.4s' },
+  { label: 'THERMAL CALIB', status: 'NOMINAL', delay: '4.2s' },
+]
+
 export default function HomePage() {
   return (
-    <div className="bg-background text-on-surface font-body">
+    <div className="bg-surface text-on-surface font-body">
       <Header />
 
       <main>
-        {/* Hero Section */}
-        <section className="relative min-h-[870px] flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,#dde1ff_0%,#f9f9fe_70%)] opacity-40"></div>
-          <div className="container mx-auto px-8 grid grid-cols-12 gap-8 items-center relative z-10">
-            <div className="col-span-12 lg:col-span-6">
-              <div className="inline-block bg-secondary-fixed text-on-secondary-fixed text-[10px] tracking-[0.2em] font-bold py-1 px-3 mb-6 uppercase">
-                Extreme Performance Series
+        {/* Hero Section — BIOS Diagnostic */}
+        <section className="relative min-h-[800px] flex items-center overflow-hidden">
+          <div className="absolute inset-0 noise-overlay animate-noise-shift" />
+          <div className="absolute inset-0 bg-gradient-to-b from-surface-dim via-background to-surface-dim" />
+
+          <div className="container mx-auto px-6 md:px-10 grid grid-cols-12 gap-8 items-center relative z-10">
+            <div className="col-span-12 lg:col-span-7">
+              <div className="diagnostic-panel p-6 md:p-8 mb-8 max-w-2xl">
+                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-primary/15">
+                  <span className="w-2 h-2 bg-primary animate-pulse-amber" />
+                  <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase">PRECISION TECH BIOS v4.0</span>
+                  <span className="font-label text-[10px] text-on-surface-variant/50 ml-auto">
+                    {new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+                  </span>
+                </div>
+
+                <div className="space-y-2.5">
+                  {diagnosticLines.map((line, i) => (
+                    <div
+                      key={line.label}
+                      className="animate-diag-fade-in flex items-center gap-3 font-label text-xs"
+                      style={{ animationDelay: line.delay, opacity: 0 }}
+                    >
+                      <span className="text-primary text-[10px] w-4">{'>'}</span>
+                      <span className="text-on-surface-variant w-28 md:w-36 uppercase tracking-wider">{line.label}</span>
+                      <span className="flex-1 h-px bg-outline/20 mx-2" />
+                      <span className="text-primary font-semibold">{line.status}</span>
+                      {i < diagnosticLines.length - 1 && (
+                        <span className="text-[10px] text-on-surface-variant/30 font-label">{'[OK]'}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-primary/15">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider">System Boot</span>
+                    <span className="font-label text-[10px] text-primary">{'[________________________]'}</span>
+                  </div>
+                  <div className="h-1.5 bg-surface-container overflow-hidden">
+                    <div className="h-full w-1/3 bg-primary animate-boot-indeterminate" />
+                  </div>
+                </div>
               </div>
-              <h1 className="font-headline text-7xl md:text-8xl font-bold tracking-tighter leading-[0.9] text-on-surface mb-8">
-                FORGED IN <span className="text-primary">SILICON.</span><br/>DEFINED BY SPEED.
-              </h1>
-              <p className="text-xl text-on-surface-variant max-w-xl mb-12 leading-relaxed">
-                Engineering the next generation of high-performance computing. Experience ultra-low latency and thermal excellence with the new Precision ATELIER components.
-              </p>
-              <div className="flex items-center space-x-6">
-                <a href="/catalog" className="primary-gradient-btn text-on-primary px-10 py-4 rounded-lg font-bold tracking-tight shadow-xl hover:shadow-primary/20 transition-all">
-                  EXPLORE THE SERIES
-                </a>
-                <a href="/build" className="flex items-center space-x-2 text-on-surface font-semibold group">
-                  <span>Watch Technical Reveal</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+
+              <div className="space-y-4 max-w-2xl">
+                <span className="inline-block font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-2">
+                  {'>'} SYSTEM READY // EXTREME PERFORMANCE SERIES
+                </span>
+                <h1 className="font-headline text-6xl md:text-7xl lg:text-8xl tracking-tight text-on-surface leading-[0.85]">
+                  FORGED IN <span className="text-primary amber-glow-text">SILICON.</span><br/>DEFINED BY SPEED.
+                </h1>
+                <p className="font-body text-xs md:text-sm text-on-surface-variant max-w-xl leading-relaxed uppercase tracking-wider">
+                  Engineering the next generation of high-performance computing. Experience ultra-low latency and thermal excellence with Precision Tech components.
+                </p>
+                <div className="flex items-center gap-6 pt-4">
+                  <Link
+                    to="/catalog"
+                    className="inline-flex items-center gap-3 bg-primary text-on-primary font-headline text-lg tracking-wide px-10 py-4 hover:bg-primary-container transition-colors duration-300"
+                  >
+                    EXPLORE SERIES
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    to="/build"
+                    className="font-label text-xs tracking-[0.15em] uppercase text-on-surface-variant hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-0.5"
+                  >
+                    CONFIGURE BUILD
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="col-span-12 lg:col-span-6 relative">
-              <div className="relative scale-110 translate-x-12">
-                <div className="aspect-square bg-gradient-to-br from-primary/10 to-surface-container-highest rounded-xl flex items-center justify-center">
-                  <div className="text-8xl font-headline font-bold text-primary/20">GPU</div>
+
+            <div className="hidden lg:flex col-span-5 justify-center">
+              <div className="diagnostic-panel p-6 w-full max-w-sm">
+                <div className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-4 pb-3 border-b border-primary/15">
+                  {'>'} SYSTEM MONITOR
                 </div>
-              </div>
-              <div className="absolute bottom-8 right-8 flex gap-4">
-                <div className="glass-panel rounded-xl p-4 border border-white/20">
-                  <div className="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Thermal Index</div>
-                  <div className="font-headline text-xl font-bold text-on-surface">28&deg;C IDLE</div>
-                </div>
-                <div className="glass-panel rounded-xl p-4 border border-white/20">
-                  <div className="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Core Clock</div>
-                  <div className="font-headline text-xl font-bold text-on-surface">3.2GHz OC</div>
+                <div className="space-y-4">
+                  {[
+                    { label: 'CPU', value: '32%', bar: '32%' },
+                    { label: 'GPU', value: '18%', bar: '18%' },
+                    { label: 'MEM', value: '45%', bar: '45%' },
+                    { label: 'TEMP', value: '42°C', bar: '28%' },
+                  ].map((stat) => (
+                    <div key={stat.label}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-label text-[10px] tracking-wider text-on-surface-variant">{stat.label}</span>
+                        <span className="font-label text-[10px] text-primary">{stat.value}</span>
+                      </div>
+                      <div className="h-1 bg-surface-container overflow-hidden">
+                        <div
+                          className="h-full bg-primary transition-all duration-1000"
+                          style={{ width: stat.bar }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -84,77 +154,83 @@ export default function HomePage() {
         </section>
 
         {/* Categories Section */}
-        <section className="py-24 bg-surface-container-low">
-          <div className="container mx-auto px-8">
-            <div className="flex justify-between items-end mb-16">
+        <section className="py-20 md:py-28 bg-surface-container-low">
+          <div className="container mx-auto px-6 md:px-10">
+            <div className="flex items-end justify-between mb-12 md:mb-16">
               <div>
-                <h2 className="font-headline text-4xl font-bold tracking-tight mb-2 uppercase">Core Inventories</h2>
-                <div className="h-1 w-20 bg-primary"></div>
+                <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-2 block">{'>'} INVENTORY</span>
+                <h2 className="font-headline text-4xl md:text-5xl tracking-tight text-on-surface uppercase">Core Components</h2>
               </div>
-              <a href="/catalog" className="text-on-surface-variant font-label text-sm tracking-widest uppercase hover:text-primary transition-colors">Select Hierarchy</a>
+              <Link
+                to="/catalog"
+                className="hidden md:inline-flex font-label text-[10px] tracking-[0.2em] uppercase text-on-surface-variant hover:text-primary transition-colors items-center gap-2"
+              >
+                VIEW ALL <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {['CPU', 'GPU', 'Motherboard', 'SSD'].map((cat, i) => (
-                <a
-                  key={cat}
-                  href={`/category/${cat.toLowerCase()}`}
-                  className="group relative aspect-[4/5] bg-surface-container-lowest overflow-hidden cursor-pointer"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
-                    <span className="text-8xl font-headline font-bold">{cat[0]}</span>
-                  </div>
-                  <div className="absolute bottom-0 left-0 p-8">
-                    <span className="text-[10px] font-bold tracking-widest text-primary mb-2 block uppercase">
-                      {['01 / Logic', '02 / Render', '03 / Nexus', '04 / Stream'][i]}
-                    </span>
-                    <h3 className="font-headline text-3xl font-bold">{cat.toUpperCase()}</h3>
-                  </div>
-                </a>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5">
+              {categories.map((cat) => {
+                const Icon = cat.icon
+                return (
+                  <Link
+                    key={cat.title}
+                    to={`/category/${cat.path}`}
+                    className="group relative bg-surface-container-lowest p-6 md:p-8 trace-border transition-all duration-300"
+                  >
+                    <div className="mb-6">
+                      <span className="font-label text-[10px] text-primary tracking-widest">{cat.number}</span>
+                    </div>
+                    <Icon className="w-8 h-8 text-outline group-hover:text-primary transition-colors duration-300 mb-4" />
+                    <div className="font-label text-[10px] text-on-surface-variant tracking-[0.15em] uppercase mb-1">{cat.label}</div>
+                    <h3 className="font-headline text-2xl md:text-3xl tracking-tight text-on-surface group-hover:text-primary transition-colors duration-300">
+                      {cat.title}
+                    </h3>
+                    <div className="mt-6 flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-on-surface-variant/50 group-hover:text-primary transition-colors">
+                      <span>BROWSE</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>
 
         {/* Featured Products */}
-        <section className="py-32">
-          <div className="container mx-auto px-8">
-            <div className="flex items-center space-x-4 mb-20">
-              <h2 className="font-headline text-5xl font-bold tracking-tighter uppercase">Featured Tier</h2>
-              <div className="flex-grow h-px bg-outline-variant/30"></div>
+        <section className="py-20 md:py-32">
+          <div className="container mx-auto px-6 md:px-10">
+            <div className="flex items-center gap-6 mb-12 md:mb-20">
+              <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} FEATURED</span>
+              <h2 className="font-headline text-3xl md:text-5xl tracking-tight text-on-surface uppercase">Performance Tier</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {featuredProducts.map((product, i) => (
-                <div key={i} className="group">
-                  <div className="bg-surface-container-lowest p-8 transition-all group-hover:bg-surface-bright mb-6 relative overflow-hidden">
+                <div key={i} className="group trace-border bg-surface-container-lowest transition-all duration-300 hover:bg-surface-container">
+                  <div className="p-6 md:p-8">
                     {product.badge && (
-                      <div className="absolute top-4 right-4 z-10">
-                        <span className="bg-secondary text-on-secondary px-2 py-1 text-[10px] font-bold tracking-widest uppercase">
-                          {product.badge}
-                        </span>
-                      </div>
+                      <span className="inline-block font-label text-[10px] tracking-[0.15em] bg-primary/10 text-primary px-3 py-1 mb-4 uppercase">
+                        {product.badge}
+                      </span>
                     )}
-                    <div className="w-full h-64 flex items-center justify-center mb-8">
-                      <div className="w-32 h-32 rounded-full bg-primary/5 flex items-center justify-center">
-                        <span className="text-4xl font-headline font-bold text-primary/30">{i === 0 ? 'GPU' : i === 1 ? 'MB' : 'CPU'}</span>
-                      </div>
-                    </div>
-                    <h4 className="font-headline text-2xl font-bold mb-2">{product.name}</h4>
-                    <p className="text-on-surface-variant text-sm mb-6">{product.desc}</p>
-                    <div className="grid grid-cols-2 gap-y-4 border-t border-outline-variant/15 pt-6">
+                    <h4 className="font-headline text-2xl md:text-3xl tracking-tight text-on-surface mb-1">{product.name}</h4>
+                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-6">{product.desc}</p>
+                    <div className="grid grid-cols-2 gap-4 pt-5">
                       {Object.entries(product.specs).map(([key, val]) => (
                         <div key={key}>
-                          <div className="text-[10px] text-outline tracking-widest font-bold uppercase mb-1">{key}</div>
-                          <div className="font-headline font-semibold">{val}</div>
+                          <div className="font-label text-[9px] text-on-surface-variant/60 tracking-[0.15em] uppercase mb-0.5">{key}</div>
+                          <div className="font-body text-xs text-on-surface">{val}</div>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className="flex justify-between items-center px-2">
-                    <span className="font-headline text-2xl font-bold">{product.price}</span>
-                    <a href="/build" className="text-primary font-bold text-sm tracking-widest uppercase border-b-2 border-primary/0 hover:border-primary transition-all">
-                      Configure Build
-                    </a>
+                  <div className="flex items-center justify-between px-6 md:px-8 pb-6 md:pb-8">
+                    <span className="font-headline text-2xl tracking-tight text-primary">{product.price}</span>
+                    <Link
+                      to="/build"
+                      className="font-label text-[10px] tracking-[0.15em] uppercase text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"
+                    >
+                      CONFIGURE <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -162,28 +238,31 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section className="py-24 relative overflow-hidden bg-slate-900 text-slate-100">
-          <div className="container mx-auto px-8 relative z-10">
-            <div className="max-w-4xl">
-              <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Engineered Intelligence</span>
-              <h2 className="font-headline text-5xl font-bold tracking-tighter mb-8 leading-tight">
-                STAY AT THE EDGE OF <br/>COMPUTATIONAL LIMITS.
+        {/* Newsletter / Terminal Signup */}
+        <section className="py-20 md:py-28 bg-surface-container-low">
+          <div className="container mx-auto px-6 md:px-10">
+            <div className="diagnostic-panel max-w-3xl mx-auto p-6 md:p-10">
+              <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-2 block">{'>'} SUBSCRIBE // SIGNAL</span>
+              <h2 className="font-headline text-3xl md:text-5xl tracking-tight text-on-surface uppercase mb-4">
+                STAY AT THE EDGE
               </h2>
-              <p className="text-slate-400 text-lg mb-12 max-w-2xl">
-                Subscribe to our Technical Briefings. Get early access to component drops, overclocking guides, and professional workstation builds.
+              <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-8 max-w-xl">
+                Technical briefings, component drops, and overclocking guides delivered to your terminal.
               </p>
-              <form className="flex flex-col md:flex-row gap-4 max-w-xl">
-                <input
-                  className="flex-grow bg-slate-800/50 border-b-2 border-slate-700 focus:border-primary text-slate-100 px-0 py-4 font-headline tracking-widest transition-all"
-                  placeholder="ENTER WORKSTATION EMAIL"
-                  type="email"
-                />
-                <button className="bg-primary text-on-primary px-12 py-4 font-bold tracking-widest uppercase hover:bg-primary-container transition-all whitespace-nowrap">
+              <form className="flex flex-col md:flex-row gap-4 max-w-xl" onSubmit={(e) => e.preventDefault()}>
+                <div className="flex-1 relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-primary font-label text-sm select-none">{'>'}</span>
+                  <input
+                    className="w-full bg-surface-container border border-outline/30 text-on-surface font-body text-sm px-8 py-3 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-on-surface-variant/40 uppercase tracking-wider"
+                    placeholder="ENTER EMAIL..."
+                    type="email"
+                  />
+                </div>
+                <button className="bg-primary text-on-primary font-label text-xs tracking-[0.15em] uppercase px-10 py-3 hover:bg-primary-container transition-colors whitespace-nowrap">
                   SUBSCRIBE
                 </button>
               </form>
-              <div className="mt-4 text-[10px] text-slate-500 tracking-widest uppercase">
+              <div className="mt-4 font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest">
                 By subscribing, you agree to our Protocol and Privacy Policy.
               </div>
             </div>

@@ -3,21 +3,21 @@ import React from 'react'
 export default function CategorySidebar({ categories, selectedCategory, onSelectCategory, counts, totalCount }) {
   return (
     <div className="w-full">
-      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+      <h3 className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 font-label">
         Categories
       </h3>
       <nav className="space-y-1">
         <button
           onClick={() => onSelectCategory('All')}
-          className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`w-full flex items-center justify-between px-3 py-2 rounded-sm text-sm font-medium transition-colors font-label ${
             selectedCategory === 'All'
-              ? 'bg-blue-50 text-blue-700'
-              : 'text-gray-700 hover:bg-gray-100'
+              ? 'bg-primary/10 text-primary'
+              : 'text-on-surface-variant hover:bg-surface-container'
           }`}
         >
           <span>All Products</span>
           <span className={`text-xs px-2 py-0.5 rounded-full ${
-            selectedCategory === 'All' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'
+            selectedCategory === 'All' ? 'bg-primary/10 text-primary' : 'bg-surface-container text-on-surface-variant'
           }`}>
             {totalCount}
           </span>
@@ -33,15 +33,15 @@ export default function CategorySidebar({ categories, selectedCategory, onSelect
             <button
               key={category}
               onClick={() => onSelectCategory(category)}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-sm text-sm font-medium transition-colors font-label ${
                 isSelected
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-primary/10 text-primary'
+                  : 'text-on-surface-variant hover:bg-surface-container'
               }`}
             >
               <span>{category}</span>
               <span className={`text-xs px-2 py-0.5 rounded-full ${
-                isSelected ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'
+                isSelected ? 'bg-primary/10 text-primary' : 'bg-surface-container text-on-surface-variant'
               }`}>
                 {count}
               </span>

@@ -19,32 +19,32 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b shadow-sm">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-surface-container-low text-on-surface font-body antialiased">
+      <nav className="bg-surface-container-lowest ghost-border">
+        <div className="max-w-[1920px] mx-auto px-6 sm:px-8 lg:px-10">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
-              <Link to="/" className="flex items-center gap-2 text-lg font-bold text-gray-900">
+              <Link to="/" className="flex items-center gap-2 text-lg font-bold text-on-surface font-headline">
                 <span>TECH ATELIER</span>
               </Link>
               <div className="flex items-center gap-1">
-                <ArrowLeft className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-500">Admin Panel</span>
+                <ArrowLeft className="w-4 h-4 text-on-surface-variant" />
+                <span className="text-sm text-on-surface-variant font-label">Admin Panel</span>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Link 
-                to="/" 
-                className="text-sm text-gray-600 hover:text-gray-900"
+              <Link
+                to="/"
+                className="text-sm text-on-surface-variant hover:text-on-surface transition-colors font-label"
               >
                 View Store
               </Link>
               {user && (
-                <div className="flex items-center gap-3 pl-4 border-l">
-                  <span className="text-sm text-gray-600">{user.email}</span>
+                <div className="flex items-center gap-3 pl-4 border-l border-outline-variant/30">
+                  <span className="text-sm text-on-surface-variant font-label">{user.email}</span>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-1 text-sm text-red-600 hover:text-red-700"
+                    className="flex items-center gap-1 text-sm text-error hover:text-on-error transition-colors font-label"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout
@@ -57,7 +57,7 @@ export default function AdminLayout() {
       </nav>
 
       <div className="flex">
-        <aside className="w-64 min-h-[calc(100vh-64px)] bg-white border-r p-4">
+        <aside className="w-64 min-h-[calc(100vh-64px)] bg-surface-container-lowest ghost-border p-4">
           <div className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon
@@ -66,10 +66,10 @@ export default function AdminLayout() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-3 px-3 py-2 rounded-sm text-sm font-medium transition-colors font-label ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-on-surface-variant hover:bg-surface-container'
                   }`}
                 >
                   <Icon className="w-5 h-5" />

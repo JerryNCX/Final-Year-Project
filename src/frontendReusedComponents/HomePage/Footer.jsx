@@ -1,27 +1,44 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="w-full py-12 bg-surface-container-low border-t border-outline-variant/30">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 max-w-[1920px] mx-auto">
+    <footer className="w-full py-12 md:py-16 bg-surface-dim">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 px-6 md:px-10 max-w-[1920px] mx-auto">
         <div>
-          <div className="font-headline font-bold text-lg mb-6 uppercase tracking-tight text-on-surface">PRECISION TECH</div>
-          <p className="text-on-surface-variant text-sm leading-relaxed max-w-md">
-            &copy; 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE. EVERY COMPONENT IS HAND-SELECTED FOR MISSION-CRITICAL STABILITY AND PEAK THROUGHPUT.
+          <div className="font-headline text-2xl tracking-wide text-on-surface mb-5">PRECISION TECH</div>
+          <p className="text-on-surface-variant font-body text-xs leading-relaxed max-w-md uppercase tracking-wider">
+            &copy; 2024 PRECISION TECH. ENGINEERED FOR PERFORMANCE. EVERY COMPONENT HAND-SELECTED FOR MISSION-CRITICAL STABILITY AND PEAK THROUGHPUT.
           </p>
         </div>
         <div className="space-y-4">
-          <div className="font-bold text-xs tracking-widest uppercase mb-5 text-on-surface">Information</div>
+          <div className="font-label text-[10px] tracking-[0.2em] uppercase text-primary mb-5">Information</div>
           <ul className="space-y-3">
-            <li><a href="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</a></li>
-            <li><a href="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Terms of Service</a></li>
+            <li>
+              <Link to="/about" className="font-label text-xs uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="font-label text-xs uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors">
+                Terms of Service
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="space-y-4">
-          <div className="font-bold text-xs tracking-widest uppercase mb-5 text-on-surface">Support</div>
+          <div className="font-label text-[10px] tracking-[0.2em] uppercase text-primary mb-5">Support</div>
           <ul className="space-y-3">
-            <li><a href="/contact" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Support</a></li>
-            <li><a href="/contact" className="text-sm text-on-surface-variant hover:text-primary transition-colors">Returns</a></li>
+            <li>
+              <Link to="/contact" className="font-label text-xs uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="font-label text-xs uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors">
+                Returns
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { User, ShoppingCart, Star, ShoppingBag, Heart, Truck } from 'lucide-react'
+import { Link, useParams } from 'react-router-dom'
+import { ShoppingBag, Heart, Truck, Star, ArrowLeft } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import Footer from '../HomePage/Footer'
 
@@ -32,18 +32,18 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body antialiased">
+      <div className="min-h-screen bg-surface text-on-surface font-body">
         <Nav />
-        <main className="max-w-[1920px] mx-auto px-4 md:px-10 py-12">
+        <main className="max-w-[1920px] mx-auto px-6 md:px-10 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-7">
-              <div className="bg-surface-container-low w-full aspect-video animate-pulse rounded-sm" />
+              <div className="bg-surface-container w-full aspect-video animate-pulse" />
             </div>
             <div className="lg:col-span-5 space-y-6">
-              <div className="h-4 bg-surface-container-low rounded w-1/4 animate-pulse" />
-              <div className="h-12 bg-surface-container-low rounded w-3/4 animate-pulse" />
-              <div className="h-6 bg-surface-container-low rounded w-1/3 animate-pulse" />
-              <div className="h-8 bg-surface-container-low rounded w-1/4 animate-pulse" />
+              <div className="h-3 bg-surface-container w-1/4 animate-pulse" />
+              <div className="h-8 bg-surface-container w-3/4 animate-pulse" />
+              <div className="h-4 bg-surface-container w-1/3 animate-pulse" />
+              <div className="h-6 bg-surface-container w-1/4 animate-pulse" />
             </div>
           </div>
         </main>
@@ -53,37 +53,52 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body antialiased">
+      <div className="min-h-screen bg-surface text-on-surface font-body">
         <Nav />
-        <main className="max-w-[1920px] mx-auto px-4 md:px-10 py-12 text-center">
-          <h1 className="text-2xl font-bold">Product Not Found</h1>
-          <p className="text-on-surface-variant mt-2">The requested product does not exist.</p>
+        <main className="max-w-[1920px] mx-auto px-6 md:px-10 py-20 text-center">
+          <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} ERROR</span>
+          <h1 className="font-headline text-4xl tracking-tight text-on-surface uppercase mt-3">Product Not Found</h1>
+          <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-2">The requested product does not exist.</p>
+          <Link to="/catalog" className="inline-block mt-8 bg-primary text-on-primary font-label text-xs tracking-[0.15em] uppercase px-8 py-3 hover:bg-primary-container transition-colors">
+            BACK TO CATALOG
+          </Link>
         </main>
       </div>
     )
   }
 
   const thumbnails = product.Images || [product.Image].filter(Boolean)
+  const specsGrid = [
+    { label: 'ARCHITECTURE', value: product.Architecture || 'Ada Lovelace' },
+    { label: 'VRAM', value: product.VRAM || '24GB GDDR6X' },
+    { label: 'BOOST CLOCK', value: product.Boost_Clock || '2640 MHz' },
+    { label: 'CUDA CORES', value: product.Cores || '16384' },
+  ]
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary">
+    <div className="min-h-screen bg-surface text-on-surface font-body">
       <Nav />
 
-      <main className="max-w-[1920px] mx-auto px-4 md:px-10 py-12">
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
+      <main className="max-w-[1920px] mx-auto px-6 md:px-10 py-8 md:py-12">
+        <Link to="/catalog" className="inline-flex items-center gap-2 font-label text-[10px] tracking-[0.15em] uppercase text-on-surface-variant hover:text-primary transition-colors mb-8">
+          <ArrowLeft className="w-3 h-3" />
+          BACK TO CATALOG
+        </Link>
+
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-20 md:mb-32">
+          {/* Image gallery */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            <div className="bg-surface-container-low w-full aspect-video flex items-center justify-center p-12 relative overflow-hidden group">
+            <div className="bg-surface-container w-full aspect-video flex items-center justify-center p-8 md:p-12 relative overflow-hidden trace-border">
               {thumbnails[selectedThumb] ? (
                 <img
                   src={thumbnails[selectedThumb]}
                   alt={product.Product_name}
-                  className="w-full h-full object-contain mix-blend-multiply z-10 transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
                   onError={e => { e.target.style.display = 'none' }}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-on-surface-variant font-body">No Image</div>
+                <span className="font-headline text-6xl text-outline/20">{product.Product_name?.[0] || '?'}</span>
               )}
-              <div className="absolute inset-0 bg-primary/5 blur-[100px] z-0 rounded-full w-3/4 h-3/4 m-auto"></div>
             </div>
             <div className="grid grid-cols-4 gap-4">
               {thumbnails.length > 0 ? (
@@ -91,141 +106,134 @@ export default function ProductDetail() {
                   <button
                     key={i}
                     onClick={() => setSelectedThumb(i)}
-                    className={`aspect-square p-4 focus:outline-none relative overflow-hidden ${
+                    className={`aspect-square p-3 flex items-center justify-center transition-all ${
                       i === selectedThumb
-                        ? 'bg-surface-container-low border border-primary/50'
-                        : 'bg-surface-container-lowest hover:bg-surface-container-low transition-colors outline outline-1 outline-outline-variant/15'
+                        ? 'trace-border-active bg-surface-container'
+                        : 'trace-border bg-surface-container-lowest hover:bg-surface-container'
                     }`}
                   >
                     <img
                       src={thumb}
                       alt={`Thumbnail ${i + 1}`}
-                      className="w-full h-full object-contain mix-blend-multiply"
+                      className="w-full h-full object-contain"
                       onError={e => { e.target.style.display = 'none' }}
                     />
                   </button>
                 ))
               ) : (
                 [...Array(4)].map((_, i) => (
-                  <div key={i} className="bg-surface-container-lowest aspect-square p-4 outline outline-1 outline-outline-variant/15"></div>
+                  <div key={i} className="aspect-square trace-border bg-surface-container-lowest" />
                 ))
               )}
             </div>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col pt-4">
-            <div className="mb-2">
-              <span className="font-label text-sm uppercase tracking-[0.05em] text-on-surface-variant font-semibold">
-                SKU: {product.SKU || 'VP-RTX-4090-OC'}
+          {/* Product info */}
+          <div className="lg:col-span-5 flex flex-col">
+            <div className="mb-1">
+              <span className="font-label text-[10px] tracking-[0.15em] text-primary uppercase">
+                SKU: {product.SKU || product.ASIN || 'N/A'}
               </span>
             </div>
-            <h1 className="font-display text-5xl md:text-6xl font-black text-on-surface leading-tight tracking-tighter mb-4">
-              {product.Product_name || 'TITAN RTX 4090 OVERCLOCK ED.'}
+            <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl tracking-tight text-on-surface leading-[0.9] mb-4 uppercase">
+              {product.Product_name || 'PRODUCT NAME'}
             </h1>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="bg-secondary/10 px-3 py-1 rounded-sm border border-secondary/20">
-                <span className="font-label text-secondary font-bold text-sm tracking-wide">EXTREME PERFORMANCE</span>
-              </div>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="font-label text-[10px] tracking-[0.15em] bg-primary/10 text-primary px-3 py-1 uppercase">
+                EXTREME PERFORMANCE
+              </span>
               <div className="flex items-center text-primary gap-0.5">
                 {[...Array(4)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary" />
+                  <Star key={i} className="w-3.5 h-3.5 fill-primary" />
                 ))}
-                <Star className="w-4 h-4 fill-primary/50" />
-                <span className="font-label text-sm font-medium text-on-surface-variant ml-2">4.9 (128 Reviews)</span>
+                <Star className="w-3.5 h-3.5 fill-primary/50" />
+                <span className="font-label text-[10px] text-on-surface-variant ml-2 tracking-wider">4.9 (128)</span>
               </div>
             </div>
-            <div className="mb-10">
-              <span className="font-headline text-4xl font-bold text-on-surface">
-                {product.Current_price ? `$${product.Current_price}` : '$1,999.00'}
+            <div className="mb-8">
+              <span className="font-headline text-3xl md:text-4xl tracking-tight text-primary">
+                {product.Current_price ? `$${product.Current_price}` : '—'}
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-12">
-              <div className="bg-surface-container-low p-5 outline outline-1 outline-outline-variant/15">
-                <div className="text-on-surface-variant font-label text-xs uppercase tracking-wider mb-1">Architecture</div>
-                <div className="font-headline font-bold text-on-surface text-lg">{product.Architecture || 'Ada Lovelace'}</div>
-              </div>
-              <div className="bg-surface-container-low p-5 outline outline-1 outline-outline-variant/15">
-                <div className="text-on-surface-variant font-label text-xs uppercase tracking-wider mb-1">VRAM</div>
-                <div className="font-headline font-bold text-on-surface text-lg">{product.VRAM || '24GB GDDR6X'}</div>
-              </div>
-              <div className="bg-surface-container-low p-5 outline outline-1 outline-outline-variant/15">
-                <div className="text-on-surface-variant font-label text-xs uppercase tracking-wider mb-1">Boost Clock</div>
-                <div className="font-headline font-bold text-secondary text-lg">{product.Boost_Clock || '2640 MHz'}</div>
-              </div>
-              <div className="bg-surface-container-low p-5 outline outline-1 outline-outline-variant/15">
-                <div className="text-on-surface-variant font-label text-xs uppercase tracking-wider mb-1">Cuda Cores</div>
-                <div className="font-headline font-bold text-on-surface text-lg">{product.Cores || '16384'}</div>
-              </div>
+            {/* Spec gauges */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              {specsGrid.map((spec) => (
+                <div key={spec.label} className="bg-surface-container p-4 trace-border">
+                  <div className="font-label text-[8px] text-on-surface-variant/60 tracking-[0.15em] uppercase mb-1">{spec.label}</div>
+                  <div className="font-body text-sm text-on-surface">{spec.value}</div>
+                </div>
+              ))}
             </div>
 
-            <div className="flex flex-col gap-4 mt-auto">
-              <button className="bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-lg py-4 px-8 rounded-lg shadow-[0_8px_16px_rgba(0,72,225,0.2)] hover:shadow-[0_12px_24px_rgba(0,72,225,0.3)] transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 w-full">
-                <ShoppingBag className="w-5 h-5" />
+            {/* Actions */}
+            <div className="flex flex-col gap-3 mt-auto">
+              <button className="bg-primary text-on-primary font-label text-sm tracking-[0.15em] uppercase py-4 px-8 hover:bg-primary-container transition-colors flex items-center justify-center gap-3 w-full">
+                <ShoppingBag className="w-4 h-4" />
                 ADD TO CART
               </button>
-              <button className="bg-surface-container-lowest text-on-surface font-headline font-bold text-lg py-4 px-8 rounded-lg outline outline-1 outline-outline-variant/30 hover:bg-surface-container-low transition-colors duration-300 flex items-center justify-center gap-3 w-full">
-                <Heart className="w-5 h-5" />
+              <button className="bg-surface-container-lowest text-on-surface font-label text-sm tracking-[0.15em] uppercase py-4 px-8 border border-outline/30 hover:bg-surface-container transition-colors flex items-center justify-center gap-3 w-full">
+                <Heart className="w-4 h-4" />
                 SAVE TO WISHLIST
               </button>
             </div>
-            <div className="mt-6 flex items-center gap-2 text-on-surface-variant text-sm font-label">
-              <Truck className="w-4 h-4" />
+            <div className="mt-4 flex items-center gap-2 text-on-surface-variant font-label text-[10px] uppercase tracking-wider">
+              <Truck className="w-3.5 h-3.5" />
               Free standard shipping on orders over $500.
             </div>
           </div>
         </section>
 
-        <section className="mb-24">
-          <h2 className="font-display text-3xl font-black text-on-surface tracking-tight mb-12 border-b border-outline-variant/20 pb-4">
-            ENGINEERED SPECIFICATIONS
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
-            <div>
-              <h3 className="font-headline font-bold text-xl mb-6 text-on-surface">GPU Engine Specs</h3>
-              <ul className="space-y-4 font-body text-sm">
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">NVIDIA CUDA® Cores</span>
-                  <span className="font-medium text-on-surface">{product.Cores || '16384'}</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Boost Clock (GHz)</span>
-                  <span className="font-medium text-on-surface">{product.Boost_Clock || '2.52'}</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Base Clock (GHz)</span>
-                  <span className="font-medium text-on-surface">{product.Core_Clock || '2.23'}</span>
-                </li>
+        {/* Full specs section */}
+        <section className="mb-20 md:mb-32">
+            <div className="flex items-center gap-6 mb-8 md:mb-12">
+              <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} SPECIFICATIONS</span>
+              <h2 className="font-headline text-2xl md:text-4xl tracking-tight text-on-surface uppercase">Engineered Specs</h2>
+            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="trace-border bg-surface-container-lowest p-5 md:p-6">
+              <h3 className="font-label text-xs tracking-[0.15em] text-primary uppercase mb-5">GPU Engine Specs</h3>
+              <ul className="space-y-3">
+                {[
+                  { label: 'CUDA CORES', value: product.Cores || '16384' },
+                  { label: 'BOOST CLOCK', value: product.Boost_Clock || '2.52 GHz' },
+                  { label: 'BASE CLOCK', value: product.Core_Clock || '2.23 GHz' },
+                ].map((spec) => (
+                  <li key={spec.label} className="flex justify-between items-center">
+                    <span className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider">{spec.label}</span>
+                    <span className="font-body text-[11px] text-on-surface">{spec.value}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div>
-              <h3 className="font-headline font-bold text-xl mb-6 text-on-surface">Memory Specs</h3>
-              <ul className="space-y-4 font-body text-sm">
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Standard Memory Config</span>
-                  <span className="font-medium text-on-surface">{product.VRAM || '24 GB GDDR6X'}</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Memory Interface Width</span>
-                  <span className="font-medium text-on-surface">384-bit</span>
-                </li>
+            <div className="trace-border bg-surface-container-lowest p-5 md:p-6">
+              <h3 className="font-label text-xs tracking-[0.15em] text-primary uppercase mb-5">Memory Specs</h3>
+              <ul className="space-y-3">
+                {[
+                  { label: 'CONFIG', value: product.VRAM || '24 GB GDDR6X' },
+                  { label: 'INTERFACE', value: '384-bit' },
+                  { label: 'BANDWIDTH', value: '1.2 TB/s' },
+                ].map((spec) => (
+                  <li key={spec.label} className="flex justify-between items-center">
+                    <span className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider">{spec.label}</span>
+                    <span className="font-body text-[11px] text-on-surface">{spec.value}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div>
-              <h3 className="font-headline font-bold text-xl mb-6 text-on-surface">Display Support</h3>
-              <ul className="space-y-4 font-body text-sm">
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Maximum Resolution</span>
-                  <span className="font-medium text-on-surface">7680x4320</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Standard Display Connectors</span>
-                  <span className="font-medium text-on-surface">HDMI, 3x DisplayPort</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant/10 pb-2">
-                  <span className="text-on-surface-variant">Multi Monitor</span>
-                  <span className="font-medium text-on-surface">Up to 4</span>
-                </li>
+            <div className="trace-border bg-surface-container-lowest p-5 md:p-6">
+              <h3 className="font-label text-xs tracking-[0.15em] text-primary uppercase mb-5">Display Support</h3>
+              <ul className="space-y-3">
+                {[
+                  { label: 'MAX RESOLUTION', value: '7680x4320' },
+                  { label: 'CONNECTORS', value: 'HDMI, 3x DisplayPort' },
+                  { label: 'MULTI MONITOR', value: 'Up to 4' },
+                ].map((spec) => (
+                  <li key={spec.label} className="flex justify-between items-center">
+                    <span className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider">{spec.label}</span>
+                    <span className="font-body text-[11px] text-on-surface">{spec.value}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -239,28 +247,31 @@ export default function ProductDetail() {
 
 function Nav() {
   return (
-    <nav className="bg-surface-bright/80 backdrop-blur-xl sticky top-0 w-full z-50">
-      <div className="flex items-center justify-between px-10 py-4 max-w-[1920px] mx-auto">
-        <a href="/" className="font-headline font-bold tracking-tighter text-on-surface text-xl uppercase">
+    <nav className="bg-surface-dim/95 backdrop-blur-xl sticky top-0 z-50">
+      <div className="flex items-center justify-between px-6 md:px-10 py-3 max-w-[1920px] mx-auto">
+        <Link to="/" className="font-headline text-2xl md:text-3xl tracking-wide text-on-surface hover:text-primary transition-colors">
           PRECISION TECH
-        </a>
+        </Link>
         <div className="hidden md:flex gap-8 items-center">
-          <a href="/" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Home</a>
-          <a href="/catalog" className="text-primary font-headline font-bold border-b-2 border-primary pb-1 tracking-tight">Catalog</a>
-          <a href="/build" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Build</a>
-          <a href="/about" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">About</a>
-          <a href="/contact" className="text-on-surface-variant font-headline font-bold hover:text-primary transition-all duration-300 tracking-tight">Support</a>
-        </div>
-        <div className="flex items-center gap-6">
-          <button className="text-on-surface-variant hover:text-primary transition-colors">
-            <User className="w-5 h-5" />
-          </button>
-          <a href="/cart" className="text-on-surface-variant hover:text-primary transition-colors">
-            <ShoppingCart className="w-5 h-5" />
-          </a>
+          {[
+            { to: '/', label: 'Home' },
+            { to: '/catalog', label: 'Catalog' },
+            { to: '/build', label: 'Build' },
+            { to: '/about', label: 'About' },
+            { to: '/contact', label: 'Support' },
+          ].map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`font-label text-xs uppercase tracking-[0.15em] py-1 transition-colors ${
+                link.to === '/catalog' ? 'text-primary border-b border-primary' : 'text-on-surface-variant hover:text-on-surface'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
-      <div className="bg-outline-variant/30 h-[1px] w-full"></div>
     </nav>
   )
 }

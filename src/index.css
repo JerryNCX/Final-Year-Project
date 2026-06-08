@@ -89,8 +89,9 @@
 @theme {
   --font-headline: "Bebas Neue", serif;
   --font-display: "Bebas Neue", serif;
-  --font-body: "JetBrains Mono", monospace;
-  --font-label: "JetBrains Mono", monospace;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --radius-xs: 0.0625rem;
 }
@@ -144,7 +145,7 @@
   --surface-variant: #e7eefe;
   --on-background: #151c27;
   --on-surface: #151c27;
-  --on-surface-variant: #5a6a7e;
+  --on-surface-variant: #3d4a5c;
   --on-primary: #ffffff;
   --on-primary-container: #ffffff;
   --on-secondary: #ffffff;
@@ -282,6 +283,8 @@
 
 body {
   font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
   background-color: var(--color-background);
   color: var(--color-on-background);
   -webkit-font-smoothing: antialiased;

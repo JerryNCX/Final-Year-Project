@@ -39,6 +39,11 @@ export default function Footer() {
                 Returns
               </Link>
             </li>
+            <li>
+              <Link to="/admin/login" className="font-label text-xs uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors">
+                Admin Portal
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

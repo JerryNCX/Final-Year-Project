@@ -5,10 +5,10 @@ import Footer from './Footer'
 import { ArrowRight, Cpu, Zap, Thermometer, HardDrive } from 'lucide-react'
 
 const categories = [
-  { number: '01', label: 'LOGIC', title: 'PROCESSORS', icon: Cpu, path: 'cpu' },
-  { number: '02', label: 'RENDER', title: 'GRAPHICS', icon: Zap, path: 'gpu' },
-  { number: '03', label: 'NEXUS', title: 'BOARDS', icon: HardDrive, path: 'motherboard' },
-  { number: '04', label: 'STREAM', title: 'STORAGE', icon: Thermometer, path: 'ssd' },
+  { number: '01', label: 'LOGIC', title: 'PROCESSORS', icon: Cpu, path: 'CPU' },
+  { number: '02', label: 'RENDER', title: 'GRAPHICS', icon: Zap, path: 'GPU' },
+  { number: '03', label: 'NEXUS', title: 'BOARDS', icon: HardDrive, path: 'Motherboard' },
+  { number: '04', label: 'STREAM', title: 'STORAGE', icon: Thermometer, path: 'Internal Drive' },
 ]
 
 const featuredProducts = [
@@ -59,7 +59,7 @@ export default function HomePage() {
               <div className="diagnostic-panel p-6 md:p-8 mb-8 max-w-2xl">
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-primary/15">
                   <span className="w-2 h-2 bg-primary animate-pulse-amber" />
-                  <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase">PRECISION TECH BIOS v4.0</span>
+                  <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase">PRECISION TECH BIOS v1.0</span>
                   <span className="font-label text-[10px] text-on-surface-variant/50 ml-auto">
                     {new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
                   </span>
@@ -174,7 +174,7 @@ export default function HomePage() {
                 return (
                   <Link
                     key={cat.title}
-                    to={`/category/${cat.path}`}
+                    to={`/catalog?category=${encodeURIComponent(cat.path)}`}
                     className="group relative bg-surface-container-lowest p-6 md:p-8 trace-border transition-all duration-300"
                   >
                     <div className="mb-6">
@@ -217,7 +217,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-2 gap-4 pt-5">
                       {Object.entries(product.specs).map(([key, val]) => (
                         <div key={key}>
-                          <div className="font-label text-[9px] text-on-surface-variant/60 tracking-[0.15em] uppercase mb-0.5">{key}</div>
+                          <div className="font-label text-[11px] text-on-surface-variant/60 tracking-[0.15em] uppercase mb-0.5">{key}</div>
                           <div className="font-body text-xs text-on-surface">{val}</div>
                         </div>
                       ))}
@@ -262,7 +262,7 @@ export default function HomePage() {
                   SUBSCRIBE
                 </button>
               </form>
-              <div className="mt-4 font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest">
+              <div className="mt-4 font-label text-[11px] text-on-surface-variant/40 uppercase tracking-widest">
                 By subscribing, you agree to our Protocol and Privacy Policy.
               </div>
             </div>

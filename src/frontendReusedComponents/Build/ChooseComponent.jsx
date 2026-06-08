@@ -1,164 +1,313 @@
-import React, { useState } from 'react'
-import { ArrowLeft, Plus } from 'lucide-react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { ArrowLeft, Plus, Check, Loader2, Search, X } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
+import { useBuild, CATEGORIES } from '@/lib/BuildContext'
+import { searchProducts, compatibleProducts } from '@/lib/api'
 
-const sampleData = [
-  { name: 'AMD Ryzen 9 7950X3D', cores: '16 / 32', clock: '4.2 / 5.7 GHz', socket: 'AM5', tdp: '120W', graphics: 'Radeon', price: 699.00 },
-  { name: 'Intel Core i9-14900K', cores: '24 (8P+16E)', clock: '3.2 / 6.0 GHz', socket: 'LGA 1700', tdp: '125W', graphics: 'UHD 770', price: 589.99 },
-  { name: 'AMD Ryzen 7 7800X3D', cores: '8 / 16', clock: '4.2 / 5.0 GHz', socket: 'AM5', tdp: '120W', graphics: 'Radeon', price: 374.49 },
+const PAGE_SIZE = 24
+
+const URL_TO_TABLE = {
+  'cpu': 'CPU', 'gpu': 'GPU', 'motherboard': 'Motherboard',
+  'memory': 'Memory', 'case': 'Case', 'psu': 'PSU',
+  'cpu-cooler': 'CPU Cooler', 'internal-drive': 'Internal Drive',
+}
+
+const TITLE_MAP = {
+  CPU: 'Select Processor', GPU: 'Select Graphics Card',
+  Motherboard: 'Select Motherboard', Memory: 'Select Memory',
+  'CPU Cooler': 'Select CPU Cooler', Case: 'Select Case',
+  PSU: 'Select Power Supply', 'Internal Drive': 'Select Storage',
+}
+
+const PRIORITY = ['CPU', 'Motherboard', 'GPU', 'Case', 'Memory', 'CPU Cooler', 'PSU', 'Internal Drive']
+
+const CONSTRAINT_PAIRS = new Set([
+  'CPU->Motherboard', 'CPU->CPU Cooler',
+  'Motherboard->CPU', 'Motherboard->Memory', 'Motherboard->Case',
+  'Motherboard->CPU Cooler', 'Motherboard->Internal Drive',
+  'GPU->Case', 'GPU->PSU',
+  'Case->Motherboard', 'Case->GPU', 'Case->PSU', 'Case->Internal Drive',
+  'Memory->Motherboard', 'PSU->Case',
+  'CPU Cooler->CPU', 'CPU Cooler->Motherboard',
+  'Internal Drive->Motherboard', 'Internal Drive->Case',
+])
+
+const SORT_OPTIONS = [
+  { value: 'default', label: 'Default' },
+  { value: 'price_asc', label: 'Price: Low to High' },
+  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'name_asc', label: 'Name: A-Z' },
+  { value: 'name_desc', label: 'Name: Z-A' },
 ]
 
+function getSpecLines(product) {
+  const s = product.specs || {}
+  const lines = []
+  if (s.socket) lines.push(`Socket: ${s.socket}`)
+  if (s.core_count) lines.push(`${s.core_count} Cores`)
+  if (s.tdp) lines.push(`${s.tdp} TDP`)
+  if (s.memory) lines.push(`VRAM: ${s.memory}`)
+  if (s.speed) lines.push(`Speed: ${s.speed}`)
+  if (s.form_factor) lines.push(`Form: ${s.form_factor}`)
+  if (s.wattage) lines.push(`${s.wattage}`)
+  if (s.type) lines.push(`${s.type}`)
+  if (s.capacity) lines.push(`${s.capacity}GB`)
+  if (s.interface) lines.push(`${s.interface}`)
+  return lines.slice(0, 3)
+}
+
+function getSelectedId(build, category) {
+  const v = build[category]
+  if (!v) return null
+  if (Array.isArray(v)) return v.length > 0 ? v[0].id : null
+  return v.id
+}
+
+function findFromEntry(build, targetTable) {
+  for (const cat of PRIORITY) {
+    const comp = build[cat]
+    if (!comp) continue
+    if (Array.isArray(comp) && comp.length === 0) continue
+    const entry = Array.isArray(comp) ? comp[0] : comp
+    const key = `${entry.table_name}->${targetTable}`
+    if (!CONSTRAINT_PAIRS.has(key)) continue
+    return { table_name: entry.table_name, id: entry.id }
+  }
+  return null
+}
+
 export default function ChooseComponent() {
-  const { category } = useParams()
+  const { category: urlCategory } = useParams()
   const navigate = useNavigate()
-  const [sortBy, setSortBy] = useState('Performance: High to Low')
-  const [selectedBrands, setSelectedBrands] = useState([])
-  const [priceMin, setPriceMin] = useState('')
-  const [priceMax, setPriceMax] = useState('')
+  const { build, addComponent } = useBuild()
 
-  const titleMap = {
-    cpu: 'Select Processor',
-    gpu: 'Select Graphics Card',
-    motherboard: 'Select Motherboard',
-    memory: 'Select Memory',
-    storage: 'Select Storage',
-    'cpu-cooler': 'Select CPU Cooler',
-    'power-supply': 'Select Power Supply',
-    case: 'Select Case',
+  const targetTable = URL_TO_TABLE[urlCategory] || urlCategory
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [total, setTotal] = useState(0)
+  const [added, setAdded] = useState(new Set())
+  const [page, setPage] = useState(0)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [sortBy, setSortBy] = useState('default')
+  const [error, setError] = useState('')
+
+  const fetchProducts = useCallback(async (q, sort, pageNum) => {
+    setLoading(true)
+    setError('')
+    try {
+      if (q.trim()) {
+        const res = await searchProducts({ q, category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort })
+        setProducts(res.results || [])
+        setTotal(res.count || 0)
+      } else {
+        const fromEntry = findFromEntry(build, targetTable)
+        if (fromEntry) {
+          const ctxCpuId = getSelectedId(build, 'CPU')
+          const ctxGpuId = getSelectedId(build, 'GPU')
+          const res = await compatibleProducts({
+            from_table: fromEntry.table_name,
+            from_id: fromEntry.id,
+            target_table: targetTable,
+            limit: PAGE_SIZE,
+            offset: pageNum * PAGE_SIZE,
+            context_cpu_id: ctxCpuId,
+            context_gpu_id: ctxGpuId,
+          })
+          setProducts(res.results || [])
+          setTotal(res.count || 0)
+        } else {
+          const res = await searchProducts({ category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort })
+          setProducts(res.results || [])
+          setTotal(res.count || 0)
+        }
+      }
+    } catch (e) {
+      setProducts([])
+      setError(e.message || 'Failed to load products')
+    } finally {
+      setLoading(false)
+    }
+  }, [build, targetTable])
+
+  useEffect(() => {
+    setPage(0)
+    setAdded(new Set())
+  }, [targetTable])
+
+  useEffect(() => {
+    fetchProducts(searchQuery, sortBy, page)
+  }, [build, targetTable, searchQuery, sortBy, page, fetchProducts])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setPage(0)
+    fetchProducts(searchQuery, sortBy, 0)
   }
 
-  const title = titleMap[category] || 'Select Component'
-
-  const toggleBrand = (brand) => {
-    setSelectedBrands(prev =>
-      prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
-    )
+  const handleSort = (val) => {
+    setSortBy(val)
+    setPage(0)
   }
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE))
+
+  function handleAdd(product) {
+    if (targetTable === 'Internal Drive') {
+      addComponent('Internal Drive', product)
+      setAdded(prev => new Set(prev).add(product.id))
+    } else {
+      addComponent(targetTable, product)
+      navigate('/build')
+    }
+  }
+
+  const title = TITLE_MAP[targetTable] || 'Select Component'
 
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body antialiased">
       <Header />
+      <div className="max-w-[1400px] mx-auto px-10 py-8">
+        <button onClick={() => navigate('/build')} className="flex items-center gap-2 text-sm font-label text-on-surface-variant hover:text-primary transition-colors mb-6">
+          <ArrowLeft className="w-4 h-4" />
+          Back to System Builder
+        </button>
 
-      <div className="max-w-[1920px] mx-auto flex">
-        <aside className="hidden lg:block w-72 bg-surface-container-low p-8 flex-shrink-0 min-h-screen">
-          <button onClick={() => navigate('/build')} className="flex items-center gap-2 text-sm font-label text-on-surface-variant hover:text-primary transition-colors mb-10">
-            <ArrowLeft className="w-4 h-4" />
-            Back to System Builder
-          </button>
-
-          <h2 className="font-label text-xs font-bold uppercase tracking-widest text-on-surface mb-6">Filters</h2>
-
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-4">Component</h3>
-            <div className="space-y-3">
-              {['Processors', 'Motherboards', 'Memory'].map(label => (
-                <label key={label} className="flex items-center gap-3 cursor-pointer group">
-                  <input type="checkbox" className="h-4 w-4 rounded-sm text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20" />
-                  <span className="text-sm text-on-surface group-hover:text-primary transition-colors">{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-4">Brand</h3>
-            <div className="space-y-3">
-              {['AMD', 'Intel'].map(brand => (
-                <label key={brand} className="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands.includes(brand)}
-                    onChange={() => toggleBrand(brand)}
-                    className="h-4 w-4 rounded-sm text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20"
-                  />
-                  <span className="text-sm text-on-surface group-hover:text-primary transition-colors">{brand}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-4">Core Count</h3>
-            <div className="space-y-3">
-              {['6 Cores', '8 Cores', '12 Cores', '16+ Cores'].map(label => (
-                <label key={label} className="flex items-center gap-3 cursor-pointer group">
-                  <input type="checkbox" className="h-4 w-4 rounded-sm text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20" />
-                  <span className="text-sm text-on-surface group-hover:text-primary transition-colors">{label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
+        <div className="flex justify-between items-end mb-6">
           <div>
-            <h3 className="text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-4">Price Range</h3>
-            <div className="flex items-center gap-3">
-              <div className="relative w-full">
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-xs">$</span>
-                <input value={priceMin} onChange={e => setPriceMin(e.target.value)} className="w-full bg-surface-container-high text-on-surface text-sm pl-5 pr-2 py-2 rounded-sm border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body" placeholder="100" type="number" />
-              </div>
-              <span className="text-on-surface-variant">-</span>
-              <div className="relative w-full">
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-xs">$</span>
-                <input value={priceMax} onChange={e => setPriceMax(e.target.value)} className="w-full bg-surface-container-high text-on-surface text-sm pl-5 pr-2 py-2 rounded-sm border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body" placeholder="1000" type="number" />
-              </div>
-            </div>
+            <h1 className="font-headline text-4xl font-bold tracking-tighter text-on-surface mb-1">{title}</h1>
+            <p className="text-on-surface-variant text-sm">{total} option{total !== 1 ? 's' : ''} available.</p>
           </div>
-        </aside>
+        </div>
 
-        <section className="flex-grow p-10">
-          <div className="flex justify-between items-end mb-8">
-            <div>
-              <h1 className="font-headline text-4xl font-bold tracking-tighter text-on-surface mb-1">{title}</h1>
-              <p className="text-on-surface-variant text-sm">Showing 24 high-performance options for your build.</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-on-surface-variant">Sort by:</span>
-              <select
-                value={sortBy}
-                onChange={e => setSortBy(e.target.value)}
-                className="bg-surface-container-high text-on-surface text-sm px-4 py-2 rounded-sm border-none focus:ring-0 focus:outline-none focus:border-b-2 focus:border-b-primary transition-all font-body cursor-pointer appearance-none pr-8"
-              >
-                <option>Performance: High to Low</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-              </select>
-            </div>
-          </div>
+        <div className="flex items-center gap-4 mb-8">
+          <form onSubmit={handleSearch} className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+            <input
+              className="w-full bg-surface-container-low text-on-surface font-body pl-10 pr-10 py-2.5 border border-outline-variant rounded-lg outline-none focus:border-primary transition-colors text-sm"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button type="button" onClick={() => { setSearchQuery(''); setPage(0) }} className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface">
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </form>
 
-          <div className="ghost-border rounded-xl overflow-hidden">
-            <div className="grid grid-cols-[2fr_1fr_1fr_1fr_80px_120px_100px] gap-0 bg-surface-container-low border-b border-outline-variant/30">
-              {['Product', 'Cores', 'Clock Speed', 'Socket', 'TDP', 'Graphics', 'Price', 'Action'].map(h => (
-                <div key={h} className="px-6 py-4 font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">{h === 'Action' ? '' : h}</div>
-              ))}
-            </div>
-            {sampleData.map((item, i) => (
-              <div key={i} className="grid grid-cols-[2fr_1fr_1fr_1fr_80px_120px_100px] gap-0 border-b border-outline-variant/15 last:border-b-0 hover:bg-surface-container-low/40 transition-colors">
-                <div className="px-6 py-4 flex items-center">
-                  <span className="font-headline font-bold text-sm text-on-surface">{item.name}</span>
-                </div>
-                <div className="px-6 py-4 flex items-center text-sm text-on-surface-variant">{item.cores}</div>
-                <div className="px-6 py-4 flex items-center text-sm text-on-surface-variant">{item.clock}</div>
-                <div className="px-6 py-4 flex items-center text-sm text-on-surface-variant">{item.socket}</div>
-                <div className="px-6 py-4 flex items-center text-sm text-on-surface-variant">{item.tdp}</div>
-                <div className="px-6 py-4 flex items-center text-sm text-on-surface-variant">{item.graphics}</div>
-                <div className="px-6 py-4 flex items-center justify-end text-sm font-headline font-bold text-on-surface">${item.price.toFixed(2)}</div>
-                <div className="px-6 py-4 flex items-center justify-end">
-                  <button
-                    onClick={() => navigate('/build')}
-                    className="primary-gradient-btn text-on-primary text-xs font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    Add
-                  </button>
-                </div>
-              </div>
+          <select
+            value={sortBy}
+            onChange={e => handleSort(e.target.value)}
+            className="bg-surface-container-low text-on-surface font-body px-4 py-2.5 border border-outline-variant rounded-lg outline-none focus:border-primary transition-colors text-sm"
+          >
+            {SORT_OPTIONS.map(o => (
+              <option key={o.value} value={o.value}>{o.label}</option>
             ))}
-          </div>
-        </section>
-      </div>
+          </select>
+        </div>
 
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-20 text-on-surface-variant">
+            <p className="text-lg mb-2 text-error">Error loading products</p>
+            <p className="text-sm mb-4">{error}</p>
+            <button onClick={() => fetchProducts(searchQuery, sortBy, page)} className="primary-gradient-btn px-5 py-2.5 text-on-primary font-label font-semibold rounded-lg">
+              Try Again
+            </button>
+          </div>
+        ) : products.length === 0 ? (
+          <div className="text-center py-20 text-on-surface-variant">
+            <p className="text-lg mb-2">No {searchQuery ? 'matching ' : ''}products found</p>
+            <p className="text-sm">
+              {searchQuery
+                ? 'Try a different search term.'
+                : 'Try selecting a different component first, or browse all products from the catalog.'}
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {products.map(p => {
+                const specLines = getSpecLines(p)
+                const isAdded = targetTable === 'Internal Drive' && added.has(p.id)
+                return (
+                  <div key={p.id} className="ghost-border rounded-xl p-4 flex flex-col hover:shadow-md transition-shadow">
+                    <div className="aspect-[4/3] bg-surface-container-high rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+                      {p.image_urls ? (
+                        <img
+                          src={(() => { try { return JSON.parse(p.image_urls)[0] } catch { return p.image_urls } })()}
+                          alt={p.name}
+                          className="w-full h-full object-contain p-2"
+                        />
+                      ) : (
+                        <span className="text-on-surface-variant text-xs">{p.table_name}</span>
+                      )}
+                    </div>
+                    <h3 className="font-headline font-bold text-sm text-on-surface leading-snug mb-2 line-clamp-2">{p.name}</h3>
+                    <div className="space-y-0.5 mb-3">
+                      {specLines.map((l, i) => (
+                        <p key={i} className="text-xs text-on-surface-variant">{l}</p>
+                      ))}
+                    </div>
+                    <div className="mt-auto flex items-center justify-between">
+                      <span className="font-headline font-bold text-base text-on-surface">${(() => { try { return parseFloat(p.price).toFixed(2) } catch { return p.price || '0.00' } })()}</span>
+                      <button
+                        onClick={() => handleAdd(p)}
+                        disabled={isAdded}
+                        className={`flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-lg transition-all ${
+                          isAdded
+                            ? 'bg-green-100 text-green-700 cursor-default'
+                            : 'primary-gradient-btn text-on-primary hover:opacity-90'
+                        }`}
+                      >
+                        {isAdded ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                        {isAdded ? 'Added' : 'Add'}
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-10">
+                <button
+                  onClick={() => setPage(p => Math.max(0, p - 1))}
+                  disabled={page === 0}
+                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-label text-on-surface hover:bg-surface-container-high transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setPage(i)}
+                    className={`w-10 h-10 rounded-lg text-sm font-label transition-all ${
+                      i === page
+                        ? 'bg-primary text-on-primary'
+                        : 'border border-outline-variant text-on-surface hover:bg-surface-container-high'
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                  disabled={page >= totalPages - 1}
+                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-label text-on-surface hover:bg-surface-container-high transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
       <Footer />
     </div>
   )

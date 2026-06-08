@@ -1,27 +1,19 @@
 import React from 'react'
 import { Lock, ArrowLeft, ArrowRight, Truck, Plane, Shield, Headphones } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import Footer from '../HomePage/Footer'
-
-const cartItems = [
-  {
-    sku: 'SKU: VOLT-X9-9950X',
-    name: 'VoltCore™ i9-14900KS Ultra',
-    specs: 'Unlocked / 6.2 GHz',
-    price: '$689.00',
-    qty: 1,
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYUckXlsms8__blJsKW6wp8J2TEVPJV4jyBGVjy26-hZTA8dCDF17lGfN2vpkDditnvldFg0haUE3upMqFPdTpnefi8u_IM8yQtx2DFYXM_gT-LcVlLUmNMmfrzGoD-pi4RT87NCCeXsLYS3U2pgpXNYxZMzJSBuFRGkCo8WTFw1vKDx2eoKM-pHf3ABLY6QQic8b-sBh1TJ66PDJzMH9MkUb5S-SQ2k-RfjbKt6RPFZ52vd7Zm4tZjxDAM_ietIX45AdDA4cbrq1V',
-  },
-  {
-    sku: 'SKU: MEM-VPR-64GB',
-    name: 'ViperX DDR5 64GB Kit',
-    specs: '7200MT/s / CL34',
-    price: '$345.00',
-    qty: 2,
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBHJXus6tYjVCFgllm9rJSL7QC11zfl36oDtvn4gUmZ4XYkG4r7mt4IRBrqHufVNrazlP2fqSZ1p0YfNQuktNzZIZxVGV28bltnRA1wa9RPJh9bbpMq9lXy7vYfX3OoBdHfLm1qXP4779QdMnUhludtdQex_6SKT_hFhn7j6IXkh_2v3vEhWK9eKd2XEZM7sDIxslJduIlMzrR5cIi8lGjke8lzEi3DVSFy6vysR87gFJSrQ94pAHxWe0N3IYJVslGQz5vJXeFu2umX',
-  },
-]
+import { useCart } from '@/lib/CartContext'
 
 export default function Checkout() {
+  const navigate = useNavigate()
+  const { cartItems, subtotal, tax, cartTotal, formatPrice, clearCart } = useCart()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    clearCart()
+    navigate('/build')
+  }
+
   return (
     <div className="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
       <header className="w-full bg-surface-container-lowest/80 backdrop-blur-xl sticky top-0 z-50 border-b border-surface-variant/50">
@@ -64,7 +56,7 @@ export default function Checkout() {
             </div>
           </div>
 
-          <form className="flex flex-col gap-10">
+          <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
             <section className="bg-surface-container-lowest p-8 lg:p-10 shadow-[0_20px_40px_rgba(26,28,31,0.03)] border border-outline-variant/15 relative overflow-hidden group">
               <div className="absolute top-0 left-0 w-1 h-full bg-primary/20 group-hover:bg-primary transition-colors duration-300"></div>
               <h2 className="font-display text-2xl font-bold tracking-tight text-on-surface mb-6 flex items-center gap-3">
@@ -75,17 +67,16 @@ export default function Checkout() {
                 <div className="col-span-1 md:col-span-2">
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">Email Address</label>
                   <input
+                    required
                     className="w-full bg-surface-container-low text-on-surface font-body px-4 py-3 border-b-2 border-primary outline-none focus:bg-surface-container transition-colors duration-200"
                     placeholder="Enter your email"
                     type="email"
-                    defaultValue="alex.engineer@example.com"
                   />
                 </div>
                 <div className="flex items-center gap-3 col-span-1 md:col-span-2 mt-2">
                   <div className="relative flex items-start">
                     <div className="flex h-6 items-center">
                       <input
-                        defaultChecked
                         className="h-4 w-4 rounded-sm border-outline text-primary focus:ring-primary bg-surface-container-low"
                         id="newsletter"
                         name="newsletter"
@@ -110,15 +101,15 @@ export default function Checkout() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">First Name</label>
-                  <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="First Name" type="text" />
+                  <input required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="First Name" type="text" />
                 </div>
                 <div>
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">Last Name</label>
-                  <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Last Name" type="text" />
+                  <input required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Last Name" type="text" />
                 </div>
                 <div className="col-span-1 md:col-span-2">
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">Address Line 1</label>
-                  <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Street Address, P.O. Box" type="text" />
+                  <input required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Street Address, P.O. Box" type="text" />
                 </div>
                 <div className="col-span-1 md:col-span-2">
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">Address Line 2 (Optional)</label>
@@ -126,12 +117,12 @@ export default function Checkout() {
                 </div>
                 <div>
                   <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">City</label>
-                  <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="City" type="text" />
+                  <input required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="City" type="text" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">State / Province</label>
-                    <select className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200 appearance-none">
+                    <select required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200 appearance-none">
                       <option disabled selected value="">Select...</option>
                       <option value="ca">California</option>
                       <option value="ny">New York</option>
@@ -140,7 +131,7 @@ export default function Checkout() {
                   </div>
                   <div>
                     <label className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-2">Postal / Zip Code</label>
-                    <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Zip" type="text" />
+                    <input required className="w-full bg-surface-container-high text-on-surface font-body px-4 py-3 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200" placeholder="Zip" type="text" />
                   </div>
                 </div>
               </div>
@@ -179,11 +170,11 @@ export default function Checkout() {
             </section>
 
             <div className="flex items-center justify-between pt-4">
-              <a className="font-label text-sm font-medium text-on-surface flex items-center gap-2 hover:text-primary transition-colors duration-200 group" href="/cart">
+              <button type="button" onClick={() => navigate('/cart')} className="font-label text-sm font-medium text-on-surface flex items-center gap-2 hover:text-primary transition-colors duration-200 group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Return to Cart
-              </a>
-              <button className="bg-gradient-to-r from-primary to-primary-container text-on-primary font-label font-bold text-sm uppercase tracking-wide px-8 py-4 rounded-lg shadow-[0_4px_14px_rgba(0,72,225,0.39)] hover:shadow-[0_6px_20px_rgba(0,72,225,0.23)] hover:scale-[1.02] transition-all duration-300 flex items-center gap-3" type="button">
+              </button>
+              <button type="submit" className="bg-gradient-to-r from-primary to-primary-container text-on-primary font-label font-bold text-sm uppercase tracking-wide px-8 py-4 rounded-lg shadow-[0_4px_14px_rgba(0,72,225,0.39)] hover:shadow-[0_6px_20px_rgba(0,72,225,0.23)] hover:scale-[1.02] transition-all duration-300 flex items-center gap-3">
                 Proceed to Inspection
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -196,14 +187,20 @@ export default function Checkout() {
             <h3 className="font-display text-xl font-bold tracking-tight text-on-surface mb-8 border-b border-outline-variant/30 pb-4">Order Summary</h3>
 
             <div className="flex flex-col gap-6 mb-8">
-              {cartItems.map((item, i) => (
-                <div key={i} className="flex gap-4 items-start group">
+              {cartItems.length === 0 ? (
+                <p className="text-on-surface-variant text-sm">No items in cart</p>
+              ) : cartItems.map((item, i) => (
+                <div key={item.id || i} className="flex gap-4 items-start group">
                   <div className="w-20 h-20 bg-surface-container-lowest flex-shrink-0 flex items-center justify-center p-2 rounded-md border border-outline-variant/15 relative overflow-hidden">
-                    <img
-                      alt={item.name}
-                      className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-transform duration-500"
-                      src={item.image}
-                    />
+                    {item.image ? (
+                      <img
+                        alt={item.name}
+                        className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-transform duration-500"
+                        src={item.image}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-surface-container-high rounded-sm" />
+                    )}
                     <div className="absolute -top-1 -right-1 w-5 h-5 bg-surface-container-lowest text-on-surface font-label text-[10px] font-bold flex items-center justify-center rounded-full border border-outline-variant/20">
                       {item.qty}
                     </div>
@@ -211,34 +208,27 @@ export default function Checkout() {
                   <div className="flex-grow">
                     <h4 className="font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-1">{item.sku}</h4>
                     <p className="font-body font-semibold text-on-surface leading-tight mb-2">{item.name}</p>
-                    <p className="font-body text-sm text-secondary font-medium">{item.specs}</p>
+                    <p className="font-body text-sm text-secondary font-medium">{item._tableName}</p>
                   </div>
                   <div className="text-right">
-                    <span className="font-display font-bold text-on-surface block">{item.price}</span>
+                    <span className="font-display font-bold text-on-surface block">{formatPrice(item.price)}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mb-8">
-              <div className="flex gap-2">
-                <input className="w-full bg-surface-container-high text-on-surface font-body px-4 py-2 border-b-2 border-transparent focus:border-primary outline-none transition-all duration-200 text-sm uppercase" placeholder="Enter Access Code" type="text" />
-                <button className="bg-surface-variant text-on-surface font-label font-bold text-xs uppercase tracking-wide px-4 py-2 hover:bg-outline-variant transition-colors duration-200 rounded-sm" type="button">Apply</button>
-              </div>
-            </div>
-
             <div className="flex flex-col gap-3 font-body text-sm border-t border-outline-variant/30 pt-6 mb-6">
               <div className="flex justify-between text-on-surface-variant">
                 <span>Subtotal</span>
-                <span className="font-medium text-on-surface">$1,379.00</span>
+                <span className="font-medium text-on-surface">{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between text-on-surface-variant">
                 <span>Shipping (Priority Overnight)</span>
-                <span className="font-medium text-on-surface">$24.00</span>
+                <span className="font-medium text-on-surface">+$24.00</span>
               </div>
               <div className="flex justify-between text-on-surface-variant">
                 <span>Estimated Tax</span>
-                <span className="font-medium text-on-surface">$114.10</span>
+                <span className="font-medium text-on-surface">{formatPrice(tax)}</span>
               </div>
             </div>
 
@@ -247,7 +237,7 @@ export default function Checkout() {
                 <span className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-1">Total Due</span>
                 <span className="block font-body text-xs text-on-surface-variant">USD</span>
               </div>
-              <span className="font-display text-4xl font-bold tracking-tight text-on-surface">$1,517.10</span>
+              <span className="font-display text-4xl font-bold tracking-tight text-on-surface">{formatPrice(cartTotal + 24)}</span>
             </div>
 
             <div className="mt-8 flex items-center justify-center gap-4 text-outline border-t border-outline-variant/20 pt-6">

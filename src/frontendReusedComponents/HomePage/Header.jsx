@@ -1,12 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Search, ShoppingCart, User, Menu, X, Sun, Moon } from 'lucide-react'
+import SearchPopover from '@/frontendReusedComponents/Search/SearchPopover'
+import { CartContext } from '@/lib/CartContext'
 
-export default function Header({ cartCount = 0, searchQuery = '', setSearchQuery, onSearch }) {
+export default function Header() {
+  const cartCtx = useContext(CartContext)
+  const cartCount = cartCtx?.cartCount ?? 0
   const location = useLocation()
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearchPopover, setShowSearchPopover] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const searchRef = useRef(null)
   const [scrolled, setScrolled] = useState(false)
   const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
 
@@ -27,12 +30,6 @@ export default function Header({ cartCount = 0, searchQuery = '', setSearchQuery
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  useEffect(() => {
-    if (showSearch && searchRef.current) {
-      searchRef.current.focus()
-    }
-  }, [showSearch])
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -74,7 +71,7 @@ export default function Header({ cartCount = 0, searchQuery = '', setSearchQuery
 
         <div className="flex items-center gap-3 md:gap-5">
           <button
-            onClick={() => setShowSearch(!showSearch)}
+            onClick={() => setShowSearchPopover(true)}
             className="text-on-surface-variant hover:text-primary transition-colors p-1"
             aria-label="Search"
           >
@@ -112,36 +109,6 @@ export default function Header({ cartCount = 0, searchQuery = '', setSearchQuery
         </div>
       </div>
 
-      {showSearch && (
-        <div className="border-t border-outline/20">
-          <div className="px-4 md:px-10 py-3 max-w-[1920px] mx-auto">
-            <div className="relative max-w-2xl">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-primary font-label text-xs uppercase tracking-widest pointer-events-none select-none">
-                {'>'}
-              </span>
-              <input
-                ref={searchRef}
-                type="text"
-                placeholder="SEARCH PRODUCTS..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery?.(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && onSearch) {
-                    onSearch(searchQuery)
-                    setShowSearch(false)
-                  }
-                  if (e.key === 'Escape') setShowSearch(false)
-                }}
-                className="w-full bg-surface-container border border-outline/30 text-on-surface font-body text-sm px-8 py-2.5 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-on-surface-variant/40 uppercase tracking-wider"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/30 font-label text-[10px] tracking-widest">
-                [ESC]
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
-
       {showMobileMenu && (
         <div className="md:hidden border-t border-outline/20 bg-surface-dim">
           <nav className="px-4 py-4 space-y-1">
@@ -163,6 +130,7 @@ export default function Header({ cartCount = 0, searchQuery = '', setSearchQuery
         </div>
       )}
 
+      <SearchPopover isOpen={showSearchPopover} onClose={() => setShowSearchPopover(false)} />
     </header>
   )
 }

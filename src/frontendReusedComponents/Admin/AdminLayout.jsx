@@ -25,7 +25,7 @@ export default function AdminLayout() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
               <Link to="/" className="flex items-center gap-2 text-lg font-bold text-on-surface font-headline">
-                <span>TECH ATELIER</span>
+                <span>PRECISION TECH</span>
               </Link>
               <div className="flex items-center gap-1">
                 <ArrowLeft className="w-4 h-4 text-on-surface-variant" />

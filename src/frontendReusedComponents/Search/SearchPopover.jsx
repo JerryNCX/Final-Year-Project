@@ -1,13 +1,94 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Search, X, Camera, SlidersHorizontal } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { Search, X, Camera, Upload, Image as ImageIcon, Cpu, Zap, HardDrive, Thermometer, CircuitBoard } from 'lucide-react'
+import { analyzeImage, searchProducts } from '@/lib/api'
+
+const categoryIcons = {
+  cpu: Cpu, gpu: Zap, 'video-card': Zap, ram: CircuitBoard,
+  memory: CircuitBoard, storage: HardDrive, motherboard: CircuitBoard,
+  cooling: Thermometer, chassis: HardDrive, 'power supply': Zap,
+  psu: Zap, ssd: HardDrive,
+}
+
+function DetectionCard({ detection }) {
+  const Icon = categoryIcons[detection.category] || CircuitBoard
+  const confidence = Math.round(detection.confidence * 100)
+
+  return (
+    <div className="trace-border bg-surface-container-lowest p-4">
+      <div className="flex items-center gap-3 mb-3">
+        <Icon className="w-5 h-5 text-primary" />
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <span className="font-label text-xs uppercase tracking-wider text-primary">{detection.category}</span>
+            <span className="font-label text-[10px] text-on-surface-variant/60">{confidence}%</span>
+          </div>
+          <div className="h-1.5 bg-surface-container overflow-hidden mt-1">
+            <div className="h-full bg-primary transition-all" style={{ width: `${confidence}%` }} />
+          </div>
+        </div>
+      </div>
+
+      {detection.ocr_results?.length > 0 && (
+        <div className="mb-3 p-2 bg-background/50 font-body text-[11px] text-on-surface leading-relaxed">
+          {detection.ocr_results.map((r, i) => (
+            <span key={i}>
+              {i > 0 && ' '}
+              <span className="text-primary">&gt;</span> {r.text}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {detection.matches?.length > 0 && (
+        <div className="space-y-2">
+          <div className="font-label text-[11px] text-on-surface-variant/50 uppercase tracking-wider">MATCHED PRODUCTS</div>
+          {detection.matches.slice(0, 3).map((match, i) => (
+            <Link
+              key={match.id || i}
+              to={`/product/${match.table_name}/${match.id}`}
+              className="block trace-border bg-surface-container p-2.5 hover:bg-surface-container-high transition-colors"
+            >
+              <div className="font-label text-[11px] text-on-surface leading-tight uppercase tracking-wider">{match.name}</div>
+              <div className="flex items-center justify-between mt-1">
+                <span className="font-label text-[11px] text-on-surface-variant/60 uppercase">
+                  {match.manufacturer || ''}
+                  {match.table_name && ` / ${match.table_name}`}
+                </span>
+                {match.price && (
+                  <span className="font-headline text-sm text-primary">${match.price}</span>
+                )}
+              </div>
+            </Link>
+          ))}
+          {detection.matches.length > 3 && (
+            <div className="font-label text-[11px] text-on-surface-variant/40 text-center pt-1 uppercase tracking-wider">
+              +{detection.matches.length - 3} more results
+            </div>
+          )}
+        </div>
+      )}
+
+      {(!detection.ocr_results?.length && !detection.matches?.length) && (
+        <div className="font-label text-[10px] text-on-surface-variant/40 text-center py-2 uppercase tracking-wider">
+          No text or matches found
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function SearchPopover({ isOpen, onClose }) {
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [textResults, setTextResults] = useState([])
+  const [textLoading, setTextLoading] = useState(false)
+  const [imageFile, setImageFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
+  const [analyzing, setAnalyzing] = useState(false)
+  const [analysisResult, setAnalysisResult] = useState(null)
+  const [analysisError, setAnalysisError] = useState(null)
   const inputRef = useRef(null)
+  const fileInputRef = useRef(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -15,97 +96,151 @@ export default function SearchPopover({ isOpen, onClose }) {
       setTimeout(() => inputRef.current?.focus(), 100)
     } else {
       setQuery('')
-      setResults([])
+      setTextResults([])
+      setImageFile(null)
+      setImagePreview(null)
+      setAnalysisResult(null)
+      setAnalysisError(null)
     }
   }, [isOpen])
 
   useEffect(() => {
-    if (!query.trim()) {
-      setResults([])
-      return
-    }
+    if (!query.trim()) { setTextResults([]); return }
     const timer = setTimeout(async () => {
-      setLoading(true)
+      setTextLoading(true)
       try {
-        const { data } = await supabase
-          .from('Product_Catalog')
-          .select('*')
-          .ilike('Product_name', `%${query}%`)
-          .limit(8)
-        setResults(data || [])
-      } catch {
-        setResults([])
-      } finally {
-        setLoading(false)
-      }
+        const res = await searchProducts({ q: query, limit: 8 })
+        setTextResults(res.results || [])
+      } catch { setTextResults([]) }
+      finally { setTextLoading(false) }
     }, 300)
     return () => clearTimeout(timer)
   }, [query])
 
-  if (!isOpen) return null
+  const handleImageSelect = useCallback(async (file) => {
+    if (!file) return
+    setImageFile(file)
+    setImagePreview(URL.createObjectURL(file))
+    setAnalysisResult(null)
+    setAnalysisError(null)
+    setAnalyzing(true)
+    try {
+      const result = await analyzeImage(file)
+      setAnalysisResult(result)
+    } catch (err) {
+      setAnalysisError(err.message || 'Analysis failed. Is the backend running?')
+    } finally {
+      setAnalyzing(false)
+    }
+  }, [])
 
-  const formatPrice = (price) => {
-    if (!price) return 'N/A'
-    const num = parseFloat(price.toString().replace(/[^0-9.]/g, ''))
-    if (isNaN(num)) return price
-    return `$${num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+  const handleDrop = useCallback((e) => {
+    e.preventDefault()
+    const file = e.dataTransfer?.files?.[0]
+    if (file?.type?.startsWith('image/')) handleImageSelect(file)
+  }, [handleImageSelect])
+
+  const handleDragOver = (e) => e.preventDefault()
+
+  const getFirstImage = (urls) => {
+    if (!urls) return null
+    try {
+      const parsed = JSON.parse(urls)
+      return Array.isArray(parsed) ? parsed[0] : null
+    } catch {
+      return urls || null
+    }
   }
 
+  if (!isOpen) return null
+
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center pt-20 px-6 bg-slate-900/40 backdrop-blur-md">
-      <div className="w-full max-w-5xl glass-panel rounded-xl shadow-2xl overflow-hidden flex flex-col border border-white/20">
-        <div className="p-8 border-b border-outline-variant/30 flex items-center gap-6">
-          <div className="flex-1 flex items-center gap-4 bg-surface-container-high/50 rounded-lg px-6 py-4 border-b-2 border-primary">
-            <Search className="w-6 h-6 text-primary" />
+    <div className="fixed inset-0 z-[100] flex flex-col items-center pt-16 md:pt-20 px-4 md:px-6 bg-background/60 backdrop-blur-sm">
+      <div className="w-full max-w-5xl diagnostic-panel flex flex-col max-h-[85vh]">
+        {/* Search header */}
+        <div className="p-4 md:p-6 flex items-center gap-4 border-b border-primary/10">
+          <div className="flex-1 flex items-center gap-3 bg-surface-container border border-outline/30 px-4 py-2.5 focus-within:border-primary/50 transition-colors">
+            <Search className="w-5 h-5 text-primary flex-shrink-0" />
             <input
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="bg-transparent border-none focus:ring-0 w-full text-2xl font-headline font-medium placeholder:text-outline"
-              placeholder="Search by model, SKU, or performance tier..."
+              className="bg-transparent border-none focus:ring-0 w-full font-label text-sm uppercase tracking-wider text-on-surface placeholder:text-on-surface-variant/40"
+              placeholder="SEARCH BY MODEL, SKU, OR KEYWORD..."
             />
-            <button onClick={onClose} className="p-2 hover:bg-surface-container-highest rounded-full transition-all">
-              <X className="w-5 h-5 text-outline" />
+            <button onClick={onClose} className="text-on-surface-variant/50 hover:text-primary transition-colors p-1 flex-shrink-0">
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        <div className="flex h-[600px]">
-          <div className="w-2/5 border-r border-outline-variant/30 bg-surface-container-low/40 p-8 flex flex-col gap-10 overflow-y-auto">
+        <div className="flex flex-1 overflow-hidden">
+          {/* Sidebar — Image upload */}
+          <div className="hidden md:flex w-72 lg:w-80 flex-shrink-0 flex-col gap-4 p-4 md:p-6 border-r border-primary/10 overflow-y-auto">
             <div>
-              <h3 className="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-4">
-                Visual Identification
-              </h3>
+              <div className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-3 flex items-center gap-2">
+                <Camera className="w-3.5 h-3.5" /> VISUAL IDENTIFICATION
+              </div>
               <div
-                onClick={() => navigate('/catalog')}
-                className="border-2 border-dashed border-outline-variant bg-surface/50 rounded-xl p-10 flex flex-col items-center text-center group cursor-pointer hover:border-primary transition-colors"
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onClick={() => fileInputRef.current?.click()}
+                className="trace-border bg-surface-container p-6 flex flex-col items-center text-center cursor-pointer hover:bg-surface-container-high transition-colors"
               >
-                <div className="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center mb-6 text-on-primary-container group-hover:scale-110 transition-transform">
-                  <Camera className="w-7 h-7" />
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  className="hidden"
+                  onChange={(e) => {
+                    if (e.target.files?.[0]) handleImageSelect(e.target.files[0])
+                  }}
+                />
+                <div className="w-12 h-12 border-2 border-outline/30 flex items-center justify-center mb-3">
+                  <Upload className="w-5 h-5 text-outline" />
                 </div>
-                <p className="font-headline text-lg font-bold mb-2">Drop hardware photo here</p>
-                <p className="text-sm text-outline px-4 leading-relaxed">
-                  Drag and drop or upload a component photo to find exact matches and technical specs.
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider leading-relaxed">
+                  Drop a component photo or click to upload
                 </p>
-                <Link
-                  to="/catalog"
-                  className="mt-6 px-6 py-2 bg-on-surface text-surface text-xs font-bold rounded-lg uppercase tracking-wider"
-                >
-                  Browse Catalog
-                </Link>
+                <div className="flex gap-2 mt-3">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click() }}
+                    className="font-label text-[11px] tracking-[0.15em] uppercase text-primary border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                  >
+                    CHOOSE FILE
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      const input = document.createElement('input')
+                      input.type = 'file'
+                      input.accept = 'image/*'
+                      input.capture = 'environment'
+                      input.onchange = () => {
+                        if (input.files?.[0]) handleImageSelect(input.files[0])
+                      }
+                      input.click()
+                    }}
+                    className="font-label text-[11px] tracking-[0.15em] uppercase text-primary border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-colors flex items-center gap-1.5"
+                  >
+                    <Camera className="w-3 h-3" /> CAMERA
+                  </button>
+                </div>
               </div>
             </div>
 
             <div>
-              <h3 className="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-4">
-                Filter Parameters
-              </h3>
+              <div className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-3">BROWSE CATEGORIES</div>
               <div className="flex flex-wrap gap-2">
-                {['GPU', 'CPU', 'Motherboard', 'RAM', 'SSD', 'PSU'].map((cat) => (
+                {['GPU', 'CPU', 'Motherboard', 'Memory', 'Internal Drive', 'PSU'].map((cat) => (
                   <Link
                     key={cat}
-                    to={`/category/${cat.toLowerCase()}`}
-                    className="px-3 py-1.5 bg-surface-bright border border-outline-variant rounded-md text-xs font-semibold hover:border-primary cursor-pointer transition-all"
+                    to={`/category/${encodeURIComponent(cat)}`}
+                    onClick={onClose}
+                    className="font-label text-[11px] tracking-[0.15em] uppercase text-on-surface-variant border border-outline/30 px-2.5 py-1.5 hover:text-primary hover:border-primary/50 transition-colors"
                   >
                     {cat}
                   </Link>
@@ -114,121 +249,178 @@ export default function SearchPopover({ isOpen, onClose }) {
             </div>
           </div>
 
-          <div className="flex-1 p-8 overflow-y-auto bg-surface-container-lowest">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline">
-                Search Results {query ? `(${results.length})` : ''}
-              </h3>
-              {results.length > 0 && (
-                <Link to={`/catalog?q=${encodeURIComponent(query)}`} className="text-primary text-xs font-bold uppercase tracking-widest hover:underline transition-all">
-                  View All Results
-                </Link>
-              )}
-            </div>
-
-            {loading ? (
-              <div className="flex items-center justify-center py-16">
-                <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              </div>
-            ) : results.length > 0 ? (
-              <div className="space-y-6">
-                {results.slice(0, 4).map((product, index) => (
-                  <div
-                    key={`${product.ASIN}-${index}`}
-                    onClick={() => { navigate(`/product/${product.id || product.ASIN}`); onClose() }}
-                    className="group flex gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-all cursor-pointer"
+          {/* Results */}
+          <div className="flex-1 p-4 md:p-6 overflow-y-auto bg-surface-container-lowest/50">
+            {/* Image analysis results */}
+            {imagePreview && (
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <ImageIcon className="w-4 h-4 text-primary" />
+                  <span className="font-label text-[10px] tracking-[0.2em] text-primary uppercase">ANALYZED IMAGE</span>
+                  <button
+                    onClick={() => {
+                      setImageFile(null)
+                      setImagePreview(null)
+                      setAnalysisResult(null)
+                      setAnalysisError(null)
+                    }}
+                    className="font-label text-[11px] text-on-surface-variant/50 hover:text-primary ml-auto uppercase"
                   >
-                    <div className="w-32 h-32 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
-                      {product.Image ? (
-                        <img src={product.Image} alt={product.Product_name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform" />
-                      ) : (
-                        <div className="text-outline text-xs">No image</div>
-                      )}
-                    </div>
-                    <div className="flex-1 py-2">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-headline text-xl font-bold group-hover:text-primary transition-colors">
-                          {product.Product_name?.length > 50 ? product.Product_name.substring(0, 50) + '...' : product.Product_name}
-                        </h4>
-                        <span className="font-headline text-xl font-bold text-on-surface">{formatPrice(product.Current_price)}</span>
-                      </div>
-                      <p className="text-sm text-outline mb-4">{product.category || 'Component'}</p>
-                      <div className="flex items-center gap-6">
-                        {product.Stars && (
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold uppercase tracking-tighter text-outline">
-                              Rating: {product.Stars}
-                            </span>
-                          </div>
-                        )}
-                        <div className="ml-auto">
-                          <span className="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-extrabold uppercase rounded">
-                            In Stock
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : query ? (
-              <div className="text-center py-16 text-outline">
-                <p className="font-headline text-lg">No results found</p>
-                <p className="text-sm mt-2">Try different keywords or browse categories</p>
-              </div>
-            ) : (
-              <div className="text-center py-16 text-outline">
-                <p className="font-headline text-lg">Start typing to search</p>
-                <p className="text-sm mt-2">Search across thousands of components</p>
+                    CLEAR
+                  </button>
+                </div>
+                <div className="trace-border bg-surface-container p-2 max-w-xs">
+                  <img src={imagePreview} alt="Uploaded component" className="w-full h-auto max-h-48 object-contain" />
+                </div>
               </div>
             )}
 
-            {!query && results.length === 0 && (
-              <>
-                <div className="mt-8 pt-8 border-t border-outline-variant/30">
-                  <h3 className="font-label text-xs font-bold uppercase tracking-[0.2em] text-outline mb-6">
-                    Technical Collections
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <Link to="/catalog" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
-                      <span className="font-headline font-bold text-on-surface">High-Performance GPUs</span>
-                      <span className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">→</span>
-                    </Link>
-                    <Link to="/category/cpu" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer">
-                      <span className="font-headline font-bold text-on-surface">Workstation CPUs</span>
-                      <span className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">→</span>
-                    </Link>
-                  </div>
+            {analyzing && (
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 bg-primary animate-pulse-amber" />
+                  <span className="font-label text-xs tracking-[0.2em] text-primary uppercase">ANALYZING IMAGE</span>
                 </div>
+                <div className="h-1 w-48 bg-surface-container overflow-hidden">
+                  <div className="h-full w-1/3 bg-primary animate-boot-indeterminate" />
+                </div>
+                <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider mt-4">
+                  Running YOLO detection + OCR...
+                </p>
+              </div>
+            )}
+
+            {analysisError && (
+              <div className="mb-6 p-4 border border-error/30 bg-error/5">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-2 h-2 bg-error" />
+                  <span className="font-label text-[10px] tracking-[0.15em] uppercase text-error">ANALYSIS FAILED</span>
+                </div>
+                <p className="font-label text-[10px] text-on-surface-variant/80 uppercase tracking-wider">
+                  {analysisError}
+                </p>
+                <p className="font-label text-[11px] text-on-surface-variant/50 mt-2">
+                  Make sure the backend is running: <span className="text-primary">npm run backend</span>
+                </p>
+              </div>
+            )}
+
+            {analysisResult?.detections?.length > 0 && (
+              <div className="mb-6">
+                <div className="font-label text-[10px] tracking-[0.2em] text-primary uppercase mb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-primary" />
+                  DETECTED COMPONENTS ({analysisResult.detections.length})
+                </div>
+                <div className="space-y-4">
+                  {analysisResult.detections.map((det, i) => (
+                    <DetectionCard key={i} detection={det} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {analysisResult?.detections?.length === 0 && !analyzing && !analysisError && imagePreview && (
+              <div className="text-center py-12">
+                <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} NO DETECTIONS</span>
+                <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider mt-2">
+                  No components were detected in the image. Try a different photo.
+                </p>
+              </div>
+            )}
+
+            {/* Text search results */}
+            {!imageFile && (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-label text-[10px] tracking-[0.15em] text-on-surface-variant/60 uppercase">
+                    {query ? `RESULTS (${textResults.length})` : 'START TYPING TO SEARCH'}
+                  </span>
+                  {textResults.length > 0 && (
+                    <Link
+                      to={`/catalog?q=${encodeURIComponent(query)}`}
+                      onClick={onClose}
+                      className="font-label text-[11px] tracking-[0.15em] uppercase text-primary hover:text-primary-container transition-colors"
+                    >
+                      VIEW ALL &gt;
+                    </Link>
+                  )}
+                </div>
+
+                {textLoading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="w-4 h-4 border border-primary border-t-transparent animate-spin" />
+                  </div>
+                ) : textResults.length > 0 ? (
+                  <div className="space-y-3">
+                    {textResults.slice(0, 5).map((product, idx) => {
+                      const imageUrl = getFirstImage(product.image_urls)
+                      return (
+                        <div
+                          key={`${product.table_name}-${product.id}-${idx}`}
+                          onClick={() => { navigate(`/product/${product.table_name}/${product.id}`); onClose() }}
+                          className="trace-border bg-surface-container-lowest p-3 hover:bg-surface-container transition-colors cursor-pointer flex gap-4"
+                        >
+                          <div className="w-20 h-20 bg-surface-container flex-shrink-0 flex items-center justify-center overflow-hidden">
+                            {imageUrl ? (
+                              <img src={imageUrl} alt="" className="w-full h-full object-contain p-1" />
+                            ) : (
+                              <span className="font-headline text-2xl text-outline/20">?</span>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex justify-between items-start gap-2">
+                              <h4 className="font-label text-xs uppercase tracking-wider text-on-surface truncate">
+                                {product.name}
+                              </h4>
+                              <span className="font-headline text-base tracking-tight text-primary flex-shrink-0">
+                                {product.price || '—'}
+                              </span>
+                            </div>
+                            <p className="font-label text-[11px] text-on-surface-variant/60 uppercase tracking-wider mt-1">
+                              {product.manufacturer || product.table_name || 'COMPONENT'}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                ) : query ? (
+                  <div className="text-center py-12">
+                    <span className="font-label text-[10px] tracking-[0.15em] text-on-surface-variant/40 uppercase">NO MATCHES</span>
+                    <p className="font-label text-[11px] text-on-surface-variant/40 mt-2">Try different keywords</p>
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <span className="font-label text-[10px] tracking-[0.15em] text-on-surface-variant/30 uppercase">
+                      SEARCH {analysisResult ? 'OR TYPE' : 'BY NAME OR UPLOAD A PHOTO'}
+                    </span>
+                  </div>
+                )}
               </>
             )}
           </div>
         </div>
 
-        <div className="bg-surface-container-highest px-8 py-4 flex items-center justify-between">
-          <div className="flex gap-8">
-            <div className="flex items-center gap-2">
-              <kbd className="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">ESC</kbd>
-              <span className="text-xs text-outline font-medium">to close</span>
+        {/* Footer */}
+        <div className="bg-surface-container px-4 md:px-6 py-3 border-t border-primary/10 flex items-center justify-between">
+          <div className="flex gap-4 md:gap-6">
+            <div className="flex items-center gap-1.5">
+              <kbd className="bg-background px-1.5 py-0.5 font-label text-[11px] text-on-surface-variant border border-outline/30">ESC</kbd>
+              <span className="font-label text-[11px] text-on-surface-variant/50 uppercase tracking-wider">CLOSE</span>
             </div>
-            <div className="flex items-center gap-2">
-              <kbd className="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">↑↓</kbd>
-              <span className="text-xs text-outline font-medium">to navigate</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <kbd className="bg-white px-1.5 py-0.5 rounded shadow-sm text-[10px] font-bold border border-outline-variant">ENTER</kbd>
-              <span className="text-xs text-outline font-medium">to select</span>
+            <div className="flex items-center gap-1.5">
+              <kbd className="bg-background px-1.5 py-0.5 font-label text-[11px] text-on-surface-variant border border-outline/30">↑↓</kbd>
+              <span className="font-label text-[11px] text-on-surface-variant/50 uppercase tracking-wider">NAVIGATE</span>
             </div>
           </div>
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-outline">
-            Precision Indexing v4.2.0
+          <div className="font-label text-[11px] tracking-[0.2em] text-on-surface-variant/30 uppercase">
+            YOLO + OCR SEARCH v1.0
           </div>
         </div>
       </div>
 
-      <button onClick={onClose} className="mt-8 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all">
-        <span className="text-sm">×</span>
-        Click outside to return to atelier
+      <button onClick={onClose} className="mt-4 font-label text-[11px] tracking-[0.15em] uppercase text-on-surface-variant/40 hover:text-primary transition-colors">
+        CLICK OUTSIDE TO CLOSE
       </button>
     </div>
   )

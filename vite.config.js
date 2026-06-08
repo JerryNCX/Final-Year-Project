@@ -11,4 +11,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/analyze": "http://localhost:8000",
+      "/search": "http://localhost:8000",
+      "/products": "http://localhost:8000",
+      "/suggest": "http://localhost:8000",
+      "/compatible-products": "http://localhost:8000",
+      "/categories": "http://localhost:8000",
+      "/brands": "http://localhost:8000",
+      "/admin": "http://localhost:8000",
+      "/api": "http://localhost:8000",
+      "/health": "http://localhost:8000",
+    },
+  },
 })

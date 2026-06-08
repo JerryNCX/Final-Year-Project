@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import { AuthProvider } from './contexts/AuthContext'
+import { BuildProvider } from '@/lib/BuildContext'
+import { CartProvider } from '@/lib/CartContext'
 import HomePage from './frontendReusedComponents/HomePage/HomePage'
 import CategoryPage from './frontendReusedComponents/CategoryPage/CategoryPage'
 import ProductCatalog from './frontendReusedComponents/Catalog/ProductCatalog'
@@ -24,11 +26,13 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <BuildProvider>
+        <CartProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/catalog" element={<ProductCatalog />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/product/:tableName/:productId" element={<ProductDetail />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/wishlist" element={<Wishlist />} />
@@ -48,10 +52,13 @@ function App() {
               </ProtectedRoute>
             }
           >
+            <Route index element={<Navigate to="products" replace />} />
             <Route path="products" element={<ProductManagement />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </CartProvider>
+        </BuildProvider>
       </BrowserRouter>
     </AuthProvider>
   )

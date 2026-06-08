@@ -3,7 +3,18 @@ import { Link, useParams } from 'react-router-dom'
 import { ChevronRight, ArrowLeft } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
-import { fetchProductsByCategory, CATEGORIES } from '@/lib/supabase'
+import { searchProducts } from '@/lib/api'
+import { CATEGORIES } from '@/lib/categories'
+
+function getFirstImage(urls) {
+  if (!urls) return null
+  try {
+    const parsed = JSON.parse(urls)
+    return Array.isArray(parsed) ? parsed[0] : null
+  } catch {
+    return urls || null
+  }
+}
 
 export default function CategoryPage() {
   const { category } = useParams()
@@ -15,12 +26,18 @@ export default function CategoryPage() {
   const isValidCategory = CATEGORIES.includes(decodedCategory)
 
   useEffect(() => {
+    if (!isValidCategory) {
+      setError('Invalid category')
+      setLoading(false)
+      return
+    }
     async function loadProducts() {
       setLoading(true)
       setError(null)
       try {
-        const data = await fetchProductsByCategory(decodedCategory, 50)
-        setProducts(data)
+        const res = await searchProducts({ category: decodedCategory, limit: 50 })
+        setProducts(res.results || [])
+        if ((res.results || []).length === 0) setError('No products found')
       } catch (err) {
         setError('Failed to load products')
         console.error(err)
@@ -28,23 +45,8 @@ export default function CategoryPage() {
         setLoading(false)
       }
     }
-
-    if (isValidCategory) {
-      loadProducts()
-    } else {
-      setError('Invalid category')
-      setLoading(false)
-    }
+    loadProducts()
   }, [decodedCategory, isValidCategory])
-
-  function extractShortName(fullName) {
-    if (!fullName) return 'Unknown Product'
-    const cleaned = fullName
-      .replace(/^SponsoredSponsored You're seeing this ad based on the product's relevance to your search query\.Let us know /g, '')
-      .replace(/Sponsored /g, '')
-      .substring(0, 80)
-    return cleaned + (fullName.length > 80 ? '...' : '')
-  }
 
   if (!isValidCategory) {
     return (
@@ -93,7 +95,7 @@ export default function CategoryPage() {
           </div>
         )}
 
-        {error && (
+        {error && !loading && (
           <div className="py-16 text-center">
             <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} {error}</span>
           </div>
@@ -111,55 +113,50 @@ export default function CategoryPage() {
 
         {!loading && !error && products.length > 0 && (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6 pb-16">
-            {products.map((product, index) => (
-              <Link
-                key={`${product.ASIN}-${index}`}
-                to={`/product/${product.id || product.ASIN}`}
-                className="group trace-border bg-surface-container-lowest p-4 transition-all duration-300 hover:bg-surface-container flex flex-col gap-3"
-              >
-                <div className="bg-surface-container aspect-square flex items-center justify-center overflow-hidden">
-                  {product.Image ? (
-                    <img
-                      src={product.Image}
-                      alt={product.Product_name}
-                      className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => { e.target.style.display = 'none' }}
-                    />
-                  ) : (
-                    <span className="font-headline text-4xl text-outline/20">{decodedCategory[0]}</span>
-                  )}
-                </div>
-                <div className="flex flex-col gap-1.5 flex-1">
-                  <h3 className="font-label text-[11px] leading-snug line-clamp-2 text-on-surface group-hover:text-primary transition-colors uppercase tracking-wider">
-                    {extractShortName(product.Product_name)}
-                  </h3>
-                  {product.Current_price && (
-                    <div className="flex items-center gap-2">
-                      <span className="font-headline text-lg tracking-tight text-primary">
-                        ${product.Current_price}
-                      </span>
-                      {product.Original_price && product.Original_price !== product.Current_price && (
-                        <span className="font-label text-[9px] text-on-surface-variant/50 line-through">
-                          ${product.Original_price}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  <div className="flex items-center gap-1.5 mt-auto pt-2 font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider">
-                    {product.Stars && (
-                      <>
-                        <span className="text-primary">{product.Stars}</span>
-                        {product.Rating_count && <span>({product.Rating_count})</span>}
-                      </>
+            {products.map((product, index) => {
+              const imageUrl = getFirstImage(product.image_urls)
+              return (
+                <Link
+                  key={`${product.table_name}-${product.id}-${index}`}
+                  to={`/product/${product.table_name}/${product.id}`}
+                  className="group trace-border bg-surface-container-lowest p-4 transition-all duration-300 hover:bg-surface-container flex flex-col gap-3"
+                >
+                  <div className="bg-surface-container aspect-square flex items-center justify-center overflow-hidden">
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => { e.target.style.display = 'none' }}
+                      />
+                    ) : (
+                      <span className="font-headline text-4xl text-outline/20">{decodedCategory[0]}</span>
                     )}
                   </div>
-                </div>
-                <div className="flex items-center gap-1 font-label text-[9px] tracking-[0.15em] uppercase text-on-surface-variant/50 group-hover:text-primary transition-all">
-                  <span>VIEW</span>
-                  <ChevronRight className="w-3 h-3" />
-                </div>
-              </Link>
-            ))}
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <h3 className="font-label text-[11px] leading-snug line-clamp-2 text-on-surface group-hover:text-primary transition-colors uppercase tracking-wider">
+                      {product.name || 'Unknown Product'}
+                    </h3>
+                    {product.price && (
+                      <div className="flex items-center gap-2">
+                        <span className="font-headline text-lg tracking-tight text-primary">
+                          {product.price}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-1.5 mt-auto pt-2 font-label text-[11px] text-on-surface-variant/60 uppercase tracking-wider">
+                      {product.manufacturer && (
+                        <span>{product.manufacturer}</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 font-label text-[11px] tracking-[0.15em] uppercase text-on-surface-variant/50 group-hover:text-primary transition-all">
+                    <span>VIEW</span>
+                    <ChevronRight className="w-3 h-3" />
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         )}
 

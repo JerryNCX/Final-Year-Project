@@ -1,77 +1,65 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { Search, Loader2, ChevronLeft, ChevronRight } from 'lucide-react'
-import { CATEGORIES, fetchAdminProducts, getCategoryCounts } from '@/lib/supabase'
+import React, { useState, useEffect, useCallback } from 'react'
+import { Search, Loader2, ChevronLeft, ChevronRight, Trash2, Save } from 'lucide-react'
+import { searchProducts, getCategories, adminUpdateProduct, adminDeleteProduct } from '@/lib/api'
+import { CATEGORIES } from '@/lib/categories'
 import CategorySidebar from './CategorySidebar'
-import ProductCard from './ProductCard'
 
 export default function ProductManagement() {
   const [products, setProducts] = useState([])
-  const [counts, setCounts] = useState({})
+  const [categoryCounts, setCategoryCounts] = useState({})
   const [totalCount, setTotalCount] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [loadingCounts, setLoadingCounts] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [search, setSearch] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(0)
+  const [editingStock, setEditingStock] = useState({})
   const limit = 30
-  const totalPages = Math.ceil(totalCount / limit)
-  
-  const isLoadingRef = useRef(false)
-  const currentRequestRef = useRef({ page: 0, category: 'All', search: '' })
 
   const loadCounts = useCallback(async () => {
-    setLoadingCounts(true)
-    const result = await getCategoryCounts()
-    setCounts(result.counts || {})
-    setTotalCount(result.allCount || 0)
-    setLoadingCounts(false)
+    try {
+      const cats = await getCategories()
+      const counts = {}
+      let allCount = 0
+      for (const c of cats) {
+        counts[c.name] = c.product_count || 0
+        allCount += c.product_count || 0
+      }
+      setCategoryCounts(counts)
+      setTotalCount(allCount)
+    } catch {
+      setCategoryCounts({})
+      setTotalCount(0)
+    }
   }, [])
 
   const loadProducts = useCallback(async (categoryToLoad, searchToLoad, pageToLoad) => {
-    if (isLoadingRef.current) return
-    
-    isLoadingRef.current = true
     setLoading(true)
-    
-    const result = await fetchAdminProducts({
-      category: categoryToLoad,
-      search: searchToLoad,
-      page: pageToLoad,
-      limit: limit
-    })
-    
-    setProducts(result.products || [])
-    isLoadingRef.current = false
-    setLoading(false)
+    try {
+      const cat = categoryToLoad === 'All' ? null : categoryToLoad
+      const res = await searchProducts({ q: searchToLoad, category: cat, limit, offset: pageToLoad * limit })
+      setProducts(res.results || [])
+      if (cat) {
+        setTotalCount(res.count || 0)
+      }
+    } catch {
+      setProducts([])
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
-  useEffect(() => {
-    loadCounts()
-  }, [loadCounts])
+  useEffect(() => { loadCounts() }, [loadCounts])
 
   useEffect(() => {
-    if (loadingCounts) return
-    const categoryToLoad = selectedCategory
-    const searchToLoad = searchQuery
-    const pageToLoad = 0
-    
-    currentRequestRef.current = { category: categoryToLoad, search: searchToLoad, page: pageToLoad }
+    if (selectedCategory === 'All') loadCounts()
+    loadProducts(selectedCategory, searchQuery, 0)
     setPage(0)
-    loadProducts(categoryToLoad, searchToLoad, pageToLoad)
-  }, [selectedCategory, searchQuery, loadingCounts, loadProducts])
+  }, [selectedCategory, searchQuery, loadProducts, loadCounts])
 
   useEffect(() => {
-    if (loadingCounts) return
-    if (page === currentRequestRef.current.page && 
-        selectedCategory === currentRequestRef.current.category &&
-        searchQuery === currentRequestRef.current.search) {
-      return
-    }
-    
-    currentRequestRef.current = { ...currentRequestRef.current, page: page }
     loadProducts(selectedCategory, searchQuery, page)
-  }, [page, selectedCategory, searchQuery, loadingCounts, loadProducts])
+  }, [page, selectedCategory, searchQuery, loadProducts])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -85,28 +73,39 @@ export default function ProductManagement() {
     setPage(0)
   }
 
-  const handleCategoryUpdate = (productId, newCategory) => {
-    setCounts(prev => ({
-      ...prev,
-      [newCategory]: (prev[newCategory] || 0) + 1,
-      [selectedCategory]: Math.max(0, (prev[selectedCategory] || 1) - 1)
-    }))
-    setTotalCount(prev => prev)
+  const handleStockChange = (product, newStock) => {
+    setEditingStock(prev => ({ ...prev, [`${product.table_name}-${product.id}`]: newStock }))
   }
 
-  const handleProductDelete = (productId) => {
-    setProducts(prev => prev.filter(p => p.id !== productId))
-    setCounts(prev => ({
-      ...prev,
-      [selectedCategory]: Math.max(0, (prev[selectedCategory] || 1) - 1)
-    }))
-    setTotalCount(prev => prev - 1)
+  const handleSaveStock = async (product) => {
+    const key = `${product.table_name}-${product.id}`
+    const newStock = editingStock[key]
+    if (newStock === undefined || newStock === product.stock) return
+    try {
+      const updated = await adminUpdateProduct(product.table_name, product.id, { stock: parseInt(newStock, 10) || 0 })
+      setProducts(prev => prev.map(p => (p.id === product.id && p.table_name === product.table_name) ? { ...p, stock: updated.stock } : p))
+      setEditingStock(prev => {
+        const copy = { ...prev }
+        delete copy[key]
+        return copy
+      })
+    } catch (err) {
+      alert('Failed to update stock: ' + err.message)
+    }
   }
 
-  const handlePageChange = (newPage) => {
-    if (loading || isLoadingRef.current) return
-    setPage(newPage)
+  const handleDelete = async (product) => {
+    if (!window.confirm(`Delete "${product.name}"? This cannot be undone.`)) return
+    try {
+      const res = await adminDeleteProduct(product.table_name, product.id)
+      setProducts(prev => prev.filter(p => !(p.id === product.id && p.table_name === product.table_name)))
+      setTotalCount(prev => Math.max(0, prev - 1))
+    } catch (err) {
+      alert('Failed to delete product: ' + err.message)
+    }
   }
+
+  const totalPages = Math.ceil(totalCount / limit)
 
   return (
     <div className="flex gap-6">
@@ -116,7 +115,7 @@ export default function ProductManagement() {
             categories={CATEGORIES}
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
-            counts={counts}
+            counts={categoryCounts}
             totalCount={totalCount}
           />
         </div>
@@ -125,7 +124,6 @@ export default function ProductManagement() {
       <div className="flex-1">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-on-surface mb-4 font-headline">Product Management</h1>
-          
           <form onSubmit={handleSearch} className="flex gap-2">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
@@ -137,18 +135,9 @@ export default function ProductManagement() {
                 className="w-full pl-10 pr-4 py-2 ghost-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-surface-container placeholder:text-outline text-on-surface"
               />
             </div>
-            <button
-              type="submit"
-              className="px-4 py-2 primary-gradient-btn"
-            >
-              Search
-            </button>
+            <button type="submit" className="px-4 py-2 primary-gradient-btn">Search</button>
             {search && (
-              <button
-                type="button"
-                onClick={handleClearSearch}
-                className="px-4 py-2 text-on-surface-variant ghost-border rounded-sm hover:bg-surface-container font-label"
-              >
+              <button type="button" onClick={handleClearSearch} className="px-4 py-2 text-on-surface-variant ghost-border rounded-sm hover:bg-surface-container font-label">
                 Clear
               </button>
             )}
@@ -163,26 +152,59 @@ export default function ProductManagement() {
         ) : products.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-on-surface-variant font-label">No products found.</p>
-            {search && (
-              <button
-                onClick={handleClearSearch}
-                className="mt-2 text-primary hover:underline font-label"
-              >
-                Clear search
-              </button>
-            )}
+            {search && <button onClick={handleClearSearch} className="mt-2 text-primary hover:underline font-label">Clear search</button>}
           </div>
         ) : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onUpdate={handleCategoryUpdate}
-                  onDelete={handleProductDelete}
-                />
-              ))}
+              {products.map((product) => {
+                const key = `${product.table_name}-${product.id}`
+                const isEditingStock = editingStock[key] !== undefined
+                return (
+                  <div key={key} className="trace-border bg-surface-container-lowest overflow-hidden flex flex-col transition-all duration-300 hover:bg-surface-container">
+                    <div className="aspect-square bg-surface-container relative overflow-hidden">
+                      {(() => { try {
+                        const urls = JSON.parse(product.image_urls || '[]')
+                        const img = Array.isArray(urls) ? urls[0] : null
+                        return img ? <img src={img} alt={product.name} className="w-full h-full object-cover" onError={e => { e.target.style.display = 'none' }} /> : null
+                      } catch { return null } })() || (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="font-label text-[10px] text-outline uppercase tracking-wider">{product.table_name}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-3 flex-1 flex flex-col">
+                      <span className="font-label text-[10px] text-primary uppercase tracking-wider mb-1">{product.table_name}</span>
+                      <h4 className="font-label text-xs text-on-surface mb-1 leading-snug uppercase tracking-wider line-clamp-2">{product.name}</h4>
+                      <span className="font-label text-sm text-primary mb-2">{product.price || '—'}</span>
+                      <div className="mt-auto space-y-2">
+                        <div className="flex items-center gap-1">
+                          <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Stock:</span>
+                          <input
+                            type="number"
+                            min="0"
+                            value={isEditingStock ? editingStock[key] : (product.stock ?? 0)}
+                            onChange={(e) => handleStockChange(product, e.target.value)}
+                            className="w-16 font-label text-xs text-on-surface bg-surface-container border border-outline/30 rounded-sm px-1.5 py-0.5 focus:outline-none focus:border-primary/50"
+                          />
+                          {isEditingStock && (
+                            <button onClick={() => handleSaveStock(product)} className="ml-1 p-1 text-green-600 hover:text-green-700 transition-colors">
+                              <Save className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => handleDelete(product)}
+                          className="w-full flex items-center justify-center gap-2 px-3 py-1.5 font-label text-[10px] tracking-wider uppercase text-error border border-error/30 hover:bg-error/10 transition-colors"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          DELETE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
             {totalPages > 1 && (
@@ -190,58 +212,25 @@ export default function ProductManagement() {
                 <p className="text-sm text-on-surface-variant font-label">
                   Showing {page * limit + 1} to {Math.min((page + 1) * limit, totalCount)} of {totalCount} products
                 </p>
-                
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => handlePageChange(page - 1)}
-                    disabled={page === 0 || loading}
-                    className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
+                  <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0 || loading} className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label">
+                    <ChevronLeft className="w-4 h-4" /> Previous
                   </button>
-                  
                   <div className="flex items-center gap-1">
-                    {(() => {
-                      const visiblePages = []
-                      let startPage = Math.max(0, page - 2)
-                      let endPage = Math.min(totalPages - 1, page + 2)
-                      
-                      if (page < 3) {
-                        endPage = Math.min(4, totalPages - 1)
-                      }
-                      if (page > totalPages - 3) {
-                        startPage = Math.max(0, totalPages - 5)
-                      }
-                      
-                      for (let i = startPage; i <= endPage; i++) {
-                        visiblePages.push(i)
-                      }
-                      
-                      return visiblePages.map(pageNum => (
-                        <button
-                          key={pageNum}
-                          onClick={() => handlePageChange(pageNum)}
-                          disabled={loading}
-                          className={`w-8 h-8 text-sm rounded-sm font-label ${
-                            page === pageNum
-                              ? 'primary-gradient-btn'
-                              : 'ghost-border hover:bg-surface-container disabled:opacity-50'
-                          }`}
-                        >
-                          {pageNum + 1}
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      let start = Math.max(0, Math.min(page - 2, totalPages - 5))
+                      const p = start + i
+                      if (p >= totalPages) return null
+                      return (
+                        <button key={p} onClick={() => setPage(p)} disabled={loading}
+                          className={`w-8 h-8 text-sm rounded-sm font-label ${page === p ? 'primary-gradient-btn' : 'ghost-border hover:bg-surface-container disabled:opacity-50'}`}>
+                          {p + 1}
                         </button>
-                      ))
-                    })()}
+                      )
+                    })}
                   </div>
-                  
-                  <button
-                    onClick={() => handlePageChange(page + 1)}
-                    disabled={page >= totalPages - 1 || loading}
-                    className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label"
-                  >
-                    Next
-                    <ChevronRight className="w-4 h-4" />
+                  <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1 || loading} className="flex items-center gap-1 px-3 py-1.5 text-sm ghost-border rounded-sm hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed font-label">
+                    Next <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>

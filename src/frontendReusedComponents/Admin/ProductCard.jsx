@@ -1,41 +1,39 @@
 import React, { useState } from 'react'
-import { Trash2, Loader2 } from 'lucide-react'
-import { CATEGORIES, updateProductCategory, deleteProduct } from '@/lib/supabase'
+import { Trash2, Loader2, Save } from 'lucide-react'
+import { adminUpdateProduct, adminDeleteProduct } from '@/lib/api'
 
-export default function ProductCard({ product, onUpdate, onDelete }) {
-  const [category, setCategory] = useState(product.category)
-  const [isUpdating, setIsUpdating] = useState(false)
+export default function ProductCard({ product, onDelete }) {
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isUpdating, setIsUpdating] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [stock, setStock] = useState(product.stock ?? 0)
+  const [isStockDirty, setIsStockDirty] = useState(false)
 
-  const handleCategoryChange = async (newCategory) => {
-    if (newCategory === category) return
-
+  const handleStockSave = async () => {
+    if (stock === product.stock) return
     setIsUpdating(true)
-    const result = await updateProductCategory(product.id, newCategory)
-
-    if (result.success) {
-      setCategory(newCategory)
-      onUpdate(product.id, newCategory)
-    } else {
-      console.error('Failed to update category:', result.error)
-      alert('Failed to update category. Please try again.')
+    try {
+      const updated = await adminUpdateProduct(product.table_name, product.id, { stock: parseInt(stock, 10) || 0 })
+      setStock(updated.stock ?? 0)
+      setIsStockDirty(false)
+    } catch (err) {
+      alert('Failed to update stock: ' + err.message)
+    } finally {
+      setIsUpdating(false)
     }
-    setIsUpdating(false)
   }
 
   const handleDelete = async () => {
     setIsDeleting(true)
-    const result = await deleteProduct(product.id)
-
-    if (result.success) {
+    try {
+      await adminDeleteProduct(product.table_name, product.id)
       onDelete(product.id)
-    } else {
-      console.error('Failed to delete product:', result.error)
-      alert('Failed to delete product. Please try again.')
+    } catch (err) {
+      alert('Failed to delete product: ' + err.message)
+    } finally {
+      setIsDeleting(false)
+      setShowDeleteConfirm(false)
     }
-    setIsDeleting(false)
-    setShowDeleteConfirm(false)
   }
 
   const truncateName = (name, maxLength = 100) => {
@@ -44,62 +42,53 @@ export default function ProductCard({ product, onUpdate, onDelete }) {
     return name.substring(0, maxLength) + '...'
   }
 
+  const imgUrl = (() => {
+    try {
+      const urls = JSON.parse(product.image_urls || '[]')
+      return Array.isArray(urls) ? urls[0] : null
+    } catch { return null }
+  })()
+
   return (
     <div className="trace-border bg-surface-container-lowest overflow-hidden flex flex-col transition-all duration-300 hover:bg-surface-container">
       <div className="aspect-square bg-surface-container relative overflow-hidden">
-        {product.Image ? (
-          <img
-            src={product.Image}
-            alt={product.Product_name}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.style.display = 'none'
-            }}
-          />
+        {imgUrl ? (
+          <img src={imgUrl} alt={product.name} className="w-full h-full object-cover" onError={e => { e.target.style.display = 'none' }} />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="font-label text-[10px] text-outline uppercase tracking-wider">NO IMAGE</span>
+            <span className="font-label text-[10px] text-outline uppercase tracking-wider">{product.table_name}</span>
           </div>
         )}
       </div>
 
       <div className="p-3 flex-1 flex flex-col">
-        <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mb-1">ASIN: {product.ASIN}</p>
+        <span className="font-label text-[10px] text-primary uppercase tracking-wider mb-1">{product.table_name}</span>
         <h4 className="font-label text-xs text-on-surface mb-2 leading-snug uppercase tracking-wider">
-          {truncateName(product.Product_name)}
+          {truncateName(product.name)}
         </h4>
 
         <div className="mt-auto space-y-2">
-          <select
-            value={category || 'Uncategorized'}
-            onChange={(e) => handleCategoryChange(e.target.value)}
-            disabled={isUpdating}
-            className="w-full font-label text-[10px] tracking-wider uppercase border border-outline/30 bg-surface-container-lowest text-on-surface px-2 py-1.5 focus:outline-none focus:border-primary/50 transition-colors disabled:opacity-50"
-          >
-            {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-
-          {isUpdating && (
-            <div className="flex items-center justify-center gap-2 font-label text-[10px] text-primary uppercase tracking-wider bg-primary/5 py-1 animate-pulse-amber">
-              <Loader2 className="w-3 h-3 animate-spin" />
-              UPDATING...
-            </div>
-          )}
+          <div className="flex items-center gap-1">
+            <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Stock:</span>
+            <input
+              type="number" min="0"
+              value={stock}
+              onChange={(e) => { setStock(e.target.value); setIsStockDirty(true) }}
+              className="w-16 font-label text-xs text-on-surface bg-surface-container border border-outline/30 rounded-sm px-1.5 py-0.5 focus:outline-none focus:border-primary/50"
+            />
+            {isStockDirty && (
+              <button onClick={handleStockSave} disabled={isUpdating} className="ml-1 p-1 text-green-600 hover:text-green-700 transition-colors">
+                {isUpdating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+              </button>
+            )}
+          </div>
 
           <button
             onClick={() => setShowDeleteConfirm(true)}
             disabled={isDeleting}
             className="w-full flex items-center justify-center gap-2 px-3 py-1.5 font-label text-[10px] tracking-wider uppercase text-error border border-error/30 hover:bg-error/10 transition-colors disabled:opacity-50"
           >
-            {isDeleting ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
-            ) : (
-              <Trash2 className="w-3.5 h-3.5" />
-            )}
+            {isDeleting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
             DELETE
           </button>
         </div>
@@ -119,15 +108,11 @@ export default function ProductCard({ product, onUpdate, onDelete }) {
               <button
                 onClick={() => setShowDeleteConfirm(false)}
                 className="flex-1 px-4 py-2.5 font-label text-[10px] tracking-[0.15em] uppercase text-on-surface-variant border border-outline/30 hover:bg-surface-container transition-colors"
-              >
-                CANCEL
-              </button>
+              >CANCEL</button>
               <button
                 onClick={handleDelete}
                 className="flex-1 px-4 py-2.5 font-label text-[10px] tracking-[0.15em] uppercase text-on-error bg-error hover:bg-error/90 transition-colors"
-              >
-                DELETE
-              </button>
+              >DELETE</button>
             </div>
           </div>
         </div>

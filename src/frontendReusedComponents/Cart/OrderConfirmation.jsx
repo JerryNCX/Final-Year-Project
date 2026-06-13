@@ -1,46 +1,79 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useLocation, Link, useNavigate } from 'react-router-dom'
-import { CheckCircle, Package, Truck, MapPin, CreditCard, ArrowLeft, ShoppingBag } from 'lucide-react'
+import { CheckCircle, Package, Truck, MapPin, CreditCard, ShoppingBag, Loader2, AlertCircle } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
-
-function formatPrice(val) {
-  return `$${Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-}
+import { getOrder } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 
 function getDeliveryDate(service) {
   const now = new Date()
-  const days = service === 'Express' ? 1 : service === 'Standard' ? randBetween(3, 5) : 5
+  const days = service === 'Express' ? 1 : service === 'Standard' ? 3 : 5
   const eta = new Date(now)
   eta.setDate(eta.getDate() + days)
   return eta.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
-}
-
-function randBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 export default function OrderConfirmation() {
   const { orderId } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const order = location.state?.order
-  const cartItems = location.state?.cartItems || []
-  const shippingCost = location.state?.shippingCost || 0
-  const selectedDelivery = location.state?.selectedDelivery || 'Express'
 
-  if (!order) {
+  const [order, setOrder] = useState(location.state?.order || null)
+  const [cartItems, setCartItems] = useState(location.state?.cartItems || [])
+  const [shippingCost, setShippingCost] = useState(location.state?.shippingCost || 0)
+  const [selectedDelivery, setSelectedDelivery] = useState(location.state?.selectedDelivery || 'Express')
+  const [loading, setLoading] = useState(!location.state?.order)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (location.state?.order) return
+    let cancelled = false
+    const fetchOrder = async () => {
+      setLoading(true)
+      setError('')
+      try {
+        const data = await getOrder(orderId)
+        if (cancelled) return
+        setOrder(data)
+        const snapshot = data.build_snapshot || {}
+        setCartItems(snapshot.cartItems || [])
+      } catch (err) {
+        if (!cancelled) setError(err.message || 'Failed to load order')
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    fetchOrder()
+    return () => { cancelled = true }
+  }, [orderId, location.state])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-surface text-on-surface font-body flex flex-col">
+        <Header />
+        <main className="flex-grow flex items-center justify-center">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
+  if (!order || error) {
     return (
       <div className="min-h-screen bg-surface text-on-surface font-body flex flex-col">
         <Header />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center max-w-md px-6">
-            <Package className="w-16 h-16 text-outline/30 mx-auto mb-4" />
+            <AlertCircle className="w-16 h-16 text-outline/30 mx-auto mb-4" />
             <h1 className="font-headline text-2xl text-on-surface mb-2">Order Not Found</h1>
-            <p className="font-label text-sm text-on-surface-variant mb-6">This order confirmation is no longer available. Check your order history.</p>
-            <Link to="/orders" className="inline-flex items-center gap-2 bg-primary text-on-primary font-label text-sm px-6 py-3 rounded-lg hover:bg-primary-fixed-dim transition-colors">
+            <p className="font-label text-sm text-on-surface-variant mb-6">
+              {error || 'This order confirmation is no longer available.'}
+            </p>
+            <Link to="/account" className="inline-flex items-center gap-2 bg-primary text-on-primary font-label text-sm px-6 py-3 rounded-lg hover:bg-primary-fixed-dim transition-colors">
               <ShoppingBag className="w-4 h-4" />
-              VIEW ORDERS
+              VIEW ORDER HISTORY
             </Link>
           </div>
         </main>
@@ -50,7 +83,7 @@ export default function OrderConfirmation() {
   }
 
   const eta = getDeliveryDate(selectedDelivery)
-  const subtotal = cartItems.reduce((s, i) => s + (i.total || 0), 0)
+  const subtotal = cartItems.reduce((s, i) => s + (i.total || i.price || 0), 0)
 
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body flex flex-col">
@@ -143,7 +176,7 @@ export default function OrderConfirmation() {
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="font-label text-sm text-on-surface">{formatPrice(item.price)}</p>
-                      {item.qty > 1 && <p className="font-label text-xs text-on-surface-variant">x{item.qty}</p>}
+                      {(item.quantity || item.qty) > 1 && <p className="font-label text-xs text-on-surface-variant">x{item.quantity || item.qty}</p>}
                     </div>
                   </div>
                 ))}

@@ -255,7 +255,7 @@ export default function ChooseComponent() {
                       ))}
                     </div>
                     <div className="mt-auto flex items-center justify-between">
-                      <span className="font-headline font-bold text-base text-on-surface">${(() => { try { return parseFloat(p.price).toFixed(2) } catch { return p.price || '0.00' } })()}</span>
+                      <span className="font-headline font-bold text-base text-on-surface">RM{(() => { try { return parseFloat(p.price).toFixed(2) } catch { return p.price || '0.00' } })()}</span>
                       <button
                         onClick={() => handleAdd(p)}
                         disabled={isAdded}

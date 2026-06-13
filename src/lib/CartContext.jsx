@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { getCart, syncCart, setCartBuild, addCartItem, removeCartItem, clearCartOnServer } from '@/lib/api'
+import { formatPrice, parsePrice } from '@/lib/currency'
 
 export const CartContext = createContext(null)
 const LOCAL_KEY = 'pc_cart_anonymous'
@@ -30,14 +31,6 @@ function extractSpecs(specs) {
   return result
 }
 
-function parsePrice(price) {
-  if (!price) return 0
-  return parseFloat(String(price).replace(/[$,]/g, '')) || 0
-}
-
-function formatPrice(val) {
-  return `$${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-}
 
 function buildItem(tableName, product, fromBuild) {
   return {

@@ -6,6 +6,7 @@ import Footer from '../HomePage/Footer'
 import { searchProducts } from '@/lib/api'
 import { CATEGORIES } from '@/lib/categories'
 import { useCart } from '@/lib/CartContext'
+import { formatPrice } from '@/lib/currency'
 
 const ITEMS_PER_PAGE = 12
 
@@ -203,12 +204,12 @@ export default function ProductCatalog() {
             <h3 className="font-label text-sm tracking-[0.15em] uppercase text-primary mb-4">PRICE RANGE</h3>
             <div className="flex items-center gap-3">
               <div className="relative flex-1">
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant/50 font-label text-[10px]">$</span>
+                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant/50 font-label text-[10px]">RM</span>
                 <input className="w-full bg-surface-container-low border border-outline/30 text-on-surface font-label text-[11px] pl-5 pr-2 py-2 focus:outline-none focus:border-primary/50 transition-colors" placeholder="MIN" type="number" />
               </div>
               <span className="text-on-surface-variant/30 font-label text-[10px]">-</span>
               <div className="relative flex-1">
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant/50 font-label text-[10px]">$</span>
+                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant/50 font-label text-[10px]">RM</span>
                 <input className="w-full bg-surface-container-low border border-outline/30 text-on-surface font-label text-[11px] pl-5 pr-2 py-2 focus:outline-none focus:border-primary/50 transition-colors" placeholder="MAX" type="number" />
               </div>
             </div>
@@ -311,7 +312,7 @@ export default function ProductCatalog() {
                         </div>
                         <div className="flex items-center justify-between mt-5 pt-4 gap-3">
                           <span className="font-headline text-xl tracking-tight text-primary">
-                            {product.price || '—'}
+                            {formatPrice(product.price)}
                           </span>
                           {product.stock != null && product.stock > 0 ? (
                             <button

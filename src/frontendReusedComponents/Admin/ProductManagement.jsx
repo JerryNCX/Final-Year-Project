@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Search, Loader2, ChevronLeft, ChevronRight, Trash2, Save } from 'lucide-react'
 import { searchProducts, getCategories, adminUpdateProduct, adminDeleteProduct } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 import { CATEGORIES } from '@/lib/categories'
 import CategorySidebar from './CategorySidebar'
 
@@ -176,7 +177,7 @@ export default function ProductManagement() {
                     <div className="p-3 flex-1 flex flex-col">
                       <span className="font-label text-[10px] text-primary uppercase tracking-wider mb-1">{product.table_name}</span>
                       <h4 className="font-label text-xs text-on-surface mb-1 leading-snug uppercase tracking-wider line-clamp-2">{product.name}</h4>
-                      <span className="font-label text-sm text-primary mb-2">{product.price || '—'}</span>
+                      <span className="font-label text-sm text-primary mb-2">{formatPrice(product.price)}</span>
                       <div className="mt-auto space-y-2">
                         <div className="flex items-center gap-1">
                           <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Stock:</span>

@@ -18,6 +18,7 @@ import ContactUs from './frontendReusedComponents/Contact/ContactUs'
 import UserAccount from './frontendReusedComponents/Auth/UserAccount'
 import AdminLayout from './frontendReusedComponents/Admin/AdminLayout'
 import ProductManagement from './frontendReusedComponents/Admin/ProductManagement'
+import AdminOrders from './frontendReusedComponents/Admin/AdminOrders'
 import AdminLogin from './frontendReusedComponents/Admin/AdminLogin'
 import ProtectedRoute from './frontendReusedComponents/Admin/ProtectedRoute'
 import PCBuildPage from './frontendReusedComponents/Build/PCBuildPage'
@@ -56,6 +57,7 @@ function App() {
           >
             <Route index element={<Navigate to="products" replace />} />
             <Route path="products" element={<ProductManagement />} />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

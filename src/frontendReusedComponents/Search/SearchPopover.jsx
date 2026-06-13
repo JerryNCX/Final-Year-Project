@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Search, X, Camera, Upload, Image as ImageIcon, Cpu, Zap, HardDrive, Thermometer, CircuitBoard } from 'lucide-react'
 import { analyzeImage, searchProducts } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 
 const categoryIcons = {
   cpu: Cpu, gpu: Zap, 'video-card': Zap, ram: CircuitBoard,
@@ -56,7 +57,7 @@ function DetectionCard({ detection }) {
                   {match.table_name && ` / ${match.table_name}`}
                 </span>
                 {match.price && (
-                  <span className="font-headline text-sm text-primary">${match.price}</span>
+                  <span className="font-headline text-sm text-primary">{formatPrice(match.price)}</span>
                 )}
               </div>
             </Link>
@@ -373,7 +374,7 @@ export default function SearchPopover({ isOpen, onClose }) {
                                 {product.name}
                               </h4>
                               <span className="font-headline text-base tracking-tight text-primary flex-shrink-0">
-                                {product.price || '—'}
+                                {formatPrice(product.price)}
                               </span>
                             </div>
                             <p className="font-label text-[11px] text-on-surface-variant/60 uppercase tracking-wider mt-1">

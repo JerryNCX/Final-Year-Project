@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Package, ArrowLeft, LogOut } from 'lucide-react'
+import { Package, ClipboardList, ArrowLeft, LogOut } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function AdminLayout() {
@@ -11,6 +11,7 @@ export default function AdminLayout() {
 
   const navItems = [
     { path: '/admin/products', label: 'Products', icon: Package },
+    { path: '/admin/orders', label: 'Orders', icon: ClipboardList },
   ]
 
   const handleLogout = async () => {

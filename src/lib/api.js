@@ -81,6 +81,11 @@ export async function adminDeleteProduct(tableName, productId) {
   })
 }
 
+export async function adminListOrders() {
+  const token = await getAccessToken()
+  return request('/admin/orders', { token })
+}
+
 export async function healthCheck() {
   return request('/health')
 }
@@ -148,6 +153,11 @@ export async function createOrder(shippingAddress, buildSnapshot, total) {
 export async function listOrders() {
   const token = await getAccessToken()
   return request('/api/orders', { token })
+}
+
+export async function getOrder(orderId) {
+  const token = await getAccessToken()
+  return request(`/api/orders/${orderId}`, { token })
 }
 
 export async function calculateShipping(destZip, originZip = '50000') {

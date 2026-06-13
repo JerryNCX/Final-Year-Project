@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { ShoppingBag, Edit, Trash2, Plus, Save, FolderOpen, Share2, X, AlertTriangle, CheckCircle } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { useBuild, CATEGORIES } from '@/lib/BuildContext'
 import { useCart } from '@/lib/CartContext'
 import { suggestCompatible } from '@/lib/api'
+import { formatPrice, parsePrice } from '@/lib/currency'
 
 const CATEGORY_META = {
   CPU: { label: 'CPU', icon: '⚡' },
@@ -30,18 +31,10 @@ function extractInt(val) {
   return m ? parseInt(m[1], 10) : null
 }
 
-function parsePrice(price) {
-  if (!price) return 0
-  return parseFloat(String(price).replace(/[$,]/g, '')) || 0
-}
-
-function formatPrice(val) {
-  return `$${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-}
-
 export default function PCBuildPage() {
   const navigate = useNavigate()
-  const { build, removeComponent, resetBuild, buildCount, savedBuilds, saveCurrentBuild, loadLocalBuild, deleteLocalBuild, cloudBuilds, deleteCloudBuild } = useBuild()
+  const [searchParams] = useSearchParams()
+  const { build, removeComponent, resetBuild, buildCount, savedBuilds, saveCurrentBuild, loadLocalBuild, deleteLocalBuild, cloudBuilds, deleteCloudBuild, applyBuild } = useBuild()
   const { replaceBuild, checkBuildConflict } = useCart()
   const [suggestions, setSuggestions] = useState({})
   const [checking, setChecking] = useState({})
@@ -50,6 +43,18 @@ export default function PCBuildPage() {
   const [showLoadPanel, setShowLoadPanel] = useState(false)
   const [copyFeedback, setCopyFeedback] = useState(false)
   const [showReplaceModal, setShowReplaceModal] = useState(false)
+
+  useEffect(() => {
+    const encoded = searchParams.get('data')
+    if (encoded) {
+      try {
+        const json = decodeURIComponent(atob(encoded))
+        const data = JSON.parse(json)
+        applyBuild(data)
+        window.history.replaceState({}, '', '/build')
+      } catch {}
+    }
+  }, [])
 
   const handleProceedToCart = () => {
     if (checkBuildConflict()) {
@@ -182,7 +187,9 @@ export default function PCBuildPage() {
 
   const handleShare = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href)
+      const encoded = btoa(JSON.stringify(build))
+      const shareUrl = `${window.location.origin}/build?data=${encodeURIComponent(encoded)}`
+      await navigator.clipboard.writeText(shareUrl)
       setCopyFeedback(true)
       setTimeout(() => setCopyFeedback(false), 2000)
     } catch {}

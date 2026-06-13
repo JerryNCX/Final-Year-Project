@@ -4,6 +4,7 @@ import { ChevronRight, ArrowLeft } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { searchProducts } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 import { CATEGORIES } from '@/lib/categories'
 
 function getFirstImage(urls) {
@@ -140,7 +141,7 @@ export default function CategoryPage() {
                     {product.price && (
                       <div className="flex items-center gap-2">
                         <span className="font-headline text-lg tracking-tight text-primary">
-                          {product.price}
+                          {formatPrice(product.price)}
                         </span>
                       </div>
                     )}

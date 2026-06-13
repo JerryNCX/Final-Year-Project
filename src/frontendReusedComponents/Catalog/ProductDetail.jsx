@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ShoppingBag, Heart, Truck, Star, ArrowLeft } from 'lucide-react'
 import { getProduct } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 
@@ -257,7 +258,7 @@ export default function ProductDetail() {
             </div>
             <div className="mb-8">
               <span className="font-headline text-3xl md:text-4xl tracking-tight text-primary">
-                {product.price || '—'}
+                {formatPrice(product.price)}
               </span>
               {product.stock != null && (
                 <span className={`ml-4 font-label text-sm tracking-[0.15em] uppercase ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
@@ -293,7 +294,7 @@ export default function ProductDetail() {
             </div>
             <div className="mt-4 flex items-center gap-2 text-on-surface-variant font-label text-[10px] uppercase tracking-wider">
               <Truck className="w-3.5 h-3.5" />
-              Free standard shipping on orders over $500.
+              Free standard shipping on orders over RM2,200.
             </div>
           </div>
         </section>

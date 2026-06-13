@@ -17,20 +17,20 @@ const featuredProducts = [
     name: 'VERTEX RTX 9090 PRO',
     desc: 'Ultra-Efficient Ada Lovelace Architecture',
     specs: { VRAM: '48GB GDDR7', Bandwidth: '1.2 TB/s', Cores: '18432 CUDA', TGP: '450W' },
-    price: '$1,999.00',
+    price: 'RM8,795.60',
   },
   {
     name: 'APEX Z890 EXTREME',
     desc: 'Next-Gen Socket LGA 1851 Support',
     specs: { Slots: '4x PCIE 5.0', Ethernet: '10GbE LAN', RAM: '256GB DDR5', Phases: '24+2+1' },
-    price: '$649.00',
+    price: 'RM2,855.60',
   },
   {
     badge: 'NEW RELEASE',
     name: 'QUBIT X-12 CORE',
     desc: 'Multi-Threaded Mastery for Workstations',
     specs: { Cores: '24P + 12E', Boost: '6.2 GHz', Cache: '60MB L3', TDP: '125W' },
-    price: '$589.00',
+    price: 'RM2,591.60',
   },
 ]
 

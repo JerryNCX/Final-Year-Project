@@ -12,7 +12,7 @@ const wishlistItems = [
       { label: 'Architecture', value: 'Raptor Lake' },
       { label: 'TDP', value: '125W Base' },
     ],
-    price: '$589.99',
+    price: 'RM2,595.96',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAZmS-I9OfQDPngFU21DqwErMgANRFw62qcS-x8acbikt7VRT34q4JDzU8xl5nfmZ6ePHzd4E3HRRBORYYRz2O0O4gJkvCM0qAZXuQIW0ZpLyss7u95m5R_Al7pg9iK5sSJEjCEW5Xef5eqOpYXxOyIt-MG6kZ2cEF-J_wwwT6tc5sQ-aexue837sPIz9GuYueugkxs-b_fvw5F5SHU5lODnmpS6KU-1SLyQvJ15qG8ht9m31ZZvva_Y7yGAJT947qLwU4dgJFWDH6O',
   },
   {
@@ -23,7 +23,7 @@ const wishlistItems = [
       { label: 'VRAM', value: '24GB GDDR6X' },
       { label: 'Status', value: 'Low Stock' },
     ],
-    price: '$1,599.99',
+    price: 'RM7,039.96',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBS8-aW4XFHhb6_oP3lR5DoWUgfh_tFAcrUev_aU3sl7mgDSGwRkH-jn5sqwp2rJiLnLJpF63KQ3QCb3_OO8gijIBKurZ3xD1B1dY57FDHsh_zIWQpLs-T_6LPhypPerfdMovVqYRmtbbO5_ju_ejh70YbPvCt7CMDcvrAkiMwYlNHqo-hO9YC1c64WppmXW7kRED76shGeGkdVvDmU-u3-v_4TOgC0ddS_V4yDWUHcOBcdyYr7e3YgCJtVg2YiHXTzzT6_46YteZ_u',
   },
   {
@@ -34,7 +34,7 @@ const wishlistItems = [
       { label: 'Form Factor', value: 'E-ATX' },
       { label: 'Socket', value: 'LGA 1700' },
     ],
-    price: '$499.00',
+    price: 'RM2,195.60',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDLm1MVlZC7xXsBK0pfUE0QumA5WyYbxOCoV0nAkhIkDMWsRw330RltmG9dJsGKdQZpjCIcmYnYVvbsYOX7dTT3naPiiqTliweTAZDyexgBRsQWccnEmBktdcDVmXYyTwG8YfRiNIac1CVqbh59JrmVVDbwOHwgYFa1vTQdArJ8nSfTwMe7Z1Yebq4r8QC4gLtE7pYKekmYwZ2xMI6JKvx-6D-zpZ1kYxXTXadOrgaYCab8WwaAkWveCe8x7lcx35T_6Jh0W2a_i-qh',
   },
   {
@@ -45,7 +45,7 @@ const wishlistItems = [
       { label: 'Efficiency', value: '80+ Titanium' },
       { label: 'Wattage', value: '1200W' },
     ],
-    price: '$349.00',
+    price: 'RM1,535.60',
     image: '',
   },
 ]

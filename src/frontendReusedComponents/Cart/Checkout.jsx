@@ -22,7 +22,7 @@ export default function Checkout() {
   const [orderError, setOrderError] = useState('')
   const [shippingRates, setShippingRates] = useState(null)
   const [selectedDelivery, setSelectedDelivery] = useState('express')
-  const [shippingCost, setShippingCost] = useState(24)
+  const [shippingCost, setShippingCost] = useState(106)
 
   const [form, setForm] = useState({
     first_name: '',
@@ -301,7 +301,7 @@ export default function Checkout() {
                       </span>
                     </span>
                     <span className="mt-2 text-sm font-bold text-on-surface">
-                      {standardRate ? `$${standardRate.cost.toFixed(2)}` : '—'}
+                      {standardRate ? `RM${standardRate.cost.toFixed(2)}` : '—'}
                     </span>
                   </label>
                   <label className={`relative flex cursor-pointer rounded-lg border-2 ${selectedDelivery === 'Express' ? 'border-primary bg-surface-bright' : 'border-outline-variant bg-surface-container-low'} p-4 focus:outline-none hover:bg-surface-container transition-colors duration-200`}>
@@ -325,7 +325,7 @@ export default function Checkout() {
                       </span>
                     </span>
                     <span className="mt-2 text-sm font-bold text-on-surface">
-                      {expressRate ? `+$${expressRate.cost.toFixed(2)}` : '—'}
+                      {expressRate ? `+RM${expressRate.cost.toFixed(2)}` : '—'}
                     </span>
                   </label>
                 </div>
@@ -379,7 +379,7 @@ export default function Checkout() {
                             : (standardRate ? standardRate.days : '3-5 Business Days')}
                         </p>
                       </div>
-                      <span className="font-label text-sm text-on-surface">${shippingCost.toFixed(2)}</span>
+                      <span className="font-label text-sm text-on-surface">RM{shippingCost.toFixed(2)}</span>
                     </div>
                   </div>
 
@@ -474,7 +474,7 @@ export default function Checkout() {
               </div>
               <div className="flex justify-between text-on-surface-variant">
                 <span>Shipping ({selectedDelivery === 'Express' ? 'Priority Overnight' : 'Standard Transport'})</span>
-                <span className="font-medium text-on-surface">+${shippingCost.toFixed(2)}</span>
+                <span className="font-medium text-on-surface">+RM{shippingCost.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-on-surface-variant">
                 <span>Estimated Tax</span>
@@ -485,7 +485,7 @@ export default function Checkout() {
             <div className="flex justify-between items-end border-t border-outline-variant/30 pt-6">
               <div>
                 <span className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-1">Total Due</span>
-                <span className="block font-body text-xs text-on-surface-variant">USD</span>
+                <span className="block font-body text-xs text-on-surface-variant">MYR</span>
               </div>
               <span className="font-display text-4xl font-bold tracking-tight text-on-surface">{formatPrice(cartTotal + shippingCost)}</span>
             </div>

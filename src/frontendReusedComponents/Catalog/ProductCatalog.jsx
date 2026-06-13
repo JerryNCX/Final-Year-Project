@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react'
+import { ChevronLeft, ChevronRight, SlidersHorizontal, ShoppingCart, Check } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { searchProducts } from '@/lib/api'
 import { CATEGORIES } from '@/lib/categories'
+import { useCart } from '@/lib/CartContext'
 
 const ITEMS_PER_PAGE = 12
 
@@ -100,6 +101,23 @@ export default function ProductCatalog() {
   const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || null)
   const [manufacturers, setManufacturers] = useState([])
   const [selectedManufacturer, setSelectedManufacturer] = useState(null)
+
+  const { addCatalogItem } = useCart()
+  const [addedIds, setAddedIds] = useState(new Set())
+
+  const handleAddToCart = (e, product) => {
+    e.preventDefault()
+    e.stopPropagation()
+    addCatalogItem(product, product.table_name)
+    setAddedIds(prev => new Set(prev).add(`${product.table_name}-${product.id}`))
+    setTimeout(() => {
+      setAddedIds(prev => {
+        const next = new Set(prev)
+        next.delete(`${product.table_name}-${product.id}`)
+        return next
+      })
+    }, 2000)
+  }
 
   const meta = selectedCategory ? CATEGORY_META[selectedCategory] : null
   const totalPages = Math.ceil(count / ITEMS_PER_PAGE)
@@ -291,13 +309,30 @@ export default function ProductCatalog() {
                             </div>
                           ))}
                         </div>
-                        <div className="flex items-center justify-between mt-5 pt-4">
+                        <div className="flex items-center justify-between mt-5 pt-4 gap-3">
                           <span className="font-headline text-xl tracking-tight text-primary">
                             {product.price || '—'}
                           </span>
-                          <span className={`font-label text-[11px] tracking-[0.15em] uppercase ${product.stock != null ? (product.stock > 0 ? 'text-green-600' : 'text-red-500') : 'text-on-surface-variant/50 group-hover:text-primary transition-colors'}`}>
-                            {product.stock != null ? (product.stock > 0 ? `IN STOCK (${product.stock})` : 'OUT OF STOCK') : 'VIEW >'}
-                          </span>
+                          {product.stock != null && product.stock > 0 ? (
+                            <button
+                              onClick={(e) => handleAddToCart(e, product)}
+                              className={`flex items-center gap-1.5 font-label text-[11px] tracking-[0.15em] uppercase px-3 py-2 rounded transition-all ${
+                                addedIds.has(`${product.table_name}-${product.id}`)
+                                  ? 'bg-green-600 text-white'
+                                  : 'bg-primary text-on-primary hover:bg-primary-fixed-dim'
+                              }`}
+                            >
+                              {addedIds.has(`${product.table_name}-${product.id}`) ? (
+                                <><Check className="w-3 h-3" /> ADDED</>
+                              ) : (
+                                <><ShoppingCart className="w-3 h-3" /> ADD TO CART</>
+                              )}
+                            </button>
+                          ) : (
+                            <span className="font-label text-[11px] tracking-[0.15em] uppercase text-red-500">
+                              {product.stock != null ? 'OUT OF STOCK' : ''}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </Link>

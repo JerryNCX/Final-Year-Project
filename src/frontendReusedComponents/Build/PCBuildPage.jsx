@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { ShoppingBag, Edit, Trash2, Plus, Save, FolderOpen, Share2, X } from 'lucide-react'
+import { ShoppingBag, Edit, Trash2, Plus, Save, FolderOpen, Share2, X, AlertTriangle, CheckCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
@@ -42,13 +42,29 @@ function formatPrice(val) {
 export default function PCBuildPage() {
   const navigate = useNavigate()
   const { build, removeComponent, resetBuild, buildCount, savedBuilds, saveCurrentBuild, loadLocalBuild, deleteLocalBuild, cloudBuilds, deleteCloudBuild } = useBuild()
-  const { addToCart, cartCount } = useCart()
+  const { replaceBuild, checkBuildConflict } = useCart()
   const [suggestions, setSuggestions] = useState({})
   const [checking, setChecking] = useState({})
   const [showSaveModal, setShowSaveModal] = useState(false)
   const [saveName, setSaveName] = useState('')
   const [showLoadPanel, setShowLoadPanel] = useState(false)
   const [copyFeedback, setCopyFeedback] = useState(false)
+  const [showReplaceModal, setShowReplaceModal] = useState(false)
+
+  const handleProceedToCart = () => {
+    if (checkBuildConflict()) {
+      setShowReplaceModal(true)
+    } else {
+      replaceBuild(build)
+      navigate('/cart')
+    }
+  }
+
+  const handleConfirmReplace = () => {
+    setShowReplaceModal(false)
+    replaceBuild(build)
+    navigate('/cart')
+  }
 
   const totalPrice = useMemo(() => {
     return CATEGORIES.reduce((sum, cat) => {
@@ -212,7 +228,7 @@ export default function PCBuildPage() {
             <span className="text-sm font-label text-on-surface-variant">Total</span>
             <span className="text-sm font-headline text-on-surface font-bold">{formatPrice(totalPrice)}</span>
           </div>
-          <button onClick={() => { addToCart(build); navigate('/cart') }} className="ml-auto primary-gradient-btn flex items-center gap-2 px-8 py-2.5 text-on-primary font-label font-semibold rounded-lg hover:shadow-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled={selectedCount === 0}>
+          <button onClick={handleProceedToCart} className="ml-auto primary-gradient-btn flex items-center gap-2 px-8 py-2.5 text-on-primary font-label font-semibold rounded-lg hover:shadow-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled={selectedCount === 0}>
             <ShoppingBag className="w-4 h-4" />
             PROCEED TO CHECKOUT
           </button>
@@ -277,6 +293,30 @@ export default function PCBuildPage() {
             )
           })}
         </div>
+
+        {showReplaceModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setShowReplaceModal(false)}>
+            <div className="bg-surface rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl border border-outline-variant/20" onClick={e => e.stopPropagation()}>
+              <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mb-4">
+                <AlertTriangle className="w-6 h-6 text-amber-600" />
+              </div>
+              <h3 className="font-headline font-bold text-lg text-on-surface mb-2">Replace Existing Build?</h3>
+              <p className="text-sm text-on-surface-variant leading-relaxed">
+                A PC build is already in your cart. Replacing it will remove the current build and add this one instead. Your individual component items will be kept.
+              </p>
+              <div className="flex gap-3 mt-6">
+                <button onClick={handleConfirmReplace} className="flex-1 flex items-center justify-center gap-2 bg-amber-600 text-white font-label text-sm px-5 py-3 rounded-lg hover:bg-amber-700 transition-colors">
+                  <CheckCircle className="w-4 h-4" />
+                  REPLACE BUILD
+                </button>
+                <button onClick={() => setShowReplaceModal(false)} className="flex-1 flex items-center justify-center gap-2 border border-outline-variant text-on-surface font-label text-sm px-5 py-3 rounded-lg hover:bg-surface-container-high transition-colors">
+                  <X className="w-4 h-4" />
+                  CANCEL
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {showSaveModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">

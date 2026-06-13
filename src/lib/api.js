@@ -109,3 +109,96 @@ export async function deleteBuild(buildId) {
   const token = await getAccessToken()
   return request(`/api/builds/${buildId}`, { method: 'DELETE', token })
 }
+
+export async function syncUserProfile(email) {
+  const token = await getAccessToken()
+  return request('/api/users/sync', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+    token,
+  })
+}
+
+export async function getUserProfile() {
+  const token = await getAccessToken()
+  return request('/api/users/profile', { token })
+}
+
+export async function updateUserProfile(data) {
+  const token = await getAccessToken()
+  return request('/api/users/profile', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+    token,
+  })
+}
+
+export async function createOrder(shippingAddress, buildSnapshot, total) {
+  const token = await getAccessToken()
+  return request('/api/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ shipping_address: shippingAddress, build_snapshot: buildSnapshot, total }),
+    token,
+  })
+}
+
+export async function listOrders() {
+  const token = await getAccessToken()
+  return request('/api/orders', { token })
+}
+
+export async function calculateShipping(destZip, originZip = '50000') {
+  return request('/shipping/calculate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ origin_zip: originZip, dest_zip: destZip }),
+  })
+}
+
+export async function getCart() {
+  const token = await getAccessToken()
+  return request('/api/cart', { token })
+}
+
+export async function syncCart(items) {
+  const token = await getAccessToken()
+  return request('/api/cart/sync', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items }),
+    token,
+  })
+}
+
+export async function addCartItem(tableName, productId, quantity = 1) {
+  const token = await getAccessToken()
+  return request('/api/cart/items', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ table_name: tableName, product_id: productId, quantity }),
+    token,
+  })
+}
+
+export async function removeCartItem(itemId) {
+  const token = await getAccessToken()
+  return request(`/api/cart/items/${itemId}`, { method: 'DELETE', token })
+}
+
+export async function setCartBuild(items) {
+  const token = await getAccessToken()
+  return request('/api/cart/build', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items }),
+    token,
+  })
+}
+
+export async function clearCartOnServer() {
+  const token = await getAccessToken()
+  return request('/api/cart', { method: 'DELETE', token })
+}

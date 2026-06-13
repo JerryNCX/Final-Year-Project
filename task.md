@@ -54,14 +54,24 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 - `vite.config.js` — added `/api` proxy → `localhost:8000`
 - `PCBuildPage.jsx` — added Save modal (name input → `saveCurrentBuild`), Load panel (lists local + cloud saves with Load/Delete), Share button (copies URL)
 
-## Remaining Work (order matters)
-1. ~~Run migration~~ (done)
-2. ~~Test admin flow~~ (done)
-3. ~~Phase 2 — Persist Builds~~ (done)
-4. **Run `add_builds_table.sql` in Supabase SQL Editor** (needed for cloud save)
-5. **Phase 3 — ChooseComponent Polish** (pagination, search, sort, error handling)
-6. **Phase 4 — Cleanup** (delete `imageSearch.js`, fix compat badge bug)
-7. **Checkout Improvements** (auth gate, email auto-fill, shipping address, delivery calc)
+## Completed (Session 6 — Checkout Improvements)
+1. **Migration `add_users_table.sql`** — creates `public.users` (profile) and `public.orders` tables with RLS
+2. **Backend `supabase.py`** — added `sync_user_profile()`, `get_user_profile()`, `upsert_user_profile()`, `create_order()`, `list_user_orders()`, `calculate_shipping()` (Malaysia zip heuristic)
+3. **Backend `main.py`** — added `POST /api/users/sync`, `GET /api/users/profile`, `PUT /api/users/profile`, `GET /api/orders`, `POST /api/orders`, `POST /shipping/calculate`
+4. **Frontend `api.js`** — added `syncUserProfile()`, `getUserProfile()`, `updateUserProfile()`, `createOrder()`, `listOrders()`, `calculateShipping()`
+5. **Frontend `SignUpPage.jsx`** — calls `syncUserProfile(email)` after successful signup
+6. **Frontend `Checkout.jsx`** — full rewrite:
+   - Auth gate: redirects to `/login?redirect=/checkout` if not authenticated
+   - Email auto-fill: reads `user.email` from `useAuth()`, displayed as read-only
+   - Shipping address: pre-fills from `GET /api/users/profile` on mount; saves via `PUT /api/users/profile` on submit
+   - Apt/Unit/Suite field added
+   - Malaysia states dropdown (all 16 states/territories)
+   - Zip-based delivery velocity: calls `POST /shipping/calculate` on zip change (500ms debounce), updates Standard/Express costs and transit days dynamically
+   - Order creation: on submit, saves address to profile + creates order with build snapshot
+
+## Remaining Work
+1. **Run `add_users_table.sql` in Supabase SQL Editor** (needed for checkout + profile)
+2. **Run `add_builds_table.sql` in Supabase SQL Editor** (needed for cloud save)
 
 ## Key Context
 - Backend: `C:\Users\Admin\Desktop\FYP Dataset\backend\app\main.py`

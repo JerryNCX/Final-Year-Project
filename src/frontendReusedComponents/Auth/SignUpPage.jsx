@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '@/lib/supabase-client'
 import { useAuth } from '@/contexts/AuthContext'
+import { syncUserProfile } from '@/lib/api'
 import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react'
+import Header from '../HomePage/Header'
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState('')
@@ -36,17 +38,19 @@ export default function SignUpPage() {
     if (signUpError) {
       setError(signUpError.message)
     } else {
+      try {
+        await syncUserProfile(email)
+      } catch (_) {}
       navigate('/')
     }
     setLoading(false)
   }
 
   return (
-    <div className="min-h-screen flex">
-      <div className="w-[45%] flex flex-col justify-center px-14 py-12 bg-background">
-       <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-12">
-          PRECISION TECH
-        </div>
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <div className="flex flex-1">
+      <div className="w-1/2 flex flex-col justify-center px-14 py-12">
         <div className="max-w-sm mx-auto w-full">
           <h1 className="text-3xl font-headline font-semibold text-on-background mb-1">
             CREATE ACCOUNT
@@ -204,7 +208,7 @@ export default function SignUpPage() {
         </div>
       </div>
 
-      <div className="w-[55%] relative overflow-hidden">
+      <div className="w-1/2 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#0d1233] to-[#070918]" />
         <div
           className="absolute inset-0 opacity-20"
@@ -261,6 +265,7 @@ export default function SignUpPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

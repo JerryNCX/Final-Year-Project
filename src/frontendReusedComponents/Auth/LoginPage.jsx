@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
-import { Lock, Mail, LogIn, Activity } from 'lucide-react'
+import { Lock, Mail, LogIn, Eye, EyeOff, Github } from 'lucide-react'
+import Header from '../HomePage/Header'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const { login } = useAuth()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,7 +20,8 @@ export default function LoginPage() {
     setLoading(true)
     const result = await login(email, password)
     if (result.success) {
-      navigate('/')
+      const redirect = searchParams.get('redirect') || '/'
+      navigate(redirect)
     } else {
       setError(result.error || 'Authentication failed')
     }
@@ -26,20 +29,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
-      <div className="w-1/2 flex flex-col justify-center px-16 py-12 bg-background">
-        <div className="text-xl font-bold tracking-tighter text-on-surface font-headline uppercase mb-16">
-          PRECISION TECH
-        </div>
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <div className="flex flex-1">
+      <div className="w-1/2 flex flex-col justify-center px-14 py-12">
         <div className="max-w-sm mx-auto w-full">
-          <h1 className="text-4xl font-headline font-semibold text-on-background mb-2">
-            Access Lab
+          <h1 className="text-3xl font-headline font-semibold text-on-background mb-1">
+            SIGN IN
           </h1>
-          <p className="text-on-surface-variant font-body text-sm mb-8">
-            Enter your credentials to access the performance engineering suite. Unauthorized access is monitored.
+          <p className="text-on-surface-variant font-body text-sm mb-7">
+            Access your account to manage orders and builds.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-error-container border border-outline-variant text-on-error-container px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -47,53 +49,48 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-label font-medium text-on-surface mb-2">
-                Authentication ID (Email)
+              <label htmlFor="login-email" className="block text-xs font-label font-medium text-on-surface mb-1.5">
+                Email Address
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
                 <input
-                  id="email"
+                  id="login-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="mail"
+                  className="w-full pl-9 pr-3 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="engineer@precision.tech"
                 />
               </div>
             </div>
 
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <label htmlFor="password" className="text-sm font-label font-medium text-on-surface">
-                  Security Key (Password)
-                </label>
-                <Link to="/login" className="text-xs font-label text-on-surface-variant hover:text-primary transition-colors">
-                  Forgot Key?
-                </Link>
-              </div>
+              <label htmlFor="login-password" className="block text-xs font-label font-medium text-on-surface mb-1.5">
+                Password
+              </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
                 <input
-                  id="password"
-                  type="password"
+                  id="login-password"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="lock"
+                  minLength={6}
+                  className="w-full pl-9 pr-10 py-2.5 bg-surface-container-high rounded-lg text-on-surface placeholder:text-on-surface-variant/50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
             </div>
-
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                className="h-4 w-4 rounded-sm text-primary border-outline-variant bg-surface-container-highest focus:ring-primary/20 focus:ring-offset-0"
-              />
-              <span className="text-xs font-label text-on-surface-variant">Maintain persistent session</span>
-            </label>
 
             <button
               type="submit"
@@ -108,19 +105,19 @@ export default function LoginPage() {
               ) : (
                 <span className="flex items-center gap-2">
                   <LogIn className="w-4 h-4" />
-                  Initialize Session
+                  SIGN IN
                 </span>
               )}
             </button>
           </form>
 
-          <div className="mt-8">
-            <div className="relative mb-6">
+          <div className="mt-6">
+            <div className="relative mb-5">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-outline-variant"></div>
               </div>
               <div className="relative flex justify-center text-xs font-label text-on-surface-variant">
-                <span className="bg-background px-2">or connect via</span>
+                <span className="bg-background px-2">Or Continue With</span>
               </div>
             </div>
             <div className="flex gap-3">
@@ -129,71 +126,79 @@ export default function LoginPage() {
                 Google
               </button>
               <button className="flex-1 flex items-center justify-center gap-2 py-2.5 border border-outline-variant rounded-lg text-sm font-label text-on-surface hover:bg-surface-container-high transition-colors">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <Github className="w-5 h-5" />
                 GitHub
               </button>
             </div>
           </div>
 
-          <p className="mt-8 text-center text-sm font-label text-on-surface-variant">
-            Require engineering access?{' '}
+          <p className="mt-6 text-center text-sm font-label text-on-surface-variant">
+            Don't have an account?{' '}
             <Link to="/signup" className="text-primary hover:text-primary-fixed-dim font-medium">
-              Request Account
+              CREATE ACCOUNT
             </Link>
           </p>
         </div>
       </div>
 
-      <div className="w-1/2 relative overflow-hidden bg-[#0a0a1a]">
+      <div className="w-1/2 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#0d1233] to-[#070918]" />
         <div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%234286f4\' fill-opacity=\'0.15\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-            backgroundSize: '60px 60px'
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%234286f4\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            backgroundSize: '80px 80px'
           }}
         />
         <div
-          className="absolute bottom-0 left-0 right-0 h-2/3"
+          className="absolute bottom-0 left-0 right-0 h-1/2"
           style={{
-            background: 'linear-gradient(180deg, transparent 0%, rgba(0,76,237,0.15) 50%, rgba(0,76,237,0.3) 100%)'
+            background: 'linear-gradient(0deg, rgba(0,76,237,0.2) 0%, transparent 100%)'
           }}
         />
 
-        <div className="absolute inset-0 flex items-center justify-center p-12">
-          <div className="w-full max-w-md space-y-6">
-            <div className="glass-panel rounded-xl p-6 border border-white/10">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-label text-blue-300 uppercase tracking-widest">System Metrics</span>
-                <Activity className="w-4 h-4 text-green-400" />
+        <div className="absolute inset-0 flex items-center justify-center p-16">
+          <div className="space-y-10 max-w-lg">
+            <div>
+              <div className="text-xs font-label text-blue-400 uppercase tracking-widest mb-3">Performance Tier 1 &mdash; Optimized v4.2</div>
+              <h2 className="text-4xl font-headline font-semibold text-white leading-tight">
+                WELCOME BACK TO<br />
+                <span className="text-blue-400">YOUR WORKSHOP</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
+                <div className="text-2xl font-headline font-bold text-green-400">99.9%</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Uptime Reliability</div>
               </div>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex justify-between text-sm mb-1.5">
-                    <span className="font-label text-blue-200">Thermal Delta</span>
-                    <span className="font-label text-green-400">-2.4&deg;C</span>
-                  </div>
-                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-[55%] bg-gradient-to-r from-green-400 to-yellow-400 rounded-full"></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-1.5">
-                    <span className="font-label text-blue-200">Clock Stability</span>
-                    <span className="font-label text-green-400">99.9%</span>
-                  </div>
-                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full w-[99%] bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
-                  </div>
-                </div>
+              <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
+                <div className="text-2xl font-headline font-bold text-green-400">0.12ms</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Query Latency</div>
+              </div>
+              <div className="glass-panel rounded-lg p-4 border border-white/5 text-center">
+                <div className="text-2xl font-headline font-bold text-green-400">+40%</div>
+                <div className="text-xs font-label text-blue-200/60 mt-1">Thermal Efficiency</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 glass-panel rounded-full px-4 py-2 border border-green-500/20 w-fit mx-auto">
-              <span className="text-xs font-label text-green-300 uppercase tracking-wider">Access Authorized</span>
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+            <div className="glass-panel rounded-xl p-6 border border-white/5">
+              <p className="text-blue-100/80 font-body text-sm leading-relaxed italic">
+                &ldquo;Precision Tech doesn&apos;t just sell hardware; they provide the infrastructure for digital craftsmanship. The atelier is where potential meets performance.&rdquo;
+              </p>
+              <div className="flex items-center gap-3 mt-4">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white">
+                  MT
+                </div>
+                <div>
+                  <div className="text-sm font-label text-white">Marcus Thorne</div>
+                  <div className="text-xs font-label text-blue-200/50">CTO, Nexus Systems</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

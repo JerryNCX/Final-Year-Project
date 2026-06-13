@@ -1,17 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Search, ShoppingCart, User, Menu, X, Sun, Moon } from 'lucide-react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Search, ShoppingCart, User, Menu, X, Sun, Moon, LogOut, UserCircle2 } from 'lucide-react'
 import SearchPopover from '@/frontendReusedComponents/Search/SearchPopover'
 import { CartContext } from '@/lib/CartContext'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function Header() {
   const cartCtx = useContext(CartContext)
   const cartCount = cartCtx?.cartCount ?? 0
   const location = useLocation()
+  const navigate = useNavigate()
+  const { isAuthenticated, user, logout } = useAuth()
   const [showSearchPopover, setShowSearchPopover] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showUserDropdown, setShowUserDropdown] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
+  const dropdownRef = useRef(null)
 
   const toggleTheme = () => {
     const next = !dark
@@ -31,6 +36,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowUserDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/catalog', label: 'Catalog' },
@@ -42,6 +57,12 @@ export default function Header() {
   const isActive = (path) => {
     if (path === '/') return location.pathname === '/'
     return location.pathname.startsWith(path)
+  }
+
+  const handleLogout = async () => {
+    await logout()
+    setShowUserDropdown(false)
+    navigate('/')
   }
 
   return (
@@ -95,9 +116,54 @@ export default function Header() {
             )}
           </Link>
 
-          <Link to="/login" className="hidden md:block text-on-surface-variant hover:text-primary transition-colors p-1">
-            <User className="w-5 h-5" />
-          </Link>
+          {isAuthenticated ? (
+            <div className="relative hidden md:block" ref={dropdownRef}>
+              <button
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+                className="text-on-surface-variant hover:text-primary transition-colors p-1"
+                aria-label="Account"
+              >
+                <User className="w-5 h-5" />
+              </button>
+              {showUserDropdown && (
+                <div className="absolute right-0 mt-2 w-44 bg-surface-container-low border border-outline-variant rounded-lg shadow-xl py-1 z-50">
+                  <div className="px-4 py-2 border-b border-outline-variant/30">
+                    <p className="font-label text-xs text-on-surface-variant truncate">{user?.email || ''}</p>
+                  </div>
+                  <Link
+                    to="/account"
+                    onClick={() => setShowUserDropdown(false)}
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-label text-on-surface hover:bg-surface-container-high transition-colors"
+                  >
+                    <UserCircle2 className="w-4 h-4" />
+                    My Account
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 w-full px-4 py-2 text-sm font-label text-on-surface hover:bg-surface-container-high transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center gap-3">
+              <Link
+                to={`/login${location.pathname !== '/login' && location.pathname !== '/signup' ? `?redirect=${encodeURIComponent(location.pathname + location.search)}` : ''}`}
+                className="font-label text-xs uppercase tracking-[0.15em] text-on-surface-variant hover:text-on-surface transition-colors py-1"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="font-label text-xs uppercase tracking-[0.15em] bg-primary text-on-primary px-4 py-1.5 rounded-lg hover:opacity-90 transition-all"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
 
           <button
             onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -126,6 +192,41 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <hr className="border-outline-variant/30 my-2" />
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/account"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="block font-label text-sm uppercase tracking-[0.15em] py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+                >
+                  My Account
+                </Link>
+                <button
+                  onClick={() => { handleLogout(); setShowMobileMenu(false) }}
+                  className="block w-full text-left font-label text-sm uppercase tracking-[0.15em] py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to={`/login${location.pathname !== '/login' && location.pathname !== '/signup' ? `?redirect=${encodeURIComponent(location.pathname + location.search)}` : ''}`}
+                  onClick={() => setShowMobileMenu(false)}
+                  className="block font-label text-sm uppercase tracking-[0.15em] py-3 px-4 text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="block font-label text-sm uppercase tracking-[0.15em] py-3 px-4 text-primary hover:text-primary-fixed-dim"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       )}

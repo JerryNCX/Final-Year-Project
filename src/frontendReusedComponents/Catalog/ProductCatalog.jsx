@@ -103,8 +103,14 @@ export default function ProductCatalog() {
   const [manufacturers, setManufacturers] = useState([])
   const [selectedManufacturer, setSelectedManufacturer] = useState(null)
 
+  const [inStockOnly, setInStockOnly] = useState(false)
+
   const { addCatalogItem } = useCart()
   const [addedIds, setAddedIds] = useState(new Set())
+
+  const filteredProducts = inStockOnly
+    ? products.filter(p => p.stock != null && p.stock > 0)
+    : products
 
   const handleAddToCart = (e, product) => {
     e.preventDefault()
@@ -132,6 +138,7 @@ export default function ProductCatalog() {
         limit: ITEMS_PER_PAGE,
         offset: (currentPage - 1) * ITEMS_PER_PAGE,
         sort_by: sortBy,
+        in_stock_first: true,
       })
       setProducts(res.results || [])
       setCount(res.count || 0)
@@ -214,6 +221,19 @@ export default function ProductCatalog() {
               </div>
             </div>
           </div>
+
+          <div className="mb-7">
+            <h3 className="font-label text-sm tracking-[0.15em] uppercase text-primary mb-4">AVAILABILITY</h3>
+            <label className="flex items-center gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={inStockOnly}
+                onChange={() => setInStockOnly(prev => !prev)}
+                className="h-4 w-4 rounded-none border-outline/40 bg-surface-container-low text-primary focus:ring-primary/30 focus:ring-offset-0 transition-colors"
+              />
+              <span className="font-label text-xs text-on-surface-variant group-hover:text-primary transition-colors uppercase tracking-wider">In Stock Only</span>
+            </label>
+          </div>
         </aside>
 
         {/* Main content */}
@@ -266,15 +286,15 @@ export default function ProductCatalog() {
                 </div>
               ))}
             </div>
-          ) : products.length === 0 ? (
+          ) : filteredProducts.length === 0 ? (
             <div className="text-center py-20">
               <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} NO PRODUCTS FOUND</span>
-              <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-3">No items match the current criteria.</p>
+              <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-3">{inStockOnly ? 'No items are currently in stock.' : 'No items match the current criteria.'}</p>
             </div>
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-                {products.map((product, idx) => {
+                {filteredProducts.map((product, idx) => {
                   const imageUrl = getFirstImage(product.image_urls)
                   const specs = getSpecsForProduct(product)
                   return (
@@ -284,6 +304,17 @@ export default function ProductCatalog() {
                       className="trace-border bg-surface-container-lowest transition-all duration-300 hover:bg-surface-container group flex flex-col h-full"
                     >
                       <div className="relative h-56 bg-surface-container flex items-center justify-center p-6 overflow-hidden">
+                        {product.stock != null && (
+                          <div className={`absolute top-3 left-3 z-10 font-label text-[10px] tracking-[0.15em] uppercase px-2 py-1 rounded-sm ${
+                            product.stock > 5
+                              ? 'bg-green-600 text-white'
+                              : product.stock > 0
+                              ? 'bg-amber-500 text-white'
+                              : 'bg-red-600 text-white'
+                          }`}>
+                            {product.stock > 5 ? 'In Stock' : product.stock > 0 ? `Low Stock: ${product.stock}` : 'Out of Stock'}
+                          </div>
+                        )}
                         {imageUrl ? (
                           <img
                             src={imageUrl}
@@ -345,7 +376,7 @@ export default function ProductCatalog() {
               {totalPages > 1 && (
                 <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-center justify-between gap-4 pt-6">
                   <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider order-2 md:order-1">
-                    SHOWING {((currentPage - 1) * ITEMS_PER_PAGE) + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, count)} OF {count} ITEMS
+                    SHOWING {((currentPage - 1) * ITEMS_PER_PAGE) + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, count)} OF {count} ITEMS{inStockOnly ? ` (${filteredProducts.length} in stock)` : ''}
                   </span>
                   <div className="flex items-center gap-2 order-1 md:order-2">
                     <button

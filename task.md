@@ -77,8 +77,24 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 
 ## Remaining Work
 
+### Stock Visibility (DONE)
+- `ProductCatalog.jsx` — Added colored stock badge overlay on product card images (green In Stock / amber Low Stock: X / red Out of Stock)
+- `ProductCatalog.jsx` — Added "In Stock Only" filter checkbox in sidebar (client-side filter, shows filtered count)
+- `ChooseComponent.jsx` — Added same stock badge overlay on component card images
+- `ChooseComponent.jsx` — "Add" button replaced with "Out of Stock" text when stock is 0/null && <= 0
+- Backend already returned `stock` in `SpecProduct` — no backend changes needed
+
+### In Stock First Sort — Default ON (DONE)
+- `supabase.py` — Added `in_stock_first` param to `search_table()`, `search_all_tables()`, `search_all_categories()`. When True, chains `.order("stock", desc=True, nullsfirst=False)` before any existing sort, producing `ORDER BY stock DESC NULLS LAST, [selected_sort]` — in-stock items always appear first, within-group sorting preserved
+- `main.py` — `in_stock_first` defaults to `True` on `GET /search`, passes through to service functions
+- `api.js` — `searchProducts()` defaults `in_stock_first = true`
+- `ProductCatalog.jsx` — Always sends `in_stock_first: true`, no toggle UI
+- `ChooseComponent.jsx` — Always sends `in_stock_first: true`, no toggle UI
+- No user action needed — every search/sort automatically puts in-stock items first
+
 ### Currency — Malaysia Ringgit (RM) — DONE
 - Created `src/lib/currency.js` — `formatPrice()` multiplies by `USD_TO_MYR = 4.40`, prefixes `RM`
+- Updated `formatPrice()` to strip `$`/non-numeric chars from string DB prices + NaN guard
 - Replaced all 5 local `formatPrice`/`parsePrice` definitions with import from `@/lib/currency`
 - Updated direct `$` in JSX: `ProductCatalog.jsx` (filter labels), `SearchPopover.jsx`, `ChooseComponent.jsx`, `Checkout.jsx` (4 locations)
 - Updated `Checkout.jsx` default shipping cost (24 → 106), `USD` label → `MYR`

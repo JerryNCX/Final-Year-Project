@@ -98,7 +98,7 @@ export default function ChooseComponent() {
     setError('')
     try {
       if (q.trim()) {
-        const res = await searchProducts({ q, category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort })
+        const res = await searchProducts({ q, category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort, in_stock_first: true })
         setProducts(res.results || [])
         setTotal(res.count || 0)
       } else {
@@ -118,7 +118,7 @@ export default function ChooseComponent() {
           setProducts(res.results || [])
           setTotal(res.count || 0)
         } else {
-          const res = await searchProducts({ category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort })
+          const res = await searchProducts({ category: targetTable, limit: PAGE_SIZE, offset: pageNum * PAGE_SIZE, sort_by: sort, in_stock_first: true })
           setProducts(res.results || [])
           setTotal(res.count || 0)
         }
@@ -237,7 +237,18 @@ export default function ChooseComponent() {
                 const isAdded = targetTable === 'Internal Drive' && added.has(p.id)
                 return (
                   <div key={p.id} className="ghost-border rounded-xl p-4 flex flex-col hover:shadow-md transition-shadow">
-                    <div className="aspect-[4/3] bg-surface-container-high rounded-lg mb-3 flex items-center justify-center overflow-hidden">
+                    <div className="aspect-[4/3] bg-surface-container-high rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
+                      {p.stock != null && (
+                        <div className={`absolute top-2 left-2 z-10 font-label text-[10px] tracking-[0.15em] uppercase px-1.5 py-0.5 rounded-sm ${
+                          p.stock > 5
+                            ? 'bg-green-600 text-white'
+                            : p.stock > 0
+                            ? 'bg-amber-500 text-white'
+                            : 'bg-red-600 text-white'
+                        }`}>
+                          {p.stock > 5 ? 'In Stock' : p.stock > 0 ? `Low: ${p.stock}` : 'OOS'}
+                        </div>
+                      )}
                       {p.image_urls ? (
                         <img
                           src={(() => { try { return JSON.parse(p.image_urls)[0] } catch { return p.image_urls } })()}
@@ -256,18 +267,22 @@ export default function ChooseComponent() {
                     </div>
                     <div className="mt-auto flex items-center justify-between">
                       <span className="font-headline font-bold text-base text-on-surface">RM{(() => { try { return parseFloat(p.price).toFixed(2) } catch { return p.price || '0.00' } })()}</span>
-                      <button
-                        onClick={() => handleAdd(p)}
-                        disabled={isAdded}
-                        className={`flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-lg transition-all ${
-                          isAdded
-                            ? 'bg-green-100 text-green-700 cursor-default'
-                            : 'primary-gradient-btn text-on-primary hover:opacity-90'
-                        }`}
-                      >
-                        {isAdded ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
-                        {isAdded ? 'Added' : 'Add'}
-                      </button>
+                      {p.stock != null && p.stock <= 0 ? (
+                        <span className="text-xs font-bold text-red-500 px-3 py-2">Out of Stock</span>
+                      ) : (
+                        <button
+                          onClick={() => handleAdd(p)}
+                          disabled={isAdded}
+                          className={`flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-lg transition-all ${
+                            isAdded
+                              ? 'bg-green-100 text-green-700 cursor-default'
+                              : 'primary-gradient-btn text-on-primary hover:opacity-90'
+                          }`}
+                        >
+                          {isAdded ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                          {isAdded ? 'Added' : 'Add'}
+                        </button>
+                      )}
                     </div>
                   </div>
                 )

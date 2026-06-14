@@ -25,8 +25,8 @@ export async function analyzeImage(file) {
   return request('/analyze', { method: 'POST', body: form })
 }
 
-export async function searchProducts({ q = '', category = null, limit = 20, offset = 0, sort_by = 'default' } = {}) {
-  const params = new URLSearchParams({ q, limit, offset, sort_by })
+export async function searchProducts({ q = '', category = null, limit = 20, offset = 0, sort_by = 'default', in_stock_first = true } = {}) {
+  const params = new URLSearchParams({ q, limit, offset, sort_by, in_stock_first })
   if (category) params.set('category', category)
   return request(`/search?${params}`)
 }

@@ -389,7 +389,7 @@ export default function PCBuildPage() {
                       <span className="text-xs text-primary ml-3">Cloud</span>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => { /* cloud load */ setShowLoadPanel(false) }} className="text-xs font-label text-primary hover:text-primary-fixed-dim transition-colors px-3 py-1 border border-outline-variant/30 rounded">
+                      <button onClick={() => { applyBuild(entry.components); setShowLoadPanel(false) }} className="text-xs font-label text-primary hover:text-primary-fixed-dim transition-colors px-3 py-1 border border-outline-variant/30 rounded">
                         Load
                       </button>
                       <button onClick={() => deleteCloudBuild(entry.id)} className="text-xs font-label text-error hover:text-error/80 transition-colors px-3 py-1 border border-outline-variant/30 rounded">

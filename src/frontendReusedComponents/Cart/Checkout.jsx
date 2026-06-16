@@ -464,7 +464,11 @@ export default function Checkout() {
 
             <div className="flex flex-col gap-6 mb-8">
               {cartItems.length === 0 ? (
-                <p className="text-on-surface-variant text-sm">No items in cart</p>
+                <div className="text-center py-10">
+                  <ShoppingBag className="w-10 h-10 mx-auto mb-3 text-outline" />
+                  <p className="text-on-surface-variant text-sm mb-3">Your cart is empty</p>
+                  <a href="/build" className="text-xs text-primary hover:underline font-label">Build a System</a>
+                </div>
               ) : cartItems.map((item, i) => (
                 <div key={item.id || i} className="flex gap-4 items-start group">
                   <div className="w-20 h-20 bg-surface-container-lowest flex-shrink-0 flex items-center justify-center p-2 rounded-md border border-outline-variant/15 relative overflow-hidden">

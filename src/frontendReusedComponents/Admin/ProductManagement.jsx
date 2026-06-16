@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Search, Loader2, ChevronLeft, ChevronRight, Trash2, Save } from 'lucide-react'
+import { Search, Loader2, ChevronLeft, ChevronRight, Trash2, Save, PackageX } from 'lucide-react'
 import { searchProducts, getCategories, adminUpdateProduct, adminDeleteProduct } from '@/lib/api'
 import { formatPrice } from '@/lib/currency'
 import { CATEGORIES } from '@/lib/categories'
@@ -152,8 +152,12 @@ export default function ProductManagement() {
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20">
+            <PackageX className="w-10 h-10 mx-auto mb-4 text-outline" />
             <p className="text-on-surface-variant font-label">No products found.</p>
-            {search && <button onClick={handleClearSearch} className="mt-2 text-primary hover:underline font-label">Clear search</button>}
+            {search
+              ? <button onClick={handleClearSearch} className="mt-3 text-xs text-primary hover:underline font-label block mx-auto">Clear Search</button>
+              : <p className="text-sm text-on-surface-variant mt-2 font-label">Add your first product to get started.</p>
+            }
           </div>
         ) : (
           <>

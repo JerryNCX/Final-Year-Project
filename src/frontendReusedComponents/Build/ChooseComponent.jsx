@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, Plus, Check, Loader2, Search, X } from 'lucide-react'
+import { ArrowLeft, Plus, Check, Loader2, Search, SearchX, X } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { useBuild, CATEGORIES } from '@/lib/BuildContext'
 import { searchProducts, compatibleProducts } from '@/lib/api'
+import { formatPrice } from '@/lib/currency'
 
 const PAGE_SIZE = 24
 
@@ -222,12 +223,18 @@ export default function ChooseComponent() {
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20 text-on-surface-variant">
+            <SearchX className="w-10 h-10 mx-auto mb-4 text-outline" />
             <p className="text-lg mb-2">No {searchQuery ? 'matching ' : ''}products found</p>
-            <p className="text-sm">
+            <p className="text-sm mb-4">
               {searchQuery
                 ? 'Try a different search term.'
                 : 'Try selecting a different component first, or browse all products from the catalog.'}
             </p>
+            {searchQuery && (
+              <button onClick={() => { setSearchQuery(''); setPage(0) }} className="text-xs text-primary hover:underline font-label">
+                Clear Search
+              </button>
+            )}
           </div>
         ) : (
           <>
@@ -266,7 +273,7 @@ export default function ChooseComponent() {
                       ))}
                     </div>
                     <div className="mt-auto flex items-center justify-between">
-                      <span className="font-headline font-bold text-base text-on-surface">RM{(() => { try { return parseFloat(p.price).toFixed(2) } catch { return p.price || '0.00' } })()}</span>
+                      <span className="font-headline font-bold text-base text-on-surface">{formatPrice(p.price)}</span>
                       {p.stock != null && p.stock <= 0 ? (
                         <span className="text-xs font-bold text-red-500 px-3 py-2">Out of Stock</span>
                       ) : (

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react'
 import { listBuilds, saveBuild as apiSaveBuild, deleteBuild as apiDeleteBuild } from './api'
+import { useAuth } from '@/contexts/AuthContext'
 
 const BuildContext = createContext(null)
 
@@ -21,6 +22,7 @@ function saveSavedBuilds(list) {
 }
 
 export function BuildProvider({ children }) {
+  const { isAuthenticated } = useAuth()
   const [build, setBuild] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
@@ -35,8 +37,12 @@ export function BuildProvider({ children }) {
   }, [build])
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setCloudBuilds([])
+      return
+    }
     listBuilds().then(res => setCloudBuilds(res.data || [])).catch(() => {})
-  }, [])
+  }, [isAuthenticated])
 
   const addComponent = useCallback((category, product) => {
     setBuild(prev => {

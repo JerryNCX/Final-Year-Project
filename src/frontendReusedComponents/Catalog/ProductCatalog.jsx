@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, SlidersHorizontal, ShoppingCart, Check } from 'lucide-react'
+import { ChevronLeft, ChevronRight, SlidersHorizontal, ShoppingCart, Check, SearchX } from 'lucide-react'
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { searchProducts } from '@/lib/api'
@@ -159,6 +159,13 @@ export default function ProductCatalog() {
     setCurrentPage(1)
   }, [selectedCategory, sortBy])
 
+  const clearAllFilters = () => {
+    setSelectedCategory(null)
+    setSelectedManufacturer(null)
+    setInStockOnly(false)
+    setSearchParams({})
+  }
+
   const getPageNumbers = () => {
     const pages = []
     const maxVisible = 5
@@ -288,8 +295,14 @@ export default function ProductCatalog() {
             </div>
           ) : filteredProducts.length === 0 ? (
             <div className="text-center py-20">
+              <SearchX className="w-10 h-10 mx-auto mb-4 text-outline" />
               <span className="font-label text-[10px] tracking-[0.2em] text-primary">{'>'} NO PRODUCTS FOUND</span>
               <p className="font-label text-xs text-on-surface-variant uppercase tracking-wider mt-3">{inStockOnly ? 'No items are currently in stock.' : 'No items match the current criteria.'}</p>
+              {(selectedCategory || selectedManufacturer || inStockOnly) && (
+                <button onClick={clearAllFilters} className="mt-4 font-label text-xs text-primary hover:underline">
+                  Clear Filters
+                </button>
+              )}
             </div>
           ) : (
             <>

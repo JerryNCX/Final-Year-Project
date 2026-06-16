@@ -280,16 +280,15 @@ export function CartProvider({ children }) {
 
   const cartCount = useMemo(() => cartItems.reduce((s, i) => s + i.quantity, 0), [cartItems])
   const subtotal = useMemo(() => cartItems.reduce((s, i) => s + i.total, 0), [cartItems])
-  const tax = useMemo(() => subtotal * 0.08, [subtotal])
-  const cartTotal = useMemo(() => subtotal + tax, [subtotal, tax])
+  const cartTotal = useMemo(() => subtotal, [subtotal])
 
   const value = useMemo(() => ({
     cartItems, addToCart, replaceBuild, addCatalogItem, checkBuildConflict,
     updateQuantity, removeFromCart, clearCart, initialLoading,
-    cartCount, subtotal, tax, cartTotal, formatPrice,
+    cartCount, subtotal, cartTotal, formatPrice,
   }), [cartItems, addToCart, replaceBuild, addCatalogItem, checkBuildConflict,
       updateQuantity, removeFromCart, clearCart, initialLoading,
-      cartCount, subtotal, tax, cartTotal])
+      cartCount, subtotal, cartTotal])
 
   return (
     <CartContext.Provider value={value}>

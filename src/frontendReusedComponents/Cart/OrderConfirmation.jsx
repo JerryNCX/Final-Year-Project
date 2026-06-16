@@ -21,8 +21,8 @@ export default function OrderConfirmation() {
 
   const [order, setOrder] = useState(location.state?.order || null)
   const [cartItems, setCartItems] = useState(location.state?.cartItems || [])
-  const [shippingCost, setShippingCost] = useState(location.state?.shippingCost || 0)
-  const [selectedDelivery, setSelectedDelivery] = useState(location.state?.selectedDelivery || 'Express')
+  const [shippingCost, setShippingCost] = useState(location.state?.shippingCost ?? 0)
+  const [selectedDelivery, setSelectedDelivery] = useState(location.state?.selectedDelivery ?? 'Express')
   const [loading, setLoading] = useState(!location.state?.order)
   const [error, setError] = useState('')
 
@@ -38,6 +38,8 @@ export default function OrderConfirmation() {
         setOrder(data)
         const snapshot = data.build_snapshot || {}
         setCartItems(snapshot.cartItems || [])
+        setShippingCost(data.shipping_cost ?? 0)
+        setSelectedDelivery(data.delivery_method || 'Express')
       } catch (err) {
         if (!cancelled) setError(err.message || 'Failed to load order')
       } finally {
@@ -111,7 +113,7 @@ export default function OrderConfirmation() {
               </div>
               <div className="text-right">
                 <span className="font-label text-xs text-on-surface-variant uppercase tracking-wider">Total Charged</span>
-                <p className="font-headline text-2xl text-primary mt-0.5">{formatPrice(order.total)}</p>
+                <p className="font-headline text-2xl text-primary mt-0.5">RM{Number(order.total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
               </div>
             </div>
           </div>
@@ -189,11 +191,11 @@ export default function OrderConfirmation() {
                 </div>
                 <div className="flex justify-between font-label text-sm text-on-surface-variant">
                   <span>Shipping</span>
-                  <span>{formatPrice(shippingCost)}</span>
+                  <span>RM{Number(shippingCost).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between font-label text-base text-on-surface font-medium pt-2 border-t border-outline-variant/20">
                   <span>Total</span>
-                  <span className="text-primary">{formatPrice(order.total)}</span>
+                  <span className="text-primary">RM{Number(order.total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
               </div>
             </div>

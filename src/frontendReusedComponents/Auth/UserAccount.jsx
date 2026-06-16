@@ -24,7 +24,6 @@ import {
 import Header from '../HomePage/Header'
 import Footer from '../HomePage/Footer'
 import { listOrders, listBuilds, getUserProfile } from '@/lib/api'
-import { formatPrice } from '@/lib/currency'
 
 function formatDate(dateStr) {
   if (!dateStr) return ''
@@ -143,7 +142,7 @@ export default function UserAccount() {
                       </div>
                       <div className="text-right flex items-center gap-4">
                         <div>
-                          <div className="text-sm font-label text-on-surface">{formatPrice(order.total)}</div>
+                          <div className="text-sm font-label text-on-surface">RM{Number(order.total).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                           <div className="flex items-center gap-1.5 text-xs font-label text-on-surface-variant mt-0.5">
                             <Calendar className="w-3 h-3" />
                             {formatDate(order.created_at)}

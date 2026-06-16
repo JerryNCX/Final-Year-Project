@@ -6,15 +6,17 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useCart } from '@/lib/CartContext'
 import { useBuild } from '@/lib/BuildContext'
 import { getUserProfile, updateUserProfile, createOrder, calculateShipping } from '@/lib/api'
+const USD_TO_MYR = 4.40
 
 export default function Checkout() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const location = useLocation()
   const { user, isAuthenticated, loading: authLoading } = useAuth()
-  const { cartItems: allCartItems, subtotal, tax, cartTotal, formatPrice, clearCart } = useCart()
+  const { cartItems: allCartItems, formatPrice, clearCart } = useCart()
   const { build } = useBuild()
   const cartItems = location.state?.selectedItems || allCartItems
+  const displaySubtotal = cartItems.reduce((s, i) => s + (i.total || 0), 0)
 
   const [checkoutStep, setCheckoutStep] = useState(1)
   const [profileLoaded, setProfileLoaded] = useState(false)
@@ -124,13 +126,31 @@ export default function Checkout() {
         build: build,
         cartItems: cartItems,
       }
-      const order = await createOrder(shippingAddress, buildSnapshot, cartTotal + shippingCost)
+      const totalMYR = displaySubtotal * USD_TO_MYR + shippingCost
+      const order = await createOrder(shippingAddress, buildSnapshot, totalMYR, shippingCost, selectedDelivery)
       clearCart()
-      navigate(`/order-confirmation/${order.id}`, {
+      navigate(`/payment/${order.id}`, {
         state: { order, cartItems, shippingCost, selectedDelivery },
+        replace: true,
       })
     } catch (err) {
-      setOrderError(err?.message || 'Failed to place order. Please try again.')
+      const msg = err?.message || ''
+      if (msg.startsWith('API 400:')) {
+        try {
+          const body = JSON.parse(msg.replace('API 400: ', ''))
+          if (body.detail?.out_of_stock_items) {
+            const items = body.detail.out_of_stock_items
+            const list = items.map(i => `${i.name} (${i.available} available, ${i.requested} requested)`).join(', ')
+            setOrderError(`Some items are out of stock: ${list}`)
+          } else {
+            setOrderError(body.detail?.message || 'Failed to place order. Please try again.')
+          }
+        } catch {
+          setOrderError('Failed to place order. Please try again.')
+        }
+      } else {
+        setOrderError(msg || 'Failed to place order. Please try again.')
+      }
     } finally {
       setSubmitting(false)
     }
@@ -428,7 +448,7 @@ export default function Checkout() {
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
                     <>
-                      PLACE ORDER — {formatPrice(cartTotal + shippingCost)}
+                      PLACE ORDER — RM{(displaySubtotal * USD_TO_MYR + shippingCost).toFixed(2)}
                       <Lock className="w-4 h-4" />
                     </>
                   )}
@@ -470,15 +490,11 @@ export default function Checkout() {
             <div className="flex flex-col gap-3 font-body text-sm border-t border-outline-variant/30 pt-6 mb-6">
               <div className="flex justify-between text-on-surface-variant">
                 <span>Subtotal</span>
-                <span className="font-medium text-on-surface">{formatPrice(subtotal)}</span>
+                <span className="font-medium text-on-surface">{formatPrice(displaySubtotal)}</span>
               </div>
               <div className="flex justify-between text-on-surface-variant">
                 <span>Shipping ({selectedDelivery === 'Express' ? 'Priority Overnight' : 'Standard Transport'})</span>
                 <span className="font-medium text-on-surface">+RM{shippingCost.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-on-surface-variant">
-                <span>Estimated Tax</span>
-                <span className="font-medium text-on-surface">{formatPrice(tax)}</span>
               </div>
             </div>
 
@@ -487,7 +503,7 @@ export default function Checkout() {
                 <span className="block font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mb-1">Total Due</span>
                 <span className="block font-body text-xs text-on-surface-variant">MYR</span>
               </div>
-              <span className="font-display text-4xl font-bold tracking-tight text-on-surface">{formatPrice(cartTotal + shippingCost)}</span>
+              <span className="font-display text-4xl font-bold tracking-tight text-on-surface">RM{(displaySubtotal * USD_TO_MYR + shippingCost).toFixed(2)}</span>
             </div>
 
             <div className="mt-8 flex items-center justify-center gap-4 text-outline border-t border-outline-variant/20 pt-6">

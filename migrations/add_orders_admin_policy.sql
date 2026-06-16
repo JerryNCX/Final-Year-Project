@@ -3,5 +3,5 @@
 
 CREATE POLICY admin_select_orders ON public.orders
   FOR SELECT USING (
-    auth.uid() IN (SELECT user_id FROM public.admin_users)
+    auth.jwt() ->> 'email' IN (SELECT email FROM public.admin_users)
   );

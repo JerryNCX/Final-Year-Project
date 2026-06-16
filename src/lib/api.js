@@ -86,6 +86,16 @@ export async function adminListOrders() {
   return request('/admin/orders', { token })
 }
 
+export async function adminUpdateOrderStatus(orderId, status) {
+  const token = await getAccessToken()
+  return request(`/admin/orders/${orderId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status }),
+    token,
+  })
+}
+
 export async function healthCheck() {
   return request('/health')
 }
@@ -140,12 +150,12 @@ export async function updateUserProfile(data) {
   })
 }
 
-export async function createOrder(shippingAddress, buildSnapshot, total) {
+export async function createOrder(shippingAddress, buildSnapshot, total, shippingCost = 0, deliveryMethod = 'Express') {
   const token = await getAccessToken()
   return request('/api/orders', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ shipping_address: shippingAddress, build_snapshot: buildSnapshot, total }),
+    body: JSON.stringify({ shipping_address: shippingAddress, build_snapshot: buildSnapshot, total, shipping_cost: shippingCost, delivery_method: deliveryMethod }),
     token,
   })
 }
@@ -158,6 +168,24 @@ export async function listOrders() {
 export async function getOrder(orderId) {
   const token = await getAccessToken()
   return request(`/api/orders/${orderId}`, { token })
+}
+
+export async function confirmPayment(orderId) {
+  const token = await getAccessToken()
+  return request(`/api/orders/${orderId}/confirm-payment`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    token,
+  })
+}
+
+export async function cancelOrder(orderId) {
+  const token = await getAccessToken()
+  return request(`/api/orders/${orderId}/cancel`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    token,
+  })
 }
 
 export async function calculateShipping(destZip, originZip = '50000') {

@@ -7,7 +7,7 @@ import { useCart } from '@/lib/CartContext'
 
 export default function ShoppingCartPage() {
   const navigate = useNavigate()
-  const { cartItems, updateQuantity, removeFromCart, subtotal, tax, cartTotal, formatPrice } = useCart()
+  const { cartItems, updateQuantity, removeFromCart, subtotal, formatPrice } = useCart()
   const [selectedIds, setSelectedIds] = useState(() => new Set(cartItems.map(i => i.id)))
 
   const itemCount = cartItems.reduce((s, i) => s + i.quantity, 0)
@@ -51,8 +51,6 @@ export default function ShoppingCartPage() {
 
   const selectedItems = useMemo(() => cartItems.filter(i => selectedIds.has(i.id)), [cartItems, selectedIds])
   const selectedSubtotal = useMemo(() => selectedItems.reduce((s, i) => s + i.total, 0), [selectedItems])
-  const selectedTax = useMemo(() => selectedSubtotal * 0.08, [selectedSubtotal])
-  const selectedTotal = useMemo(() => selectedSubtotal + selectedTax, [selectedSubtotal, selectedTax])
   const selectedCount = selectedItems.reduce((s, i) => s + i.quantity, 0)
 
   const handleExecuteOrder = () => {
@@ -238,17 +236,13 @@ export default function ShoppingCartPage() {
                 <span>Shipping Calculation</span>
                 <span className="font-medium text-on-surface">Calculated at next step</span>
               </div>
-              <div className="flex justify-between items-center text-on-surface-variant">
-                <span>Estimated Tax</span>
-                <span className="font-medium text-on-surface">{formatPrice(selectedTax)}</span>
-              </div>
             </div>
 
             <div className="h-[1px] w-full bg-outline-variant/30"></div>
 
             <div className="flex justify-between items-end">
               <span className="text-sm font-bold tracking-[0.1em] text-on-surface-variant uppercase">Total Required</span>
-              <span className="text-3xl font-display font-bold text-on-surface leading-none">{formatPrice(selectedTotal)}</span>
+              <span className="text-3xl font-display font-bold text-on-surface leading-none">{formatPrice(selectedSubtotal)}</span>
             </div>
 
             <button

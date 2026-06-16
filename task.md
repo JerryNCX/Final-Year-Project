@@ -97,6 +97,14 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 - Updated `formatPrice()` to strip `$`/non-numeric chars from string DB prices + NaN guard
 - Replaced all 5 local `formatPrice`/`parsePrice` definitions with import from `@/lib/currency`
 - Updated direct `$` in JSX: `ProductCatalog.jsx` (filter labels), `SearchPopover.jsx`, `ChooseComponent.jsx`, `Checkout.jsx` (4 locations)
+
+### Stock Validation at Checkout (DONE)
+- `supabase.py` — Added `validate_cart_stock(cart_items, client)` and `decrement_stock(table_name, product_id, quantity, client)`
+- `validate_cart_stock()` — iterates cart items, queries `get_product()` for current stock, returns list of failures (name, table_name, product_id, available, requested). Treats null stock as 0. Handles product not found.
+- `decrement_stock()` — subtracts quantity from current stock via `update()`, clamps to minimum 0
+- `main.py` — `place_order()` now validates all items first (all-or-nothing), decrements stock on success, returns 400 with `out_of_stock_items` list if any item is insufficient
+- `Checkout.jsx` — Parses structured 400 error, displays per-item breakdown: "Some items are out of stock: Intel i7-13700K (0 available, 1 requested)"
+- Uses `_tableName`/`_productId` from cart item frontend format (or `table_name`/`product_id` fallback)
 - Updated `Checkout.jsx` default shipping cost (24 → 106), `USD` label → `MYR`
 - Updated backend shipping costs in `supabase.py` (all × 4.40)
 - Updated hardcoded prices in `HomePage.jsx` and `Wishlist.jsx`
@@ -119,6 +127,20 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 ### New Features
 7. **Rebuild from order** — "Rebuild this order" button in order history
 8. **Product reviews/ratings
+
+### Seed Stock for Modern Products (DONE)
+- Created `migrations/seed_stock_modern.sql` — assigns `FLOOR(RANDOM() * 21)::int` stock to modern products across all 8 categories
+- Modern filters per table:
+  - CPU: `lithography IN ('3 nm','4 nm','5 nm','7 nm','10 nm')` — Zen 4/5, Arrow Lake, Raptor Lake, Alder Lake, etc.
+  - GPU: `memory_type IN ('GDDR7','GDDR6X','GDDR6')` — RTX 30/40/50-series, RX 6000/7000/9000
+  - Motherboard: `socket IN ('LGA1851','AM5','LGA1700','AM4')` — modern AMD/Intel platforms
+  - Memory: `form_factor ILIKE '%DDR5%' OR form_factor ILIKE '%DDR4%'`
+  - PSU: `efficiency IN ('80+ Titanium','80+ Platinum','80+ Gold') AND wattage >= 500W`
+  - Case: `type ILIKE '%Mini ITX%' OR ILIKE '%MicroATX%' OR = 'ATX Mid Tower'`
+  - CPU Cooler: `cpu_socket` supports AM4/AM5/LGA1700/LGA1851
+  - Internal Drive: `interface` M.2 PCIe 5.0/4.0/3.0
+- Legacy products remain at stock 0 (out of stock)
+- Run in Supabase SQL Editor
 
 ## Key Technical Context
 - **Server**: `py -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8001` (8000 via npm run dev). PYTHONPATH must be `C:\Users\Admin\Desktop\FYP Dataset`.

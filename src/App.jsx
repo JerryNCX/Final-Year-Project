@@ -9,6 +9,7 @@ import ProductCatalog from './frontendReusedComponents/Catalog/ProductCatalog'
 import ProductDetail from './frontendReusedComponents/Catalog/ProductDetail'
 import ShoppingCart from './frontendReusedComponents/Cart/ShoppingCart'
 import Checkout from './frontendReusedComponents/Cart/Checkout'
+import PaymentPage from './frontendReusedComponents/Cart/PaymentPage'
 import OrderConfirmation from './frontendReusedComponents/Cart/OrderConfirmation'
 import Wishlist from './frontendReusedComponents/Wishlist/Wishlist'
 import LoginPage from './frontendReusedComponents/Auth/LoginPage'
@@ -37,6 +38,7 @@ function App() {
           <Route path="/product/:tableName/:productId" element={<ProductDetail />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment/:orderId" element={<PaymentPage />} />
           <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/login" element={<LoginPage />} />

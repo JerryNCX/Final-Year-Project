@@ -39,8 +39,8 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 6. `migrations/add_admin_list_orders_function.sql` — SECURITY DEFINER function `admin_list_all_orders()`
 
 ### Frontend — Components (DONE)
-- `PCBuildPage.jsx` — 8-slot builder, compatibility badges, wait/PSU rec, save/load/share, centered overlay replace-confirmation modal
-- `ChooseComponent.jsx` — pagination (prev/next + page numbers), search, sort, error retry
+- `PCBuildPage.jsx` — 8-slot builder, compatibility badges, wait/PSU rec, save/load/share, centered overlay replace-confirmation modal; cloud Load button fixed
+- `ChooseComponent.jsx` — pagination (prev/next + page numbers), search, sort, error retry; NaN price fixed (uses `formatPrice`)
 - `ShoppingCart.jsx` — two sections (Build + Catalog items), per-item checkboxes, section master checkboxes, filtered totals
 - `Checkout.jsx` — 2-step flow (Shipping → Payment), email auto-fill, address pre-fill, zip-based delivery velocity, inline errors, build snapshot with selected items
 - `OrderConfirmation.jsx` — fetches from `GET /api/orders/{orderId}` on refresh fallback, loading spinner, error/not-found states
@@ -56,8 +56,8 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 - `Footer.jsx` — "Admin Portal" link
 
 ### Frontend — Context/State (DONE)
-- `BuildContext.jsx` — localStorage + cloud persistence, local/cloud save arrays, apply/delete/refresh
-- `CartContext.jsx` — anonymous cart in localStorage, authenticated sync to Supabase (800ms debounce), auto-merge on login (sums matching), conflict detection, `addToCart`/`replaceBuild`/`addCatalogItem`/`updateQuantity`/`removeFromCart`/`clearCart`
+- `BuildContext.jsx` — localStorage + cloud persistence, local/cloud save arrays, apply/delete/refresh; cloud builds re-fetch on auth change
+- `CartContext.jsx` — anonymous cart in localStorage, authenticated sync to Supabase (800ms debounce), auto-merge on login (sums matching), conflict detection, `addToCart`/`replaceBuild`/`addCatalogItem`/`updateQuantity`/`removeFromCart`/`clearCart`; `firstImage()` helper fixes missing images in cart/checkout
 - `api.js` — all API wrappers, `getAccessToken()` helper, `token` option for Bearer header
 - `supabase-client.js` — just exports the Supabase client (for auth)
 
@@ -74,6 +74,13 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 
 ### Docs
 - `docs/purchase-flow.md` — complete purchase flow document
+
+### Bug Fixes (DONE)
+- **Cloud Load button** — `PCBuildPage.jsx:392` — Empty onClick handler now calls `applyBuild(entry.components)`
+- **Cloud builds stale on account switch** — `BuildContext.jsx:37-39` — Re-fetches on `isAuthenticated` change instead of once on mount
+- **Cart/checkout images missing** — `CartContext.jsx:41,61` — `firstImage()` helper handles JSON string, native array, and raw URL formats
+- **NaN price in ChooseComponent** — `ChooseComponent.jsx:275` — Inline `parseFloat` replaced with shared `formatPrice()` utility
+- **Empty state improvements** — `ProductCatalog.jsx`, `ChooseComponent.jsx`, `ProductManagement.jsx`, `Checkout.jsx` — Added icons (SearchX, PackageX, ShoppingBag) + contextual CTAs
 
 ## Remaining Work
 
@@ -114,19 +121,63 @@ Ship a full PC part catalog/builder with Supabase 8-table backend, PC Builder wi
 - Update shipping cost values in `calculate_shipping()` to realistic RM amounts
 - Update any hardcoded dollar amounts in frontend/components
 
-### Polish & UX
-1. **Homepage PC Builder CTA** — Add hero section card linking to `/build`
-2. **Wishlist** — Audit `/wishlist` route
-3. **Empty states** — Improve empty states for cart, builds list, order history
-4. **Stock validation at checkout** — Check stock before placing order, warn/block OOS
+### 🛠️ Functional Bugs
+1. **ContactUs form does nothing** — `ContactUs.jsx` — No `onSubmit`, uncontrolled inputs, purely decorative
+2. **HomePage newsletter form does nothing** — `HomePage.jsx:252` — `preventDefault` with zero handler logic
+
+### 👤 User Experience
+3. **ShoppingCart shows empty cart while loading** — `ShoppingCart.jsx:10` — Doesn't read `initialLoading` from CartContext, flash of empty content
+4. **SignUpPage missing confirm-password field** — `SignUpPage.jsx` — Users can't catch password typos
+5. **Load panel can't distinguish loading vs empty vs error** — `PCBuildPage.jsx:365` — No loading spinner for cloud builds
+6. **CategoryPage errors have no retry button** — `CategoryPage.jsx:99-103` — User must navigate away and back
+7. **ProductDetail errors have no retry button** — `ProductDetail.jsx:175-189` — Same, no way to retry
+8. **Login/AdminLogin generic error message** — `LoginPage.jsx`, `AdminLogin.jsx` — Can't tell if email or password is wrong
+
+### ⚠️ Error Handling & Resilience
+9. **ProductCatalog silently shows "No products" on API error** — `ProductCatalog.jsx:145-148` — Error swallowed, user sees misleading empty state
+10. **ProductManagement shows "No products" on API error** — `ProductManagement.jsx:46-48` — Same, no error UI for network failures
+11. **BuildContext cloud builds errors silently swallowed** — `BuildContext.jsx:44` — `.catch(() => {})`, no retry mechanism
+12. **CartContext has no error state exposed** — `CartContext.jsx:140-157` — Components can't show sync failures
+13. **PCBuildPage compatibility errors swallowed** — `PCBuildPage.jsx:100` — `.catch(() => {})`, user gets no warning
+14. **Cart sync failures silently ignored** — `CartContext.jsx:173` — `syncCart().catch(() => {})`
+15. **12 empty catch blocks** — Multiple files — Should at least `console.warn`
+
+### 🏗️ Code Quality & Maintainability
+16. **Array index as key (10 files)** — ChooseComponent, SearchPopover, PCBuildPage, ProductCatalog, etc. — React anti-pattern, causes incorrect re-renders on list reorder/filter
+17. **`useEffect` missing dependency** — `PCBuildPage.jsx:89-105` — `suggestions` state read but not in deps array
+18. **Hardcoded route paths** — ~15+ files — No central route constants
+19. **No shared validation utility** — LoginPage, SignUpPage, Checkout — Each form duplicates or skips validation logic
+
+### 🔒 Security
+20. **No client-side input validation** — LoginPage, SignUpPage, Checkout — Malformed data sent before server validates
+21. **No email regex on signup/login** — SignUpPage, LoginPage — Bypassable HTML `type="email"` only
+22. **No name/content sanitization** — SignUpPage — Names like `"<script>"` or 500-char strings accepted
+23. **XSS via base64 build data (low risk)** — PCBuildPage.jsx:48 — `applyBuild()` accepts decoded payload from URL params
+
+### 🚀 Performance
+24. **Bundle > 500kB warning** — vite build output — Single chunk, could code-split with dynamic imports
+25. **Array index keys cause unnecessary re-renders** — 10 files — Fixed keys help React's reconciliation
+
+### 🎨 Visual / Creative Design
+26. **Widen product grid** — ProductCatalog — Add `xl:grid-cols-5` for large screens
+27. **Mobile order summary accordion** — Checkout.jsx:461 — Collapsible on small screens
+28. **Page transitions & micro-interactions** — Various — Skeleton pulse + hover scales exist, no route transitions
+29. **Product image lightbox** — ProductDetail — Click to zoom/enlarge product images
+
+### 📐 Scalability / Architecture
+30. **BuildContext cloud builds has no loading/error state** — `BuildContext.jsx:39-45` — Components can't distinguish states
+31. **CartContext has no error state exposed** — `CartContext.jsx:140-157` — Components can't show sync failures
+32. **Route paths duplicated across 15+ files** — Multiple — Create `src/lib/routes.js` constants file
+33. **No centralized API error handling** — Multiple — Each component handles errors differently
+34. **No form validation utility** — Multiple — Create `src/lib/validation.js` with shared validators
 
 ### Admin Enhancements
-5. **Order status management** — Admin updates status (processing/shipped/delivered); shown in account
-6. **Persist shipping data** — Add `shipping_cost` + `delivery_method` columns to `orders` table
+35. **Order status management** — Admin updates status (processing/shipped/delivered); shown in account
+36. **Persist shipping data** — Add `shipping_cost` + `delivery_method` columns to `orders` table
 
 ### New Features
-7. **Rebuild from order** — "Rebuild this order" button in order history
-8. **Product reviews/ratings
+37. **Rebuild from order** — "Rebuild this order" button in order history
+38. **Product reviews/ratings
 
 ### Seed Stock for Modern Products (DONE)
 - Created `migrations/seed_stock_modern.sql` — assigns `FLOOR(RANDOM() * 21)::int` stock to modern products across all 8 categories

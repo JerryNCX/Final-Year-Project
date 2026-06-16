@@ -2,7 +2,7 @@
 
 ## 📝 Content Defects
 
-_No content defects logged yet._
+- [#3](https://github.com/JerryNCX/Final-Year-Project/issues/3) Build - Choose Components Page — opened by @JerryNCX _(closed 2026-06-16)_
 
 ## 📄 Documentation Defects
 

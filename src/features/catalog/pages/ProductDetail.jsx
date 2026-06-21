@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { ShoppingBag, Heart, Truck, Star, ArrowLeft } from 'lucide-react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { ShoppingBag, Heart, Truck, Star, ArrowLeft, GitCompare } from 'lucide-react'
 import { getProduct } from '@/features/catalog/api/catalog'
 import { formatPrice } from '@/utils/currency'
 import Header from '@/features/home/components/Header'
@@ -129,6 +129,7 @@ function getImages(urls) {
 
 export default function ProductDetail() {
   const { tableName, productId } = useParams()
+  const navigate = useNavigate()
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -290,6 +291,13 @@ export default function ProductDetail() {
               <button className="bg-surface-container-lowest text-on-surface font-label text-sm tracking-[0.15em] uppercase py-4 px-8 border border-outline/30 hover:bg-surface-container transition-colors flex items-center justify-center gap-3 w-full">
                 <Heart className="w-4 h-4" />
                 SAVE TO WISHLIST
+              </button>
+              <button
+                onClick={() => navigate(`/catalog?category=${encodeURIComponent(product.table_name)}&compare=${product.table_name}-${product.id}`)}
+                className="text-on-surface border-outline/30 bg-surface-container-lowest hover:bg-surface-container font-label text-sm tracking-[0.15em] uppercase py-4 px-8 border transition-colors flex items-center justify-center gap-3 w-full"
+              >
+                <GitCompare className="w-4 h-4" />
+                ADD TO COMPARE
               </button>
             </div>
             <div className="mt-4 flex items-center gap-2 text-on-surface-variant font-label text-[10px] uppercase tracking-wider">

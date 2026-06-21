@@ -6,10 +6,18 @@ export async function analyzeImage(file) {
   return request('/analyze', { method: 'POST', body: form })
 }
 
-export async function searchProducts({ q = '', category = null, limit = 20, offset = 0, sort_by = 'default', in_stock_first = true } = {}) {
+export async function searchProducts({ q = '', category = null, limit = 20, offset = 0, sort_by = 'default', in_stock_first = true, manufacturer = null, price_min = null, price_max = null, filters = null } = {}) {
   const params = new URLSearchParams({ q, limit, offset, sort_by, in_stock_first })
   if (category) params.set('category', category)
+  if (manufacturer) params.set('manufacturer', manufacturer)
+  if (price_min != null) params.set('price_min', price_min)
+  if (price_max != null) params.set('price_max', price_max)
+  if (filters) params.set('filters', JSON.stringify(filters))
   return request(`/search?${params}`)
+}
+
+export async function getCategoryFilters(category) {
+  return request(`/search/filters/${encodeURIComponent(category)}`)
 }
 
 export async function getCategories() {

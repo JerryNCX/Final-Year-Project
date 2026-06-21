@@ -24,6 +24,7 @@ import AdminLogin from '@/features/admin/pages/AdminLogin'
 import ProtectedRoute from '@/features/admin/components/ProtectedRoute'
 import PCBuildPage from '@/features/builder/pages/PCBuildPage'
 import ChooseComponent from '@/features/builder/pages/ChooseComponent'
+import ComparePage from '@/features/catalog/pages/ComparePage'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/catalog" element={<ProductCatalog />} />
+          <Route path="/compare" element={<ComparePage />} />
           <Route path="/product/:tableName/:productId" element={<ProductDetail />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/checkout" element={<Checkout />} />

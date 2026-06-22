@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ShoppingCart, Check, SearchX, X, Archive, Search } from 'lucide-react'
 import Header from '@/features/home/components/Header'
 import Footer from '@/features/home/components/Footer'
@@ -169,6 +169,7 @@ function RangeFilterGroup({ label, min, max, valueMin, valueMax, onMinChange, on
 
 export default function ProductCatalog() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -539,7 +540,7 @@ export default function ProductCatalog() {
                   const ids = Array.from(compareIds)
                   const params = new URLSearchParams()
                   ids.forEach(id => params.append('ids', id))
-                  window.open(`/compare?${params}`, '_blank')
+                  navigate(`/compare?${params}`)
                 }}
                 disabled={compareIds.size < 2}
                 className={`font-label text-[11px] tracking-[0.15em] uppercase border px-3 py-1.5 transition-colors ${

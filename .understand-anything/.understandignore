@@ -29,3 +29,6 @@ dist-ssr
 .env
 .cursor
 .gitignore
+poppler/
+stitch-exports/
+supabase tables/

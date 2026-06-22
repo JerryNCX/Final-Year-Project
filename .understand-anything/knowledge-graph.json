@@ -1,0 +1,3953 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "final-year-project",
+    "languages": [
+      "css",
+      "html",
+      "javascript",
+      "json",
+      "markdown",
+      "python",
+      "sql",
+      "txt",
+      "yaml"
+    ],
+    "frameworks": [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "Radix UI",
+      "React Router"
+    ],
+    "description": "An e-commerce system integrating YOLO and OCR for PC customization, built with React and Supabase. Note: this project has over 50 source files; consider scoping analysis to a subdirectory for faster results.",
+    "analyzedAt": "2026-06-22T19:15:25.752818+00:00",
+    "gitCommitHash": "af275bdfe3efce9c58587220cbb89efd0a1c7fb0"
+  },
+  "nodes": [
+    {
+      "id": "service:.github/workflows/changelog.yml",
+      "type": "service",
+      "name": "changelog.yml",
+      "filePath": ".github/workflows/changelog.yml",
+      "summary": "CI/CD workflow: changelog.yml",
+      "tags": [
+        "infrastructure"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "yaml, 136 lines"
+    },
+    {
+      "id": "table:migrations/add_admin_list_orders_function.sql",
+      "type": "table",
+      "name": "add_admin_list_orders_function.sql",
+      "filePath": "migrations/add_admin_list_orders_function.sql",
+      "summary": "Database migration: add_admin_list_orders_function",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 14 lines"
+    },
+    {
+      "id": "table:migrations/add_admin_rls.sql",
+      "type": "table",
+      "name": "add_admin_rls.sql",
+      "filePath": "migrations/add_admin_rls.sql",
+      "summary": "Database migration: add_admin_rls",
+      "tags": [
+        "database"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "sql, 89 lines"
+    },
+    {
+      "id": "table:migrations/add_admin_update_order_policy.sql",
+      "type": "table",
+      "name": "add_admin_update_order_policy.sql",
+      "filePath": "migrations/add_admin_update_order_policy.sql",
+      "summary": "Database migration: add_admin_update_order_policy",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 7 lines"
+    },
+    {
+      "id": "table:migrations/add_builds_table.sql",
+      "type": "table",
+      "name": "add_builds_table.sql",
+      "filePath": "migrations/add_builds_table.sql",
+      "summary": "Database migration: add_builds_table",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 25 lines"
+    },
+    {
+      "id": "table:migrations/add_cart_table.sql",
+      "type": "table",
+      "name": "add_cart_table.sql",
+      "filePath": "migrations/add_cart_table.sql",
+      "summary": "Database migration: add_cart_table",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 28 lines"
+    },
+    {
+      "id": "table:migrations/add_order_shipping_columns.sql",
+      "type": "table",
+      "name": "add_order_shipping_columns.sql",
+      "filePath": "migrations/add_order_shipping_columns.sql",
+      "summary": "Database migration: add_order_shipping_columns",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 2 lines"
+    },
+    {
+      "id": "table:migrations/add_order_update_policy.sql",
+      "type": "table",
+      "name": "add_order_update_policy.sql",
+      "filePath": "migrations/add_order_update_policy.sql",
+      "summary": "Database migration: add_order_update_policy",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 5 lines"
+    },
+    {
+      "id": "table:migrations/add_orders_admin_policy.sql",
+      "type": "table",
+      "name": "add_orders_admin_policy.sql",
+      "filePath": "migrations/add_orders_admin_policy.sql",
+      "summary": "Database migration: add_orders_admin_policy",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 7 lines"
+    },
+    {
+      "id": "table:migrations/add_stock_column.sql",
+      "type": "table",
+      "name": "add_stock_column.sql",
+      "filePath": "migrations/add_stock_column.sql",
+      "summary": "Database migration: add_stock_column",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 11 lines"
+    },
+    {
+      "id": "table:migrations/add_stock_reserved_and_order_status.sql",
+      "type": "table",
+      "name": "add_stock_reserved_and_order_status.sql",
+      "filePath": "migrations/add_stock_reserved_and_order_status.sql",
+      "summary": "Database migration: add_stock_reserved_and_order_status",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 13 lines"
+    },
+    {
+      "id": "table:migrations/add_stock_rpc_functions.sql",
+      "type": "table",
+      "name": "add_stock_rpc_functions.sql",
+      "filePath": "migrations/add_stock_rpc_functions.sql",
+      "summary": "Database migration: add_stock_rpc_functions",
+      "tags": [
+        "database"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "sql, 60 lines"
+    },
+    {
+      "id": "table:migrations/add_users_table.sql",
+      "type": "table",
+      "name": "add_users_table.sql",
+      "filePath": "migrations/add_users_table.sql",
+      "summary": "Database migration: add_users_table",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 46 lines"
+    },
+    {
+      "id": "table:migrations/seed_stock_modern.sql",
+      "type": "table",
+      "name": "seed_stock_modern.sql",
+      "filePath": "migrations/seed_stock_modern.sql",
+      "summary": "Database migration: seed_stock_modern",
+      "tags": [
+        "database"
+      ],
+      "complexity": "simple",
+      "languageNotes": "sql, 25 lines"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "CHANGELOG.md",
+      "summary": "\ud83d\udccb Changelog",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 3 lines"
+    },
+    {
+      "id": "document:CONFLICT_LOG.md",
+      "type": "document",
+      "name": "CONFLICT_LOG.md",
+      "filePath": "CONFLICT_LOG.md",
+      "summary": "\u26a0\ufe0f Conflict Log",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 3 lines"
+    },
+    {
+      "id": "document:DEFECT_LOG.md",
+      "type": "document",
+      "name": "DEFECT_LOG.md",
+      "filePath": "DEFECT_LOG.md",
+      "summary": "\ud83d\udc1b Defect Log",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 14 lines"
+    },
+    {
+      "id": "document:FYP Article Lists.txt",
+      "type": "document",
+      "name": "FYP Article Lists.txt",
+      "filePath": "FYP Article Lists.txt",
+      "summary": "FYP Article Lists",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "txt, 25 lines"
+    },
+    {
+      "id": "document:FYP1.md",
+      "type": "document",
+      "name": "FYP1.md",
+      "filePath": "FYP1.md",
+      "summary": "## Page 1",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "complex",
+      "languageNotes": "markdown, 3358 lines"
+    },
+    {
+      "id": "document:ProjectLog.md",
+      "type": "document",
+      "name": "ProjectLog.md",
+      "filePath": "ProjectLog.md",
+      "summary": "Project Log",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 36 lines"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "React + Vite",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 16 lines"
+    },
+    {
+      "id": "config:components.json",
+      "type": "config",
+      "name": "components.json",
+      "filePath": "components.json",
+      "summary": "Configuration file: components.json",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "json, 22 lines"
+    },
+    {
+      "id": "document:design.md",
+      "type": "document",
+      "name": "design.md",
+      "filePath": "design.md",
+      "summary": "Design System Document",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "markdown, 95 lines"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "summary": "HTML entry: index.html",
+      "tags": [
+        "markup"
+      ],
+      "complexity": "simple",
+      "languageNotes": "html, 27 lines"
+    },
+    {
+      "id": "config:jsconfig.json",
+      "type": "config",
+      "name": "jsconfig.json",
+      "filePath": "jsconfig.json",
+      "summary": "Configuration file: jsconfig.json",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "json, 11 lines"
+    },
+    {
+      "id": "config:opencode.json",
+      "type": "config",
+      "name": "opencode.json",
+      "filePath": "opencode.json",
+      "summary": "Configuration file: opencode.json",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "json, 20 lines"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "Configuration file: package.json",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "json, 51 lines"
+    },
+    {
+      "id": "document:task.md",
+      "type": "document",
+      "name": "task.md",
+      "filePath": "task.md",
+      "summary": "Task.md \u2014 PC Builder + Full E-Commerce Flow",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "complex",
+      "languageNotes": "markdown, 216 lines"
+    },
+    {
+      "id": "document:.opencode/plans/session.md",
+      "type": "document",
+      "name": "session.md",
+      "filePath": ".opencode/plans/session.md",
+      "summary": "PC Builder Session",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 18 lines"
+    },
+    {
+      "id": "document:.opencode/rules.md",
+      "type": "document",
+      "name": "rules.md",
+      "filePath": ".opencode/rules.md",
+      "summary": "## Session Continuity Rule",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "simple",
+      "languageNotes": "markdown, 11 lines"
+    },
+    {
+      "id": "config:.postman/resources.yaml",
+      "type": "config",
+      "name": "resources.yaml",
+      "filePath": ".postman/resources.yaml",
+      "summary": "Configuration file: .postman/resources.yaml",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "yaml, 9 lines"
+    },
+    {
+      "id": "document:docs/purchase-flow.md",
+      "type": "document",
+      "name": "purchase-flow.md",
+      "filePath": "docs/purchase-flow.md",
+      "summary": "PC Builder \u2014 Complete Purchase Flow",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "complex",
+      "languageNotes": "markdown, 211 lines"
+    },
+    {
+      "id": "document:docs/stock-workflow.md",
+      "type": "document",
+      "name": "stock-workflow.md",
+      "filePath": "docs/stock-workflow.md",
+      "summary": "Stock Reservation Workflow",
+      "tags": [
+        "documentation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "markdown, 172 lines"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "type": "file",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "summary": "import js from '@eslint/js'",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 29 lines"
+    },
+    {
+      "id": "config:postman/globals/workspace.globals.yaml",
+      "type": "config",
+      "name": "workspace.globals.yaml",
+      "filePath": "postman/globals/workspace.globals.yaml",
+      "summary": "Configuration file: postman/globals/workspace.globals.yaml",
+      "tags": [
+        "configuration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "yaml, 2 lines"
+    },
+    {
+      "id": "file:scripts/cleanProductCatalog.cjs",
+      "type": "file",
+      "name": "cleanProductCatalog.cjs",
+      "filePath": "scripts/cleanProductCatalog.cjs",
+      "summary": "Exports: baseDir, firstCommaIndex, originalCategory, nameLower, line",
+      "tags": [
+        "untagged"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 188 lines"
+    },
+    {
+      "id": "function:scripts/cleanProductCatalog.cjs:getCategoryFromKeyword",
+      "type": "function",
+      "name": "getCategoryFromKeyword",
+      "filePath": "scripts/cleanProductCatalog.cjs",
+      "summary": "Function getCategoryFromKeyword in cleanProductCatalog.cjs",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/cleanProductCatalog.cjs:processCSV",
+      "type": "function",
+      "name": "processCSV",
+      "filePath": "scripts/cleanProductCatalog.cjs",
+      "summary": "Function processCSV in cleanProductCatalog.cjs",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/App.jsx",
+      "type": "file",
+      "name": "App.jsx",
+      "filePath": "src/App.jsx",
+      "summary": "Exports: App",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 75 lines"
+    },
+    {
+      "id": "function:src/App.jsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "src/App.jsx",
+      "summary": "Function App in App.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/button.jsx",
+      "type": "file",
+      "name": "button.jsx",
+      "filePath": "src/components/ui/button.jsx",
+      "summary": "Exports: Button, Comp, buttonVariants",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 60 lines"
+    },
+    {
+      "id": "function:src/components/ui/button.jsx:Button",
+      "type": "function",
+      "name": "Button",
+      "filePath": "src/components/ui/button.jsx",
+      "summary": "Function Button in button.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/card.jsx",
+      "type": "file",
+      "name": "card.jsx",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Exports: , CardAction, CardDescription, CardContent, CardTitle",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 101 lines"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:Card",
+      "type": "function",
+      "name": "Card",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function Card in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardHeader",
+      "type": "function",
+      "name": "CardHeader",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardHeader in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardTitle",
+      "type": "function",
+      "name": "CardTitle",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardTitle in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardDescription",
+      "type": "function",
+      "name": "CardDescription",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardDescription in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardAction",
+      "type": "function",
+      "name": "CardAction",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardAction in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardContent",
+      "type": "function",
+      "name": "CardContent",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardContent in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/card.jsx:CardFooter",
+      "type": "function",
+      "name": "CardFooter",
+      "filePath": "src/components/ui/card.jsx",
+      "summary": "Function CardFooter in card.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/input-group.jsx",
+      "type": "file",
+      "name": "input-group.jsx",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Exports: , InputGroupText, InputGroupButton, InputGroup, inputGroupButtonVariants",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 160 lines"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroup",
+      "type": "function",
+      "name": "InputGroup",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroup in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroupAddon",
+      "type": "function",
+      "name": "InputGroupAddon",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroupAddon in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroupButton",
+      "type": "function",
+      "name": "InputGroupButton",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroupButton in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroupText",
+      "type": "function",
+      "name": "InputGroupText",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroupText in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroupInput",
+      "type": "function",
+      "name": "InputGroupInput",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroupInput in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/input-group.jsx:InputGroupTextarea",
+      "type": "function",
+      "name": "InputGroupTextarea",
+      "filePath": "src/components/ui/input-group.jsx",
+      "summary": "Function InputGroupTextarea in input-group.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/input.jsx",
+      "type": "file",
+      "name": "input.jsx",
+      "filePath": "src/components/ui/input.jsx",
+      "summary": "Exports: Input",
+      "tags": [
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 24 lines"
+    },
+    {
+      "id": "function:src/components/ui/input.jsx:Input",
+      "type": "function",
+      "name": "Input",
+      "filePath": "src/components/ui/input.jsx",
+      "summary": "Function Input in input.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/label.jsx",
+      "type": "file",
+      "name": "label.jsx",
+      "filePath": "src/components/ui/label.jsx",
+      "summary": "Exports: Label",
+      "tags": [
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 21 lines"
+    },
+    {
+      "id": "function:src/components/ui/label.jsx:Label",
+      "type": "function",
+      "name": "Label",
+      "filePath": "src/components/ui/label.jsx",
+      "summary": "Function Label in label.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/navigation-menu.jsx",
+      "type": "file",
+      "name": "navigation-menu.jsx",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Exports: , NavigationMenuTrigger, NavigationMenuIndicator, NavigationMenuLink, NavigationMenuList",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 152 lines"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenu",
+      "type": "function",
+      "name": "NavigationMenu",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenu in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuList",
+      "type": "function",
+      "name": "NavigationMenuList",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuList in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuItem",
+      "type": "function",
+      "name": "NavigationMenuItem",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuItem in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuTrigger",
+      "type": "function",
+      "name": "NavigationMenuTrigger",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuTrigger in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuContent",
+      "type": "function",
+      "name": "NavigationMenuContent",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuContent in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuViewport",
+      "type": "function",
+      "name": "NavigationMenuViewport",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuViewport in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuLink",
+      "type": "function",
+      "name": "NavigationMenuLink",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuLink in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/navigation-menu.jsx:NavigationMenuIndicator",
+      "type": "function",
+      "name": "NavigationMenuIndicator",
+      "filePath": "src/components/ui/navigation-menu.jsx",
+      "summary": "Function NavigationMenuIndicator in navigation-menu.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/resizable.jsx",
+      "type": "file",
+      "name": "resizable.jsx",
+      "filePath": "src/components/ui/resizable.jsx",
+      "summary": "Exports: ResizableHandle, ResizablePanelGroup, ResizablePanel",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 51 lines"
+    },
+    {
+      "id": "function:src/components/ui/resizable.jsx:ResizablePanelGroup",
+      "type": "function",
+      "name": "ResizablePanelGroup",
+      "filePath": "src/components/ui/resizable.jsx",
+      "summary": "Function ResizablePanelGroup in resizable.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/resizable.jsx:ResizablePanel",
+      "type": "function",
+      "name": "ResizablePanel",
+      "filePath": "src/components/ui/resizable.jsx",
+      "summary": "Function ResizablePanel in resizable.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/resizable.jsx:ResizableHandle",
+      "type": "function",
+      "name": "ResizableHandle",
+      "filePath": "src/components/ui/resizable.jsx",
+      "summary": "Function ResizableHandle in resizable.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/tabs.jsx",
+      "type": "file",
+      "name": "tabs.jsx",
+      "filePath": "src/components/ui/tabs.jsx",
+      "summary": "Exports: TabsContent, TabsList, TabsTrigger, Tabs",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 60 lines"
+    },
+    {
+      "id": "function:src/components/ui/tabs.jsx:Tabs",
+      "type": "function",
+      "name": "Tabs",
+      "filePath": "src/components/ui/tabs.jsx",
+      "summary": "Function Tabs in tabs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/tabs.jsx:TabsList",
+      "type": "function",
+      "name": "TabsList",
+      "filePath": "src/components/ui/tabs.jsx",
+      "summary": "Function TabsList in tabs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/tabs.jsx:TabsTrigger",
+      "type": "function",
+      "name": "TabsTrigger",
+      "filePath": "src/components/ui/tabs.jsx",
+      "summary": "Function TabsTrigger in tabs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/components/ui/tabs.jsx:TabsContent",
+      "type": "function",
+      "name": "TabsContent",
+      "filePath": "src/components/ui/tabs.jsx",
+      "summary": "Function TabsContent in tabs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/components/ui/textarea.jsx",
+      "type": "file",
+      "name": "textarea.jsx",
+      "filePath": "src/components/ui/textarea.jsx",
+      "summary": "Exports: Textarea",
+      "tags": [
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 20 lines"
+    },
+    {
+      "id": "function:src/components/ui/textarea.jsx:Textarea",
+      "type": "function",
+      "name": "Textarea",
+      "filePath": "src/components/ui/textarea.jsx",
+      "summary": "Function Textarea in textarea.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/config/categories.js",
+      "type": "file",
+      "name": "categories.js",
+      "filePath": "src/config/categories.js",
+      "summary": "Exports: CATEGORIES",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 10 lines"
+    },
+    {
+      "id": "file:src/features/about/pages/AboutUs.jsx",
+      "type": "file",
+      "name": "AboutUs.jsx",
+      "filePath": "src/features/about/pages/AboutUs.jsx",
+      "summary": "Exports: AboutUs",
+      "tags": [
+        "page"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 189 lines"
+    },
+    {
+      "id": "function:src/features/about/pages/AboutUs.jsx:AboutUs",
+      "type": "function",
+      "name": "AboutUs",
+      "filePath": "src/features/about/pages/AboutUs.jsx",
+      "summary": "Function AboutUs in AboutUs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/api/admin.js",
+      "type": "file",
+      "name": "admin.js",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Exports: adminListOrders, healthCheck, token, adminDeleteProduct, adminUpdateOrderStatus",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 38 lines"
+    },
+    {
+      "id": "function:src/features/admin/api/admin.js:adminUpdateProduct",
+      "type": "function",
+      "name": "adminUpdateProduct",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Function adminUpdateProduct in admin.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/admin/api/admin.js:adminDeleteProduct",
+      "type": "function",
+      "name": "adminDeleteProduct",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Function adminDeleteProduct in admin.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/admin/api/admin.js:adminListOrders",
+      "type": "function",
+      "name": "adminListOrders",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Function adminListOrders in admin.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/admin/api/admin.js:adminUpdateOrderStatus",
+      "type": "function",
+      "name": "adminUpdateOrderStatus",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Function adminUpdateOrderStatus in admin.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/admin/api/admin.js:healthCheck",
+      "type": "function",
+      "name": "healthCheck",
+      "filePath": "src/features/admin/api/admin.js",
+      "summary": "Function healthCheck in admin.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/components/AdminLayout.jsx",
+      "type": "file",
+      "name": "AdminLayout.jsx",
+      "filePath": "src/features/admin/components/AdminLayout.jsx",
+      "summary": "Exports: handleLogout, isActive, currentPath, navItems, location",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 90 lines"
+    },
+    {
+      "id": "function:src/features/admin/components/AdminLayout.jsx:AdminLayout",
+      "type": "function",
+      "name": "AdminLayout",
+      "filePath": "src/features/admin/components/AdminLayout.jsx",
+      "summary": "Function AdminLayout in AdminLayout.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/components/CategorySidebar.jsx",
+      "type": "file",
+      "name": "CategorySidebar.jsx",
+      "filePath": "src/features/admin/components/CategorySidebar.jsx",
+      "summary": "Exports: CategorySidebar, count, isSelected",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 54 lines"
+    },
+    {
+      "id": "function:src/features/admin/components/CategorySidebar.jsx:CategorySidebar",
+      "type": "function",
+      "name": "CategorySidebar",
+      "filePath": "src/features/admin/components/CategorySidebar.jsx",
+      "summary": "Function CategorySidebar in CategorySidebar.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/components/ProductCard.jsx",
+      "type": "file",
+      "name": "ProductCard.jsx",
+      "filePath": "src/features/admin/components/ProductCard.jsx",
+      "summary": "Exports: truncateName, ProductCard, handleDelete, handleStockSave, imgUrl",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 122 lines"
+    },
+    {
+      "id": "function:src/features/admin/components/ProductCard.jsx:ProductCard",
+      "type": "function",
+      "name": "ProductCard",
+      "filePath": "src/features/admin/components/ProductCard.jsx",
+      "summary": "Function ProductCard in ProductCard.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/components/ProtectedRoute.jsx",
+      "type": "file",
+      "name": "ProtectedRoute.jsx",
+      "filePath": "src/features/admin/components/ProtectedRoute.jsx",
+      "summary": "Exports: result, res, ProtectedRoute, check, location",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 60 lines"
+    },
+    {
+      "id": "function:src/features/admin/components/ProtectedRoute.jsx:ProtectedRoute",
+      "type": "function",
+      "name": "ProtectedRoute",
+      "filePath": "src/features/admin/components/ProtectedRoute.jsx",
+      "summary": "Function ProtectedRoute in ProtectedRoute.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/pages/AdminLogin.jsx",
+      "type": "file",
+      "name": "AdminLogin.jsx",
+      "filePath": "src/features/admin/pages/AdminLogin.jsx",
+      "summary": "Exports: handleSubmit, navigate, result, AdminLogin",
+      "tags": [
+        "page"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 103 lines"
+    },
+    {
+      "id": "function:src/features/admin/pages/AdminLogin.jsx:AdminLogin",
+      "type": "function",
+      "name": "AdminLogin",
+      "filePath": "src/features/admin/pages/AdminLogin.jsx",
+      "summary": "Function AdminLogin in AdminLogin.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/pages/AdminOrders.jsx",
+      "type": "file",
+      "name": "AdminOrders.jsx",
+      "filePath": "src/features/admin/pages/AdminOrders.jsx",
+      "summary": "Exports: items, res, formatDate, AdminOrders, handleStatusChange",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 260 lines"
+    },
+    {
+      "id": "function:src/features/admin/pages/AdminOrders.jsx:formatDate",
+      "type": "function",
+      "name": "formatDate",
+      "filePath": "src/features/admin/pages/AdminOrders.jsx",
+      "summary": "Function formatDate in AdminOrders.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/admin/pages/AdminOrders.jsx:AdminOrders",
+      "type": "function",
+      "name": "AdminOrders",
+      "filePath": "src/features/admin/pages/AdminOrders.jsx",
+      "summary": "Function AdminOrders in AdminOrders.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/admin/pages/ProductManagement.jsx",
+      "type": "file",
+      "name": "ProductManagement.jsx",
+      "filePath": "src/features/admin/pages/ProductManagement.jsx",
+      "summary": "Exports: handleStockChange, newStock, img, copy, handleDelete",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 249 lines"
+    },
+    {
+      "id": "function:src/features/admin/pages/ProductManagement.jsx:ProductManagement",
+      "type": "function",
+      "name": "ProductManagement",
+      "filePath": "src/features/admin/pages/ProductManagement.jsx",
+      "summary": "Function ProductManagement in ProductManagement.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/auth/api/auth.js",
+      "type": "file",
+      "name": "auth.js",
+      "filePath": "src/features/auth/api/auth.js",
+      "summary": "Exports: authService",
+      "tags": [
+        "module"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 58 lines"
+    },
+    {
+      "id": "file:src/features/auth/api/user.js",
+      "type": "file",
+      "name": "user.js",
+      "filePath": "src/features/auth/api/user.js",
+      "summary": "Exports: token, getUserProfile, syncUserProfile, updateUserProfile",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 26 lines"
+    },
+    {
+      "id": "function:src/features/auth/api/user.js:syncUserProfile",
+      "type": "function",
+      "name": "syncUserProfile",
+      "filePath": "src/features/auth/api/user.js",
+      "summary": "Function syncUserProfile in user.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/auth/api/user.js:getUserProfile",
+      "type": "function",
+      "name": "getUserProfile",
+      "filePath": "src/features/auth/api/user.js",
+      "summary": "Function getUserProfile in user.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/auth/api/user.js:updateUserProfile",
+      "type": "function",
+      "name": "updateUserProfile",
+      "filePath": "src/features/auth/api/user.js",
+      "summary": "Function updateUserProfile in user.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/auth/hooks/useAuth.jsx",
+      "type": "file",
+      "name": "useAuth.jsx",
+      "filePath": "src/features/auth/hooks/useAuth.jsx",
+      "summary": "Exports: result, AuthProvider, useAuth, AuthContext, value",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 67 lines"
+    },
+    {
+      "id": "function:src/features/auth/hooks/useAuth.jsx:AuthProvider",
+      "type": "function",
+      "name": "AuthProvider",
+      "filePath": "src/features/auth/hooks/useAuth.jsx",
+      "summary": "Function AuthProvider in useAuth.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/auth/hooks/useAuth.jsx:useAuth",
+      "type": "function",
+      "name": "useAuth",
+      "filePath": "src/features/auth/hooks/useAuth.jsx",
+      "summary": "Function useAuth in useAuth.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/auth/pages/LoginPage.jsx",
+      "type": "file",
+      "name": "LoginPage.jsx",
+      "filePath": "src/features/auth/pages/LoginPage.jsx",
+      "summary": "Exports: redirect, result, handleSubmit, LoginPage, navigate",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 205 lines"
+    },
+    {
+      "id": "function:src/features/auth/pages/LoginPage.jsx:LoginPage",
+      "type": "function",
+      "name": "LoginPage",
+      "filePath": "src/features/auth/pages/LoginPage.jsx",
+      "summary": "Function LoginPage in LoginPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/auth/pages/SignUpPage.jsx",
+      "type": "file",
+      "name": "SignUpPage.jsx",
+      "filePath": "src/features/auth/pages/SignUpPage.jsx",
+      "summary": "Exports: handleSubmit, navigate, SignUpPage",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 272 lines"
+    },
+    {
+      "id": "function:src/features/auth/pages/SignUpPage.jsx:SignUpPage",
+      "type": "function",
+      "name": "SignUpPage",
+      "filePath": "src/features/auth/pages/SignUpPage.jsx",
+      "summary": "Function SignUpPage in SignUpPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/auth/pages/UserAccount.jsx",
+      "type": "file",
+      "name": "UserAccount.jsx",
+      "filePath": "src/features/auth/pages/UserAccount.jsx",
+      "summary": "Exports: extraCount, handleSignOut, fetchData, activeConfigItems, compCount",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 520 lines"
+    },
+    {
+      "id": "function:src/features/auth/pages/UserAccount.jsx:formatDate",
+      "type": "function",
+      "name": "formatDate",
+      "filePath": "src/features/auth/pages/UserAccount.jsx",
+      "summary": "Function formatDate in UserAccount.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/auth/pages/UserAccount.jsx:UserAccount",
+      "type": "function",
+      "name": "UserAccount",
+      "filePath": "src/features/auth/pages/UserAccount.jsx",
+      "summary": "Function UserAccount in UserAccount.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/builder/api/builder.js",
+      "type": "file",
+      "name": "builder.js",
+      "filePath": "src/features/builder/api/builder.js",
+      "summary": "Exports: listBuilds, saveBuild, token, deleteBuild, getBuild",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 26 lines"
+    },
+    {
+      "id": "function:src/features/builder/api/builder.js:saveBuild",
+      "type": "function",
+      "name": "saveBuild",
+      "filePath": "src/features/builder/api/builder.js",
+      "summary": "Function saveBuild in builder.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/api/builder.js:listBuilds",
+      "type": "function",
+      "name": "listBuilds",
+      "filePath": "src/features/builder/api/builder.js",
+      "summary": "Function listBuilds in builder.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/api/builder.js:getBuild",
+      "type": "function",
+      "name": "getBuild",
+      "filePath": "src/features/builder/api/builder.js",
+      "summary": "Function getBuild in builder.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/api/builder.js:deleteBuild",
+      "type": "function",
+      "name": "deleteBuild",
+      "filePath": "src/features/builder/api/builder.js",
+      "summary": "Function deleteBuild in builder.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/builder/pages/ChooseComponent.jsx",
+      "type": "file",
+      "name": "ChooseComponent.jsx",
+      "filePath": "src/features/builder/pages/ChooseComponent.jsx",
+      "summary": "Exports: getSpecLines, isAdded, handleSort, key, entry",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 336 lines"
+    },
+    {
+      "id": "function:src/features/builder/pages/ChooseComponent.jsx:getSpecLines",
+      "type": "function",
+      "name": "getSpecLines",
+      "filePath": "src/features/builder/pages/ChooseComponent.jsx",
+      "summary": "Function getSpecLines in ChooseComponent.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/pages/ChooseComponent.jsx:getSelectedId",
+      "type": "function",
+      "name": "getSelectedId",
+      "filePath": "src/features/builder/pages/ChooseComponent.jsx",
+      "summary": "Function getSelectedId in ChooseComponent.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/pages/ChooseComponent.jsx:findFromEntry",
+      "type": "function",
+      "name": "findFromEntry",
+      "filePath": "src/features/builder/pages/ChooseComponent.jsx",
+      "summary": "Function findFromEntry in ChooseComponent.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/pages/ChooseComponent.jsx:ChooseComponent",
+      "type": "function",
+      "name": "ChooseComponent",
+      "filePath": "src/features/builder/pages/ChooseComponent.jsx",
+      "summary": "Function ChooseComponent in ChooseComponent.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/builder/pages/PCBuildPage.jsx",
+      "type": "file",
+      "name": "PCBuildPage.jsx",
+      "filePath": "src/features/builder/pages/PCBuildPage.jsx",
+      "summary": "Exports: hasIssue, key, hasSelection, handleSave, otherComp",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 430 lines"
+    },
+    {
+      "id": "function:src/features/builder/pages/PCBuildPage.jsx:extractInt",
+      "type": "function",
+      "name": "extractInt",
+      "filePath": "src/features/builder/pages/PCBuildPage.jsx",
+      "summary": "Function extractInt in PCBuildPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/builder/pages/PCBuildPage.jsx:PCBuildPage",
+      "type": "function",
+      "name": "PCBuildPage",
+      "filePath": "src/features/builder/pages/PCBuildPage.jsx",
+      "summary": "Function PCBuildPage in PCBuildPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/api/cart.js",
+      "type": "file",
+      "name": "cart.js",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Exports: getCart, setCartBuild, syncCart, clearCartOnServer, token",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 46 lines"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:getCart",
+      "type": "function",
+      "name": "getCart",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function getCart in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:syncCart",
+      "type": "function",
+      "name": "syncCart",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function syncCart in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:addCartItem",
+      "type": "function",
+      "name": "addCartItem",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function addCartItem in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:removeCartItem",
+      "type": "function",
+      "name": "removeCartItem",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function removeCartItem in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:setCartBuild",
+      "type": "function",
+      "name": "setCartBuild",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function setCartBuild in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/cart.js:clearCartOnServer",
+      "type": "function",
+      "name": "clearCartOnServer",
+      "filePath": "src/features/cart/api/cart.js",
+      "summary": "Function clearCartOnServer in cart.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/api/order.js",
+      "type": "file",
+      "name": "order.js",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Exports: confirmPayment, createOrder, token, getOrder, cancelOrder",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 39 lines"
+    },
+    {
+      "id": "function:src/features/cart/api/order.js:createOrder",
+      "type": "function",
+      "name": "createOrder",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Function createOrder in order.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/order.js:listOrders",
+      "type": "function",
+      "name": "listOrders",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Function listOrders in order.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/order.js:getOrder",
+      "type": "function",
+      "name": "getOrder",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Function getOrder in order.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/order.js:confirmPayment",
+      "type": "function",
+      "name": "confirmPayment",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Function confirmPayment in order.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/api/order.js:cancelOrder",
+      "type": "function",
+      "name": "cancelOrder",
+      "filePath": "src/features/cart/api/order.js",
+      "summary": "Function cancelOrder in order.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/pages/Checkout.jsx",
+      "type": "file",
+      "name": "Checkout.jsx",
+      "filePath": "src/features/cart/pages/Checkout.jsx",
+      "summary": "Exports: isActive, result, fetchRates, rate, handleContinueToPayment",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 538 lines"
+    },
+    {
+      "id": "function:src/features/cart/pages/Checkout.jsx:Checkout",
+      "type": "function",
+      "name": "Checkout",
+      "filePath": "src/features/cart/pages/Checkout.jsx",
+      "summary": "Function Checkout in Checkout.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/pages/OrderConfirmation.jsx",
+      "type": "file",
+      "name": "OrderConfirmation.jsx",
+      "filePath": "src/features/cart/pages/OrderConfirmation.jsx",
+      "summary": "Exports: days, getDeliveryDate, now, location, eta",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 226 lines"
+    },
+    {
+      "id": "function:src/features/cart/pages/OrderConfirmation.jsx:getDeliveryDate",
+      "type": "function",
+      "name": "getDeliveryDate",
+      "filePath": "src/features/cart/pages/OrderConfirmation.jsx",
+      "summary": "Function getDeliveryDate in OrderConfirmation.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/cart/pages/OrderConfirmation.jsx:OrderConfirmation",
+      "type": "function",
+      "name": "OrderConfirmation",
+      "filePath": "src/features/cart/pages/OrderConfirmation.jsx",
+      "summary": "Function OrderConfirmation in OrderConfirmation.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/pages/PaymentPage.jsx",
+      "type": "file",
+      "name": "PaymentPage.jsx",
+      "filePath": "src/features/cart/pages/PaymentPage.jsx",
+      "summary": "Exports: handleConfirm, location, PaymentPage, handleCancel, subtotal",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 266 lines"
+    },
+    {
+      "id": "function:src/features/cart/pages/PaymentPage.jsx:PaymentPage",
+      "type": "function",
+      "name": "PaymentPage",
+      "filePath": "src/features/cart/pages/PaymentPage.jsx",
+      "summary": "Function PaymentPage in PaymentPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/cart/pages/ShoppingCart.jsx",
+      "type": "file",
+      "name": "ShoppingCart.jsx",
+      "filePath": "src/features/cart/pages/ShoppingCart.jsx",
+      "summary": "Exports: buildAllSelected, catalogItems, Checkbox, buildItems, next",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 268 lines"
+    },
+    {
+      "id": "function:src/features/cart/pages/ShoppingCart.jsx:ShoppingCartPage",
+      "type": "function",
+      "name": "ShoppingCartPage",
+      "filePath": "src/features/cart/pages/ShoppingCart.jsx",
+      "summary": "Function ShoppingCartPage in ShoppingCart.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/api/catalog.js",
+      "type": "file",
+      "name": "catalog.js",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Exports: params, calculateShipping, analyzeImage, form, getCategories",
+      "tags": [
+        "module"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 56 lines"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:analyzeImage",
+      "type": "function",
+      "name": "analyzeImage",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function analyzeImage in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:searchProducts",
+      "type": "function",
+      "name": "searchProducts",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function searchProducts in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:getCategoryFilters",
+      "type": "function",
+      "name": "getCategoryFilters",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function getCategoryFilters in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:getCategories",
+      "type": "function",
+      "name": "getCategories",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function getCategories in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:getBrands",
+      "type": "function",
+      "name": "getBrands",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function getBrands in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:getProduct",
+      "type": "function",
+      "name": "getProduct",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function getProduct in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:suggestCompatible",
+      "type": "function",
+      "name": "suggestCompatible",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function suggestCompatible in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:compatibleProducts",
+      "type": "function",
+      "name": "compatibleProducts",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function compatibleProducts in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/api/catalog.js:calculateShipping",
+      "type": "function",
+      "name": "calculateShipping",
+      "filePath": "src/features/catalog/api/catalog.js",
+      "summary": "Function calculateShipping in catalog.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/components/SearchPopover.jsx",
+      "type": "file",
+      "name": "SearchPopover.jsx",
+      "filePath": "src/features/catalog/components/SearchPopover.jsx",
+      "summary": "Exports: confidence, result, handleDragOver, imageUrl, DetectionCard",
+      "tags": [
+        "component"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 428 lines"
+    },
+    {
+      "id": "function:src/features/catalog/components/SearchPopover.jsx:DetectionCard",
+      "type": "function",
+      "name": "DetectionCard",
+      "filePath": "src/features/catalog/components/SearchPopover.jsx",
+      "summary": "Function DetectionCard in SearchPopover.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/components/SearchPopover.jsx:SearchPopover",
+      "type": "function",
+      "name": "SearchPopover",
+      "filePath": "src/features/catalog/components/SearchPopover.jsx",
+      "summary": "Function SearchPopover in SearchPopover.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/pages/CategoryPage.jsx",
+      "type": "file",
+      "name": "CategoryPage.jsx",
+      "filePath": "src/features/catalog/pages/CategoryPage.jsx",
+      "summary": "Exports: parsed, getFirstImage, decodedCategory, res, imageUrl",
+      "tags": [
+        "page"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 168 lines"
+    },
+    {
+      "id": "function:src/features/catalog/pages/CategoryPage.jsx:getFirstImage",
+      "type": "function",
+      "name": "getFirstImage",
+      "filePath": "src/features/catalog/pages/CategoryPage.jsx",
+      "summary": "Function getFirstImage in CategoryPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/CategoryPage.jsx:CategoryPage",
+      "type": "function",
+      "name": "CategoryPage",
+      "filePath": "src/features/catalog/pages/CategoryPage.jsx",
+      "summary": "Function CategoryPage in CategoryPage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/pages/ComparePage.jsx",
+      "type": "file",
+      "name": "ComparePage.jsx",
+      "filePath": "src/features/catalog/pages/ComparePage.jsx",
+      "summary": "Exports: failedCount, img, settled, next, color",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 378 lines"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ComparePage.jsx:getFirstImage",
+      "type": "function",
+      "name": "getFirstImage",
+      "filePath": "src/features/catalog/pages/ComparePage.jsx",
+      "summary": "Function getFirstImage in ComparePage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ComparePage.jsx:StockBadge",
+      "type": "function",
+      "name": "StockBadge",
+      "filePath": "src/features/catalog/pages/ComparePage.jsx",
+      "summary": "Function StockBadge in ComparePage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ComparePage.jsx:productsAllSame",
+      "type": "function",
+      "name": "productsAllSame",
+      "filePath": "src/features/catalog/pages/ComparePage.jsx",
+      "summary": "Function productsAllSame in ComparePage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ComparePage.jsx:ComparePage",
+      "type": "function",
+      "name": "ComparePage",
+      "filePath": "src/features/catalog/pages/ComparePage.jsx",
+      "summary": "Function ComparePage in ComparePage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "type": "file",
+      "name": "ProductCatalog.jsx",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Exports: CheckboxFilterGroup, imageUrl, currentVal, handleCategoryChange, toggleCompare",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 714 lines"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:getFirstImage",
+      "type": "function",
+      "name": "getFirstImage",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function getFirstImage in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:getSpecsForProduct",
+      "type": "function",
+      "name": "getSpecsForProduct",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function getSpecsForProduct in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:StockBadge",
+      "type": "function",
+      "name": "StockBadge",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function StockBadge in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:CategoryMenuBar",
+      "type": "function",
+      "name": "CategoryMenuBar",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function CategoryMenuBar in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:CheckboxFilterGroup",
+      "type": "function",
+      "name": "CheckboxFilterGroup",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function CheckboxFilterGroup in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:RangeFilterGroup",
+      "type": "function",
+      "name": "RangeFilterGroup",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function RangeFilterGroup in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductCatalog.jsx:ProductCatalog",
+      "type": "function",
+      "name": "ProductCatalog",
+      "filePath": "src/features/catalog/pages/ProductCatalog.jsx",
+      "summary": "Function ProductCatalog in ProductCatalog.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/catalog/pages/ProductDetail.jsx",
+      "type": "file",
+      "name": "ProductDetail.jsx",
+      "filePath": "src/features/catalog/pages/ProductDetail.jsx",
+      "summary": "Exports: parsed, groups, SPEC_GROUPS, loadProduct, getImages",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 343 lines"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductDetail.jsx:getImages",
+      "type": "function",
+      "name": "getImages",
+      "filePath": "src/features/catalog/pages/ProductDetail.jsx",
+      "summary": "Function getImages in ProductDetail.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/features/catalog/pages/ProductDetail.jsx:ProductDetail",
+      "type": "function",
+      "name": "ProductDetail",
+      "filePath": "src/features/catalog/pages/ProductDetail.jsx",
+      "summary": "Function ProductDetail in ProductDetail.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/contact/pages/ContactUs.jsx",
+      "type": "file",
+      "name": "ContactUs.jsx",
+      "filePath": "src/features/contact/pages/ContactUs.jsx",
+      "summary": "Exports: ContactUs",
+      "tags": [
+        "page"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 149 lines"
+    },
+    {
+      "id": "function:src/features/contact/pages/ContactUs.jsx:ContactUs",
+      "type": "function",
+      "name": "ContactUs",
+      "filePath": "src/features/contact/pages/ContactUs.jsx",
+      "summary": "Function ContactUs in ContactUs.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/home/components/Footer.jsx",
+      "type": "file",
+      "name": "Footer.jsx",
+      "filePath": "src/features/home/components/Footer.jsx",
+      "summary": "Exports: Footer",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 52 lines"
+    },
+    {
+      "id": "function:src/features/home/components/Footer.jsx:Footer",
+      "type": "function",
+      "name": "Footer",
+      "filePath": "src/features/home/components/Footer.jsx",
+      "summary": "Function Footer in Footer.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/home/components/Header.jsx",
+      "type": "file",
+      "name": "Header.jsx",
+      "filePath": "src/features/home/components/Header.jsx",
+      "summary": "Exports: navLinks, isActive, handleLogout, Header, cartCount",
+      "tags": [
+        "component"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 237 lines"
+    },
+    {
+      "id": "function:src/features/home/components/Header.jsx:Header",
+      "type": "function",
+      "name": "Header",
+      "filePath": "src/features/home/components/Header.jsx",
+      "summary": "Function Header in Header.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/home/pages/HomePage.jsx",
+      "type": "file",
+      "name": "HomePage.jsx",
+      "filePath": "src/features/home/pages/HomePage.jsx",
+      "summary": "Exports: diagnosticLines, Icon, categories, HomePage, featuredProducts",
+      "tags": [
+        "page"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 276 lines"
+    },
+    {
+      "id": "function:src/features/home/pages/HomePage.jsx:HomePage",
+      "type": "function",
+      "name": "HomePage",
+      "filePath": "src/features/home/pages/HomePage.jsx",
+      "summary": "Function HomePage in HomePage.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/features/wishlist/pages/Wishlist.jsx",
+      "type": "file",
+      "name": "Wishlist.jsx",
+      "filePath": "src/features/wishlist/pages/Wishlist.jsx",
+      "summary": "Exports: wishlistItems, Wishlist",
+      "tags": [
+        "page"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 123 lines"
+    },
+    {
+      "id": "function:src/features/wishlist/pages/Wishlist.jsx:Wishlist",
+      "type": "function",
+      "name": "Wishlist",
+      "filePath": "src/features/wishlist/pages/Wishlist.jsx",
+      "summary": "Function Wishlist in Wishlist.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/client.js",
+      "type": "file",
+      "name": "client.js",
+      "filePath": "src/lib/client.js",
+      "summary": "Exports: request, getAccessToken, res, BASE, text",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 25 lines"
+    },
+    {
+      "id": "function:src/lib/client.js:request",
+      "type": "function",
+      "name": "request",
+      "filePath": "src/lib/client.js",
+      "summary": "Function request in client.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/lib/client.js:getAccessToken",
+      "type": "function",
+      "name": "getAccessToken",
+      "filePath": "src/lib/client.js",
+      "summary": "Function getAccessToken in client.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/lib/supabase.js",
+      "type": "file",
+      "name": "supabase.js",
+      "filePath": "src/lib/supabase.js",
+      "summary": "Exports: supabaseUrl, supabase, supabaseAnonKey",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 10 lines"
+    },
+    {
+      "id": "file:src/main.jsx",
+      "type": "file",
+      "name": "main.jsx",
+      "filePath": "src/main.jsx",
+      "summary": "import { StrictMode } from 'react'",
+      "tags": [
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 10 lines"
+    },
+    {
+      "id": "file:src/stores/BuildContext.jsx",
+      "type": "file",
+      "name": "BuildContext.jsx",
+      "filePath": "src/stores/BuildContext.jsx",
+      "summary": "Exports: deleteCloudBuild, loadSavedBuilds, entry, removeComponent, CATEGORIES",
+      "tags": [
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "javascript, 133 lines"
+    },
+    {
+      "id": "function:src/stores/BuildContext.jsx:loadSavedBuilds",
+      "type": "function",
+      "name": "loadSavedBuilds",
+      "filePath": "src/stores/BuildContext.jsx",
+      "summary": "Function loadSavedBuilds in BuildContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/BuildContext.jsx:saveSavedBuilds",
+      "type": "function",
+      "name": "saveSavedBuilds",
+      "filePath": "src/stores/BuildContext.jsx",
+      "summary": "Function saveSavedBuilds in BuildContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/BuildContext.jsx:BuildProvider",
+      "type": "function",
+      "name": "BuildProvider",
+      "filePath": "src/stores/BuildContext.jsx",
+      "summary": "Function BuildProvider in BuildContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/BuildContext.jsx:useBuild",
+      "type": "function",
+      "name": "useBuild",
+      "filePath": "src/stores/BuildContext.jsx",
+      "summary": "Function useBuild in BuildContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stores/CartContext.jsx",
+      "type": "file",
+      "name": "CartContext.jsx",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Exports: useCart, result, extractSpecs, CartProvider, server",
+      "tags": [
+        "component"
+      ],
+      "complexity": "complex",
+      "languageNotes": "javascript, 314 lines"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:formatCategory",
+      "type": "function",
+      "name": "formatCategory",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function formatCategory in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:firstImage",
+      "type": "function",
+      "name": "firstImage",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function firstImage in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:extractSpecs",
+      "type": "function",
+      "name": "extractSpecs",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function extractSpecs in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:buildItem",
+      "type": "function",
+      "name": "buildItem",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function buildItem in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:enrichFromServer",
+      "type": "function",
+      "name": "enrichFromServer",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function enrichFromServer in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:toServerPayload",
+      "type": "function",
+      "name": "toServerPayload",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function toServerPayload in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:loadLocal",
+      "type": "function",
+      "name": "loadLocal",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function loadLocal in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:saveLocal",
+      "type": "function",
+      "name": "saveLocal",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function saveLocal in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:clearLocal",
+      "type": "function",
+      "name": "clearLocal",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function clearLocal in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:mergeItems",
+      "type": "function",
+      "name": "mergeItems",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function mergeItems in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:CartProvider",
+      "type": "function",
+      "name": "CartProvider",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function CartProvider in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stores/CartContext.jsx:useCart",
+      "type": "function",
+      "name": "useCart",
+      "filePath": "src/stores/CartContext.jsx",
+      "summary": "Function useCart in CartContext.jsx",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/styles/App.css",
+      "type": "file",
+      "name": "App.css",
+      "filePath": "src/styles/App.css",
+      "summary": "Stylesheet: src/styles/App.css",
+      "tags": [
+        "stylesheet"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "css, 85 lines"
+    },
+    {
+      "id": "file:src/styles/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "src/styles/index.css",
+      "summary": "Stylesheet: src/styles/index.css",
+      "tags": [
+        "stylesheet"
+      ],
+      "complexity": "complex",
+      "languageNotes": "css, 339 lines"
+    },
+    {
+      "id": "file:src/utils/currency.js",
+      "type": "file",
+      "name": "currency.js",
+      "filePath": "src/utils/currency.js",
+      "summary": "Exports: formatPrice, USD_TO_MYR, parsePrice, converted, num",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 13 lines"
+    },
+    {
+      "id": "function:src/utils/currency.js:formatPrice",
+      "type": "function",
+      "name": "formatPrice",
+      "filePath": "src/utils/currency.js",
+      "summary": "Function formatPrice in currency.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/utils/currency.js:parsePrice",
+      "type": "function",
+      "name": "parsePrice",
+      "filePath": "src/utils/currency.js",
+      "summary": "Function parsePrice in currency.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/utils/utils.js",
+      "type": "file",
+      "name": "utils.js",
+      "filePath": "src/utils/utils.js",
+      "summary": "Exports: cn",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 6 lines"
+    },
+    {
+      "id": "function:src/utils/utils.js:cn",
+      "type": "function",
+      "name": "cn",
+      "filePath": "src/utils/utils.js",
+      "summary": "Function cn in utils.js",
+      "tags": [
+        "function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:start_backend.py",
+      "type": "file",
+      "name": "start_backend.py",
+      "filePath": "start_backend.py",
+      "summary": "import os",
+      "tags": [
+        "script"
+      ],
+      "complexity": "simple",
+      "languageNotes": "python, 9 lines"
+    },
+    {
+      "id": "file:vite.config.js",
+      "type": "file",
+      "name": "vite.config.js",
+      "filePath": "vite.config.js",
+      "summary": "import path from \"path\"",
+      "tags": [
+        "module"
+      ],
+      "complexity": "simple",
+      "languageNotes": "javascript, 29 lines"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:scripts/cleanProductCatalog.cjs",
+      "target": "function:scripts/cleanProductCatalog.cjs:getCategoryFromKeyword",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/cleanProductCatalog.cjs",
+      "target": "function:scripts/cleanProductCatalog.cjs:processCSV",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/button.jsx",
+      "target": "function:src/components/ui/button.jsx:Button",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:Card",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardTitle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardDescription",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/card.jsx",
+      "target": "function:src/components/ui/card.jsx:CardFooter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroupAddon",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroupButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroupText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroupInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input-group.jsx",
+      "target": "function:src/components/ui/input-group.jsx:InputGroupTextarea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/input.jsx",
+      "target": "function:src/components/ui/input.jsx:Input",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/label.jsx",
+      "target": "function:src/components/ui/label.jsx:Label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuTrigger",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/navigation-menu.jsx",
+      "target": "function:src/components/ui/navigation-menu.jsx:NavigationMenuIndicator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/resizable.jsx",
+      "target": "function:src/components/ui/resizable.jsx:ResizablePanelGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/resizable.jsx",
+      "target": "function:src/components/ui/resizable.jsx:ResizablePanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/resizable.jsx",
+      "target": "function:src/components/ui/resizable.jsx:ResizableHandle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/tabs.jsx",
+      "target": "function:src/components/ui/tabs.jsx:Tabs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/tabs.jsx",
+      "target": "function:src/components/ui/tabs.jsx:TabsList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/tabs.jsx",
+      "target": "function:src/components/ui/tabs.jsx:TabsTrigger",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/tabs.jsx",
+      "target": "function:src/components/ui/tabs.jsx:TabsContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/components/ui/textarea.jsx",
+      "target": "function:src/components/ui/textarea.jsx:Textarea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/about/pages/AboutUs.jsx",
+      "target": "function:src/features/about/pages/AboutUs.jsx:AboutUs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/api/admin.js",
+      "target": "function:src/features/admin/api/admin.js:adminUpdateProduct",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/api/admin.js",
+      "target": "function:src/features/admin/api/admin.js:adminDeleteProduct",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/api/admin.js",
+      "target": "function:src/features/admin/api/admin.js:adminListOrders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/api/admin.js",
+      "target": "function:src/features/admin/api/admin.js:adminUpdateOrderStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/api/admin.js",
+      "target": "function:src/features/admin/api/admin.js:healthCheck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/components/AdminLayout.jsx",
+      "target": "function:src/features/admin/components/AdminLayout.jsx:AdminLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/components/CategorySidebar.jsx",
+      "target": "function:src/features/admin/components/CategorySidebar.jsx:CategorySidebar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/components/ProductCard.jsx",
+      "target": "function:src/features/admin/components/ProductCard.jsx:ProductCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/components/ProtectedRoute.jsx",
+      "target": "function:src/features/admin/components/ProtectedRoute.jsx:ProtectedRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/pages/AdminLogin.jsx",
+      "target": "function:src/features/admin/pages/AdminLogin.jsx:AdminLogin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/pages/AdminOrders.jsx",
+      "target": "function:src/features/admin/pages/AdminOrders.jsx:formatDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/pages/AdminOrders.jsx",
+      "target": "function:src/features/admin/pages/AdminOrders.jsx:AdminOrders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/admin/pages/ProductManagement.jsx",
+      "target": "function:src/features/admin/pages/ProductManagement.jsx:ProductManagement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/api/user.js",
+      "target": "function:src/features/auth/api/user.js:syncUserProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/api/user.js",
+      "target": "function:src/features/auth/api/user.js:getUserProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/api/user.js",
+      "target": "function:src/features/auth/api/user.js:updateUserProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/hooks/useAuth.jsx",
+      "target": "function:src/features/auth/hooks/useAuth.jsx:AuthProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/hooks/useAuth.jsx",
+      "target": "function:src/features/auth/hooks/useAuth.jsx:useAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/pages/LoginPage.jsx",
+      "target": "function:src/features/auth/pages/LoginPage.jsx:LoginPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/pages/SignUpPage.jsx",
+      "target": "function:src/features/auth/pages/SignUpPage.jsx:SignUpPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/pages/UserAccount.jsx",
+      "target": "function:src/features/auth/pages/UserAccount.jsx:formatDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/auth/pages/UserAccount.jsx",
+      "target": "function:src/features/auth/pages/UserAccount.jsx:UserAccount",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/api/builder.js",
+      "target": "function:src/features/builder/api/builder.js:saveBuild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/api/builder.js",
+      "target": "function:src/features/builder/api/builder.js:listBuilds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/api/builder.js",
+      "target": "function:src/features/builder/api/builder.js:getBuild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/api/builder.js",
+      "target": "function:src/features/builder/api/builder.js:deleteBuild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/ChooseComponent.jsx",
+      "target": "function:src/features/builder/pages/ChooseComponent.jsx:getSpecLines",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/ChooseComponent.jsx",
+      "target": "function:src/features/builder/pages/ChooseComponent.jsx:getSelectedId",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/ChooseComponent.jsx",
+      "target": "function:src/features/builder/pages/ChooseComponent.jsx:findFromEntry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/ChooseComponent.jsx",
+      "target": "function:src/features/builder/pages/ChooseComponent.jsx:ChooseComponent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/PCBuildPage.jsx",
+      "target": "function:src/features/builder/pages/PCBuildPage.jsx:extractInt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/builder/pages/PCBuildPage.jsx",
+      "target": "function:src/features/builder/pages/PCBuildPage.jsx:PCBuildPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:getCart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:syncCart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:addCartItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:removeCartItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:setCartBuild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/cart.js",
+      "target": "function:src/features/cart/api/cart.js:clearCartOnServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/order.js",
+      "target": "function:src/features/cart/api/order.js:createOrder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/order.js",
+      "target": "function:src/features/cart/api/order.js:listOrders",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/order.js",
+      "target": "function:src/features/cart/api/order.js:getOrder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/order.js",
+      "target": "function:src/features/cart/api/order.js:confirmPayment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/api/order.js",
+      "target": "function:src/features/cart/api/order.js:cancelOrder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/pages/Checkout.jsx",
+      "target": "function:src/features/cart/pages/Checkout.jsx:Checkout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/pages/OrderConfirmation.jsx",
+      "target": "function:src/features/cart/pages/OrderConfirmation.jsx:getDeliveryDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/pages/OrderConfirmation.jsx",
+      "target": "function:src/features/cart/pages/OrderConfirmation.jsx:OrderConfirmation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/pages/PaymentPage.jsx",
+      "target": "function:src/features/cart/pages/PaymentPage.jsx:PaymentPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/cart/pages/ShoppingCart.jsx",
+      "target": "function:src/features/cart/pages/ShoppingCart.jsx:ShoppingCartPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:analyzeImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:searchProducts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:getCategoryFilters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:getCategories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:getBrands",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:getProduct",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:suggestCompatible",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:compatibleProducts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/api/catalog.js",
+      "target": "function:src/features/catalog/api/catalog.js:calculateShipping",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/components/SearchPopover.jsx",
+      "target": "function:src/features/catalog/components/SearchPopover.jsx:DetectionCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/components/SearchPopover.jsx",
+      "target": "function:src/features/catalog/components/SearchPopover.jsx:SearchPopover",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/CategoryPage.jsx",
+      "target": "function:src/features/catalog/pages/CategoryPage.jsx:getFirstImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/CategoryPage.jsx",
+      "target": "function:src/features/catalog/pages/CategoryPage.jsx:CategoryPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ComparePage.jsx",
+      "target": "function:src/features/catalog/pages/ComparePage.jsx:getFirstImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ComparePage.jsx",
+      "target": "function:src/features/catalog/pages/ComparePage.jsx:StockBadge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ComparePage.jsx",
+      "target": "function:src/features/catalog/pages/ComparePage.jsx:productsAllSame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ComparePage.jsx",
+      "target": "function:src/features/catalog/pages/ComparePage.jsx:ComparePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:getFirstImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:getSpecsForProduct",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:StockBadge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:CategoryMenuBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:CheckboxFilterGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:RangeFilterGroup",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductCatalog.jsx",
+      "target": "function:src/features/catalog/pages/ProductCatalog.jsx:ProductCatalog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductDetail.jsx",
+      "target": "function:src/features/catalog/pages/ProductDetail.jsx:getImages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/catalog/pages/ProductDetail.jsx",
+      "target": "function:src/features/catalog/pages/ProductDetail.jsx:ProductDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/contact/pages/ContactUs.jsx",
+      "target": "function:src/features/contact/pages/ContactUs.jsx:ContactUs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/home/components/Footer.jsx",
+      "target": "function:src/features/home/components/Footer.jsx:Footer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/home/components/Header.jsx",
+      "target": "function:src/features/home/components/Header.jsx:Header",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/home/pages/HomePage.jsx",
+      "target": "function:src/features/home/pages/HomePage.jsx:HomePage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/features/wishlist/pages/Wishlist.jsx",
+      "target": "function:src/features/wishlist/pages/Wishlist.jsx:Wishlist",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/lib/client.js",
+      "target": "function:src/lib/client.js:request",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/lib/client.js",
+      "target": "function:src/lib/client.js:getAccessToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/BuildContext.jsx",
+      "target": "function:src/stores/BuildContext.jsx:loadSavedBuilds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/BuildContext.jsx",
+      "target": "function:src/stores/BuildContext.jsx:saveSavedBuilds",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/BuildContext.jsx",
+      "target": "function:src/stores/BuildContext.jsx:BuildProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/BuildContext.jsx",
+      "target": "function:src/stores/BuildContext.jsx:useBuild",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:formatCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:firstImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:extractSpecs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:buildItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:enrichFromServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:toServerPayload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:loadLocal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:saveLocal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:clearLocal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:mergeItems",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:CartProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/stores/CartContext.jsx",
+      "target": "function:src/stores/CartContext.jsx:useCart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/currency.js",
+      "target": "function:src/utils/currency.js:formatPrice",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/currency.js",
+      "target": "function:src/utils/currency.js:parsePrice",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/utils/utils.js",
+      "target": "function:src/utils/utils.js:cn",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/App.jsx",
+      "target": "file:src/styles/App.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/lib/client.js",
+      "target": "file:src/lib/supabase.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/App.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "file:src/styles/index.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7,
+      "recoveredFromImportMap": true
+    },
+    {
+      "source": "function:src/App.jsx:App",
+      "target": "file:src/styles/App.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/lib/client.js:getAccessToken",
+      "target": "file:src/lib/supabase.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main.jsx",
+      "target": "function:src/App.jsx:App",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:entry-point",
+      "name": "Entry Point",
+      "description": "Application bootstrap and routing setup.",
+      "nodeIds": [
+        "file:index.html",
+        "file:src/App.jsx",
+        "file:src/main.jsx",
+        "file:vite.config.js"
+      ]
+    },
+    {
+      "id": "layer:ui-components",
+      "name": "UI Components",
+      "description": "Reusable UI component library built with Radix UI and Tailwind CSS.",
+      "nodeIds": [
+        "file:src/components/ui/button.jsx",
+        "file:src/components/ui/card.jsx",
+        "file:src/components/ui/input-group.jsx",
+        "file:src/components/ui/input.jsx",
+        "file:src/components/ui/label.jsx",
+        "file:src/components/ui/navigation-menu.jsx",
+        "file:src/components/ui/resizable.jsx",
+        "file:src/components/ui/tabs.jsx",
+        "file:src/components/ui/textarea.jsx"
+      ]
+    },
+    {
+      "id": "layer:feature-pages",
+      "name": "Feature Pages",
+      "description": "Page-level components by feature domain.",
+      "nodeIds": [
+        "file:src/features/about/pages/AboutUs.jsx",
+        "file:src/features/admin/pages/AdminLogin.jsx",
+        "file:src/features/admin/pages/AdminOrders.jsx",
+        "file:src/features/admin/pages/ProductManagement.jsx",
+        "file:src/features/auth/pages/LoginPage.jsx",
+        "file:src/features/auth/pages/SignUpPage.jsx",
+        "file:src/features/auth/pages/UserAccount.jsx",
+        "file:src/features/builder/pages/ChooseComponent.jsx",
+        "file:src/features/builder/pages/PCBuildPage.jsx",
+        "file:src/features/cart/pages/Checkout.jsx",
+        "file:src/features/cart/pages/OrderConfirmation.jsx",
+        "file:src/features/cart/pages/PaymentPage.jsx",
+        "file:src/features/cart/pages/ShoppingCart.jsx",
+        "file:src/features/catalog/pages/CategoryPage.jsx",
+        "file:src/features/catalog/pages/ComparePage.jsx",
+        "file:src/features/catalog/pages/ProductCatalog.jsx",
+        "file:src/features/catalog/pages/ProductDetail.jsx",
+        "file:src/features/contact/pages/ContactUs.jsx",
+        "file:src/features/home/pages/HomePage.jsx",
+        "file:src/features/wishlist/pages/Wishlist.jsx"
+      ]
+    },
+    {
+      "id": "layer:feature-api",
+      "name": "Feature API Modules",
+      "description": "API client modules per feature.",
+      "nodeIds": [
+        "file:src/features/admin/api/admin.js",
+        "file:src/features/auth/api/auth.js",
+        "file:src/features/auth/api/user.js",
+        "file:src/features/builder/api/builder.js",
+        "file:src/features/cart/api/cart.js",
+        "file:src/features/cart/api/order.js",
+        "file:src/features/catalog/api/catalog.js"
+      ]
+    },
+    {
+      "id": "layer:feature-components",
+      "name": "Feature Components",
+      "description": "Feature-specific reusable components.",
+      "nodeIds": [
+        "file:src/features/admin/components/AdminLayout.jsx",
+        "file:src/features/admin/components/CategorySidebar.jsx",
+        "file:src/features/admin/components/ProductCard.jsx",
+        "file:src/features/admin/components/ProtectedRoute.jsx",
+        "file:src/features/catalog/components/SearchPopover.jsx",
+        "file:src/features/home/components/Footer.jsx",
+        "file:src/features/home/components/Header.jsx"
+      ]
+    },
+    {
+      "id": "layer:state-management",
+      "name": "State Management",
+      "description": "React contexts, providers, and custom hooks.",
+      "nodeIds": [
+        "file:src/features/auth/hooks/useAuth.jsx",
+        "file:src/stores/BuildContext.jsx",
+        "file:src/stores/CartContext.jsx"
+      ]
+    },
+    {
+      "id": "layer:core-library",
+      "name": "Core Library",
+      "description": "Shared utilities: Supabase client, HTTP client, utils.",
+      "nodeIds": [
+        "file:src/config/categories.js",
+        "file:src/lib/client.js",
+        "file:src/lib/supabase.js",
+        "file:src/utils/currency.js",
+        "file:src/utils/utils.js"
+      ]
+    },
+    {
+      "id": "layer:styles",
+      "name": "Styles",
+      "description": "CSS stylesheets.",
+      "nodeIds": [
+        "file:src/styles/App.css",
+        "file:src/styles/index.css"
+      ]
+    },
+    {
+      "id": "layer:configuration",
+      "name": "Configuration",
+      "description": "Project config files.",
+      "nodeIds": [
+        "config:components.json",
+        "config:jsconfig.json",
+        "config:opencode.json",
+        "config:package.json",
+        "config:.postman/resources.yaml",
+        "file:eslint.config.js",
+        "config:postman/globals/workspace.globals.yaml"
+      ]
+    },
+    {
+      "id": "layer:database",
+      "name": "Database Migrations",
+      "description": "Supabase SQL migrations.",
+      "nodeIds": [
+        "table:migrations/add_admin_list_orders_function.sql",
+        "table:migrations/add_admin_rls.sql",
+        "table:migrations/add_admin_update_order_policy.sql",
+        "table:migrations/add_builds_table.sql",
+        "table:migrations/add_cart_table.sql",
+        "table:migrations/add_order_shipping_columns.sql",
+        "table:migrations/add_order_update_policy.sql",
+        "table:migrations/add_orders_admin_policy.sql",
+        "table:migrations/add_stock_column.sql",
+        "table:migrations/add_stock_reserved_and_order_status.sql",
+        "table:migrations/add_stock_rpc_functions.sql",
+        "table:migrations/add_users_table.sql",
+        "table:migrations/seed_stock_modern.sql"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "Project documentation.",
+      "nodeIds": [
+        "document:CHANGELOG.md",
+        "document:CONFLICT_LOG.md",
+        "document:DEFECT_LOG.md",
+        "document:FYP Article Lists.txt",
+        "document:FYP1.md",
+        "document:ProjectLog.md",
+        "document:README.md",
+        "document:design.md",
+        "document:task.md",
+        "document:.opencode/plans/session.md",
+        "document:.opencode/rules.md",
+        "document:docs/purchase-flow.md",
+        "document:docs/stock-workflow.md"
+      ]
+    },
+    {
+      "id": "layer:infrastructure",
+      "name": "Infrastructure",
+      "description": "CI/CD and infra config.",
+      "nodeIds": [
+        "service:.github/workflows/changelog.yml"
+      ]
+    },
+    {
+      "id": "layer:scripts",
+      "name": "Scripts",
+      "description": "Utility and maintenance scripts.",
+      "nodeIds": [
+        "file:scripts/cleanProductCatalog.cjs",
+        "file:start_backend.py"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Application Entry Point",
+      "description": "The application boots from src/main.jsx which renders the React app into index.html. Vite is configured via vite.config.js with React plugin and Tailwind CSS. The main App.jsx defines all routes using React Router.",
+      "nodeIds": [
+        "file:src/main.jsx",
+        "file:index.html",
+        "file:vite.config.js",
+        "function:src/App.jsx:App"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "UI Component Library",
+      "description": "A set of reusable UI components built on Radix UI primitives with Tailwind CSS styling. Includes Button, Card, Input, Label, Tabs, NavigationMenu, Resizable panels, and Textarea. The clsx+tailwind-merge utility in src/utils/utils.js enables conditional class composition.",
+      "nodeIds": [
+        "function:src/components/ui/button.jsx:Button",
+        "function:src/components/ui/card.jsx:CardFooter",
+        "function:src/components/ui/tabs.jsx:TabsContent",
+        "function:src/components/ui/navigation-menu.jsx:NavigationMenuIndicator",
+        "function:src/components/ui/input.jsx:Input",
+        "function:src/utils/utils.js:cn"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Authentication System",
+      "description": "Handles user sign-up, login, and account management. The auth API module communicates with Supabase, while the useAuth hook provides auth state to the component tree. Pages include LoginPage, SignUpPage, and UserAccount.",
+      "nodeIds": [
+        "file:src/features/auth/api/auth.js",
+        "function:src/features/auth/hooks/useAuth.jsx:useAuth",
+        "function:src/features/auth/pages/LoginPage.jsx:LoginPage",
+        "function:src/features/auth/pages/SignUpPage.jsx:SignUpPage",
+        "function:src/features/auth/pages/UserAccount.jsx:UserAccount"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Product Catalog & Search",
+      "description": "The core e-commerce feature. ProductCatalog.jsx provides the main catalog with category filtering, spec table, pagination, and compare functionality. SearchPopover offers quick product search. CategoryPage and ProductDetail show individual items.",
+      "nodeIds": [
+        "function:src/features/catalog/pages/ProductCatalog.jsx:ProductCatalog",
+        "function:src/features/catalog/pages/ProductDetail.jsx:ProductDetail",
+        "function:src/features/catalog/pages/CategoryPage.jsx:CategoryPage",
+        "function:src/features/catalog/components/SearchPopover.jsx:SearchPopover",
+        "function:src/features/catalog/api/catalog.js:calculateShipping",
+        "file:src/config/categories.js"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Product Comparison",
+      "description": "ComparePage enables side-by-side comparison of up to 4 products. It reads IDs from URL params, fetches product data, and renders spec tables with diff highlighting. Products are selected via checkboxes in the catalog table.",
+      "nodeIds": [
+        "function:src/features/catalog/pages/ComparePage.jsx:ComparePage"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Shopping Cart & Checkout",
+      "description": "CartContext manages cart state globally. ShoppingCart displays items, Checkout collects shipping/payment info, PaymentPage handles payment, and OrderConfirmation shows the result. Order API handles server-side order management.",
+      "nodeIds": [
+        "function:src/stores/CartContext.jsx:useCart",
+        "function:src/features/cart/pages/ShoppingCart.jsx:ShoppingCartPage",
+        "function:src/features/cart/pages/Checkout.jsx:Checkout",
+        "function:src/features/cart/pages/PaymentPage.jsx:PaymentPage",
+        "function:src/features/cart/pages/OrderConfirmation.jsx:OrderConfirmation",
+        "function:src/features/cart/api/order.js:cancelOrder",
+        "function:src/features/cart/api/cart.js:clearCartOnServer"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "PC Builder",
+      "description": "An interactive PC builder that lets users select compatible components. BuildContext manages the build state. PCBuildPage shows the current build with compatibility checks, and ChooseComponent lets users browse and select components.",
+      "nodeIds": [
+        "function:src/stores/BuildContext.jsx:useBuild",
+        "function:src/features/builder/pages/PCBuildPage.jsx:PCBuildPage",
+        "function:src/features/builder/pages/ChooseComponent.jsx:ChooseComponent",
+        "function:src/features/builder/api/builder.js:deleteBuild"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Admin Dashboard",
+      "description": "Admin panel for product and order management. ProtectedRoute handles admin authentication. AdminLayout provides navigation. ProductManagement lets CRUD operations on products. AdminOrders shows orders with status management.",
+      "nodeIds": [
+        "function:src/features/admin/pages/ProductManagement.jsx:ProductManagement",
+        "function:src/features/admin/pages/AdminOrders.jsx:AdminOrders",
+        "function:src/features/admin/pages/AdminLogin.jsx:AdminLogin",
+        "function:src/features/admin/components/AdminLayout.jsx:AdminLayout",
+        "function:src/features/admin/components/ProtectedRoute.jsx:ProtectedRoute",
+        "function:src/features/admin/api/admin.js:healthCheck"
+      ]
+    },
+    {
+      "order": 9,
+      "title": "Header & Footer",
+      "description": "Global navigation and site footer shared across all pages. Header includes the PC Builder link, cart with item count, and search popover. Footer provides links and site information.",
+      "nodeIds": [
+        "function:src/features/home/components/Header.jsx:Header",
+        "function:src/features/home/components/Footer.jsx:Footer"
+      ]
+    },
+    {
+      "order": 10,
+      "title": "Database Migrations",
+      "description": "Supabase SQL migrations for all database entities: users, products, builds, cart, orders, stock management, RLS policies, and admin functions. The migrations establish the complete data schema.",
+      "nodeIds": [
+        "table:migrations/add_users_table.sql",
+        "table:migrations/add_cart_table.sql",
+        "table:migrations/add_builds_table.sql",
+        "table:migrations/add_orders_admin_policy.sql",
+        "table:migrations/add_stock_rpc_functions.sql"
+      ]
+    }
+  ]
+}

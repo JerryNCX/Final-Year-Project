@@ -301,7 +301,7 @@ export default function SearchPopover({ isOpen, onClose }) {
                   {analysisError}
                 </p>
                 <p className="font-label text-[11px] text-on-surface-variant/50 mt-2">
-                  Make sure the backend is running: <span className="text-primary">npm run backend</span>
+                  Please retry the analysis.
                 </p>
               </div>
             )}

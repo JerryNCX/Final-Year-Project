@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite\" \"C:\\Users\\Admin\\anaconda3\\envs\\peepeepoopoo\\python.exe start_backend.py\"",
-    "backend": "C:\\Users\\Admin\\anaconda3\\envs\\peepeepoopoo\\python.exe start_backend.py",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

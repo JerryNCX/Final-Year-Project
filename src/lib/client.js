@@ -1,6 +1,6 @@
 import { supabase } from './supabase'
 
-const BASE = ''
+const BASE = import.meta.env.VITE_API_URL || ''
 
 export async function request(url, options = {}) {
   const headers = { ...options.headers }
